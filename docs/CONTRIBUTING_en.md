@@ -1,4 +1,4 @@
-#### [German version(deutsche Version)](https://github.com/Oberleutnant20/dms/blob/master/docs/CONTRIBUTING.md)
+#### [German version(deutsche Version)](https://github.com/Oberleutnant20/Duali-Bib/blob/master/docs/CONTRIBUTING.md)
 #### English version(englische Version)
 
 
@@ -6,9 +6,9 @@
 
 #### **Did you find a bug?**
 
-* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/Oberleutnant20/dms/issues).
+* **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/Oberleutnant20/Duali-Bib/issues).
 
-* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/Oberleutnant20/dms/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible,  demonstrating the expected behavior that is not occurring.
+* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/Oberleutnant20/Duali-Bib/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible,  demonstrating the expected behavior that is not occurring.
 
 #### **Did you write a patch that fixes a bug?**
 
@@ -44,9 +44,6 @@ Start reading our code and you'll get the hang of it. We optimize for readabilit
   
   * This is open source software. Consider the people who will read your code, and make it look nice for them. It's sort of like driving a car: Perhaps you love doing donuts when you're alone, but with passengers the goal is to make the ride as smooth as possible.
 
-Thanks! :heart: :heart: :heart:
+Thanks!
 
 Tim aka. Oberleutnant20
-Viktor,
-Alex,
-Marcel
