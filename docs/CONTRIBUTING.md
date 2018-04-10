@@ -1,4 +1,4 @@
-#### [English version(englische Version)](https://github.com/Oberleutnant20/dms/blob/master/docs/CONTRIBUTING_en.md)
+#### [English version(englische Version)](https://github.com/Oberleutnant20/Duali-Bib/blob/master/docs/CONTRIBUTING_en.md)
 #### German version(Deutsche version)
 
 
@@ -6,9 +6,9 @@
 
 #### ** Haben Sie einen Fehler gefunden? **
 
-* ** Stellen Sie sicher, dass der Fehler nicht bereits gemeldet wurde **, indem Sie auf GitHub unter [Probleme](https://github.com/Oberleutnant20/dms/issues) suchen.
+* ** Stellen Sie sicher, dass der Fehler nicht bereits gemeldet wurde **, indem Sie auf GitHub unter [Probleme](https://github.com/Oberleutnant20/Duali-Bib/issues) suchen.
 
-* Falls Sie kein offenes Problem finden können, das das Problem angeht, [öffnen Sie ein neues](https://github.com/Oberleutnant20/dms/issues/new). Achten Sie darauf, einen ** Titel und eine eindeutige Beschreibung ** sowie so viele relevante Informationen wie möglich anzugeben, die das erwartete Verhalten zeigen, das nicht auftritt.
+* Falls Sie kein offenes Problem finden können, das das Problem angeht, [öffnen Sie ein neues](https://github.com/Oberleutnant20/Duali-Bib/issues/new). Achten Sie darauf, einen ** Titel und eine eindeutige Beschreibung ** sowie so viele relevante Informationen wie möglich anzugeben, die das erwartete Verhalten zeigen, das nicht auftritt.
 
 #### ** Hast du einen Patch geschrieben, der einen Fehler behebt? **
 
@@ -44,9 +44,6 @@ Beginnen Sie mit dem Lesen unseres Codes und Sie werden den Dreh herausfinden. W
   
   * Dies ist eine Open-Source-Software. Betrachten Sie die Leute, die Ihren Code lesen und ihn für sie nett aussehen lassen. Es ist so, als würde man ein Auto fahren: Vielleicht magst du Donuts, wenn du alleine bist, aber mit Fahrgästen ist es das Ziel, die Fahrt so glatt wie möglich zu machen.
 
-Vielen Dank! :heart: :heart: :heart:
+Vielen Dank!
 
-Tim aka. Oberleutnant20,
-Viktor,
-Alex,
-Marcel
+Tim aka. Oberleutnant20
