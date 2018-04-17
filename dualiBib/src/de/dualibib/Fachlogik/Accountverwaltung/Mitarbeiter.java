@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Medienverwaltung;
+package de.dualibib.Fachlogik.Accountverwaltung;
 
 /**
  *
  * @author Carina
  */
-public class CD {
+public class Mitarbeiter extends Kunde{
     
 }

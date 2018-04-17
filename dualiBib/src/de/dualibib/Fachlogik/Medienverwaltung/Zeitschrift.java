@@ -9,6 +9,6 @@ package de.dualibib.Fachlogik.Medienverwaltung;
  *
  * @author Carina
  */
-public class Zeitschrift {
+public class Zeitschrift extends Medien{
     
 }

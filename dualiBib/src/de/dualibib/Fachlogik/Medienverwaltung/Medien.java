@@ -9,6 +9,12 @@ package de.dualibib.Fachlogik.Medienverwaltung;
  *
  * @author Carina
  */
-public class Medien {
+public abstract class Medien {
+    
+    private int isbn;
+    private Kategorien kategorien;
+    private String name;
+    
+    
     
 }

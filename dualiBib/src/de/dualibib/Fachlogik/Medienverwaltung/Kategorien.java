@@ -9,6 +9,6 @@ package de.dualibib.Fachlogik.Medienverwaltung;
  *
  * @author Carina
  */
-public class Kategorien {
-    
+public enum Kategorien {
+    Buch, EBook, Zeitschrift
 }
