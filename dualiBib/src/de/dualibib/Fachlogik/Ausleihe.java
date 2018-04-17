@@ -11,4 +11,8 @@ package de.dualibib.Fachlogik;
  */
 public class Ausleihe {
     
+    /*
+    nachsehen von wem ausgeliehen/vorgemerkt und bis wann
+    */
+    
 }

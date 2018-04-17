@@ -11,9 +11,43 @@ package de.dualibib.Fachlogik.Medienverwaltung;
  */
 public abstract class Medien {
     
-    private int isbn;
     private Kategorien kategorien;
     private String name;
+    //mehr Infos über Ausleihe
+    private boolean ausgeliehen;
+    private boolean vorgemerkt;
+
+    public Kategorien getKategorien() {
+        return kategorien;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isAusgeliehen() {
+        return ausgeliehen;
+    }
+
+    public boolean isVorgemerkt() {
+        return vorgemerkt;
+    }
+
+    public void setKategorien(Kategorien kategorien) {
+        this.kategorien = kategorien;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAusgeliehen(boolean ausgeliehen) {
+        this.ausgeliehen = ausgeliehen;
+    }
+
+    public void setVorgemerkt(boolean vorgemerkt) {
+        this.vorgemerkt = vorgemerkt;
+    }
     
     
     

@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Medienverwaltung;
+package de.dualibib.Fachlogik.Medienverwaltung.Printmedien;
+
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 
 /**
  *
  * @author Carina
  */
-public class Buch extends Medien{
+public class Zeitschrift extends Medien{
     
 }
