@@ -9,6 +9,6 @@ package de.dualibib.Datenlogik;
  *
  * @author Carina
  */
-public class AccountDAO {
+public class AccountDAO implements  IAccountDAO{
     
 }

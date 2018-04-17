@@ -5,8 +5,10 @@
  */
 package de.dualibib.Fachlogik.Ausleihverwaltung;
 
-import de.dualibib.Datenlogik.AusleiheDAO;
+import de.dualibib.Datenlogik.IAusleiheDAO;
 import de.dualibib.Fachlogik.IVerwaltung;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -14,8 +16,12 @@ import de.dualibib.Fachlogik.IVerwaltung;
  */
 public class Ausleiheverwaltung implements IVerwaltung{
 
-    public Ausleiheverwaltung(AusleiheDAO ausleiheDAO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Set<Ausleihe> accountListe;
+    private IAusleiheDAO ausleiheDAO;
+    
+    public Ausleiheverwaltung(IAusleiheDAO ausleiheDAO) {
+        accountListe = new HashSet<Ausleihe>();
+        this.ausleiheDAO = ausleiheDAO;
     }
 
     @Override

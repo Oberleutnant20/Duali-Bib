@@ -9,6 +9,6 @@ package de.dualibib.Datenlogik;
  *
  * @author Carina
  */
-public class AusleiheDAO {
+public class AusleiheDAO implements IAusleiheDAO{
     
 }

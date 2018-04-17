@@ -7,10 +7,12 @@ package de.dualibib;
 
 import de.dualibib.Datenlogik.AccountDAO;
 import de.dualibib.Datenlogik.AusleiheDAO;
+import de.dualibib.Datenlogik.KategorieDAO;
 import de.dualibib.Datenlogik.MedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Controller;
+import de.dualibib.Fachlogik.Kategorienverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 
 /**
@@ -23,7 +25,8 @@ public class Main {
         Accountverwaltung accountverwaltung = new Accountverwaltung(new AccountDAO());
         Medienverwaltung medienverwaltung = new Medienverwaltung(new MedienDAO());
         Ausleiheverwaltung ausleiheverwaltung = new Ausleiheverwaltung(new AusleiheDAO());
-        Controller controller = new Controller(accountverwaltung, medienverwaltung,ausleiheverwaltung);
+        Kategorienverwaltung kategorienverwaltung = new Kategorienverwaltung(new KategorieDAO());
+        Controller controller = new Controller(accountverwaltung, medienverwaltung,ausleiheverwaltung, kategorienverwaltung);
         controller.start();
     }
 }

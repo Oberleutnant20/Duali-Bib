@@ -9,6 +9,6 @@ package de.dualibib.Datenlogik;
  *
  * @author Carina
  */
-public class MedienDAO implements IMedienDAO{
+public interface IKategorieDAO {
     
 }

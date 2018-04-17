@@ -5,8 +5,11 @@
  */
 package de.dualibib.Fachlogik.Medienverwaltung;
 
+import de.dualibib.Datenlogik.IMedienDAO;
 import de.dualibib.Datenlogik.MedienDAO;
 import de.dualibib.Fachlogik.IVerwaltung;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -14,8 +17,12 @@ import de.dualibib.Fachlogik.IVerwaltung;
  */
 public class Medienverwaltung implements IVerwaltung{
 
-    public Medienverwaltung(MedienDAO medienDAO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Set<Medien> accountListe;
+    private IMedienDAO medienDAO;
+    
+    public Medienverwaltung(IMedienDAO medienDAO) {
+      accountListe = new HashSet<Medien>();
+        this.medienDAO = medienDAO;
     }
 
     @Override

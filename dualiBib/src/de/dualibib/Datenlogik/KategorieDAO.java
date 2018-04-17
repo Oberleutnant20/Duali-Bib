@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Medienverwaltung;
+package de.dualibib.Datenlogik;
 
 /**
  *
  * @author Carina
  */
-public enum Kategorien {
-    Buch, CD, EBook, Zeitschrift
+public class KategorieDAO implements IKategorieDAO{
+    
 }

@@ -10,5 +10,18 @@ package de.dualibib.Fachlogik.Accountverwaltung;
  * @author Carina
  */
 public class Account {
-    
+
+    private Kunde kunde = null;
+    private Mitarbeiter mitarbeiter = null;
+    private String emailAdresse = null;
+    private String passwort = null;
+
+    public Kunde getKunde() {
+        return kunde;
+    }
+
+    public Mitarbeiter getMitarbeiter() {
+        return mitarbeiter;
+    }
+
 }

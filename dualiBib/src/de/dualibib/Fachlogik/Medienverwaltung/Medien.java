@@ -11,12 +11,21 @@ package de.dualibib.Fachlogik.Medienverwaltung;
  */
 public abstract class Medien {
     
-    private Kategorien kategorien;
+    private String kategorien;
     private String name;
     //mehr Infos über Ausleihe
     private boolean ausgeliehen;
     private boolean vorgemerkt;
 
+    public Medien(String kategorien, String name, boolean ausgeliehen, boolean vorgemerkt) {
+        this.kategorien = kategorien;
+        this.name = name;
+        this.ausgeliehen = ausgeliehen;
+        this.vorgemerkt = vorgemerkt;
+    }
+
+    
+    
     public Kategorien getKategorien() {
         return kategorien;
     }
