@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Medienverwaltung;
+package de.dualibib.Fachlogik.Ausleihverwaltung;
 
-import de.dualibib.Datenlogik.MedienDAO;
+import de.dualibib.Datenlogik.AusleiheDAO;
 
 /**
  *
  * @author Carina
  */
-public class Medienverwaltung {
+public class Ausleiheverwaltung {
 
-    public Medienverwaltung(MedienDAO medienDAO) {
+    public Ausleiheverwaltung(AusleiheDAO ausleiheDAO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
