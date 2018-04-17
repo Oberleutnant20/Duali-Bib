@@ -9,6 +9,6 @@ package de.dualibib.Fachlogik.Medienverwaltung;
  *
  * @author Carina
  */
-public class EBook {
+public class EBook extends Medien{
     
 }
