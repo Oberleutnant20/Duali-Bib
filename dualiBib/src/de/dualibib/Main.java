@@ -12,7 +12,7 @@ import de.dualibib.Datenlogik.MedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Controller;
-import de.dualibib.Fachlogik.Kategorienverwaltung;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 
 /**

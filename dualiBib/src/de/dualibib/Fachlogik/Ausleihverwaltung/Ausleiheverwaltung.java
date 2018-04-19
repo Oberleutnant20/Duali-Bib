@@ -6,47 +6,62 @@
 package de.dualibib.Fachlogik.Ausleihverwaltung;
 
 import de.dualibib.Datenlogik.IAusleiheDAO;
-import de.dualibib.Fachlogik.IVerwaltung;
+import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author Carina
  */
-public class Ausleiheverwaltung implements IVerwaltung{
+public class Ausleiheverwaltung{
 
-    private Set<Ausleihe> accountListe;
+    private Set<Ausleihe> ausleiheListe;
     private IAusleiheDAO ausleiheDAO;
     
     public Ausleiheverwaltung(IAusleiheDAO ausleiheDAO) {
-        accountListe = new HashSet<Ausleihe>();
+        ausleiheListe = new HashSet<Ausleihe>();
         this.ausleiheDAO = ausleiheDAO;
     }
 
-    @Override
-    public void speichern() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void speichern() throws IOException{
+        List<Ausleihe> liste = new ArrayList<>();
+		for (Ausleihe a : ausleiheListe)
+			liste.add(a);
+		ausleiheDAO.speichern(liste);
     }
 
-    @Override
     public void laden() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ausleiheListe.clear();
+		try {
+			List<Ausleihe> liste = ausleiheDAO.laden();
+			for (Ausleihe ausleihe : liste)
+				this.add(ausleihe);
+
+		} catch (Exception e) {	}
     }
 
-    @Override
-    public boolean istLeer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void add(Ausleihe ausleihe) {
+        if (!ausleiheListe.add(ausleihe)) {
+			String error = "Ausleihe gibt es bereits.";
+		}
     }
 
-    @Override
-    public void add() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Ausleihe ausleihe) {
+        if (!ausleiheListe.remove(ausleihe)) {
+			String error = "Ausleihe gibt es nicht.";
+		}
     }
 
-    @Override
-    public void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Ausleihe> get() {
+        ArrayList<Ausleihe> liste = new ArrayList<Ausleihe>();
+		for (Ausleihe ausleihe : ausleiheListe) {
+			liste.add(ausleihe);
+		}
+		return liste;
     }
     
 }

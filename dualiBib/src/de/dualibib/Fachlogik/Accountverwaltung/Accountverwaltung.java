@@ -6,15 +6,17 @@
 package de.dualibib.Fachlogik.Accountverwaltung;
 
 import de.dualibib.Datenlogik.IAccountDAO;
-import de.dualibib.Fachlogik.IVerwaltung;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author Carina
  */
-public class Accountverwaltung implements IVerwaltung{
+public class Accountverwaltung{
 
     private Set<Account> accountListe;
     private IAccountDAO accountDAO;
@@ -24,29 +26,41 @@ public class Accountverwaltung implements IVerwaltung{
         this.accountDAO = accountDAO;
     }
 
-    @Override
-    public void speichern() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void speichern() throws IOException{
+        List<Account> liste = new ArrayList<>();
+		for (Account a : accountListe)
+			liste.add(a);
+		accountDAO.speichern(liste);
     }
 
-    @Override
     public void laden() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        accountListe.clear();
+		try {
+			List<Account> liste = accountDAO.laden();
+			for (Account account : liste)
+				this.add(account);
+
+		} catch (Exception e) {	}
     }
 
-    @Override
-    public boolean istLeer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void add(Account account) {
+        if (!accountListe.add(account)) {
+			String error = "Account gibt es bereits.";
+		}
     }
 
-    @Override
-    public void add() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Account account) {
+        if (!accountListe.remove(account)) {
+			String error = "Account gibt es nicht.";
+		}
     }
 
-    @Override
-    public void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Account> get() {
+        ArrayList<Account> liste = new ArrayList<Account>();
+		for (Account account : accountListe) {
+			liste.add(account);
+		}
+		return liste;
     }
     
 }

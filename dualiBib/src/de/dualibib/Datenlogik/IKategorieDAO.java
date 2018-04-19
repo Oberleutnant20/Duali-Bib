@@ -5,10 +5,15 @@
  */
 package de.dualibib.Datenlogik;
 
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
+import java.io.IOException;
+import java.util.List;
+
 /**
  *
  * @author Carina
  */
 public interface IKategorieDAO {
-    
+    List<Kategorie> laden() throws IOException;
+    void speichern(List<Kategorie> kategorieListe)  throws IOException;
 }
