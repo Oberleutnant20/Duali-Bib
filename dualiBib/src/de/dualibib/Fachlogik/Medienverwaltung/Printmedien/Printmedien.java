@@ -5,7 +5,6 @@
  */
 package de.dualibib.Fachlogik.Medienverwaltung.Printmedien;
 
-import de.dualibib.Fachlogik.Medienverwaltung.Kategorien;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 
 /**
@@ -18,7 +17,7 @@ public abstract class Printmedien extends Medien{
     private String verlag;
     private String autor;
 
-    public Printmedien(int isbn, String verlag, String autor, Kategorien kategorien, String name, boolean ausgeliehen, boolean vorgemerkt) {
+    public Printmedien(int isbn, String verlag, String autor, String kategorien, String name, boolean ausgeliehen, boolean vorgemerkt) {
         super(kategorien, name, ausgeliehen, vorgemerkt);
         this.isbn = isbn;
         this.verlag = verlag;

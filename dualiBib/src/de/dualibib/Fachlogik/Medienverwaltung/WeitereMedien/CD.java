@@ -13,6 +13,11 @@ public class CD extends WeitereMedien{
  
     private String kuenstler;
 
+    public CD(String kuenstler, int idnr, String kategorien, String name, boolean ausgeliehen, boolean vorgemerkt) {
+        super(idnr, kategorien, name, ausgeliehen, vorgemerkt);
+        this.kuenstler = kuenstler;
+    }
+
     public String getKuenstler() {
         return kuenstler;
     }

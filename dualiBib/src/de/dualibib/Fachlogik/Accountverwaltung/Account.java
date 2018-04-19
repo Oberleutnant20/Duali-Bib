@@ -11,16 +11,16 @@ package de.dualibib.Fachlogik.Accountverwaltung;
  */
 public class Account {
 
-    private Kunde kunde = null;
-    private Mitarbeiter mitarbeiter = null;
-    private String emailAdresse = null;
+    private User user = null;
+    private String username = null;
     private String passwort = null;
+    private boolean mitarbeiter;
 
-    public Kunde getKunde() {
-        return kunde;
+    public User getKunde() {
+        return user;
     }
 
-    public Mitarbeiter getMitarbeiter() {
+    public boolean getMitarbeiter() {
         return mitarbeiter;
     }
 

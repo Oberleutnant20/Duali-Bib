@@ -13,4 +13,8 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medien;
  */
 public class Zeitschrift extends Medien{
     
+    public Zeitschrift(String kategorien, String name, boolean ausgeliehen, boolean vorgemerkt) {
+        super(kategorien, name, ausgeliehen, vorgemerkt);
+    }
+    
 }

@@ -13,4 +13,8 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medien;
  */
 public class EBook extends Medien{
     
+    public EBook(String kategorien, String name, boolean ausgeliehen, boolean vorgemerkt) {
+        super(kategorien, name, ausgeliehen, vorgemerkt);
+    }
+    
 }

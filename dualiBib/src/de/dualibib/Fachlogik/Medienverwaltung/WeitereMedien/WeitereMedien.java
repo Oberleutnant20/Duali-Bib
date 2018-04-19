@@ -15,6 +15,11 @@ public abstract class WeitereMedien extends Medien{
     
     private int idnr;
 
+    public WeitereMedien(int idnr, String kategorien, String name, boolean ausgeliehen, boolean vorgemerkt) {
+        super(kategorien, name, ausgeliehen, vorgemerkt);
+        this.idnr = idnr;
+    }
+
     public int getIdnr() {
         return idnr;
     }

@@ -26,7 +26,7 @@ public abstract class Medien {
 
     
     
-    public Kategorien getKategorien() {
+    public String getKategorien() {
         return kategorien;
     }
 
@@ -42,7 +42,7 @@ public abstract class Medien {
         return vorgemerkt;
     }
 
-    public void setKategorien(Kategorien kategorien) {
+    public void setKategorien(String kategorien) {
         this.kategorien = kategorien;
     }
 

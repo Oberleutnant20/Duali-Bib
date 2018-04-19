@@ -15,12 +15,22 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
  */
 public class Controller {
 
+    Accountverwaltung accountverwaltung;
+    Medienverwaltung medienverwaltung;
+    Ausleiheverwaltung ausleiheverwaltung;
+    Kategorienverwaltung kategorienverwaltung;
+
     public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.accountverwaltung = accountverwaltung;
+        this.medienverwaltung = medienverwaltung;
+        this.ausleiheverwaltung = ausleiheverwaltung;
+        this.kategorienverwaltung = kategorienverwaltung;
     }
+         
+    
 
     public void start() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
