@@ -1,0 +1,3 @@
+Bei Libraries muss JUnit hinzugefügt werden --> Add Library...
+
+Genutzte Verschlüsselung SHA512 mit vorgegebenem SALT.(Password.getSHA512(String passwd))
