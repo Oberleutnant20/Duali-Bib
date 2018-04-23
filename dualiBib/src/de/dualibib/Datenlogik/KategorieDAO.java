@@ -5,7 +5,7 @@
  */
 package de.dualibib.Datenlogik;
 
-import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import java.io.IOException;
 import java.util.List;
 
@@ -13,15 +13,15 @@ import java.util.List;
  *
  * @author Carina
  */
-public class MedienDAO implements IMedienDAO{
+public class KategorieDAO implements IKategorieDAO{
 
     @Override
-    public List<Medien> laden() throws IOException {
+    public List<Kategorie> laden() throws IOException {
         return null; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void speichern(List<Medien> medienListe) throws IOException {
+    public void speichern(List<Kategorie> kategorieListe) throws IOException {
         //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -5,10 +5,12 @@
  */
 package de.dualibib.UI;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Carina
  */
-public class UI {
+public class UI extends JFrame {
     
 }

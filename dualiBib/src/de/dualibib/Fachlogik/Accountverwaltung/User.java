@@ -9,6 +9,6 @@ package de.dualibib.Fachlogik.Accountverwaltung;
  *
  * @author Carina
  */
-public class Kunde {
+public class User {
     
 }

@@ -5,7 +5,7 @@
  */
 package de.dualibib.Datenlogik;
 
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import java.io.IOException;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public interface IAusleiheDAO {
-    List<Ausleihe> laden() throws IOException;
-    void speichern(List<Ausleihe> ausleiheListe)  throws IOException;
+public interface IKategorieDAO {
+    List<Kategorie> laden() throws IOException;
+    void speichern(List<Kategorie> kategorieListe)  throws IOException;
 }
