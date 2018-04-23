@@ -5,10 +5,24 @@
  */
 package de.dualibib.Datenlogik;
 
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
+import java.io.IOException;
+import java.util.List;
+
 /**
  *
  * @author Carina
  */
-public class AusleiheDAO {
+public class AusleiheDAO implements IAusleiheDAO{
+
+    @Override
+    public List<Ausleihe> laden() throws IOException {
+        return null; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void speichern(List<Ausleihe> ausleiheListe) throws IOException {
+        //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
