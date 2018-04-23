@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 /**
  *
@@ -16,7 +10,8 @@ public class Information {
     private final String mail = "";
     private final String version = "";
     private final String copyright = "";
-    private final String info = "Diese Funktion ist noch in der Entwicklung";
+    private final String info = "Diese Funktion ist noch in der Entwicklung. \n"
+            + "This feature is still under development";
 
     /**
      * Bei der Entwicklerinformation ist<br>

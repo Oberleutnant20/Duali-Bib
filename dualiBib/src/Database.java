@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,8 +17,8 @@ public class Database {
      *
      * @return Connection if Successful
      */
-    public Connection connect() {
-        return connect("SA", "");
+    public Connection connect_hsqldb() {
+        return connect_hsqldb("SA", "");
     }
     
     /**
@@ -43,8 +37,8 @@ public class Database {
      * @param passwd Password to Authentication the User.
      * @return Connection if Successful
      */
-    public Connection connect(String usr, String passwd) {
-        return connect("jdbc:hsqldb:hsql://localhost/", usr, passwd);
+    public Connection connect_hsqldb(String usr, String passwd) {
+        return connect_hsqldb("jdbc:hsqldb:hsql://localhost/", usr, passwd);
     }
     
     /**
@@ -68,7 +62,7 @@ public class Database {
      * @param passwd Password to Authentication the User.
      * @return Connection if Successful
      */
-    public Connection connect(String url, String usr, String passwd) {
+    public Connection connect_hsqldb(String url, String usr, String passwd) {
         return connect(url, usr, passwd, "org.hsqldb.jdbcDriver");
     }
     
