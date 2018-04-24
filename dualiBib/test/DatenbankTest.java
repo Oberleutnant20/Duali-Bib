@@ -5,9 +5,11 @@ import de.dualibib.Datenlogik.KategorieDAO;
 import de.dualibib.Datenlogik.MedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import java.util.ArrayList;
 import java.util.List;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /*
@@ -42,9 +44,9 @@ public class DatenbankTest {
     @Test
     public void kategorieTest() throws Exception {
         KategorieDAO sut = new KategorieDAO();
-        List<String> datenListe = new ArrayList<>();
+        List<Kategorie> datenListe = new ArrayList<>();
         //hinzufügen
-        List<String> datenbankListe = sut.laden();
+        List<Kategorie> datenbankListe = sut.laden();
         assertTrue(datenListe.equals(datenbankListe));
     }
 
