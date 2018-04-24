@@ -7,6 +7,7 @@ package de.dualibib.Datenlogik;
 
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class MedienDAO implements IMedienDAO{
 
     @Override
     public List<Medien> laden() throws IOException {
-        return null; //To change body of generated methods, choose Tools | Templates.
+        return new ArrayList<>(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
