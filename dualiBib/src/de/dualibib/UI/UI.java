@@ -203,15 +203,18 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_beendenMenuActionPerformed
 
     private void LoginLogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginLogoutMenuActionPerformed
-        selectPanel.setVisible(false);
+        panelUnsichtbar();
         loginPanel.setVisible(true);
+        aktuellesPanel = "loginPanel";
     }//GEN-LAST:event_LoginLogoutMenuActionPerformed
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
-        jPanel1.setVisible(false);
+        panelUnsichtbar();
         selectPanel.setVisible(true);
+        aktuellesPanel = "selectPanel";
     }//GEN-LAST:event_selectActionPerformed
 
+    String aktuellesPanel="";
     LoginPanel loginPanel;
     SelectPanel selectPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,5 +250,12 @@ public class UI extends javax.swing.JFrame {
         add(selectPanel);
         loginPanel = new LoginPanel();
         add(loginPanel);
+    }
+
+    private void panelUnsichtbar() {
+        selectPanel.setVisible(false);
+        loginPanel.setVisible(false);
+        jPanel1.setVisible(false);                   
+        
     }
 }
