@@ -5,6 +5,8 @@
  */
 package de.dualibib.UI;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -17,7 +19,9 @@ public class UI extends javax.swing.JFrame {
     /**
      * Creates new form UI
      */
-    public UI() {
+    public UI(List genreListe, List kategorieListe) {
+        this.genreListe = new ArrayList<String>();
+        this.kategorieListe = new ArrayList<String>();
         initComponents();
         setLayout(new java.awt.BorderLayout());
         setVisible(true);
@@ -40,7 +44,7 @@ public class UI extends javax.swing.JFrame {
         genreBox = new javax.swing.JComboBox<>();
         kategorieBox = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        uebersichtTabelle = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         accountMenu = new javax.swing.JMenu();
         LoginLogoutMenu = new javax.swing.JMenuItem();
@@ -85,18 +89,26 @@ public class UI extends javax.swing.JFrame {
 
         kategorieBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        uebersichtTabelle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Titel", "Autor", "Status", "Genre", "Kategorie"
             }
-        ));
-        jScrollPane3.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(uebersichtTabelle);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,13 +150,28 @@ public class UI extends javax.swing.JFrame {
         accountMenu.add(LoginLogoutMenu);
 
         editAccountMenu.setText("Account bearbeiten");
+        editAccountMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editAccountMenuActionPerformed(evt);
+            }
+        });
         accountMenu.add(editAccountMenu);
         accountMenu.add(jSeparator2);
 
         historyMenu.setText("History");
+        historyMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyMenuActionPerformed(evt);
+            }
+        });
         accountMenu.add(historyMenu);
 
         aktuelleAusleiheMenu.setText("aktuelle Ausleihe");
+        aktuelleAusleiheMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aktuelleAusleiheMenuActionPerformed(evt);
+            }
+        });
         accountMenu.add(aktuelleAusleiheMenu);
         accountMenu.add(jSeparator1);
 
@@ -168,6 +195,11 @@ public class UI extends javax.swing.JFrame {
         helpMenu.add(jSeparator3);
 
         optionMenu.setText("Option");
+        optionMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionMenuActionPerformed(evt);
+            }
+        });
         helpMenu.add(optionMenu);
 
         jMenuBar1.add(helpMenu);
@@ -175,9 +207,19 @@ public class UI extends javax.swing.JFrame {
         administrationMenu.setText("Administration");
 
         accountsBearbeitenItem.setText("Accounts bearbeiten");
+        accountsBearbeitenItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountsBearbeitenItemActionPerformed(evt);
+            }
+        });
         administrationMenu.add(accountsBearbeitenItem);
 
         ausleihenBearbeiten.setText("Ausleihen bearbeiten");
+        ausleihenBearbeiten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ausleihenBearbeitenActionPerformed(evt);
+            }
+        });
         administrationMenu.add(ausleihenBearbeiten);
 
         jMenuBar1.add(administrationMenu);
@@ -204,17 +246,62 @@ public class UI extends javax.swing.JFrame {
 
     private void LoginLogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginLogoutMenuActionPerformed
         panelUnsichtbar();
+        add(loginPanel);
         loginPanel.setVisible(true);
-        aktuellesPanel = "loginPanel";
     }//GEN-LAST:event_LoginLogoutMenuActionPerformed
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         panelUnsichtbar();
+        selectPanel = new SelectPanel(genreListe,kategorieListe);
+        add(selectPanel);
         selectPanel.setVisible(true);
-        aktuellesPanel = "selectPanel";
     }//GEN-LAST:event_selectActionPerformed
 
-    String aktuellesPanel="";
+    private void editAccountMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountMenuActionPerformed
+        panelUnsichtbar();
+        add(accountBearbeitenPanel);
+        accountBearbeitenPanel.setVisible(true);
+    }//GEN-LAST:event_editAccountMenuActionPerformed
+
+    private void accountsBearbeitenItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountsBearbeitenItemActionPerformed
+        panelUnsichtbar();
+        add(accountsBearbeitenPanel);
+        accountsBearbeitenPanel.setVisible(true);
+    }//GEN-LAST:event_accountsBearbeitenItemActionPerformed
+
+    private void historyMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyMenuActionPerformed
+        panelUnsichtbar();
+        add(historyPanel);
+        historyPanel.setVisible(true);
+    }//GEN-LAST:event_historyMenuActionPerformed
+
+    private void aktuelleAusleiheMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aktuelleAusleiheMenuActionPerformed
+        panelUnsichtbar();
+        add(ausleihenPanel);
+        ausleihenPanel.setVisible(true);
+    }//GEN-LAST:event_aktuelleAusleiheMenuActionPerformed
+
+    private void optionMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionMenuActionPerformed
+        panelUnsichtbar();
+        add(optionPanel);
+        optionPanel.setVisible(true);
+    }//GEN-LAST:event_optionMenuActionPerformed
+
+    private void ausleihenBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenBearbeitenActionPerformed
+        panelUnsichtbar();
+        add(ausleihenBearbeitenPanel);
+        ausleihenBearbeitenPanel.setVisible(true);
+    }//GEN-LAST:event_ausleihenBearbeitenActionPerformed
+
+    List genreListe;
+    List kategorieListe;
+    //Panel
+    AusleihenBearbeitenPanel ausleihenBearbeitenPanel;
+    OptionPanel optionPanel;
+    AusleihenPanel ausleihenPanel;
+    HistoryPanel historyPanel;
+    AccountsBearbeitenPanel accountsBearbeitenPanel;
+    AccountBearbeitenPanel accountBearbeitenPanel;
     LoginPanel loginPanel;
     SelectPanel selectPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -238,24 +325,32 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JComboBox<String> kategorieBox;
     private javax.swing.JMenuItem optionMenu;
     private javax.swing.JButton select;
     private javax.swing.JMenuItem supportMenu;
+    private javax.swing.JTable uebersichtTabelle;
     // End of variables declaration//GEN-END:variables
 
     private void addPanels() {
-        selectPanel = new SelectPanel();
-        add(selectPanel);
         loginPanel = new LoginPanel();
-        add(loginPanel);
+        accountBearbeitenPanel = new AccountBearbeitenPanel();
+        historyPanel = new HistoryPanel();
+        accountsBearbeitenPanel = new AccountsBearbeitenPanel();
+        ausleihenPanel = new AusleihenPanel();
+        optionPanel = new OptionPanel();
+        ausleihenBearbeitenPanel = new AusleihenBearbeitenPanel();
     }
 
     private void panelUnsichtbar() {
         selectPanel.setVisible(false);
         loginPanel.setVisible(false);
-        jPanel1.setVisible(false);                   
-        
+        jPanel1.setVisible(false); 
+        accountBearbeitenPanel.setVisible(false);
+        historyPanel.setVisible(false);
+        accountsBearbeitenPanel.setVisible(false);
+        ausleihenPanel.setVisible(false);
+        optionPanel.setVisible(false);
+        ausleihenBearbeitenPanel.setVisible(false);
     }
 }
