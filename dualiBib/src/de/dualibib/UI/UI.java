@@ -5,14 +5,6 @@
  */
 package de.dualibib.UI;
 
-import de.dualibib.UI.Panels.OptionPanel;
-import de.dualibib.UI.Panels.AusleihenPanel;
-import de.dualibib.UI.Panels.HistoryPanel;
-import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
-import de.dualibib.UI.Panels.AccountBearbeitenPanel;
-import de.dualibib.UI.Panels.LoginPanel;
-import de.dualibib.UI.Panels.SelectPanel;
-import de.dualibib.UI.Panels.AusleihenBearbeitenPanel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -26,17 +18,13 @@ public class UI extends javax.swing.JFrame {
     /**
      * Creates new form UI
      */
-    public UI(List genreListe, List kategorieListe) {
+    public UI(List genreListe, List kategorieListe,PanelHandler panelHandler) {
         this.genreListe = new ArrayList<String>();
         this.kategorieListe = new ArrayList<String>();
         initComponents();
         setLayout(new java.awt.BorderLayout());
         setVisible(true);
-        //panelHandler = new PanelHandler();
-        //add(panelHandler.getSuchePanel());
-        //jPanel1.setVisible(false);
-        //panelHandler.getSuchePanel().setVisible(true);
-        
+        this.panelHandler = panelHandler;
     }
 
     public JPanel getjPanel1() {
@@ -134,9 +122,19 @@ public class UI extends javax.swing.JFrame {
         helpMenu.setText("Help");
 
         informationMenu.setText("Information");
+        informationMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                informationMenuActionPerformed(evt);
+            }
+        });
         helpMenu.add(informationMenu);
 
         supportMenu.setText("Support");
+        supportMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supportMenuActionPerformed(evt);
+            }
+        });
         helpMenu.add(supportMenu);
         helpMenu.add(jSeparator3);
 
@@ -232,20 +230,19 @@ public class UI extends javax.swing.JFrame {
         panelHandler.getAusleihenBearbeitenPanel().setVisible(true);
     }//GEN-LAST:event_ausleihenBearbeitenActionPerformed
 
+    private void informationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informationMenuActionPerformed
+        info();
+    }//GEN-LAST:event_informationMenuActionPerformed
+
+    private void supportMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supportMenuActionPerformed
+        entwicklung();
+    }//GEN-LAST:event_supportMenuActionPerformed
+
     List genreListe;
     List kategorieListe;
     
     PanelHandler panelHandler;
     
-//    //Panel
-//    AusleihenBearbeitenPanel ausleihenBearbeitenPanel;
-//    OptionPanel optionPanel;
-//    AusleihenPanel ausleihenPanel;
-//    HistoryPanel historyPanel;
-//    AccountsBearbeitenPanel accountsBearbeitenPanel;
-//    AccountBearbeitenPanel accountBearbeitenPanel;
-//    LoginPanel loginPanel;
-//    SelectPanel selectPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem LoginLogoutMenu;
     private javax.swing.JMenu accountMenu;
@@ -267,26 +264,11 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem supportMenu;
     // End of variables declaration//GEN-END:variables
 
-//    private void addPanels() {
-//        loginPanel = new LoginPanel();
-//        accountBearbeitenPanel = new AccountBearbeitenPanel();
-//        historyPanel = new HistoryPanel();
-//        accountsBearbeitenPanel = new AccountsBearbeitenPanel();
-//        ausleihenPanel = new AusleihenPanel();
-//        optionPanel = new OptionPanel();
-//        ausleihenBearbeitenPanel = new AusleihenBearbeitenPanel();
-//        selectPanel = new SelectPanel();
-//    }
+    private void info() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-//    private void panelUnsichtbar() {
-//        selectPanel.setVisible(false);
-//        loginPanel.setVisible(false);
-//        jPanel1.setVisible(false); 
-//        accountBearbeitenPanel.setVisible(false);
-//        historyPanel.setVisible(false);
-//        accountsBearbeitenPanel.setVisible(false);
-//        ausleihenPanel.setVisible(false);
-//        optionPanel.setVisible(false);
-//        ausleihenBearbeitenPanel.setVisible(false);
-//    }
+    private void entwicklung() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

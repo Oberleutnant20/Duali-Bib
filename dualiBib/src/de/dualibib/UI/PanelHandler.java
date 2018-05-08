@@ -74,7 +74,7 @@ public class PanelHandler {
     }
 
     public PanelHandler(List genreListe, List kategorieListe) {
-        ui = new UI(genreListe, kategorieListe);
+        ui = new UI(genreListe, kategorieListe,this);
         initPanels();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);

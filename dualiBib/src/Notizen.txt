@@ -3,3 +3,6 @@ Bei Libraries muss JUnit hinzugefügt werden --> Add Library...
 Genutzte Verschlüsselung SHA512 mit vorgegebenem SALT.(Password.getSHA512(String passwd))
 
 Beispiel MySQL --> https://github.com/Oberleutnant20/dms/blob/master/dms/src/de/dms/function/databse/sql/mysql/MYSQL_SQL_Script.sql
+
+ResultSet --> ArrayList
+https://stackoverflow.com/questions/26127305/resultset-how-to-put-it-into-a-arraylist
