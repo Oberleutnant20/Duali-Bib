@@ -29,17 +29,17 @@ public class AccountDAO implements IAccountDAO {
 
     @Override
     public List<Account> laden() throws IOException {
-        ArrayList<String> ret = new ArrayList<>();
+        ArrayList<Account> ret = new ArrayList<>();
         try {
             int columnCount = db.getMetaData(rs).getColumnCount();
             while (rs.next()) {
                 int i = 1;
                 while (i <= columnCount) {
-                    ret.add(rs.getString(i++));
+                    ret.add(new Account());
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("AccountDAO laden: "+ ex);;
         }
         return ret;
     }
