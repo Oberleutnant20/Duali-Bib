@@ -5,8 +5,10 @@
  */
 package de.dualibib.UI;
 
+import de.dualibib.info.Informationen;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -186,9 +188,19 @@ public class UI extends javax.swing.JFrame {
         helpMenu.setText("Help");
 
         informationMenu.setText("Information");
+        informationMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                informationMenuActionPerformed(evt);
+            }
+        });
         helpMenu.add(informationMenu);
 
         supportMenu.setText("Support");
+        supportMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supportMenuActionPerformed(evt);
+            }
+        });
         helpMenu.add(supportMenu);
         helpMenu.add(jSeparator3);
 
@@ -290,6 +302,14 @@ public class UI extends javax.swing.JFrame {
         ausleihenBearbeitenPanel.setVisible(true);
     }//GEN-LAST:event_ausleihenBearbeitenActionPerformed
 
+    private void informationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informationMenuActionPerformed
+        info();
+    }//GEN-LAST:event_informationMenuActionPerformed
+
+    private void supportMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supportMenuActionPerformed
+        entwicklung();
+    }//GEN-LAST:event_supportMenuActionPerformed
+
     List genreListe;
     List kategorieListe;
     //Panel
@@ -350,5 +370,13 @@ public class UI extends javax.swing.JFrame {
         ausleihenPanel.setVisible(false);
         optionPanel.setVisible(false);
         ausleihenBearbeitenPanel.setVisible(false);
+    }
+
+    private void info() {
+        JOptionPane.showMessageDialog(rootPane, new Informationen().printEntwickler(), "Entwicklerinformationen", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void entwicklung() {
+        JOptionPane.showMessageDialog(rootPane, new Informationen().printEntwicklung(""), "Entwicklungsstatus", JOptionPane.ERROR_MESSAGE);
     }
 }
