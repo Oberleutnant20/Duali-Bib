@@ -6,8 +6,6 @@
 package de.dualibib.Fachlogik.Kategorieverwaltung;
 
 import de.dualibib.Datenlogik.IKategorieDAO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,14 +22,15 @@ public class Kategorienverwaltung{
     private IKategorieDAO kategorieDAO;
     
     public Kategorienverwaltung(IKategorieDAO kategorieDAO) {
-        kategorieListe = new HashSet<Kategorie>();
+        kategorieListe = new HashSet<>();
         this.kategorieDAO = kategorieDAO;
     }
     
     public void speichern() throws IOException{
         List<Kategorie> liste = new ArrayList<>();
-		for (Kategorie kategorie : kategorieListe)
-			liste.add(kategorie);
+        kategorieListe.forEach((kategorie) -> {
+            liste.add(kategorie);
+         });
 		kategorieDAO.speichern(liste);
     }
 
@@ -39,8 +38,9 @@ public class Kategorienverwaltung{
         kategorieListe.clear();
 		try {
 			List<Kategorie> liste = kategorieDAO.laden();
-			for (Kategorie kategorie : liste)
-				this.add(kategorie);
+                        liste.forEach((kategorie) -> {
+                            this.add(kategorie);
+            });
 
 		} catch (Exception e) {	}
     }
@@ -58,10 +58,10 @@ public class Kategorienverwaltung{
     }
 
     public List<Kategorie> get() {
-        ArrayList<Kategorie> liste = new ArrayList<Kategorie>();
-		for (Kategorie kategorie : kategorieListe) {
-			liste.add(kategorie);
-		}
+        ArrayList<Kategorie> liste = new ArrayList<>();
+        kategorieListe.forEach((kategorie) -> {
+            liste.add(kategorie);
+         });
 		return liste;
     }
 }
