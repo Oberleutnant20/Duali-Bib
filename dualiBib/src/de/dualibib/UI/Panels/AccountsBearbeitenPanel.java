@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package de.dualibib.UI;
+package de.dualibib.UI.Panels;
 
 /**
  *
@@ -32,6 +32,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         sucheAccountField = new javax.swing.JTextField();
         bearbeitenButton = new javax.swing.JButton();
         anlegenButton = new javax.swing.JButton();
+        sucheField = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
@@ -54,6 +55,8 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
 
         anlegenButton.setText("Anlegen");
 
+        sucheField.setText("Suche");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,11 +75,15 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
                 .addComponent(bearbeitenButton)
                 .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(sucheAccountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -96,6 +103,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField sucheAccountField;
+    private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
 }
