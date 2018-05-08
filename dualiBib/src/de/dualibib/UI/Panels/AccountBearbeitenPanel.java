@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.UI;
+package de.dualibib.UI.Panels;
 
 /**
  *
@@ -49,6 +49,7 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
         strasseField = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         ibanField = new javax.swing.JTextField();
+        sucheField = new javax.swing.JTextField();
 
         vornameLable.setText("Vorname:");
 
@@ -94,6 +95,13 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
 
         ibanField.setText("jTextField9");
 
+        sucheField.setText("Suche");
+        sucheField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,10 +142,13 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
                                                     .addComponent(stadtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(hausnummerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(89, 89, 89)
-                                        .addComponent(checkPasswortLable)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(checkPasswortField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(checkPasswortLable)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(checkPasswortField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(ibanLable)
                                 .addGap(18, 18, 18)
@@ -164,7 +175,8 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vornameLable)
                     .addComponent(nameLable)
@@ -199,9 +211,13 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
                     .addComponent(ibanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(saveButton)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
+        System.out.println("blub");
+    }//GEN-LAST:event_sucheFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -225,6 +241,7 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
     private javax.swing.JLabel stadtLable;
     private javax.swing.JTextField strasseField;
     private javax.swing.JLabel strasseLable;
+    private javax.swing.JTextField sucheField;
     private javax.swing.JTextField vornameField;
     private javax.swing.JLabel vornameLable;
     // End of variables declaration//GEN-END:variables

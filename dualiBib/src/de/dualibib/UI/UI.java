@@ -5,8 +5,17 @@
  */
 package de.dualibib.UI;
 
+import de.dualibib.UI.Panels.OptionPanel;
+import de.dualibib.UI.Panels.AusleihenPanel;
+import de.dualibib.UI.Panels.HistoryPanel;
+import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
+import de.dualibib.UI.Panels.AccountBearbeitenPanel;
+import de.dualibib.UI.Panels.LoginPanel;
+import de.dualibib.UI.Panels.SelectPanel;
+import de.dualibib.UI.Panels.AusleihenBearbeitenPanel;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,9 +32,18 @@ public class UI extends javax.swing.JFrame {
         initComponents();
         setLayout(new java.awt.BorderLayout());
         setVisible(true);
-        addPanels();
+        //panelHandler = new PanelHandler();
+        //add(panelHandler.getSuchePanel());
+        //jPanel1.setVisible(false);
+        //panelHandler.getSuchePanel().setVisible(true);
+        
     }
 
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,14 +53,7 @@ public class UI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        select = new javax.swing.JButton();
-        genreBox = new javax.swing.JComboBox<>();
-        kategorieBox = new javax.swing.JComboBox<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        uebersichtTabelle = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         accountMenu = new javax.swing.JMenu();
         LoginLogoutMenu = new javax.swing.JMenuItem();
@@ -61,80 +72,17 @@ public class UI extends javax.swing.JFrame {
         accountsBearbeitenItem = new javax.swing.JMenuItem();
         ausleihenBearbeiten = new javax.swing.JMenuItem();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        select.setText("Auswählen");
-        select.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectActionPerformed(evt);
-            }
-        });
-
-        genreBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        kategorieBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        uebersichtTabelle.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Titel", "Autor", "Status", "Genre", "Kategorie"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane3.setViewportView(uebersichtTabelle);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(kategorieBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(genreBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(select))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+            .addGap(0, 506, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(genreBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kategorieBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(select))
-                .addGap(22, 22, 22))
+            .addGap(0, 298, Short.MAX_VALUE)
         );
 
         accountMenu.setText("Account");
@@ -243,64 +191,61 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_beendenMenuActionPerformed
 
     private void LoginLogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginLogoutMenuActionPerformed
-        panelUnsichtbar();
-        add(loginPanel);
-        loginPanel.setVisible(true);
+        panelHandler.panelUnsichtbar();
+        add(panelHandler.getLoginPanel());
+        panelHandler.getLoginPanel().setVisible(true);
     }//GEN-LAST:event_LoginLogoutMenuActionPerformed
 
-    private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
-        panelUnsichtbar();
-        add(selectPanel);
-        selectPanel.setVisible(true);
-    }//GEN-LAST:event_selectActionPerformed
-
     private void editAccountMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountMenuActionPerformed
-        panelUnsichtbar();
-        add(accountBearbeitenPanel);
-        accountBearbeitenPanel.setVisible(true);
+        panelHandler.panelUnsichtbar();
+        add(panelHandler.getAccountBearbeitenPanel());
+        panelHandler.getAccountBearbeitenPanel().setVisible(true);
     }//GEN-LAST:event_editAccountMenuActionPerformed
 
     private void accountsBearbeitenItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountsBearbeitenItemActionPerformed
-        panelUnsichtbar();
-        add(accountsBearbeitenPanel);
-        accountsBearbeitenPanel.setVisible(true);
+        panelHandler.panelUnsichtbar();
+        add(panelHandler.getAccountsBearbeitenPanel());
+        panelHandler.getAccountsBearbeitenPanel().setVisible(true);
     }//GEN-LAST:event_accountsBearbeitenItemActionPerformed
 
     private void historyMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyMenuActionPerformed
-        panelUnsichtbar();
-        add(historyPanel);
-        historyPanel.setVisible(true);
+        panelHandler.panelUnsichtbar();
+        add(panelHandler.getHistoryPanel());
+        panelHandler.getHistoryPanel().setVisible(true);
     }//GEN-LAST:event_historyMenuActionPerformed
 
     private void aktuelleAusleiheMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aktuelleAusleiheMenuActionPerformed
-        panelUnsichtbar();
-        add(ausleihenPanel);
-        ausleihenPanel.setVisible(true);
+        panelHandler.panelUnsichtbar();
+        add(panelHandler.getAusleihenPanel());
+        panelHandler.getAusleihenPanel().setVisible(true);
     }//GEN-LAST:event_aktuelleAusleiheMenuActionPerformed
 
     private void optionMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionMenuActionPerformed
-        panelUnsichtbar();
-        add(optionPanel);
-        optionPanel.setVisible(true);
+        panelHandler.panelUnsichtbar();
+        add(panelHandler.getOptionPanel());
+        panelHandler.getOptionPanel().setVisible(true);
     }//GEN-LAST:event_optionMenuActionPerformed
 
     private void ausleihenBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenBearbeitenActionPerformed
-        panelUnsichtbar();
-        add(ausleihenBearbeitenPanel);
-        ausleihenBearbeitenPanel.setVisible(true);
+        panelHandler.panelUnsichtbar();
+        add(panelHandler.getAusleihenBearbeitenPanel());
+        panelHandler.getAusleihenBearbeitenPanel().setVisible(true);
     }//GEN-LAST:event_ausleihenBearbeitenActionPerformed
 
     List genreListe;
     List kategorieListe;
-    //Panel
-    AusleihenBearbeitenPanel ausleihenBearbeitenPanel;
-    OptionPanel optionPanel;
-    AusleihenPanel ausleihenPanel;
-    HistoryPanel historyPanel;
-    AccountsBearbeitenPanel accountsBearbeitenPanel;
-    AccountBearbeitenPanel accountBearbeitenPanel;
-    LoginPanel loginPanel;
-    SelectPanel selectPanel;
+    
+    PanelHandler panelHandler;
+    
+//    //Panel
+//    AusleihenBearbeitenPanel ausleihenBearbeitenPanel;
+//    OptionPanel optionPanel;
+//    AusleihenPanel ausleihenPanel;
+//    HistoryPanel historyPanel;
+//    AccountsBearbeitenPanel accountsBearbeitenPanel;
+//    AccountBearbeitenPanel accountBearbeitenPanel;
+//    LoginPanel loginPanel;
+//    SelectPanel selectPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem LoginLogoutMenu;
     private javax.swing.JMenu accountMenu;
@@ -310,45 +255,38 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem ausleihenBearbeiten;
     private javax.swing.JMenuItem beendenMenu;
     private javax.swing.JMenuItem editAccountMenu;
-    private javax.swing.JComboBox<String> genreBox;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem historyMenu;
     private javax.swing.JMenuItem informationMenu;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox<String> kategorieBox;
     private javax.swing.JMenuItem optionMenu;
-    private javax.swing.JButton select;
     private javax.swing.JMenuItem supportMenu;
-    private javax.swing.JTable uebersichtTabelle;
     // End of variables declaration//GEN-END:variables
 
-    private void addPanels() {
-        loginPanel = new LoginPanel();
-        accountBearbeitenPanel = new AccountBearbeitenPanel();
-        historyPanel = new HistoryPanel();
-        accountsBearbeitenPanel = new AccountsBearbeitenPanel();
-        ausleihenPanel = new AusleihenPanel();
-        optionPanel = new OptionPanel();
-        ausleihenBearbeitenPanel = new AusleihenBearbeitenPanel();
-        selectPanel = new SelectPanel();
-    }
+//    private void addPanels() {
+//        loginPanel = new LoginPanel();
+//        accountBearbeitenPanel = new AccountBearbeitenPanel();
+//        historyPanel = new HistoryPanel();
+//        accountsBearbeitenPanel = new AccountsBearbeitenPanel();
+//        ausleihenPanel = new AusleihenPanel();
+//        optionPanel = new OptionPanel();
+//        ausleihenBearbeitenPanel = new AusleihenBearbeitenPanel();
+//        selectPanel = new SelectPanel();
+//    }
 
-    private void panelUnsichtbar() {
-        selectPanel.setVisible(false);
-        loginPanel.setVisible(false);
-        jPanel1.setVisible(false); 
-        accountBearbeitenPanel.setVisible(false);
-        historyPanel.setVisible(false);
-        accountsBearbeitenPanel.setVisible(false);
-        ausleihenPanel.setVisible(false);
-        optionPanel.setVisible(false);
-        ausleihenBearbeitenPanel.setVisible(false);
-    }
+//    private void panelUnsichtbar() {
+//        selectPanel.setVisible(false);
+//        loginPanel.setVisible(false);
+//        jPanel1.setVisible(false); 
+//        accountBearbeitenPanel.setVisible(false);
+//        historyPanel.setVisible(false);
+//        accountsBearbeitenPanel.setVisible(false);
+//        ausleihenPanel.setVisible(false);
+//        optionPanel.setVisible(false);
+//        ausleihenBearbeitenPanel.setVisible(false);
+//    }
 }

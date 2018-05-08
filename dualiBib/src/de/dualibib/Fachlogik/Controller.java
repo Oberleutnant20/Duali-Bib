@@ -10,6 +10,7 @@ import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
+import de.dualibib.UI.PanelHandler;
 import de.dualibib.UI.UI;
 
 /**
@@ -24,7 +25,7 @@ public class Controller {
     private Kategorienverwaltung kategorienverwaltung;
     private Genreverwaltung genreverwaltung;
     
-    private UI mainview;
+    private PanelHandler panelHandler;
 
     public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung) {
         this.accountverwaltung = accountverwaltung;
@@ -42,7 +43,7 @@ public class Controller {
         ausleiheverwaltung.laden();
         kategorienverwaltung.laden();
         genreverwaltung.laden();
-        mainview = new UI(kategorienverwaltung.get(),genreverwaltung.get());
+        panelHandler = new PanelHandler(kategorienverwaltung.get(),genreverwaltung.get());
     }
     
 }

@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.UI;
+package de.dualibib.UI.Panels;
+
+import de.dualibib.UI.PanelHandler;
 
 /**
  *
@@ -11,11 +13,14 @@ package de.dualibib.UI;
  */
 public class LoginPanel extends javax.swing.JPanel {
 
+    private final PanelHandler panelHandler;
+
     /**
      * Creates new form Login
      */
-    public LoginPanel() {
+    public LoginPanel(PanelHandler panelHandler) {
         initComponents();
+        this.panelHandler = panelHandler;
     }
 
     /**
@@ -32,6 +37,7 @@ public class LoginPanel extends javax.swing.JPanel {
         loginButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        sucheField = new javax.swing.JTextField();
 
         accountnameField.setText("jTextField1");
 
@@ -42,6 +48,8 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel1.setText("Accountname");
 
         jLabel2.setText("Passwort");
+
+        sucheField.setText("Suche");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -59,11 +67,15 @@ public class LoginPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))))
                 .addContainerGap(89, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(accountnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -84,5 +96,6 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
     private javax.swing.JTextField passwortField;
+    private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 }
