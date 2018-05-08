@@ -7,8 +7,6 @@ package de.dualibib.UI;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 /**
  *
@@ -252,7 +250,6 @@ public class UI extends javax.swing.JFrame {
 
     private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
         panelUnsichtbar();
-        selectPanel = new SelectPanel(genreListe,kategorieListe);
         add(selectPanel);
         selectPanel.setVisible(true);
     }//GEN-LAST:event_selectActionPerformed
@@ -340,6 +337,7 @@ public class UI extends javax.swing.JFrame {
         ausleihenPanel = new AusleihenPanel();
         optionPanel = new OptionPanel();
         ausleihenBearbeitenPanel = new AusleihenBearbeitenPanel();
+        selectPanel = new SelectPanel();
     }
 
     private void panelUnsichtbar() {
