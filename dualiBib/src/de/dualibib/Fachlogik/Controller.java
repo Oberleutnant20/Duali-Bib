@@ -8,6 +8,7 @@ package de.dualibib.Fachlogik;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
+import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 import de.dualibib.UI.UI;
 
@@ -21,24 +22,27 @@ public class Controller {
     private Medienverwaltung medienverwaltung;
     private Ausleiheverwaltung ausleiheverwaltung;
     private Kategorienverwaltung kategorienverwaltung;
+    private Genreverwaltung genreverwaltung;
     
     private UI mainview;
 
-    public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung) {
+    public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung) {
         this.accountverwaltung = accountverwaltung;
         this.medienverwaltung = medienverwaltung;
         this.ausleiheverwaltung = ausleiheverwaltung;
         this.kategorienverwaltung = kategorienverwaltung;
+        this.genreverwaltung = genreverwaltung;
     }
          
     
 
     public void start() {
-        mainview = new UI();
         accountverwaltung.laden();
         medienverwaltung.laden();
         ausleiheverwaltung.laden();
         kategorienverwaltung.laden();
+        genreverwaltung.laden();
+        mainview = new UI(kategorienverwaltung.get(),genreverwaltung.get());
     }
     
 }

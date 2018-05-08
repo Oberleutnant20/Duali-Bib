@@ -6,6 +6,7 @@
 package de.dualibib.UI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,17 +14,17 @@ import java.util.ArrayList;
  */
 public class SelectPanel extends javax.swing.JPanel {
 
-    private final ArrayList<String> genreListe;
-
-    private final ArrayList<String> kategorieListe;
+//    private final ArrayList<String> genreListe;
+//
+//    private final ArrayList<String> kategorieListe;
 
     /**
      * Creates new form SelectPanel
      */
-    public SelectPanel(ArrayList genreListe, ArrayList kategorieListe) {
+    public SelectPanel(){//List genreListe, List kategorieListe) {
         initComponents();
-        this.genreListe = genreListe;
-        this.kategorieListe = kategorieListe;
+//        this.genreListe = genreListe;
+//        this.kategorieListe = kategorieListe;
     }
 
     /**
@@ -47,7 +48,7 @@ public class SelectPanel extends javax.swing.JPanel {
         kategorieLable = new javax.swing.JLabel();
         beschreibungLable = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
 
         nameField.setText("jTextField1");
         nameField.addActionListener(new java.awt.event.ActionListener() {
@@ -84,7 +85,7 @@ public class SelectPanel extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new DefaultComboBoxModel(kategorieListe));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -96,18 +97,14 @@ public class SelectPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nameLable)
-                                    .addComponent(beschreibungLable))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(kategorieLable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(nameLable)
+                            .addComponent(beschreibungLable)
+                            .addComponent(kategorieLable))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(statusLable)
@@ -145,7 +142,7 @@ public class SelectPanel extends javax.swing.JPanel {
                     .addComponent(genreLable)
                     .addComponent(kategorieLable)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ausleihenVormerkenButton)
@@ -170,7 +167,7 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel beschreibungLable;
     private javax.swing.JLabel genreLable;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel kategorieLable;
     private javax.swing.JTextField nameField;
