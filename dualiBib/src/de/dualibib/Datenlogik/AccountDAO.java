@@ -7,23 +7,46 @@ package de.dualibib.Datenlogik;
 
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Carina
  */
-public class AccountDAO implements  IAccountDAO{
+public class AccountDAO implements IAccountDAO {
+
+    Database db = new Database();
+    private final Connection con = db.connect_mysql();
+    private final ResultSet rs = db.getResult_mysql(con, "");
+    
 
     @Override
     public List<Account> laden() throws IOException {
-        return new ArrayList<>();//To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> ret = new ArrayList<>();
+        try {
+            int columnCount = db.getMetaData(rs).getColumnCount();
+            while (rs.next()) {
+                int i = 1;
+                while (i <= columnCount) {
+                    ret.add(rs.getString(i++));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ret;
     }
 
     @Override
     public void speichern(List<Account> accountListe) throws IOException {
-         //To change body of generated methods, choose Tools | Templates.
+        //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
