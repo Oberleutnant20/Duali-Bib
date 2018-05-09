@@ -5,7 +5,7 @@
  */
 package de.dualibib.Datenlogik;
 
-import de.dualibib.Fachlogik.History.History;
+import de.dualibib.Fachlogik.Historyverwaltung.History;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
