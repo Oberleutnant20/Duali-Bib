@@ -6,16 +6,18 @@
 package de.dualibib;
 
 import de.dualibib.Datenlogik.AccountDAO;
+import de.dualibib.Datenlogik.AnderemedienDAO;
 import de.dualibib.Datenlogik.AusleiheDAO;
 import de.dualibib.Datenlogik.GenreDAO;
 import de.dualibib.Datenlogik.KategorieDAO;
-import de.dualibib.Datenlogik.MedienDAO;
+import de.dualibib.Datenlogik.PrintmedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Controller;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
-import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
+import de.dualibib.Fachlogik.Medienverwaltung.Anderemedienverwaltung;
+import de.dualibib.Fachlogik.Medienverwaltung.Printmedienverwaltung;
 
 /**
  *
@@ -25,11 +27,12 @@ public class Main {
 
     public static void main(String[] args) {
         Accountverwaltung accountverwaltung = new Accountverwaltung(new AccountDAO());
-        Medienverwaltung medienverwaltung = new Medienverwaltung(new MedienDAO());
+        Anderemedienverwaltung anderemedienverwaltung = new Anderemedienverwaltung(new AnderemedienDAO());
+        Printmedienverwaltung printmedienverwaltung = new Printmedienverwaltung(new PrintmedienDAO());
         Ausleiheverwaltung ausleiheverwaltung = new Ausleiheverwaltung(new AusleiheDAO());
         Kategorienverwaltung kategorienverwaltung = new Kategorienverwaltung(new KategorieDAO());
         Genreverwaltung genreverwaltung = new Genreverwaltung(new GenreDAO());
-        Controller controller = new Controller(accountverwaltung, medienverwaltung,ausleiheverwaltung, kategorienverwaltung,genreverwaltung);
+        Controller controller = new Controller(accountverwaltung, anderemedienverwaltung,printmedienverwaltung,ausleiheverwaltung, kategorienverwaltung,genreverwaltung);
         controller.start();
     }
 }

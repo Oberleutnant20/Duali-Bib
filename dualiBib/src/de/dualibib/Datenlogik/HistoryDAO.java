@@ -5,11 +5,10 @@
  */
 package de.dualibib.Datenlogik;
 
-import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.Fachlogik.History.History;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class MedienDAO implements IMedienDAO{
+public class HistoryDAO implements IHistoryDAO{
 
     Database db = new Database();
     private final Connection con = db.connect_mysql();
@@ -26,24 +25,24 @@ public class MedienDAO implements IMedienDAO{
     
 
     @Override
-    public List<Medien> laden() throws IOException {
-        ArrayList<Medien> ret = new ArrayList<>();
+    public List<History> laden() throws IOException {
+        ArrayList<History> ret = new ArrayList<>();
         try {
             int columnCount = db.getMetaData(rs).getColumnCount();
             while (rs.next()) {
                 int i = 1;
                 while (i <= columnCount) {
-                    ret.add(new Medien());
+                    ret.add(new History());
                 }
             }
         } catch (SQLException ex) {
-            System.err.println("MedienDAO laden: "+ ex);;
+            System.err.println("HistoryDAO laden: "+ ex);;
         }
         return ret;
-        }
+}
 
     @Override
-    public void speichern(List<Medien> medienListe) throws IOException {
+    public void speichern(List<History> historyListe) throws IOException {
         //To change body of generated methods, choose Tools | Templates.
     }
     

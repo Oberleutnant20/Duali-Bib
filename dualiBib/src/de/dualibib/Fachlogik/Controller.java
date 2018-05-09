@@ -9,9 +9,9 @@ import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
-import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
+import de.dualibib.Fachlogik.Medienverwaltung.Anderemedienverwaltung;
+import de.dualibib.Fachlogik.Medienverwaltung.Printmedienverwaltung;
 import de.dualibib.UI.PanelHandler;
-import de.dualibib.UI.UI;
 
 /**
  *
@@ -20,16 +20,18 @@ import de.dualibib.UI.UI;
 public class Controller {
 
     private Accountverwaltung accountverwaltung;
-    private Medienverwaltung medienverwaltung;
+    private Anderemedienverwaltung anderemedienverwaltung;
+    private Printmedienverwaltung printmedienverwaltung;
     private Ausleiheverwaltung ausleiheverwaltung;
     private Kategorienverwaltung kategorienverwaltung;
     private Genreverwaltung genreverwaltung;
     
     private PanelHandler panelHandler;
 
-    public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung) {
+    public Controller(Accountverwaltung accountverwaltung, Anderemedienverwaltung anderemedienverwaltung, Printmedienverwaltung printmedienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung) {
         this.accountverwaltung = accountverwaltung;
-        this.medienverwaltung = medienverwaltung;
+        this.anderemedienverwaltung = anderemedienverwaltung;
+        this.printmedienverwaltung = printmedienverwaltung;
         this.ausleiheverwaltung = ausleiheverwaltung;
         this.kategorienverwaltung = kategorienverwaltung;
         this.genreverwaltung = genreverwaltung;
@@ -39,7 +41,7 @@ public class Controller {
 
     public void start() {
         accountverwaltung.laden();
-        medienverwaltung.laden();
+        anderemedienverwaltung.laden();
         ausleiheverwaltung.laden();
         kategorienverwaltung.laden();
         genreverwaltung.laden();

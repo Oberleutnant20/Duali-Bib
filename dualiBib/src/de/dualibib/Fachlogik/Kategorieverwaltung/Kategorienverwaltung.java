@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class Kategorienverwaltung{
 
-     private Set<Kategorie> kategorieListe;
+    private Set<Kategorie> kategorieListe;
     private IKategorieDAO kategorieDAO;
     
     public Kategorienverwaltung(IKategorieDAO kategorieDAO) {

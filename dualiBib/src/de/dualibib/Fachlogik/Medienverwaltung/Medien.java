@@ -5,29 +5,46 @@
  */
 package de.dualibib.Fachlogik.Medienverwaltung;
 
+import de.dualibib.Fachlogik.Genreverwaltung.Genre;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
+
 /**
  *
  * @author Carina
  */
 public abstract class Medien {
     
-    private String kategorien;
+    private Kategorie kategorien;
+    private Genre genre;
     private String name;
     //mehr Infos über Ausleihe
     private boolean ausgeliehen;
     private boolean vorgemerkt;
+    private int id;
 
-    public Medien(String kategorien, String name, boolean ausgeliehen, boolean vorgemerkt) {
+    public Medien(Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id) {
         this.kategorien = kategorien;
         this.name = name;
         this.ausgeliehen = ausgeliehen;
         this.vorgemerkt = vorgemerkt;
+        this.id = id;
+        this.genre = genre;
     }
 
-    
-    
-    public String getKategorien() {
-        return kategorien;
+    public void setKategorien(Kategorie kategorien) {
+        this.kategorien = kategorien;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -40,10 +57,6 @@ public abstract class Medien {
 
     public boolean isVorgemerkt() {
         return vorgemerkt;
-    }
-
-    public void setKategorien(String kategorien) {
-        this.kategorien = kategorien;
     }
 
     public void setName(String name) {
