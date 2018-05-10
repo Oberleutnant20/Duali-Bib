@@ -5,8 +5,7 @@
  */
 package de.dualibib.Fachlogik.Medienverwaltung;
 
-import de.dualibib.Datenlogik.IMedienDAO;
-//import de.dualibib.Datenlogik.MedienDAO;
+import de.dualibib.Datenlogik.IAnderemedienDAO;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,13 +13,13 @@ import java.util.Set;
  *
  * @author Carina
  */
-public class Medienverwaltung{
+public class Anderemedienverwaltung{
 
-    private Set<Medien> accountListe;
-    private IMedienDAO medienDAO;
+    private Set<Anderemedien> medienListe;
+    private IAnderemedienDAO medienDAO;
     
-    public Medienverwaltung(IMedienDAO medienDAO) {
-      accountListe = new HashSet<Medien>();
+    public Anderemedienverwaltung(IAnderemedienDAO medienDAO) {
+      medienListe = new HashSet<Anderemedien>();
         this.medienDAO = medienDAO;
     }
 

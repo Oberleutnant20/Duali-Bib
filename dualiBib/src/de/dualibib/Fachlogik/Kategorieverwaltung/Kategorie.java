@@ -10,7 +10,13 @@ package de.dualibib.Fachlogik.Kategorieverwaltung;
  * @author Carina
  */
 public class Kategorie {
+    private int id;
+    private String name;
     private String bezeichnung;
+
+    public Kategorie(String bezeichnung) {
+        this.bezeichnung = bezeichnung;
+    }
 
     public String getBezeichnung() {
         return bezeichnung;
