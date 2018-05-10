@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Datenlogik;
+package de.dualibib.Datenlogik.dao;
 
+import de.dualibib.Datenlogik.Database;
+import de.dualibib.Datenlogik.IPrintmedienDAO;
 import de.dualibib.Fachlogik.Medienverwaltung.Printmedien;
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,7 +21,7 @@ import java.util.List;
  */
 public class PrintmedienDAO implements IPrintmedienDAO{
 
-    Database db = new Database();
+    private final Database db = new Database();
     private final Connection con = db.connect_mysql();
     private final ResultSet rs = db.getResult_mysql(con, "");
     
@@ -32,7 +34,7 @@ public class PrintmedienDAO implements IPrintmedienDAO{
             while (rs.next()) {
                 int i = 1;
                 while (i <= columnCount) {
-                    ret.add(new Printmedien());
+                    ret.add(new Printmedien(isbn, columnCount, genre, kategorien, name, true, true, i));
                 }
             }
         } catch (SQLException ex) {

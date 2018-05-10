@@ -5,12 +5,12 @@
  */
 package de.dualibib;
 
-import de.dualibib.Datenlogik.AccountDAO;
-import de.dualibib.Datenlogik.AnderemedienDAO;
-import de.dualibib.Datenlogik.AusleiheDAO;
-import de.dualibib.Datenlogik.GenreDAO;
-import de.dualibib.Datenlogik.KategorieDAO;
-import de.dualibib.Datenlogik.PrintmedienDAO;
+import de.dualibib.Datenlogik.dao.AccountDAO;
+import de.dualibib.Datenlogik.dao.AnderemedienDAO;
+import de.dualibib.Datenlogik.dao.AusleiheDAO;
+import de.dualibib.Datenlogik.dao.GenreDAO;
+import de.dualibib.Datenlogik.dao.KategorieDAO;
+import de.dualibib.Datenlogik.dao.PrintmedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Controller;

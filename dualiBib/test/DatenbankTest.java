@@ -1,7 +1,7 @@
 
-import de.dualibib.Datenlogik.AccountDAO;
-import de.dualibib.Datenlogik.AusleiheDAO;
-import de.dualibib.Datenlogik.KategorieDAO;
+import de.dualibib.Datenlogik.dao.AccountDAO;
+import de.dualibib.Datenlogik.dao.AusleiheDAO;
+import de.dualibib.Datenlogik.dao.KategorieDAO;
 import de.dualibib.Datenlogik.MedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;

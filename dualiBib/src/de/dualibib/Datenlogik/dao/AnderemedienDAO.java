@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Datenlogik;
+package de.dualibib.Datenlogik.dao;
 
-import de.dualibib.Fachlogik.Genreverwaltung.Genre;
+import de.dualibib.Datenlogik.Database;
+import de.dualibib.Datenlogik.IAnderemedienDAO;
+import de.dualibib.Fachlogik.Medienverwaltung.Anderemedien;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,32 +19,32 @@ import java.util.List;
  *
  * @author Carina
  */
-public class GenreDAO implements IGenreDAO{
+public class AnderemedienDAO implements IAnderemedienDAO{
 
-   Database db = new Database();
+    private final Database db = new Database();
     private final Connection con = db.connect_mysql();
     private final ResultSet rs = db.getResult_mysql(con, "");
     
 
     @Override
-    public List<Genre> laden() throws IOException {
-        ArrayList<Genre> ret = new ArrayList<>();
+    public List<Anderemedien> laden() throws IOException {
+        ArrayList<Anderemedien> ret = new ArrayList<>();
         try {
             int columnCount = db.getMetaData(rs).getColumnCount();
             while (rs.next()) {
                 int i = 1;
                 while (i <= columnCount) {
-                    ret.add(new Genre());
+                    ret.add(new Anderemedien(columnCount, genre, kategorien, name, true, true, i));
                 }
             }
         } catch (SQLException ex) {
-            System.err.println("GenreDAO laden: "+ ex);;
+            System.err.println("MedienDAO laden: "+ ex);
         }
         return ret;
-    }
-    
+        }
+
     @Override
-    public void speichern(List<Genre> genreListe) throws IOException {
+    public void speichern(List<Anderemedien> medienListe) throws IOException {
         //To change body of generated methods, choose Tools | Templates.
     }
     
