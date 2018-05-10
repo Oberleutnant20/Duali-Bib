@@ -90,15 +90,9 @@ FOREIGN KEY (km_ID) REFERENCES KategorieMedien(km_ID)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 ---- Einfügen(Insert)
-
-INSERT INTO dualibib.Genre(g_name) VALUES ('');
-
-INSERT INTO dualibib.KategorieMedien(km_name, km_beschreibung) VALUES ('', '');
-
+INSERT INTO dualibib.Genre(g_name) VALUES ('Test');
+INSERT INTO dualibib.KategorieMedien(km_name, km_beschreibung) VALUES ('Test1', 'Ein einfacher Test');
 -- Password: !Administrator@dualibib
-
 -- Passwordalgorithmus: SHA-512
-
-INSERT INTO User(u_Vorname, u_Nachname, u_Login, u_passwd, u_mitarbeiter) 
-
+INSERT INTO User(u_Vorname, u_Nachname, u_Login, u_passwd, u_mitarbeiter)
 VALUES ('Admin', 'Min', 'admin001', '1f91db1eb1781471c712d1001a21971a01611ab1431601491881da1ed19111c12213e1df1241111ad1f014b1b214c1de1041f61ca1681371621c710318719612113213a1b81cc11a1ea10e1841c11d11c01851d21571a412a14111a13718d1e6', true)

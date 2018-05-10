@@ -49,6 +49,15 @@ public class Database {
     public Connection connect_mysql() {
         return connect_mysql("root", "");
     }
+    
+    /**
+     * Connection for Database MySQL on Localhost with Login root.
+     *
+     * @return Connection if Successful
+     */
+    public Connection connect_mysql_schema() {
+        return connect_mysql("jdbc:mysql://localhost:3306/"+schema, "root", "");
+    }
 
     /**
      * Connection for Database HyperSQL(HSQLDB) on Localhost without Login User.
@@ -156,7 +165,7 @@ public class Database {
      */
     public static ResultSet getResult_mysql(Connection con, String table) {
         ResultSet rs = null;
-        try (PreparedStatement ptsm = con.prepareStatement("USE " + schema + "; SELECT * FROM " + table)) {
+        try (PreparedStatement ptsm = con.prepareStatement("SELECT * FROM " + table + ";")) {
             rs = ptsm.executeQuery();
         } catch (SQLException ex) {
             System.err.println("getResult: " + ex);
@@ -211,7 +220,7 @@ public class Database {
      */
     public static ResultSet getResult_mysql(Connection con, String table, String attribut, String value) {
         ResultSet rs = null;
-        try (PreparedStatement ptsm = con.prepareStatement("USE " + schema + "; SELECT * FROM " + table + " WHERE " + attribut + " LIKE " + value)) {
+        try (PreparedStatement ptsm = con.prepareStatement("SELECT * FROM " + table + " WHERE " + attribut + " LIKE " + value+";")) {
             rs = ptsm.executeQuery();
         } catch (SQLException ex) {
             System.err.println("getResult: " + ex);
@@ -242,18 +251,18 @@ public class Database {
         // Return the data.
         return clobData;
     }
-    
+
     /**
-     * 
-     * @param rs
-     * @return 
+     *
+     * @param rs ResultSet
+     * @return
      */
-    public static ResultSetMetaData getMetaData(ResultSet rs){
+    public static ResultSetMetaData getMetaData(ResultSet rs) {
         ResultSetMetaData ret = null;
         try {
             ret = rs.getMetaData();
         } catch (SQLException ex) {
-            System.err.println("getMetadata: " +ex);;
+            System.err.println("getMetadata: " + ex);;
         }
         return ret;
     }

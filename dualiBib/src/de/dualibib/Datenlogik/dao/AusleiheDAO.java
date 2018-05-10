@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Datenlogik;
+package de.dualibib.Datenlogik.dao;
 
-import de.dualibib.Fachlogik.Medienverwaltung.Anderemedien;
-import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.Datenlogik.Database;
+import de.dualibib.Datenlogik.IAusleiheDAO;
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,32 +19,32 @@ import java.util.List;
  *
  * @author Carina
  */
-public class AnderemedienDAO implements IAnderemedienDAO{
+public class AusleiheDAO implements IAusleiheDAO{
 
-    Database db = new Database();
+    private final Database db = new Database();
     private final Connection con = db.connect_mysql();
     private final ResultSet rs = db.getResult_mysql(con, "");
     
 
     @Override
-    public List<Anderemedien> laden() throws IOException {
-        ArrayList<Anderemedien> ret = new ArrayList<>();
+    public List<Ausleihe> laden() throws IOException {
+        ArrayList<Ausleihe> ret = new ArrayList<>();
         try {
             int columnCount = db.getMetaData(rs).getColumnCount();
             while (rs.next()) {
                 int i = 1;
                 while (i <= columnCount) {
-                    ret.add(new Anderemedien());
+                    ret.add(new Ausleihe(i, date, i));
                 }
             }
         } catch (SQLException ex) {
-            System.err.println("MedienDAO laden: "+ ex);;
+            System.err.println("AusleiheDAO laden: "+ ex);
         }
         return ret;
-        }
+}
 
     @Override
-    public void speichern(List<Anderemedien> medienListe) throws IOException {
+    public void speichern(List<Ausleihe> ausleiheListe) throws IOException {
         //To change body of generated methods, choose Tools | Templates.
     }
     
