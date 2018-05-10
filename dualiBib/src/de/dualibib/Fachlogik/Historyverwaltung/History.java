@@ -3,48 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Ausleihverwaltung;
-
-import java.util.Date;
+package de.dualibib.Fachlogik.Historyverwaltung;
 
 /**
  *
  * @author Carina
  */
-public class Ausleihe {
-    
-    private int id;
-    private Date date;
-    private int userid;
+public class History {
+    int id;
+    int userid;
+    int medienid;
 
-    public Ausleihe(int id, Date date, int userid) {
+    public History(int id, int userid, int medienid) {
         this.id = id;
-        this.date = date;
         this.userid = userid;
+        this.medienid = medienid;
     }
 
     public int getId() {
         return id;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
     public int getUserid() {
         return userid;
+    }
+
+    public int getMedienid() {
+        return medienid;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public void setUserid(int userid) {
         this.userid = userid;
+    }
+
+    public void setMedienid(int medienid) {
+        this.medienid = medienid;
     }
     
 }

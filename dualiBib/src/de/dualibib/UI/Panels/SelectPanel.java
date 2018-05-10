@@ -5,14 +5,15 @@
  */
 package de.dualibib.UI.Panels;
 
-import java.util.ArrayList;
-import java.util.List;
+import de.dualibib.UI.PanelHandler;
 
 /**
  *
  * @author Carina
  */
 public class SelectPanel extends javax.swing.JPanel {
+
+    private final PanelHandler panelHandler;
 
 //    private final ArrayList<String> genreListe;
 //
@@ -21,10 +22,11 @@ public class SelectPanel extends javax.swing.JPanel {
     /**
      * Creates new form SelectPanel
      */
-    public SelectPanel(){//List genreListe, List kategorieListe) {
+    public SelectPanel(PanelHandler panelHandler){//List genreListe, List kategorieListe) {
         initComponents();
 //        this.genreListe = genreListe;
 //        this.kategorieListe = kategorieListe;
+        this.panelHandler = panelHandler;
     }
 
     /**

@@ -83,13 +83,13 @@ public class PanelHandler {
 
     private void initPanels(){
         loginPanel = new LoginPanel(this);
-        accountBearbeitenPanel = new AccountBearbeitenPanel();
-        historyPanel = new HistoryPanel();
-        accountsBearbeitenPanel = new AccountsBearbeitenPanel();
-        ausleihenPanel = new AusleihenPanel();
-        optionPanel = new OptionPanel();
-        ausleihenBearbeitenPanel = new AusleihenBearbeitenPanel();
-        selectPanel = new SelectPanel();
+        accountBearbeitenPanel = new AccountBearbeitenPanel(this);
+        historyPanel = new HistoryPanel(this);
+        accountsBearbeitenPanel = new AccountsBearbeitenPanel(this);
+        ausleihenPanel = new AusleihenPanel(this);
+        optionPanel = new OptionPanel(this);
+        ausleihenBearbeitenPanel = new AusleihenBearbeitenPanel(this);
+        selectPanel = new SelectPanel(this);
         suchePanel= new SuchePanel(this);
     }
     public void panelUnsichtbar() {

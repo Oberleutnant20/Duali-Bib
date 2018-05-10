@@ -5,17 +5,22 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.UI.PanelHandler;
+
 /**
  *
  * @author Carina
  */
 public class AccountBearbeitenPanel extends javax.swing.JPanel {
 
+    private final PanelHandler panelHandler;
+
     /**
      * Creates new form AccountBearbeiten
      */
-    public AccountBearbeitenPanel() {
+    public AccountBearbeitenPanel(PanelHandler panelHandler) {
         initComponents();
+        this.panelHandler = panelHandler;
     }
 
     /**

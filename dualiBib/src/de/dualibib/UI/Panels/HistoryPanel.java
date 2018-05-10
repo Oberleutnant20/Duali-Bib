@@ -5,17 +5,22 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.UI.PanelHandler;
+
 /**
  *
  * @author Carina
  */
 public class HistoryPanel extends javax.swing.JPanel {
 
+    private final PanelHandler panelHandler;
+
     /**
      * Creates new form HistoryPanel
      */
-    public HistoryPanel() {
+    public HistoryPanel(PanelHandler panelHandler) {
         initComponents();
+        this.panelHandler = panelHandler;
     }
 
     /**

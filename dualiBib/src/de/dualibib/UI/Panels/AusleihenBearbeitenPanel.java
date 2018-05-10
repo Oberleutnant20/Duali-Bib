@@ -5,17 +5,22 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.UI.PanelHandler;
+
 /**
  *
  * @author Carina
  */
 public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
 
+    private final PanelHandler panelHandler;
+
     /**
      * Creates new form AusleihenBearbeitenPanel
      */
-    public AusleihenBearbeitenPanel() {
+    public AusleihenBearbeitenPanel(PanelHandler panelHandler) {
         initComponents();
+        this.panelHandler = panelHandler;
     }
 
     /**
