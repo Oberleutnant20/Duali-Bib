@@ -18,8 +18,8 @@ import de.dualibib.Fachlogik.Medienverwaltung.Printmedien;
  */
 public class Zeitschrift extends Printmedien{
     
-    public Zeitschrift(String isbn, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id) {
-        super(isbn, barcodenummer, genre, kategorien, name, ausgeliehen, vorgemerkt, id);
+    public Zeitschrift(String isbn, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id,int anzahl) {
+        super(isbn, barcodenummer, genre, kategorien, name, ausgeliehen, vorgemerkt, id,anzahl);
     }
     
     

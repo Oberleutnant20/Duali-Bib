@@ -5,7 +5,9 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.UI.PanelHandler;
+import java.util.List;
 
 /**
  *
@@ -106,4 +108,8 @@ public class AusleihenPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
+
+    public void setUserAusleihe(List<Ausleihe> ausleiheListe) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

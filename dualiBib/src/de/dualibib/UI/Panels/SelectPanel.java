@@ -55,6 +55,7 @@ public class SelectPanel extends javax.swing.JPanel {
         sucheField = new javax.swing.JTextField();
 
         nameField.setText("jTextField1");
+        nameField.setEnabled(false);
         nameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameFieldActionPerformed(evt);
@@ -64,18 +65,25 @@ public class SelectPanel extends javax.swing.JPanel {
         beschreibungField.setColumns(20);
         beschreibungField.setRows(5);
         beschreibungField.setText("Text");
+        beschreibungField.setEnabled(false);
         jScrollPane1.setViewportView(beschreibungField);
 
         ausleihenVormerkenButton.setText("Ausleihen/Vormerken");
 
         statusField.setText("jTextField2");
+        statusField.setEnabled(false);
         statusField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statusFieldActionPerformed(evt);
             }
         });
 
-        bearbeitenButton.setText("Bearbeiten");
+        bearbeitenButton.setText("Speichern");
+        bearbeitenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bearbeitenButtonActionPerformed(evt);
+            }
+        });
 
         nameLable.setText("Name:");
 
@@ -93,7 +101,12 @@ public class SelectPanel extends javax.swing.JPanel {
 
         jTextField1.setText("Suche");
 
-        sucheField.setText("Suche");
+        sucheField.setText("Titelsuche...");
+        sucheField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -181,6 +194,17 @@ public class SelectPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameFieldActionPerformed
 
+    private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
+        panelHandler.panelUnsichtbar();
+        add(panelHandler.getSuchePanel());
+        panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
+        panelHandler.getSuchePanel().setVisible(true);
+    }//GEN-LAST:event_sucheFieldActionPerformed
+
+    private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
+        statusField.enable();
+    }//GEN-LAST:event_bearbeitenButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ausleihenVormerkenButton;
@@ -199,5 +223,6 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel statusLable;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
+
 
 }
