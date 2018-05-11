@@ -34,12 +34,8 @@ public class KategorieDAO implements IKategorieDAO {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("kategorieMedien"));
                 rs = ptsm.executeQuery();
-                int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
-                    int i = 1;
-                    while (i <= columnCount) {
-                        ret.add(new Kategorie(rs.getString(2)));
-                    }
+                        ret.add(new Kategorie(rs.getInt(1) , rs.getString(2), rs.getString(3)));
                 }
             } catch (SQLException ex) {
                 System.err.println("KategorieDAO laden: " + ex);
