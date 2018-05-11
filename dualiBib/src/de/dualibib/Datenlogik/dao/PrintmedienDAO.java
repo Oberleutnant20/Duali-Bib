@@ -43,7 +43,6 @@ public class PrintmedienDAO implements IPrintmedienDAO{
             rs = ptsm.executeQuery();
             rs1 = ptsm1.executeQuery();
             rs2 = ptsm2.executeQuery();
-            int columnCount = db.getMetaData(rs).getColumnCount();
             while (rs.next()) {
                     ret.add(new Printmedien(rs.getString(4), rs.getLong(5), new Genre(rs1.getString(2)), new Kategorie(rs2.getLong(1), rs2.getString(2), rs2.getString(1)), rs.getString(2), true, true, rs.getLong(1)));
             }
