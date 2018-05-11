@@ -16,13 +16,27 @@ public class Printmedien extends Medien{
     
     private String isbn;
     private long barcodenummer;
+    private int anzahl;
+    private int verfuegbar_anzahl;
     
-    public Printmedien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id) {
+    public Printmedien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id, int anzahl) {
         super(genre, kategorien, name, ausgeliehen, vorgemerkt, id);
         this.barcodenummer = barcodenummer;
         this.isbn = isbn;
+        this.anzahl = anzahl;
     }
 
+    public void berechneVerfuegbare(int ausgeliehene){
+        verfuegbar_anzahl = anzahl - ausgeliehene;
+    }
+    
+    public int getVerfuegbare(){
+        return verfuegbar_anzahl;
+    }
+    
+    public int getAnzahl(){
+        return anzahl;
+    }
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }

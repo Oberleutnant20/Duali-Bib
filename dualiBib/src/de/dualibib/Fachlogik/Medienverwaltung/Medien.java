@@ -70,6 +70,14 @@ public abstract class Medien {
     public void setVorgemerkt(boolean vorgemerkt) {
         this.vorgemerkt = vorgemerkt;
     }
+
+    public Kategorie getKategorien() {
+        return kategorien;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
     
     
     

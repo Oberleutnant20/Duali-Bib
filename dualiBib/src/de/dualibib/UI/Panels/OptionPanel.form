@@ -81,8 +81,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="sucheField">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Suche"/>
+        <Property name="text" type="java.lang.String" value="Titelsuche..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sucheFieldActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

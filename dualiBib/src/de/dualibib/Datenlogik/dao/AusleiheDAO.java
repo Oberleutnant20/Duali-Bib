@@ -34,12 +34,8 @@ public class AusleiheDAO implements IAusleiheDAO {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("Ausleihe"));
                 rs = ptsm.executeQuery();
-                int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
-                    int i = 1;
-                    while (i <= columnCount) {
-                        ret.add(new Ausleihe(rs.getLong(1), rs.getDate(2), rs.getInt(3)));
-                    }
+                        ret.add(new Ausleihe(rs.getLong(1),rs.getLong(3), rs.getDate(2), rs.getInt(4), rs.getInt(5)));
                 }
             } catch (SQLException ex) {
                 System.err.println("AusleiheDAO laden: " + ex);

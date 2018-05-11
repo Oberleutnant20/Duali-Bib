@@ -36,7 +36,7 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+              <Component id="historysuchField" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="sucheField" min="-2" pref="70" max="-2" attributes="0"/>
           </Group>
@@ -48,7 +48,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                      <Component id="historysuchField" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="sucheField" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -68,9 +68,9 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="historysuchField">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Titel suchen..."/>
+        <Property name="text" type="java.lang.String" value="Historysuche..."/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -138,8 +138,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="sucheField">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Suche"/>
+        <Property name="text" type="java.lang.String" value="Titelsuche..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sucheFieldActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -34,12 +34,8 @@ public class GenreDAO implements IGenreDAO {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("genre"));
                 rs = ptsm.executeQuery();
-                int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
-                    int i = 1;
-                    while (i <= columnCount) {
                         ret.add(new Genre(rs.getString(2)));
-                    }
                 }
             } catch (SQLException ex) {
                 System.err.println("GenreDAO laden: " + ex);
