@@ -60,7 +60,12 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
             }
         });
 
-        sucheField.setText("Suche");
+        sucheField.setText("Titelsuchen...");
+        sucheField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,6 +102,12 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
     private void entfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entfernenButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_entfernenButtonActionPerformed
+
+    private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
+        panelHandler.panelUnsichtbar();
+        panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
+        panelHandler.getSuchePanel().setVisible(true);
+    }//GEN-LAST:event_sucheFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
