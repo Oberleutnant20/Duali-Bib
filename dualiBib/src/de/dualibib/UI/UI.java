@@ -287,8 +287,8 @@ public class UI extends javax.swing.JFrame {
 
     void setUserOnline() {
         System.out.println("enable user");
-        accountMenu.setEnabled(true);
-        accountMenu.setEnabled(true);
+        editAccountMenu.setEnabled(true);
+        historyMenu.setEnabled(true);
         aktuelleAusleiheMenu.setEnabled(true);
     }
 }

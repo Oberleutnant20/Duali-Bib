@@ -241,6 +241,8 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
 
     public void setAccount(Account a) {
         account =a;
+        if(a==null)
+            System.out.println("null");
         hausnummerField.setText(TOOL_TIP_TEXT_KEY);
         nameField.setText(a.getNachname());
         plzField.setText(TOOL_TIP_TEXT_KEY);
@@ -250,6 +252,6 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
     }
     
     public void bearbeitenMitarbeiter(){
-        mitarbeiterCheckBox.enable();
+        mitarbeiterCheckBox.setEnabled(true);
     }
 }

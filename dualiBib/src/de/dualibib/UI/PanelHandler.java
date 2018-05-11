@@ -118,7 +118,7 @@ public class PanelHandler {
 
     public void login(String accountname, String passwort) {
         if(controller.setAktuellerUser(accountname, passwort)!=null){
-            this.aktuellerUser =aktuellerUser;
+            this.aktuellerUser =controller.setAktuellerUser(accountname, passwort);
             if(controller.isMitarbeiter()){
                 ui.setMitarbeiterOnline();
             }
