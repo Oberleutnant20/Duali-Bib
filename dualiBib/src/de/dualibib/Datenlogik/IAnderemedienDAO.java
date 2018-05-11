@@ -6,6 +6,7 @@
 package de.dualibib.Datenlogik;
 
 import de.dualibib.Fachlogik.Medienverwaltung.Anderemedien;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,6 +15,6 @@ import java.util.List;
  * @author Carina
  */
 public interface IAnderemedienDAO {
-    List<Anderemedien> laden() throws IOException;
+    List<Anderemedien> laden() throws IOException, ConnectionError;
     void speichern(List<Anderemedien> medienListe)  throws IOException;
 }
