@@ -20,9 +20,9 @@ public abstract class Medien {
     //mehr Infos über Ausleihe
     private boolean ausgeliehen;
     private boolean vorgemerkt;
-    private int id;
+    private long id;
 
-    public Medien(Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id) {
+    public Medien(Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id) {
         this.kategorien = kategorien;
         this.name = name;
         this.ausgeliehen = ausgeliehen;
@@ -39,11 +39,11 @@ public abstract class Medien {
         this.genre = genre;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

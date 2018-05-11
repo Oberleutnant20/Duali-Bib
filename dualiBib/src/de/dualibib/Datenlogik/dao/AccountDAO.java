@@ -11,6 +11,7 @@ import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,18 +30,19 @@ public class AccountDAO implements IAccountDAO {
     @Override
     public List<Account> laden() throws IOException, ConnectionError {
         ArrayList<Account> ret = new ArrayList<>();
-        if (con != null) {
-            rs = db.getResult_mysql(con, "user");
+        if (con != null) {            
             try {
+                PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("user"));
+                rs = ptsm.executeQuery();
                 int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
                     int i = 1;
                     while (i <= columnCount) {
-                        ret.add(new Account(username, passwort, true, i, vorname, nachname));
+                        ret.add(new Account(rs.getString("u_login"), rs.getString("u_passwd"), rs.getBoolean("u_Mitarbeiter"), rs.getInt("u_ID"), rs.getString("u_Vorname"), rs.getString("u_Nachname")));
                     }
                 }
             } catch (SQLException ex) {
-                System.err.println("AccountDAO laden: " + ex);;
+                System.err.println("AccountDAO laden: " + ex);
             }
         } else {
             throw new ConnectionError();

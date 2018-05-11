@@ -49,14 +49,14 @@ public class Database {
     public Connection connect_mysql() {
         return connect_mysql("root", "");
     }
-    
+
     /**
      * Connection for Database MySQL on Localhost with Login root.
      *
      * @return Connection if Successful
      */
     public Connection connect_mysql_schema() {
-        return connect_mysql("jdbc:mysql://localhost:3306/"+schema, "root", "");
+        return connect_mysql("jdbc:mysql://localhost:3306/" + schema, "root", "");
     }
 
     /**
@@ -220,7 +220,7 @@ public class Database {
      */
     public static ResultSet getResult_mysql(Connection con, String table, String attribut, String value) {
         ResultSet rs = null;
-        try (PreparedStatement ptsm = con.prepareStatement("SELECT * FROM " + table + " WHERE " + attribut + " LIKE " + value+";")) {
+        try (PreparedStatement ptsm = con.prepareStatement("SELECT * FROM " + table + " WHERE " + attribut + " LIKE " + value + ";")) {
             rs = ptsm.executeQuery();
         } catch (SQLException ex) {
             System.err.println("getResult: " + ex);
@@ -265,6 +265,15 @@ public class Database {
             System.err.println("getMetadata: " + ex);;
         }
         return ret;
+    }
+    
+    /**
+     * SQL Statement für alles abrufen "Select * From Tabelle;"
+     * @param table angabe der Tabelle
+     * @return SQL Statement String
+     */
+    public static String getResultSQLStatement(String table) {
+        return "SELECT * FROM " + table + ";";
     }
 
 }

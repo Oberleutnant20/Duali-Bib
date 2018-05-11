@@ -13,17 +13,17 @@ import java.util.Date;
  */
 public class Ausleihe {
     
-    private int id;
+    private long id;
     private Date date;
     private int userid;
 
-    public Ausleihe(int id, Date date, int userid) {
+    public Ausleihe(long id, Date date, int userid) {
         this.id = id;
         this.date = date;
         this.userid = userid;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -35,7 +35,7 @@ public class Ausleihe {
         return userid;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

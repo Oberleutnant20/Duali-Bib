@@ -14,18 +14,18 @@ import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
  */
 public class Anderemedien extends Medien{
     
-    private int barcodenummer;
+    private long barcodenummer;
     
-    public Anderemedien(int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id) {
+    public Anderemedien(long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id) {
         super(genre, kategorien, name, ausgeliehen, vorgemerkt, id);
         this.barcodenummer = barcodenummer;
     }
 
-    public void setBarcodenummer(int barcodenummer) {
+    public void setBarcodenummer(long barcodenummer) {
         this.barcodenummer = barcodenummer;
     }
 
-    public int getBarcodenummer() {
+    public long getBarcodenummer() {
         return barcodenummer;
     }
     

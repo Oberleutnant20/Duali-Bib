@@ -10,7 +10,16 @@ package de.dualibib.Fachlogik.Genreverwaltung;
  * @author Carina
  */
 public class Genre {
+
     private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     private String bezeichnung;
 
     public Genre(String bezeichnung) {
@@ -24,5 +33,5 @@ public class Genre {
     public void setBezeichnung(String bezeichnung) {
         this.bezeichnung = bezeichnung;
     }
-    
+
 }

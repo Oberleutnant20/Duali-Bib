@@ -6,6 +6,7 @@
 package de.dualibib.Datenlogik;
 
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,6 +15,6 @@ import java.util.List;
  * @author Carina
  */
 public interface IAccountDAO {
-    List<Account> laden() throws IOException;
+    List<Account> laden() throws IOException, ConnectionError;
     void speichern(List<Account> accountListe)  throws IOException;
 }

@@ -8,8 +8,10 @@ package de.dualibib.Datenlogik.dao;
 import de.dualibib.Datenlogik.Database;
 import de.dualibib.Datenlogik.IHistoryDAO;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,33 +21,38 @@ import java.util.List;
  *
  * @author Carina
  */
-public class HistoryDAO implements IHistoryDAO{
+public class HistoryDAO implements IHistoryDAO {
 
     private final Database db = new Database();
-    private final Connection con = db.connect_mysql();
-    private final ResultSet rs = db.getResult_mysql(con, "");
-    
+    private final Connection con = db.connect_mysql_schema();
+    private ResultSet rs = null;
 
     @Override
-    public List<History> laden() throws IOException {
+    public List<History> laden() throws IOException, ConnectionError {
         ArrayList<History> ret = new ArrayList<>();
-        try {
-            int columnCount = db.getMetaData(rs).getColumnCount();
-            while (rs.next()) {
-                int i = 1;
-                while (i <= columnCount) {
-                    ret.add(new History(i, i, i));
+        if (con != null) {
+            try {
+                PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("History"));
+                rs = ptsm.executeQuery();
+                int columnCount = db.getMetaData(rs).getColumnCount();
+                while (rs.next()) {
+                    int i = 1;
+                    while (i <= columnCount) {
+                        ret.add(new History(rs.getLong(1), rs.getInt(2), rs.getInt(3)));
+                    }
                 }
+            } catch (SQLException ex) {
+                System.err.println("HistoryDAO laden: " + ex);
             }
-        } catch (SQLException ex) {
-            System.err.println("HistoryDAO laden: "+ ex);
+        } else {
+            throw new ConnectionError();
         }
         return ret;
-}
+    }
 
     @Override
     public void speichern(List<History> historyListe) throws IOException {
         //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
