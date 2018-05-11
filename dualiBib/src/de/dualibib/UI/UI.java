@@ -281,12 +281,14 @@ public class UI extends javax.swing.JFrame {
     }
 
     void setMitarbeiterOnline() {
-        administrationMenu.enable();
+        System.out.println("enable admin");
+        administrationMenu.setEnabled(true);
     }
 
     void setUserOnline() {
-        accountMenu.enable();
-        accountMenu.enable();
-        aktuelleAusleiheMenu.enable();
+        System.out.println("enable user");
+        accountMenu.setEnabled(true);
+        accountMenu.setEnabled(true);
+        aktuelleAusleiheMenu.setEnabled(true);
     }
 }
