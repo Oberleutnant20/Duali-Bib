@@ -34,12 +34,15 @@ public class AccountDAO implements IAccountDAO {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("user"));
                 rs = ptsm.executeQuery();
-                int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
-                    int i = 1;
-                    while (i <= columnCount) {
-                        ret.add(new Account(rs.getString("u_login"), rs.getString("u_passwd"), rs.getBoolean("u_Mitarbeiter"), rs.getInt("u_ID"), rs.getString("u_Vorname"), rs.getString("u_Nachname")));
-                    }
+                    String login = rs.getString("u_login");
+                    String passwd = rs.getString("u_passwd");
+                    boolean mitarbeiter = rs.getBoolean("u_Mitarbeiter");
+                    int id = rs.getInt("u_ID");
+                    String vorname = rs.getString("u_Vorname");
+                    String nachname = rs.getString("u_Nachname");
+                    
+                    ret.add(new Account(login,passwd, mitarbeiter, id, vorname, nachname));
                 }
             } catch (SQLException ex) {
                 System.err.println("AccountDAO laden: " + ex);

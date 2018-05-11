@@ -36,10 +36,7 @@ public class HistoryDAO implements IHistoryDAO {
                 rs = ptsm.executeQuery();
                 int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
-                    int i = 1;
-                    while (i <= columnCount) {
-                        ret.add(new History(rs.getLong(1), rs.getInt(2), rs.getInt(3)));
-                    }
+                        ret.add(new History(rs.getLong(1), rs.getInt(2), rs.getInt(3),rs.getInt(4)));
                 }
             } catch (SQLException ex) {
                 System.err.println("HistoryDAO laden: " + ex);

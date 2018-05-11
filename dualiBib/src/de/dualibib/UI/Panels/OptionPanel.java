@@ -48,7 +48,12 @@ public class OptionPanel extends javax.swing.JPanel {
             }
         });
 
-        sucheField.setText("Suche");
+        sucheField.setText("Titelsuche...");
+        sucheField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -83,8 +88,16 @@ public class OptionPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uebernehmenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uebernehmenButtonActionPerformed
-        // TODO add your handling code here:
+        panelHandler.panelUnsichtbar();
+        panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
+        panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_uebernehmenButtonActionPerformed
+
+    private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
+        panelHandler.panelUnsichtbar();
+        //panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
+        panelHandler.getSuchePanel().setVisible(true);
+    }//GEN-LAST:event_sucheFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,7 +5,9 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.UI.PanelHandler;
+import java.util.List;
 
 /**
  *
@@ -60,7 +62,12 @@ public class AusleihenPanel extends javax.swing.JPanel {
 
         bestaettgenButton.setText("Bestätigen");
 
-        sucheField.setText("Suche");
+        sucheField.setText("Titelsuche...");
+        sucheField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,6 +105,12 @@ public class AusleihenPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_entfernenButtonActionPerformed
 
+    private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
+        panelHandler.panelUnsichtbar();
+        panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
+        panelHandler.getSuchePanel().setVisible(true);
+    }//GEN-LAST:event_sucheFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bestaettgenButton;
@@ -106,4 +119,8 @@ public class AusleihenPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
+
+    public void setUserAusleihe(List<Ausleihe> ausleiheListe) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

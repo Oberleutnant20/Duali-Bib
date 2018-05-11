@@ -5,6 +5,8 @@
  */
 package de.dualibib.UI;
 
+import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Fachlogik.Controller;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
 import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
 import de.dualibib.UI.Panels.AusleihenBearbeitenPanel;
@@ -32,9 +34,18 @@ public class PanelHandler {
     private SelectPanel selectPanel;
     private SuchePanel suchePanel;
     private UI ui;
+    
+    private final Controller controller;
+    private boolean eingeloggt;
+    private boolean mitarbeiter;
+    private Account aktuellerUser;
 
     public UI getUi() {
         return ui;
+    }
+
+    public Account getAktuellerUser() {
+        return aktuellerUser;
     }
 
     public SuchePanel getSuchePanel() {
@@ -73,12 +84,13 @@ public class PanelHandler {
         return selectPanel;
     }
 
-    public PanelHandler(List genreListe, List kategorieListe) {
-        ui = new UI(genreListe, kategorieListe,this);
+    public PanelHandler(Controller controller, List genreListe, List kategorieListe) {
+        ui = new UI(genreListe, kategorieListe,this, false);
         initPanels();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
         suchePanel.setVisible(true);
+        this.controller = controller;
     }
 
     private void initPanels(){
@@ -103,4 +115,24 @@ public class PanelHandler {
         optionPanel.setVisible(false);
         ausleihenBearbeitenPanel.setVisible(false);
     }
+
+    public void login(String accountname, String passwort) {
+        if(controller.setAktuellerUser(accountname, passwort)!=null){
+            this.aktuellerUser =aktuellerUser;
+            if(controller.isMitarbeiter()){
+                ui.setMitarbeiterOnline();
+            }
+            ui.setUserOnline();
+            ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
+            historyPanel.setUserHistory(controller.getHistoryListe());
+        }
+    }
+
+    public void saveAccountChange(int id,String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort,boolean mitarbeiter) {
+        Account a = new Account(vorname, passwort, mitarbeiter, id, vorname, vorname);
+        controller.saveAccountChange(a);
+    }
+
+    
+    
 }

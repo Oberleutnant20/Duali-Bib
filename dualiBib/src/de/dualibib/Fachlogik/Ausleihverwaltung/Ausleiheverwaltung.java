@@ -6,7 +6,6 @@
 package de.dualibib.Fachlogik.Ausleihverwaltung;
 
 import de.dualibib.Datenlogik.IAusleiheDAO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;

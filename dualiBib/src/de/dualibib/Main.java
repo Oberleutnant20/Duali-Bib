@@ -9,12 +9,14 @@ import de.dualibib.Datenlogik.dao.AccountDAO;
 import de.dualibib.Datenlogik.dao.AnderemedienDAO;
 import de.dualibib.Datenlogik.dao.AusleiheDAO;
 import de.dualibib.Datenlogik.dao.GenreDAO;
+import de.dualibib.Datenlogik.dao.HistoryDAO;
 import de.dualibib.Datenlogik.dao.KategorieDAO;
 import de.dualibib.Datenlogik.dao.PrintmedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Controller;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
+import de.dualibib.Fachlogik.Historyverwaltung.Historyverwaltung;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Anderemedienverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Printmedienverwaltung;
@@ -32,7 +34,9 @@ public class Main {
         Ausleiheverwaltung ausleiheverwaltung = new Ausleiheverwaltung(new AusleiheDAO());
         Kategorienverwaltung kategorienverwaltung = new Kategorienverwaltung(new KategorieDAO());
         Genreverwaltung genreverwaltung = new Genreverwaltung(new GenreDAO());
-        Controller controller = new Controller(accountverwaltung, anderemedienverwaltung,printmedienverwaltung,ausleiheverwaltung, kategorienverwaltung,genreverwaltung);
-        controller.start();
+        Historyverwaltung historyverwaltung = new Historyverwaltung(new HistoryDAO());
+        
+        Controller controller = new Controller(accountverwaltung, anderemedienverwaltung,printmedienverwaltung,ausleiheverwaltung, kategorienverwaltung,genreverwaltung, historyverwaltung);
+        
     }
 }

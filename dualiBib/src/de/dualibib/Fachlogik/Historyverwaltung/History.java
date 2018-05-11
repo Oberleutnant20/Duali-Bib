@@ -12,12 +12,20 @@ package de.dualibib.Fachlogik.Historyverwaltung;
 public class History {
     long id;
     int userid;
-    int medienid;
+    long medienid;
+    long kategorieid;
 
-    public History(long id, int userid, int medienid) {
+    public History(long id, int userid, long medienid, long kategorieid) {
         this.id = id;
         this.userid = userid;
         this.medienid = medienid;
+        this.kategorieid = kategorieid;
+    }
+
+    
+    
+    public long getKategorieid() {
+        return kategorieid;
     }
 
     public long getId() {
@@ -28,7 +36,7 @@ public class History {
         return userid;
     }
 
-    public int getMedienid() {
+    public long getMedienid() {
         return medienid;
     }
 
@@ -40,8 +48,12 @@ public class History {
         this.userid = userid;
     }
 
-    public void setMedienid(int medienid) {
+    public void setMedienid(long medienid) {
         this.medienid = medienid;
+    }
+
+    public void setKategorieid(long kategorieid) {
+        this.kategorieid = kategorieid;
     }
     
 }

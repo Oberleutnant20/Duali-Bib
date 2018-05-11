@@ -42,6 +42,11 @@ public class SuchePanel extends javax.swing.JPanel {
         selectButton = new javax.swing.JButton();
 
         sucheField.setText("Suche");
+        sucheField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheFieldActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -117,6 +122,10 @@ public class SuchePanel extends javax.swing.JPanel {
         panelHandler.getSelectPanel().setVisible(true);
     }//GEN-LAST:event_selectButtonActionPerformed
 
+    private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
+        setSearchTitel(sucheField.getText());
+    }//GEN-LAST:event_sucheFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> genreComboBox;
@@ -128,4 +137,8 @@ public class SuchePanel extends javax.swing.JPanel {
     private javax.swing.JButton selectButton;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
+
+    void setSearchTitel(String text) {
+        System.out.println("TODO!");
+    }
 }

@@ -60,7 +60,12 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
 
         anlegenButton.setText("Anlegen");
 
-        sucheField.setText("Suche");
+        sucheField.setText("Titelsuche...");
+        sucheField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,6 +104,12 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
+        panelHandler.panelUnsichtbar();
+        panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
+        panelHandler.getSuchePanel().setVisible(true);
+    }//GEN-LAST:event_sucheFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

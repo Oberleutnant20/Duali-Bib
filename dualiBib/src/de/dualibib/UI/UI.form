@@ -20,6 +20,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="editAccountMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Account bearbeiten"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editAccountMenuActionPerformed"/>
@@ -30,6 +31,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="historyMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="History"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="historyMenuActionPerformed"/>
@@ -38,6 +40,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="aktuelleAusleiheMenu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="aktuelle Ausleihe"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="aktuelleAusleiheMenuActionPerformed"/>
@@ -91,6 +94,7 @@
         <Menu class="javax.swing.JMenu" name="administrationMenu">
           <Properties>
             <Property name="text" type="java.lang.String" value="Administration"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="accountsBearbeitenItem">

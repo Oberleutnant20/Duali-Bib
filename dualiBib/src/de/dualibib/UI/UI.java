@@ -15,16 +15,19 @@ import javax.swing.JPanel;
  */
 public class UI extends javax.swing.JFrame {
 
+    private boolean online;
+
     /**
      * Creates new form UI
      */
-    public UI(List genreListe, List kategorieListe,PanelHandler panelHandler) {
+    public UI(List genreListe, List kategorieListe,PanelHandler panelHandler, boolean online) {
         this.genreListe = new ArrayList<String>();
         this.kategorieListe = new ArrayList<String>();
         initComponents();
         setLayout(new java.awt.BorderLayout());
         setVisible(true);
         this.panelHandler = panelHandler;
+        this.online = online;
     }
 
     public JPanel getjPanel1() {
@@ -84,6 +87,7 @@ public class UI extends javax.swing.JFrame {
         accountMenu.add(LoginLogoutMenu);
 
         editAccountMenu.setText("Account bearbeiten");
+        editAccountMenu.setEnabled(false);
         editAccountMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editAccountMenuActionPerformed(evt);
@@ -93,6 +97,7 @@ public class UI extends javax.swing.JFrame {
         accountMenu.add(jSeparator2);
 
         historyMenu.setText("History");
+        historyMenu.setEnabled(false);
         historyMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 historyMenuActionPerformed(evt);
@@ -101,6 +106,7 @@ public class UI extends javax.swing.JFrame {
         accountMenu.add(historyMenu);
 
         aktuelleAusleiheMenu.setText("aktuelle Ausleihe");
+        aktuelleAusleiheMenu.setEnabled(false);
         aktuelleAusleiheMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aktuelleAusleiheMenuActionPerformed(evt);
@@ -149,6 +155,7 @@ public class UI extends javax.swing.JFrame {
         jMenuBar1.add(helpMenu);
 
         administrationMenu.setText("Administration");
+        administrationMenu.setEnabled(false);
 
         accountsBearbeitenItem.setText("Accounts bearbeiten");
         accountsBearbeitenItem.addActionListener(new java.awt.event.ActionListener() {
@@ -197,6 +204,7 @@ public class UI extends javax.swing.JFrame {
     private void editAccountMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountMenuActionPerformed
         panelHandler.panelUnsichtbar();
         add(panelHandler.getAccountBearbeitenPanel());
+        panelHandler.getAccountBearbeitenPanel().setAccount(panelHandler.getAktuellerUser());
         panelHandler.getAccountBearbeitenPanel().setVisible(true);
     }//GEN-LAST:event_editAccountMenuActionPerformed
 
@@ -270,5 +278,15 @@ public class UI extends javax.swing.JFrame {
 
     private void entwicklung() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void setMitarbeiterOnline() {
+        administrationMenu.enable();
+    }
+
+    void setUserOnline() {
+        accountMenu.enable();
+        accountMenu.enable();
+        aktuelleAusleiheMenu.enable();
     }
 }
