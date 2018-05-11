@@ -6,6 +6,7 @@
 package de.dualibib.Datenlogik;
 
 import de.dualibib.Fachlogik.Historyverwaltung.History;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.List;
 
@@ -14,6 +15,6 @@ import java.util.List;
  * @author Carina
  */
 public interface IHistoryDAO {
-    List<History> laden() throws IOException;
+    List<History> laden() throws IOException, ConnectionError;
     void speichern(List<History> historyListe)  throws IOException;
 }

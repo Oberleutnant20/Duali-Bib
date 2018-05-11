@@ -15,9 +15,9 @@ import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 public class Printmedien extends Medien{
     
     private String isbn;
-    private int barcodenummer;
+    private long barcodenummer;
     
-    public Printmedien(String isbn, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id) {
+    public Printmedien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id) {
         super(genre, kategorien, name, ausgeliehen, vorgemerkt, id);
         this.barcodenummer = barcodenummer;
         this.isbn = isbn;
@@ -27,7 +27,7 @@ public class Printmedien extends Medien{
         this.isbn = isbn;
     }
 
-    public void setBarcodenummer(int barcodenummer) {
+    public void setBarcodenummer(long barcodenummer) {
         this.barcodenummer = barcodenummer;
     }
 
@@ -35,7 +35,7 @@ public class Printmedien extends Medien{
         return isbn;
     }
 
-    public int getBarcodenummer() {
+    public long getBarcodenummer() {
         return barcodenummer;
     }
     

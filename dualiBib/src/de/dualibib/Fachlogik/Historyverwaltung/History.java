@@ -10,17 +10,17 @@ package de.dualibib.Fachlogik.Historyverwaltung;
  * @author Carina
  */
 public class History {
-    int id;
+    long id;
     int userid;
     int medienid;
 
-    public History(int id, int userid, int medienid) {
+    public History(long id, int userid, int medienid) {
         this.id = id;
         this.userid = userid;
         this.medienid = medienid;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -32,7 +32,7 @@ public class History {
         return medienid;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
