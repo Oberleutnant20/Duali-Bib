@@ -57,6 +57,11 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         sucheAccountField.setText("Suche Account");
 
         bearbeitenButton.setText("Bearbeiten");
+        bearbeitenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bearbeitenButtonActionPerformed(evt);
+            }
+        });
 
         anlegenButton.setText("Anlegen");
 
@@ -110,6 +115,15 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
+
+    private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
+        panelHandler.panelUnsichtbar();
+        
+        //panelHandler.getAccountBearbeitenPanel().setAccount();
+        panelHandler.getAccountBearbeitenPanel().bearbeitenMitarbeiter();
+        panelHandler.getAccountBearbeitenPanel().setVisible(true);
+        
+    }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
