@@ -38,6 +38,7 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         meldungText = new javax.swing.JLabel();
+        sucheField = new javax.swing.JTextField();
 
         accountnameField.setText("Accountname");
 
@@ -55,6 +56,13 @@ public class LoginPanel extends javax.swing.JPanel {
         jLabel2.setText("Passwort");
 
         meldungText.setText("Bitte gib deinen Accountnamen und Passwort an.");
+
+        sucheField.setText("Titelsuchen...");
+        sucheField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,11 +82,15 @@ public class LoginPanel extends javax.swing.JPanel {
                             .addComponent(passwortField)
                             .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(75, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
                 .addComponent(meldungText)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -108,6 +120,12 @@ public class LoginPanel extends javax.swing.JPanel {
             
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
+        panelHandler.panelUnsichtbar();
+        panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
+        panelHandler.getSuchePanel().setVisible(true);
+    }//GEN-LAST:event_sucheFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField accountnameField;
@@ -116,5 +134,6 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel meldungText;
     private javax.swing.JTextField passwortField;
+    private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 }

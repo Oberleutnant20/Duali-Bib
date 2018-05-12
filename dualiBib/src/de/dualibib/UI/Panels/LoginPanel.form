@@ -35,12 +35,17 @@
               </Group>
               <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="sucheField" min="-2" pref="70" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <Component id="sucheField" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="meldungText" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -92,6 +97,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Bitte gib deinen Accountnamen und Passwort an."/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="sucheField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Titelsuchen..."/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sucheFieldActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

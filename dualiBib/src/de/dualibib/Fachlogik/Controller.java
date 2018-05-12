@@ -162,6 +162,10 @@ public class Controller {
     public void deleteAusleihe(Ausleihe a) {
        ausleiheverwaltung.delete(a);
     }
+
+    public void saveAccount(Account account) {
+        accountverwaltung.add(account);
+    }
     
     
 }

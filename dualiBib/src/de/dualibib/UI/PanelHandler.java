@@ -145,6 +145,10 @@ public class PanelHandler {
         controller.deleteAusleihe(a);
     }
 
+    public void saveAccount(int userid, String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort, boolean mitarbeiter) {
+        controller.saveAccount(new Account(vorname, passwort, mitarbeiter, userid, vorname, vorname));
+    }
+
     
     
 }
