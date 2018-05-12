@@ -5,8 +5,13 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Genreverwaltung.Genre;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -26,9 +31,9 @@ public class SelectPanel extends javax.swing.JPanel {
      */
     public SelectPanel(PanelHandler panelHandler){//List genreListe, List kategorieListe) {
         initComponents();
-//        this.genreListe = genreListe;
-//        this.kategorieListe = kategorieListe;
         this.panelHandler = panelHandler;
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
+        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
     }
 
     /**
@@ -291,6 +296,20 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel statusLable;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
-
+private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+    
+    private void setComboboxGenre(JComboBox combobox,List<Genre> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
 
 }

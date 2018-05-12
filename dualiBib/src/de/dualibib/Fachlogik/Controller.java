@@ -18,6 +18,7 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 import de.dualibib.UI.PanelHandler;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,7 +59,8 @@ public class Controller {
         kategorienverwaltung.laden();
         genreverwaltung.laden();
         historyverwaltung.laden();
-        panelHandler = new PanelHandler(this, kategorienverwaltung.get(),genreverwaltung.get());
+        ausleihenPruefen();
+        panelHandler = new PanelHandler(this, genreverwaltung.get(),kategorienverwaltung.get());
     }
     
     public Account getAktuellerUser(){
@@ -83,11 +85,11 @@ public class Controller {
     }
 
     public void addHistory(History history){
-        
+        historyverwaltung.add(history);
     }
     
     public void addAusleihe(Ausleihe ausleihe){
-        
+        ausleiheverwaltung.add(ausleihe);
     }
     
     private void ladeUserDaten() {
@@ -191,6 +193,19 @@ public class Controller {
         kategorienverwaltung.speichern();
         genreverwaltung.speichern();
         historyverwaltung.speichern();
+    }
+
+    private void ausleihenPruefen() {
+        ArrayList<Ausleihe> liste = ausleiheverwaltung.get();
+        Date heute = new Date();
+        int id = historyverwaltung.get().size();
+        for (int i = 0; i < liste.size(); i++) {
+            if(liste.get(i).getDate().before(heute)){
+                History history = new History(id++,liste.get(i).getUserid(),liste.get(i).getMedienid(), liste.get(i).getKategorieid());
+                historyListe.add(history);
+                ausleiheverwaltung.delete(liste.get(i));
+            }
+        }
     }
     
     

@@ -8,6 +8,7 @@ package de.dualibib.UI.Panels;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,13 +43,10 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "AusleiheID", "MedienID", "Date", "UserID", "KategorieIDl"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -75,14 +73,11 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(entfernenButton)))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(entfernenButton)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,6 +115,10 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
 
     public void setAusleihenListe(ArrayList<Ausleihe> ausleihe){
         ausleiheListe = ausleihe;
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = 0; i < ausleiheListe.size(); i++) {
+          model.addRow(new Object[]{ausleiheListe.get(i).getId(),ausleiheListe.get(i).getMedienid(),ausleiheListe.get(i).getDate(),ausleiheListe.get(i).getUserid(),ausleiheListe.get(i).getKategorieid()});  
+        }
     }
     
     private Ausleihe getAusleihefromIndices(int position) {

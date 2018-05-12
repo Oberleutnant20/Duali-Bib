@@ -5,10 +5,16 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,6 +31,8 @@ public class HistoryPanel extends javax.swing.JPanel {
     public HistoryPanel(PanelHandler panelHandler) {
         initComponents();
         this.panelHandler = panelHandler;
+        setComboboxKategorie(katgorieComboBox, panelHandler.getKategorieListe());
+        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
     }
 
     /**
@@ -61,7 +69,7 @@ public class HistoryPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "HistoryID", "UserID", "MedienID", "KategorieID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -170,6 +178,10 @@ public class HistoryPanel extends javax.swing.JPanel {
 
     public void setUserHistory(ArrayList<History> history) {
        historyListe = history;
+       DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = 0; i < historyListe.size(); i++) {
+          model.addRow(new Object[]{historyListe.get(i).getId(),historyListe.get(i).getUserid(),historyListe.get(i).getMedienid(),historyListe.get(i).getKategorieid()});  
+        }
     }
     
     private Medien getMediumfromHistoryIndices(int position) {
@@ -186,5 +198,21 @@ public class HistoryPanel extends javax.swing.JPanel {
 		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
 	}
 	return selected[0];
+    }
+    
+    private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+    
+    private void setComboboxGenre(JComboBox combobox,List<Genre> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
     }
 }

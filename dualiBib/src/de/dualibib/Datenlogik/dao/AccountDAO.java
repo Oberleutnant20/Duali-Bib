@@ -16,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -41,8 +43,13 @@ public class AccountDAO implements IAccountDAO {
                     int id = rs.getInt("u_ID");
                     String vorname = rs.getString("u_Vorname");
                     String nachname = rs.getString("u_Nachname");
-                    
-                    ret.add(new Account(login,passwd, mitarbeiter, id, vorname, nachname));
+                    String strasse = rs.getString("u_Strasse");
+                    String hausnummer = rs.getString("u_Hausnummer");
+                    int plz = rs.getInt("u_PLZ");
+                    String ort = rs.getString("u_ort");
+                    String anrede = rs.getString("u_anrede");
+                                        
+                    ret.add(new Account(login,passwd, mitarbeiter, id, vorname, nachname, plz, strasse, hausnummer, ort));
                 }
             } catch (SQLException ex) {
                 System.err.println("AccountDAO laden: " + ex);
@@ -55,7 +62,16 @@ public class AccountDAO implements IAccountDAO {
 
     @Override
     public void speichern(List<Account> accountListe) throws IOException {
-        //To change body of generated methods, choose Tools | Templates.
+        for (Account account : accountListe) {
+            try {
+                PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
+                        + "VALUES('"+account.getVorname()+"','"+account.getNachname()+"','"+account.getUsername()+"','"+account.getPasswort()+"', "+account.isMitarbeiter()+", "+account.getStrasse()+", "+account.getHausnummer()+", "+account.getPlz()+", "+account.getOrt()+")");
+                ptsm.execute();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }
+        
     }
 
 }

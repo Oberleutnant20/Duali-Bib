@@ -5,9 +5,15 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Genreverwaltung.Genre;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +30,8 @@ public class SuchePanel extends javax.swing.JPanel {
     public SuchePanel(PanelHandler panelHandler) {
         initComponents();
         this.panelHandler = panelHandler;
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
+        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
     }
 
     /**
@@ -53,13 +61,10 @@ public class SuchePanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Kategorie", "Genre", "ISBN", "Verfügbar"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -69,6 +74,11 @@ public class SuchePanel extends javax.swing.JPanel {
         genreLable.setText("Genre");
 
         kategorieComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        kategorieComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategorieComboBoxActionPerformed(evt);
+            }
+        });
 
         genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -136,6 +146,10 @@ public class SuchePanel extends javax.swing.JPanel {
         setSearchTitel(sucheField.getText());
     }//GEN-LAST:event_sucheFieldActionPerformed
 
+    private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kategorieComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> genreComboBox;
@@ -154,6 +168,10 @@ public class SuchePanel extends javax.swing.JPanel {
     
     public void setMedienListe(ArrayList<Medien> medien){
         medienListe = medien;
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = 0; i < medienListe.size(); i++) {
+          model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});  
+        }
     }
     
     private Medien getMediumfromIndices(int position) {
@@ -168,5 +186,21 @@ public class SuchePanel extends javax.swing.JPanel {
 		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
 	}
 	return selected[0];
+    }
+    
+    private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+    
+    private void setComboboxGenre(JComboBox combobox,List<Genre> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
     }
 }
