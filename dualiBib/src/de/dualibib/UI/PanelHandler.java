@@ -8,6 +8,7 @@ package de.dualibib.UI;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Controller;
+import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
 import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
@@ -147,6 +148,10 @@ public class PanelHandler {
 
     public void saveAccount(int userid, String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort, boolean mitarbeiter) {
         controller.saveAccount(new Account(vorname, passwort, mitarbeiter, userid, vorname, vorname));
+    }
+
+    public void deleteHistory(History h) {
+        controller.deleteHistory(h);
     }
 
     

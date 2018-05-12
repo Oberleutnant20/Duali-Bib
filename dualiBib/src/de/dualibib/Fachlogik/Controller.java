@@ -35,8 +35,8 @@ public class Controller {
     private PanelHandler panelHandler;
     
     private Account aktuellerUser;
-    private List<History> historyListe;
-    private List<Ausleihe> ausleiheListe;
+    private ArrayList<History> historyListe;
+    private ArrayList<Ausleihe> ausleiheListe;
 
     public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung,Historyverwaltung historyverwaltung) {
         this.accountverwaltung = accountverwaltung;
@@ -105,7 +105,7 @@ public class Controller {
         return null;
     }
 
-    private List<History> ladeHistory() {
+    private ArrayList<History> ladeHistory() {
         int userid = aktuellerUser.getUserid();
         ArrayList<History> list = new ArrayList<History>();
         
@@ -118,7 +118,7 @@ public class Controller {
         return list;
     }
 
-    private List<Ausleihe> ladeAusleihe() {
+    private ArrayList<Ausleihe> ladeAusleihe() {
         int userid = aktuellerUser.getUserid();
         ArrayList<Ausleihe> list = new ArrayList<Ausleihe>();
         
@@ -131,11 +131,11 @@ public class Controller {
         return list;
     }
 
-    public List<History> getHistoryListe() {
+    public ArrayList<History> getHistoryListe() {
         return historyListe;
     }
 
-    public List<Ausleihe> getAusleiheListe() {
+    public ArrayList<Ausleihe> getAusleiheListe() {
         return ausleiheListe;
     }
 
@@ -165,6 +165,10 @@ public class Controller {
 
     public void saveAccount(Account account) {
         accountverwaltung.add(account);
+    }
+
+    public void deleteHistory(History h) {
+        historyverwaltung.delete(h);
     }
     
     

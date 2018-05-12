@@ -72,6 +72,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Historysuche..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="historysuchFieldActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
 
@@ -95,6 +98,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ausw&#xe4;hlen"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="auswaehlenButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="kategorieLable">
       <Properties>
