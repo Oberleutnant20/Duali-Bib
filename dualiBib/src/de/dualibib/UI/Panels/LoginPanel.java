@@ -6,6 +6,7 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.UI.PanelHandler;
+import java.io.IOException;
 
 /**
  *
@@ -14,6 +15,7 @@ import de.dualibib.UI.PanelHandler;
 public class LoginPanel extends javax.swing.JPanel {
 
     private final PanelHandler panelHandler;
+    private boolean online = false;
 
     /**
      * Creates new form Login
@@ -107,15 +109,15 @@ public class LoginPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        String accountname = accountnameField.getText();
-        String passwort = passwortField.getText();
-        if(panelHandler.login(accountname, passwort)){
-            meldungText.setText("Erfolgreich eingeloggt.");
-            accountnameField.setEnabled(false);
-            passwortField.setEnabled(false);
-            loginButton.setEnabled(false);
-        }else{
-            meldungText.setText("Accountname oder Passwort falsch.");
+        if(!online){
+            einloggen();
+        }
+        else{
+            try {
+                ausloggen();
+            } catch (Exception e) {
+                meldungText.setText("Speichern der Sitzung nicht möglich");
+            }
         }
             
     }//GEN-LAST:event_loginButtonActionPerformed
@@ -136,4 +138,28 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JTextField passwortField;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
+
+    private void einloggen(){
+        String accountname = accountnameField.getText();
+        String passwort = passwortField.getText();
+        if(panelHandler.login(accountname, passwort)){
+            meldungText.setText("Erfolgreich eingeloggt.");
+            accountnameField.setEnabled(false);
+            passwortField.setEnabled(false);
+            loginButton.setText("Logout");
+            online = true;
+        }else{
+            meldungText.setText("Accountname oder Passwort falsch.");
+        }
+    }
+    
+    private void ausloggen() throws IOException{
+        panelHandler.ausloggen();
+        meldungText.setText("Erfolgreich ausgeloggt.");
+        loginButton.setText("Login");
+        accountnameField.setEnabled(true);
+        passwortField.setEnabled(true);
+        online = false;
+    }
+
 }

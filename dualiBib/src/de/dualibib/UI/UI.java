@@ -297,4 +297,11 @@ public class UI extends javax.swing.JFrame {
         panelHandler.loadUserHistory();
         panelHandler.loadUserAusleihe();
     }
+
+    void setUserOffline() {
+        editAccountMenu.setEnabled(false);
+        historyMenu.setEnabled(false);
+        aktuelleAusleiheMenu.setEnabled(false);
+        administrationMenu.setEnabled(false);
+    }
 }

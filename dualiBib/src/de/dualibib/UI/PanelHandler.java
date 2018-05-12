@@ -19,6 +19,7 @@ import de.dualibib.UI.Panels.LoginPanel;
 import de.dualibib.UI.Panels.OptionPanel;
 import de.dualibib.UI.Panels.SelectPanel;
 import de.dualibib.UI.Panels.SuchePanel;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -175,6 +176,12 @@ public class PanelHandler {
                 medium = liste.get(i);
         }
         return medium;
+    }
+
+    public void ausloggen() throws IOException {
+        controller.saveDB();
+        ui.setUserOffline();
+        aktuellerUser = null;
     }
 
     
