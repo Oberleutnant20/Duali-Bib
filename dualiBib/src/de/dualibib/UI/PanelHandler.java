@@ -44,9 +44,19 @@ public class PanelHandler {
     private boolean eingeloggt;
     private boolean mitarbeiter;
     private Account aktuellerUser;
+    private List genreListe;
+    private List kategorieListe;
 
     public UI getUi() {
         return ui;
+    }
+
+    public List getGenreListe() {
+        return genreListe;
+    }
+
+    public List getKategorieListe() {
+        return kategorieListe;
     }
 
     public Account getAktuellerUser() {
@@ -91,6 +101,8 @@ public class PanelHandler {
 
     public PanelHandler(Controller controller, List genreListe, List kategorieListe) {
         ui = new UI(genreListe, kategorieListe,this, false);
+        this.genreListe = genreListe;
+        this.kategorieListe = kategorieListe;
         initPanels();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
@@ -135,8 +147,8 @@ public class PanelHandler {
         return false;
     }
 
-    public void saveAccountChange(int id,String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort,boolean mitarbeiter) {
-        Account a = new Account(vorname, passwort, mitarbeiter, id, vorname, vorname);
+    public void saveAccountChange(int id, String hausnummer, String name, int plz, String ort, String strasse, String vorname, String passwort, boolean mitarbeiter, String accountname) {
+        Account a = new Account(accountname,passwort, mitarbeiter, id, vorname, name, plz, strasse, hausnummer, ort);
         controller.saveAccountChange(a);
     }
 
@@ -148,8 +160,8 @@ public class PanelHandler {
         controller.deleteAusleihe(a);
     }
 
-    public void saveAccount(int userid, String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort, boolean mitarbeiter) {
-        controller.saveAccount(new Account(vorname, passwort, mitarbeiter, userid, vorname, vorname));
+    public void saveAccount(int id, String hausnummer, String name, int plz, String ort, String strasse, String vorname, String passwort, boolean mitarbeiter, String accountname) {
+        controller.saveAccount(new Account(accountname,passwort, mitarbeiter, id, vorname, name, plz, strasse, hausnummer, ort));
     }
 
     void loadUserAusleihe() {

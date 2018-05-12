@@ -9,6 +9,7 @@ import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -43,13 +44,10 @@ public class AusleihenPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "AusleiheID", "MedienID", "Date", "UserID", "KategorieID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -119,6 +117,10 @@ public class AusleihenPanel extends javax.swing.JPanel {
 
     public void setUserAusleihe(ArrayList<Ausleihe> ausleihe) {
         ausleiheListe = ausleihe;
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = 0; i < ausleiheListe.size(); i++) {
+          model.addRow(new Object[]{ausleiheListe.get(i).getId(),ausleiheListe.get(i).getMedienid(),ausleiheListe.get(i).getDate(),ausleiheListe.get(i).getUserid(),ausleiheListe.get(i).getKategorieid()});  
+        }
     }
     
     private Ausleihe getAusleihefromIndices(int position) {

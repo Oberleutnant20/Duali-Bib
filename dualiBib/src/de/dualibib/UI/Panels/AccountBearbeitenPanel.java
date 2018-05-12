@@ -208,17 +208,20 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sucheFieldActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-
+        if(!plzField.getText().matches("[0-9]{5}")){
+            meldungText.setText("PLZ ist ungültig.");
+            return;
+        }
         if(passwortField.getText().equals(checkPasswortField.getText())){
             String hausnummer = hausnummerField.getText();
             String name = nameField.getText();
-            String plz = plzField.getText();
+            int plz = Integer.parseInt(plzField.getText());
             String stadt = stadtField.getText();
             String strasse = strasseField.getText();
             String vorname = vornameField.getText();
             String passwort = passwortField.getText();
             boolean mitarbeiter = mitarbeiterCheckBox.isSelected();
-            panelHandler.saveAccountChange(account.getUserid(),hausnummer, name, plz, stadt, strasse, vorname, passwort,mitarbeiter);
+            save(account.getUserid(),hausnummer, name, plz, stadt, strasse, vorname, passwort,mitarbeiter);
             meldungText.setText("Änderungen wurden übernommen.");
         }
         else{
@@ -263,11 +266,11 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
         vornameField.setText(a.getVorname());
     }
         
-    public void save(int id,String hausnummer, String name, String plz, String stadt, String strasse, String vorname,String  passwort, boolean mitarbeiter){
+    public void save(int id,String hausnummer, String name, int plz, String ort, String strasse, String vorname,String  passwort, boolean mitarbeiter){
         if(neu)
-        panelHandler.saveAccountChange(account.getUserid(),hausnummer, name, plz, stadt, strasse, vorname, passwort,mitarbeiter);
+        panelHandler.saveAccountChange(account.getUserid(),hausnummer, name ,plz , strasse,ort,vorname,passwort, mitarbeiter,account.getUsername());
         else
-          panelHandler.saveAccount(account.getUserid(),hausnummer, name, plz, stadt, strasse, vorname, passwort,mitarbeiter);  
+          panelHandler.saveAccount(account.getUserid(),hausnummer, name ,plz , strasse,ort,vorname,passwort, mitarbeiter,account.getUsername());  
     }
     
     public void bearbeitenMitarbeiter(){
