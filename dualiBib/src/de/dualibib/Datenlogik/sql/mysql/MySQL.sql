@@ -99,8 +99,8 @@ CONSTRAINT h_mID_FK FOREIGN KEY(m_ID) REFERENCES Medien(m_ID)
 INSERT INTO User(u_Vorname, u_Nachname, u_Login, u_passwd, u_mitarbeiter,u_Strasse, u_Hausnummer, u_PLZ, u_Ort)
 VALUES ('Admin', 'Min', 'admin001', '1f91db1eb1781471c712d1001a21971a01611ab1431601491881da1ed19111c12213e1df1241111ad1f014b1b214c1de1041f61ca1681371621c710318719612113213a1b81cc11a1ea10e1841c11d11c01851d21571a412a14111a13718d1e6', true, 'TestStr.', 1, 12345, 'Testort');
 -- Testinserts
-INSERT INTO User(u_Vorname, u_Nachname, u_Login, u_passwd, u_Strasse, u_Hausnummer, u_PLZ, u_Ort)
-VALUES ('vor', 'nach', 'user', 'pw', 'Testweg', 12, 22554, 'Testdorf');
+INSERT INTO User(u_Vorname, u_Nachname, u_Login, u_passwd, u_mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort)
+VALUES ('vor', 'nach', 'user', 'pw', true,'Testweg', 12, 22554, 'Testdorf');
 INSERT INTO Genre(g_name) VALUES ('Test');
 INSERT INTO Genre(g_Name) VALUES ('Test1');
 INSERT INTO KategorieMedien(km_name, km_beschreibung) VALUES ('Test1', 'Ein einfacher Test');
