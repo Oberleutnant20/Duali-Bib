@@ -17,7 +17,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import de.dualibib.Datenlogik.IMedienDAO;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import java.util.ArrayList;
 
 /**
  *
@@ -30,6 +32,8 @@ public class MedienDAO implements IMedienDAO {
     private ResultSet rs = null;
     private ResultSet rs1 = null;
     private ResultSet rs2 = null;
+    GenreDAO gen = new GenreDAO();
+    KategorieDAO kat = new KategorieDAO();
 
     @Override
     public List<Medien> laden() throws IOException, ConnectionError {
@@ -37,10 +41,9 @@ public class MedienDAO implements IMedienDAO {
         if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("medien"));
-                
                 rs = ptsm.executeQuery();
-                ArrayList<Genre> genreListe = getGenre();
-                ArrayList<Kategorie> kategorieListe = getKategorie();
+                List<Genre> genreListe = gen.laden();
+                List<Kategorie> kategorieListe = kat.laden();
                 while (rs.next()) {
                     String isbn = rs.getString("m_ISBN");
                     long barcode = rs.getLong("m_barcode");
@@ -57,6 +60,7 @@ public class MedienDAO implements IMedienDAO {
                     Genre genre = matchGenre(genreListe, gid);
                     Kategorie kat = matchKategorie(kategorieListe, kmid);
                     
+                    
                     ret.add(new Medien(isbn, barcode, genre, kat, titel, ausgeliehen, vorgemerkt, id, anzahl));
                 }
             } catch (SQLException ex) {
@@ -67,33 +71,13 @@ public class MedienDAO implements IMedienDAO {
         }
         return ret;
     }
-
-    public ArrayList<Genre> getGenre() throws SQLException{
-        PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("genre"));
-        rs = ptsm.executeQuery();
-        ArrayList<Genre> list = new ArrayList();
-        while (rs.next()) {
-            list.add(new Genre(rs1.getString("g_Name")));
-        }
-        return list;
-    }
-    
-    public ArrayList<Kategorie> getKategorie() throws SQLException{
-        PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("kategorieMedien"));
-        rs = ptsm.executeQuery();
-        ArrayList<Kategorie> list = new ArrayList();
-        while (rs.next()) {
-            list.add(new Kategorie(rs2.getInt("km_id"), rs2.getString("km_name"), rs2.getString("km_beschreibung")));
-        }
-        return list;
-    }
-    
+   
     @Override
     public void speichern(List<Medien> medienListe) throws IOException {
         //To change body of generated methods, choose Tools | Templates.
     }
 
-    private Genre matchGenre(ArrayList<Genre> genreListe, int gid) {
+    private Genre matchGenre(List<Genre> genreListe, int gid) {
         for (int i = 0; i < genreListe.size(); i++) {
             if(genreListe.get(i).getId()==gid)
                 return genreListe.get(i);
@@ -101,7 +85,7 @@ public class MedienDAO implements IMedienDAO {
         return null;
     }
 
-    private Kategorie matchKategorie(ArrayList<Kategorie> kategorieListe, int kmid) {
+    private Kategorie matchKategorie(List<Kategorie> kategorieListe, int kmid) {
         for (int i = 0; i < kategorieListe.size(); i++) {
             if(kategorieListe.get(i).getId()==kmid)
                 return kategorieListe.get(i);
