@@ -58,6 +58,7 @@ m_Titel VARCHAR(150),
 m_Author VARCHAR(150),
 m_ISBN VARCHAR(24) UNIQUE,
 m_Barcode BIGINT UNIQUE,
+m_ausgeliehen   BOOLEAN DEFAULT FALSE,
 m_Vorgemerkt    BOOLEAN DEFAULT FALSE,
 m_Anzahl        INTEGER,
 m_beschreibung  VARCHAR(500),
@@ -103,7 +104,7 @@ VALUES ('vor', 'nach', 'user', 'pw', 'Testweg', 12, 22554, 'Testdorf');
 INSERT INTO Genre(g_name) VALUES ('Test');
 INSERT INTO Genre(g_Name) VALUES ('Test1');
 INSERT INTO KategorieMedien(km_name, km_beschreibung) VALUES ('Test1', 'Ein einfacher Test');
-INSERT INTO KategorieMedien(km_name, km_beschreibung) VALUES ('Test2', 'Ein einfacher Test');
+INSERT INTO KategorieMedien(km_name, km_beschreibung) VALUES ('Test2', 'Ein einfacher Test1');
 INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibung, km_id, g_id) 
 VALUES('Datenbanken-Implementierungste', 'Andreas Heuer', '978-3826691560', 9783826691560, 1, 'Dieses Buch behandelt Konzepte und Techniken der Implementierung von Datenbanksystemen, die heutzutage die Kernkomponente von Informationssystemen darstellen.', 1, 1);
 INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibung, km_id, g_id) 

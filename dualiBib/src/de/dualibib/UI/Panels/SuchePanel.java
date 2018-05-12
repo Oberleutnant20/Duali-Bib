@@ -190,7 +190,7 @@ public class SuchePanel extends javax.swing.JPanel {
     
     private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
         String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i <= list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
         }        
         combobox.setModel(new DefaultComboBoxModel(tmp));
@@ -198,7 +198,7 @@ public class SuchePanel extends javax.swing.JPanel {
     
     private void setComboboxGenre(JComboBox combobox,List<Genre> list){
         String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i <= list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
         }        
         combobox.setModel(new DefaultComboBoxModel(tmp));
