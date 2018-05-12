@@ -9,6 +9,7 @@ package de.dualibib.UI.Panels;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -47,13 +48,10 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Usename", "Vorname", "Nachname"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -88,14 +86,13 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(71, 71, 71))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(sucheAccountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(anlegenButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -104,8 +101,9 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
                 .addComponent(bearbeitenButton)
                 .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,9 +111,9 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
                 .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(sucheAccountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bearbeitenButton)
                     .addComponent(anlegenButton)
@@ -132,10 +130,10 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
 
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
         try {
-            getAccountfromIndices(getListSelections());
+            Account a = getAccountfromIndices(getListSelections());
             panelHandler.panelUnsichtbar();
-        
-            //panelHandler.getAccountBearbeitenPanel().setAccount();
+            panelHandler.getUi().add(panelHandler.getAccountBearbeitenPanel());
+            panelHandler.getAccountBearbeitenPanel().setAccount(a);
             panelHandler.getAccountBearbeitenPanel().bearbeitenMitarbeiter();
             panelHandler.getAccountBearbeitenPanel().setVisible(true);
         } catch (Exception e) {
@@ -171,6 +169,12 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     
     public void setAccountListe(ArrayList<Account> account){
         accountListe = account;
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = 0; i < accountListe.size(); i++) {
+          model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
+        }
+        
+        
     }
     
     private Account getAccountfromIndices(int position) {

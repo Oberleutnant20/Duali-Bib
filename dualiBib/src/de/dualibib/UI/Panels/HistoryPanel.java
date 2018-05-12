@@ -6,9 +6,13 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Historyverwaltung.History;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -186,5 +190,13 @@ public class HistoryPanel extends javax.swing.JPanel {
 		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
 	}
 	return selected[0];
+    }
+    
+    private void setCombobox(JComboBox combobox,List<Kategorie> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
     }
 }
