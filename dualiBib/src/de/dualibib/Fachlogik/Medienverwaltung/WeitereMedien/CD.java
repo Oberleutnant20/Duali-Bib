@@ -7,30 +7,20 @@ package de.dualibib.Fachlogik.Medienverwaltung.WeitereMedien;
 
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
-import de.dualibib.Fachlogik.Medienverwaltung.Anderemedien;
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 
 /**
  *
  * @author Carina
  */
-public class CD extends Anderemedien{
- 
-    private String kuenstler;
+public class CD extends Medien{
 
-    public CD(String kuenstler, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id) {
-        super(barcodenummer, genre, kategorien, name, ausgeliehen, vorgemerkt, id);
-        this.kuenstler = kuenstler;
+    public CD(String isbn, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id,int anzahl) {
+        super(isbn, barcodenummer, genre, kategorien, name, ausgeliehen, vorgemerkt, id, anzahl);
+
     }
 
     
-    
-    public String getKuenstler() {
-        return kuenstler;
-    }
-
-    public void setKuenstler(String kuenstler) {
-        this.kuenstler = kuenstler;
-    }
     
     
     

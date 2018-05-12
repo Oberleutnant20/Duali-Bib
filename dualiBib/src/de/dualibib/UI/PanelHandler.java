@@ -7,6 +7,7 @@ package de.dualibib.UI;
 
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Controller;
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
 import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
 import de.dualibib.UI.Panels.AusleihenBearbeitenPanel;
@@ -116,7 +117,7 @@ public class PanelHandler {
         ausleihenBearbeitenPanel.setVisible(false);
     }
 
-    public void login(String accountname, String passwort) {
+    public boolean login(String accountname, String passwort) {
         if(controller.setAktuellerUser(accountname, passwort)!=null){
             this.aktuellerUser =controller.setAktuellerUser(accountname, passwort);
             if(controller.isMitarbeiter()){
@@ -125,12 +126,18 @@ public class PanelHandler {
             ui.setUserOnline();
             ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
             historyPanel.setUserHistory(controller.getHistoryListe());
+            return true;
         }
+        return false;
     }
 
     public void saveAccountChange(int id,String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort,boolean mitarbeiter) {
         Account a = new Account(vorname, passwort, mitarbeiter, id, vorname, vorname);
         controller.saveAccountChange(a);
+    }
+
+    public void saveMediumChange(Medien m) {
+        controller.saveMediumChange(m);
     }
 
     

@@ -5,7 +5,9 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +16,7 @@ import de.dualibib.UI.PanelHandler;
 public class SuchePanel extends javax.swing.JPanel {
 
     private final PanelHandler panelHandler;
+    ArrayList<Medien> medienListe;
 
     /**
      * Creates new form SuchePanel
@@ -117,8 +120,11 @@ public class SuchePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
-        //panelHandler.panelUnsichtbar();
-        
+        panelHandler.panelUnsichtbar();
+        panelHandler.getSelectPanel().setMedium(getMediumfromIndices(getListSelections()));
+        if(panelHandler.getAktuellerUser().isMitarbeiter()){
+            panelHandler.getSelectPanel().setMitarbeiter();
+        }
         panelHandler.getSelectPanel().setVisible(true);
     }//GEN-LAST:event_selectButtonActionPerformed
 
@@ -141,4 +147,21 @@ public class SuchePanel extends javax.swing.JPanel {
     void setSearchTitel(String text) {
         System.out.println("TODO!");
     }
+    public void setMedienListe(ArrayList<Medien> medien){
+        medienListe = medien;
+    }
+    
+    private Medien getMediumfromIndices(int position) {
+		Medien selected = null;
+		selected = medienListe.get(position);
+		return selected;
+	}
+    
+    private int getListSelections() {
+		int[] selected = jTable1.getSelectedRows();
+		for (int i = 0; i < selected.length; i++) {
+			selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+		}
+		return selected[0];
+	}
 }
