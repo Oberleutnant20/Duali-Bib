@@ -6,6 +6,7 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Historyverwaltung.History;
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 
@@ -142,7 +143,10 @@ public class HistoryPanel extends javax.swing.JPanel {
 
     private void auswaehlenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_auswaehlenButtonActionPerformed
        try {
-            panelHandler.deleteHistory(getHistoryfromIndices(getListSelections()));
+            panelHandler.getSelectPanel().setMedium(getMediumfromHistoryIndices(getListSelections()));
+            panelHandler.panelUnsichtbar();
+            panelHandler.getUi().add(panelHandler.getSelectPanel());
+            panelHandler.getSelectPanel().setVisible(true);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_auswaehlenButtonActionPerformed
@@ -168,10 +172,12 @@ public class HistoryPanel extends javax.swing.JPanel {
        historyListe = history;
     }
     
-    private History getHistoryfromIndices(int position) {
+    private Medien getMediumfromHistoryIndices(int position) {
 		History selected = null;
+                Medien medium = null;
 		selected = historyListe.get(position);
-		return selected;
+                medium = panelHandler.mapHistoryAndMedium(selected);
+		return medium;
 	}
     
     private int getListSelections() {

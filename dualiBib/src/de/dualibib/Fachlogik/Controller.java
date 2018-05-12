@@ -170,6 +170,18 @@ public class Controller {
     public void deleteHistory(History h) {
         historyverwaltung.delete(h);
     }
+
+    public ArrayList<Ausleihe> getAllAusleihenListe() {
+        return ausleiheverwaltung.get();
+    }
+
+    public ArrayList<Account> getAllAccountsListe() {
+        return accountverwaltung.get();
+    }
+
+    public ArrayList<Medien> getAllMedien() {
+        return medienverwaltung.get();
+    }
     
     
 }

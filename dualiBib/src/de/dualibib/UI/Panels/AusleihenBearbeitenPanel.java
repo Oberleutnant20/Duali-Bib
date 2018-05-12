@@ -118,7 +118,7 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
 
-    public void setAccountListe(ArrayList<Ausleihe> ausleihe){
+    public void setAusleihenListe(ArrayList<Ausleihe> ausleihe){
         ausleiheListe = ausleihe;
     }
     

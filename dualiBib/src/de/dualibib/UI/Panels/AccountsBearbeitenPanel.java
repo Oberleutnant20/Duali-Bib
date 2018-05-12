@@ -131,11 +131,16 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sucheFieldActionPerformed
 
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
-        panelHandler.panelUnsichtbar();
+        try {
+            getAccountfromIndices(getListSelections());
+            panelHandler.panelUnsichtbar();
         
-        //panelHandler.getAccountBearbeitenPanel().setAccount();
-        panelHandler.getAccountBearbeitenPanel().bearbeitenMitarbeiter();
-        panelHandler.getAccountBearbeitenPanel().setVisible(true);
+            //panelHandler.getAccountBearbeitenPanel().setAccount();
+            panelHandler.getAccountBearbeitenPanel().bearbeitenMitarbeiter();
+            panelHandler.getAccountBearbeitenPanel().setVisible(true);
+        } catch (Exception e) {
+        }
+        
         
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 

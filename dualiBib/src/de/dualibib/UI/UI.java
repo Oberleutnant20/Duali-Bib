@@ -283,6 +283,9 @@ public class UI extends javax.swing.JFrame {
     void setMitarbeiterOnline() {
         System.out.println("enable admin");
         administrationMenu.setEnabled(true);
+        
+        panelHandler.loadAdminAccounts();
+        panelHandler.loadAdminAusleihen();
     }
 
     void setUserOnline() {
@@ -290,5 +293,8 @@ public class UI extends javax.swing.JFrame {
         editAccountMenu.setEnabled(true);
         historyMenu.setEnabled(true);
         aktuelleAusleiheMenu.setEnabled(true);
+        
+        panelHandler.loadUserHistory();
+        panelHandler.loadUserAusleihe();
     }
 }

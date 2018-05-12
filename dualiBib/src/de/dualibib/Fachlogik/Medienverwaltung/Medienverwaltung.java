@@ -55,7 +55,7 @@ public class Medienverwaltung{
 		}
     }
 
-    public List<Medien> get() {
+    public ArrayList<Medien> get() {
         ArrayList<Medien> liste = new ArrayList<Medien>();
 		for (Medien account : medienListe) {
 			liste.add(account);

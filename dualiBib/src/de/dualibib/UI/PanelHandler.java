@@ -19,6 +19,7 @@ import de.dualibib.UI.Panels.LoginPanel;
 import de.dualibib.UI.Panels.OptionPanel;
 import de.dualibib.UI.Panels.SelectPanel;
 import de.dualibib.UI.Panels.SuchePanel;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -150,8 +151,30 @@ public class PanelHandler {
         controller.saveAccount(new Account(vorname, passwort, mitarbeiter, userid, vorname, vorname));
     }
 
-    public void deleteHistory(History h) {
-        controller.deleteHistory(h);
+    void loadUserAusleihe() {
+        ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
+    }
+
+    void loadUserHistory() {
+        historyPanel.setUserHistory(controller.getHistoryListe());
+    }
+
+    void loadAdminAccounts() {
+        accountsBearbeitenPanel.setAccountListe(controller.getAllAccountsListe());
+    }
+
+    void loadAdminAusleihen() {
+        ausleihenBearbeitenPanel.setAusleihenListe(controller.getAllAusleihenListe());
+    }
+
+    public Medien mapHistoryAndMedium(History selected) {
+        Medien medium = null;
+        ArrayList<Medien> liste = controller.getAllMedien();
+        for (int i = 0; i < liste.size(); i++) {
+            if(liste.get(i).getId()==selected.getMedienid())
+                medium = liste.get(i);
+        }
+        return medium;
     }
 
     
