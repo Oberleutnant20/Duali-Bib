@@ -57,6 +57,11 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         sucheAccountField.setText("Suche Account");
+        sucheAccountField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sucheAccountFieldActionPerformed(evt);
+            }
+        });
 
         bearbeitenButton.setText("Bearbeiten");
         bearbeitenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +158,19 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_anlegenButtonActionPerformed
 
+    private void sucheAccountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheAccountFieldActionPerformed
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
+        
+        for (int i = 0; i < accountListe.size(); i++) {
+            if(accountListe.get(i).getUsername().equals(sucheAccountField.getText()))
+             model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
+        }
+    }//GEN-LAST:event_sucheAccountFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField accountnameField;
@@ -168,7 +186,13 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     
     public void setAccountListe(ArrayList<Account> account){
         accountListe = account;
+    }
+    
+    public void fillTable(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
         for (int i = 0; i < accountListe.size(); i++) {
           model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
         }

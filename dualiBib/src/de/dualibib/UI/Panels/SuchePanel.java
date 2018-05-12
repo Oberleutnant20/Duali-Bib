@@ -81,6 +81,11 @@ public class SuchePanel extends javax.swing.JPanel {
         });
 
         genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        genreComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genreComboBoxActionPerformed(evt);
+            }
+        });
 
         selectButton.setText("Auswählen");
         selectButton.addActionListener(new java.awt.event.ActionListener() {
@@ -147,8 +152,30 @@ public class SuchePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sucheFieldActionPerformed
 
     private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        String text = kategorieComboBox.getItemAt(0);
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
+        
+        for (int i = 0; i < medienListe.size(); i++) {
+            if(medienListe.get(i).getName().equals(text))
+             model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});    
+        }
     }//GEN-LAST:event_kategorieComboBoxActionPerformed
+
+    private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreComboBoxActionPerformed
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        String text =genreComboBox.getItemAt(0);
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
+        
+        for (int i = 0; i < medienListe.size(); i++) {
+            if(medienListe.get(i).getName().equals(text))
+             model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});    
+        }
+    }//GEN-LAST:event_genreComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -163,7 +190,16 @@ public class SuchePanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     void setSearchTitel(String text) {
-        System.out.println("TODO!");
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
+        
+        for (int i = 0; i < medienListe.size(); i++) {
+            if(medienListe.get(i).getName().equals(text))
+             model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});    
+        }
     }
     
     public void setMedienListe(ArrayList<Medien> medien){

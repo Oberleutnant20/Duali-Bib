@@ -8,7 +8,9 @@ package de.dualibib.UI;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Controller;
+import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
 import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
@@ -44,18 +46,18 @@ public class PanelHandler {
     private boolean eingeloggt;
     private boolean mitarbeiter;
     private Account aktuellerUser;
-    private List genreListe;
-    private List kategorieListe;
+    private List<Genre> genreListe;
+    private List<Kategorie> kategorieListe;
 
     public UI getUi() {
         return ui;
     }
 
-    public List getGenreListe() {
+    public List<Genre> getGenreListe() {
         return genreListe;
     }
 
-    public List getKategorieListe() {
+    public List<Kategorie> getKategorieListe() {
         return kategorieListe;
     }
 
