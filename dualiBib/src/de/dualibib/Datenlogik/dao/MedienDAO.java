@@ -38,16 +38,12 @@ public class MedienDAO implements IMedienDAO {
     @Override
     public List<Medien> laden() throws IOException, ConnectionError {
         ArrayList<Medien> ret = new ArrayList<>();
-        System.out.println("bla");
         if (con != null) {
             try {
-                System.out.println("1");
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("medien"));
-                System.out.println("2");
                 rs = ptsm.executeQuery();
                 List<Genre> genreListe = gen.laden();
                 List<Kategorie> kategorieListe = kat.laden();
-                System.out.println("3");
                 while (rs.next()) {
                     String isbn = rs.getString("m_ISBN");
                     long barcode = rs.getLong("m_barcode");
@@ -76,31 +72,7 @@ public class MedienDAO implements IMedienDAO {
         }
         return ret;
     }
-
-    public List<Genre> getGenre() throws SQLException{
-        
-        PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("genre"));
-        rs = ptsm.executeQuery();
-        ArrayList<Genre> list = new ArrayList();
-        while (rs.next()) {
-            list.add(new Genre(rs1.getString("g_Name")));
-        }
-        System.out.println("genre");
-        return list;
-    }
-    
-    public List<Kategorie> getKategorie() throws SQLException{
-        
-        PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("kategorieMedien"));
-        rs = ptsm.executeQuery();
-        ArrayList<Kategorie> list = new ArrayList();
-        while (rs.next()) {
-            list.add(new Kategorie(rs2.getInt("km_id"), rs2.getString("km_name"), rs2.getString("km_beschreibung")));
-        }
-        System.out.println("kategorie");
-        return list;
-    }
-    
+   
     @Override
     public void speichern(List<Medien> medienListe) throws IOException {
         //To change body of generated methods, choose Tools | Templates.
