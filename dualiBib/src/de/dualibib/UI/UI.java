@@ -281,12 +281,27 @@ public class UI extends javax.swing.JFrame {
     }
 
     void setMitarbeiterOnline() {
-        administrationMenu.enable();
+        System.out.println("enable admin");
+        administrationMenu.setEnabled(true);
+        
+        panelHandler.loadAdminAccounts();
+        panelHandler.loadAdminAusleihen();
     }
 
     void setUserOnline() {
-        accountMenu.enable();
-        accountMenu.enable();
-        aktuelleAusleiheMenu.enable();
+        System.out.println("enable user");
+        editAccountMenu.setEnabled(true);
+        historyMenu.setEnabled(true);
+        aktuelleAusleiheMenu.setEnabled(true);
+        
+        panelHandler.loadUserHistory();
+        panelHandler.loadUserAusleihe();
+    }
+
+    void setUserOffline() {
+        editAccountMenu.setEnabled(false);
+        historyMenu.setEnabled(false);
+        aktuelleAusleiheMenu.setEnabled(false);
+        administrationMenu.setEnabled(false);
     }
 }

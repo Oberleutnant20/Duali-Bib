@@ -6,7 +6,9 @@
 
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.UI.PanelHandler;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +17,7 @@ import de.dualibib.UI.PanelHandler;
 public class AccountsBearbeitenPanel extends javax.swing.JPanel {
 
     private final PanelHandler panelHandler;
+    ArrayList<Account> accountListe;
 
     /** Creates new form AccountsBearbeiten */
     public AccountsBearbeitenPanel(PanelHandler panelHandler) {
@@ -38,6 +41,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         bearbeitenButton = new javax.swing.JButton();
         anlegenButton = new javax.swing.JButton();
         sucheField = new javax.swing.JTextField();
+        accountnameField = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
@@ -57,8 +61,18 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         sucheAccountField.setText("Suche Account");
 
         bearbeitenButton.setText("Bearbeiten");
+        bearbeitenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bearbeitenButtonActionPerformed(evt);
+            }
+        });
 
         anlegenButton.setText("Anlegen");
+        anlegenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anlegenButtonActionPerformed(evt);
+            }
+        });
 
         sucheField.setText("Titelsuche...");
         sucheField.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +80,8 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
                 sucheFieldActionPerformed(evt);
             }
         });
+
+        accountnameField.setText("Accountname");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -82,7 +98,9 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(anlegenButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(accountnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                 .addComponent(bearbeitenButton)
                 .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -100,7 +118,8 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bearbeitenButton)
-                    .addComponent(anlegenButton))
+                    .addComponent(anlegenButton)
+                    .addComponent(accountnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -111,8 +130,35 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
 
+    private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
+        try {
+            getAccountfromIndices(getListSelections());
+            panelHandler.panelUnsichtbar();
+        
+            //panelHandler.getAccountBearbeitenPanel().setAccount();
+            panelHandler.getAccountBearbeitenPanel().bearbeitenMitarbeiter();
+            panelHandler.getAccountBearbeitenPanel().setVisible(true);
+        } catch (Exception e) {
+        }
+        
+        
+    }//GEN-LAST:event_bearbeitenButtonActionPerformed
+
+    private void anlegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anlegenButtonActionPerformed
+        System.out.println(accountnameField.getText());
+        if(accountnameField.getText().equals("Accountname")){}
+        else{
+            panelHandler.panelUnsichtbar();
+            panelHandler.getUi().add(panelHandler.getAccountBearbeitenPanel());
+            panelHandler.getAccountBearbeitenPanel().bearbeitenMitarbeiter();
+            panelHandler.getAccountBearbeitenPanel().setNewAccount(new Account(accountnameField.getText(), "todo", true, 1, "todo", "todo"));
+            panelHandler.getAccountBearbeitenPanel().setVisible(true);
+        }
+    }//GEN-LAST:event_anlegenButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField accountnameField;
     private javax.swing.JButton anlegenButton;
     private javax.swing.JButton bearbeitenButton;
     private javax.swing.JButton jButton1;
@@ -122,4 +168,22 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
+    
+    public void setAccountListe(ArrayList<Account> account){
+        accountListe = account;
+    }
+    
+    private Account getAccountfromIndices(int position) {
+		Account selected = null;
+		selected = accountListe.get(position);
+		return selected;
+	}
+    
+    private int getListSelections() {
+	int[] selected = jTable1.getSelectedRows();
+	for (int i = 0; i < selected.length; i++) {
+		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+	}
+	return selected[0];
+    }
 }

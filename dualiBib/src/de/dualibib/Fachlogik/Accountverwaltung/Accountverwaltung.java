@@ -55,7 +55,7 @@ public class Accountverwaltung{
 		}
     }
 
-    public List<Account> get() {
+    public ArrayList<Account> get() {
         ArrayList<Account> liste = new ArrayList<Account>();
 		for (Account account : accountListe) {
 			liste.add(account);

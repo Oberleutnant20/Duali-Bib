@@ -6,8 +6,9 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Historyverwaltung.History;
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +17,7 @@ import java.util.List;
 public class HistoryPanel extends javax.swing.JPanel {
 
     private final PanelHandler panelHandler;
+    ArrayList<History> historyListe;
 
     /**
      * Creates new form HistoryPanel
@@ -45,6 +47,11 @@ public class HistoryPanel extends javax.swing.JPanel {
         sucheField = new javax.swing.JTextField();
 
         historysuchField.setText("Historysuche...");
+        historysuchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historysuchFieldActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,6 +67,11 @@ public class HistoryPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         auswaehlenButton.setText("Auswählen");
+        auswaehlenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                auswaehlenButtonActionPerformed(evt);
+            }
+        });
 
         kategorieLable.setText("Kategorie:");
 
@@ -129,6 +141,20 @@ public class HistoryPanel extends javax.swing.JPanel {
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
 
+    private void auswaehlenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_auswaehlenButtonActionPerformed
+       try {
+            panelHandler.getSelectPanel().setMedium(getMediumfromHistoryIndices(getListSelections()));
+            panelHandler.panelUnsichtbar();
+            panelHandler.getUi().add(panelHandler.getSelectPanel());
+            panelHandler.getSelectPanel().setVisible(true);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_auswaehlenButtonActionPerformed
+
+    private void historysuchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historysuchFieldActionPerformed
+        System.out.println("tabelle anpassen");
+    }//GEN-LAST:event_historysuchFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton auswaehlenButton;
@@ -142,7 +168,23 @@ public class HistoryPanel extends javax.swing.JPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    public void setUserHistory(List<History> historyListe) {
-        //jTable1
+    public void setUserHistory(ArrayList<History> history) {
+       historyListe = history;
+    }
+    
+    private Medien getMediumfromHistoryIndices(int position) {
+		History selected = null;
+                Medien medium = null;
+		selected = historyListe.get(position);
+                medium = panelHandler.mapHistoryAndMedium(selected);
+		return medium;
+	}
+    
+    private int getListSelections() {
+	int[] selected = jTable1.getSelectedRows();
+	for (int i = 0; i < selected.length; i++) {
+		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+	}
+	return selected[0];
     }
 }

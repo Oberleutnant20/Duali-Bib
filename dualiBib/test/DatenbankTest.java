@@ -1,18 +1,16 @@
 
 import de.dualibib.Datenlogik.dao.AccountDAO;
-import de.dualibib.Datenlogik.dao.AnderemedienDAO;
 import de.dualibib.Datenlogik.dao.AusleiheDAO;
 import de.dualibib.Datenlogik.dao.GenreDAO;
 import de.dualibib.Datenlogik.dao.HistoryDAO;
 import de.dualibib.Datenlogik.dao.KategorieDAO;
-import de.dualibib.Datenlogik.dao.PrintmedienDAO;
+import de.dualibib.Datenlogik.dao.MedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
-import de.dualibib.Fachlogik.Medienverwaltung.Anderemedien;
-import de.dualibib.Fachlogik.Medienverwaltung.Printmedien;
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertTrue;
@@ -112,30 +110,11 @@ public class DatenbankTest {
     }
     
     @Test
-    public void anderemedienTest() throws Exception {
-        AnderemedienDAO sut = new AnderemedienDAO();
-        List<Anderemedien> datenListe = new ArrayList<>();
+    public void edienTest() throws Exception {
+        MedienDAO sut = new MedienDAO();
+        List<Medien> datenListe = new ArrayList<>();
         //hinzufügen
-        List<Anderemedien> datenbankListe = sut.laden();boolean equal = true;
-        for (int i = 0;i <datenbankListe.size();i++) {
-                       
-            equal = equal && (datenbankListe.get(i).getBarcodenummer() == datenbankListe.get(i).getBarcodenummer());
-            equal = equal && datenbankListe.get(i).getGenre().equals(datenbankListe.get(i).getGenre());
-            equal = equal && datenbankListe.get(i).getKategorien().equals(datenbankListe.get(i).getKategorien());
-            equal = equal && datenbankListe.get(i).getName().equals(datenbankListe.get(i).getName());
-            equal = equal && (datenbankListe.get(i).isAusgeliehen() == datenbankListe.get(i).isAusgeliehen());
-            equal = equal && (datenbankListe.get(i).isVorgemerkt() == datenbankListe.get(i).isVorgemerkt());
-            equal = equal && (datenbankListe.get(i).getId() == datenbankListe.get(i).getId());
-        }
-        assertTrue(equal);
-    }
-    
-    @Test
-    public void printmedienTest() throws Exception {
-        PrintmedienDAO sut = new PrintmedienDAO();
-        List<Printmedien> datenListe = new ArrayList<>();
-        //hinzufügen
-        List<Printmedien> datenbankListe = sut.laden();boolean equal = true;
+        List<Medien> datenbankListe = sut.laden();boolean equal = true;
         for (int i = 0;i <datenbankListe.size();i++) {
             
             equal = equal && (datenbankListe.get(i).getBarcodenummer() == datenbankListe.get(i).getBarcodenummer());
