@@ -14,29 +14,13 @@ USE dualibib;
 DROP TABLE IF EXISTS history;
 DROP TABLE IF EXISTS Ausleihe;
 DROP TABLE IF EXISTS Medien;
-DROP TABLE IF EXISTS Printmedien;
-DROP TABLE IF EXISTS andereMedien;
+DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Genre;
 DROP TABLE IF EXISTS KategorieMedien;
-DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Sprache;
 
 -- Erstelle Tabellen(Table)
 -- Tebellen ohne Fremdschlüssel
-CREATE TABLE User(
-u_ID            INTEGER AUTO_INCREMENT,
-u_Vorname       VARCHAR(150),
-u_Nachname      VARCHAR(150),
-u_login         VARCHAR(8) UNIQUE,
-u_passwd        VARCHAR(192),
-u_Mitarbeiter   BOOLEAN DEFAULT false,
-u_Strasse       VARCHAR(50),
-U_Hausnummer    VARCHAR(50),
-u_PLZ           INTEGER,
-u_Ort           VARCHAR(25),
-u_Anrede        VARCHAR(4) DEFAULT 'N.N.',
---CONSTRAINT u_AnredeCK CHECK(u_Anrede IN ('Herr', 'Frau')),
-CONSTRAINT u_uID_PK PRIMARY KEY (u_ID)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE Genre(
 g_ID            INTEGER AUTO_INCREMENT,
@@ -51,7 +35,31 @@ km_beschreibung VARCHAR(500),
 CONSTRAINT km_kmID_PK PRIMARY KEY (km_ID)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
+/*CREATE TABLE Sprache(
+s_ID        INTEGER AUTO_INCREMENT,
+s_Name      VARCHAR(20),
+CONSTRAINT s_sID_PK PRIMARY KEY(s_ID)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;*/
+
 -- Fremdschlüssel Tabellen
+CREATE TABLE User(
+u_ID            INTEGER AUTO_INCREMENT,
+u_Vorname       VARCHAR(150),
+u_Nachname      VARCHAR(150),
+u_login         VARCHAR(8) UNIQUE,
+u_passwd        VARCHAR(192),
+u_Mitarbeiter   BOOLEAN DEFAULT false,
+u_Strasse       VARCHAR(50),
+U_Hausnummer    VARCHAR(50),
+u_PLZ           INTEGER,
+u_Ort           VARCHAR(25),
+u_Anrede        VARCHAR(4) DEFAULT 'N.N.',
+--s_ID            INTEGER,
+--CONSTRAINT u_AnredeCK CHECK(u_Anrede IN ('Herr', 'Frau')),
+CONSTRAINT u_uID_PK PRIMARY KEY (u_ID)--,
+--CONSTRAINT u_sID_FK FOREIGN KEY (s_ID) REFERENCES Sprache(s_ID)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 CREATE TABLE Medien(
 m_ID BIGINT AUTO_INCREMENT,
 m_Titel VARCHAR(150),
