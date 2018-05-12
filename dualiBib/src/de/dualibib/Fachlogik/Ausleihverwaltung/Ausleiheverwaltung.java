@@ -55,7 +55,7 @@ public class Ausleiheverwaltung{
 		}
     }
 
-    public List<Ausleihe> get() {
+    public ArrayList<Ausleihe> get() {
         ArrayList<Ausleihe> liste = new ArrayList<Ausleihe>();
 		for (Ausleihe ausleihe : ausleiheListe) {
 			liste.add(ausleihe);

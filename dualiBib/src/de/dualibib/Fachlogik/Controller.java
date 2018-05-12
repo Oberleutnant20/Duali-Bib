@@ -13,9 +13,10 @@ import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Historyverwaltung.Historyverwaltung;
-import de.dualibib.Fachlogik.Medienverwaltung.Anderemedienverwaltung;
-import de.dualibib.Fachlogik.Medienverwaltung.Printmedienverwaltung;
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 import de.dualibib.UI.PanelHandler;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +27,7 @@ import java.util.List;
 public class Controller {
 
     private Accountverwaltung accountverwaltung;
-    private Anderemedienverwaltung anderemedienverwaltung;
-    private Printmedienverwaltung printmedienverwaltung;
+    private Medienverwaltung medienverwaltung;
     private Ausleiheverwaltung ausleiheverwaltung;
     private Kategorienverwaltung kategorienverwaltung;
     private Genreverwaltung genreverwaltung;
@@ -36,13 +36,12 @@ public class Controller {
     private PanelHandler panelHandler;
     
     private Account aktuellerUser;
-    private List<History> historyListe;
-    private List<Ausleihe> ausleiheListe;
+    private ArrayList<History> historyListe;
+    private ArrayList<Ausleihe> ausleiheListe;
 
-    public Controller(Accountverwaltung accountverwaltung, Anderemedienverwaltung anderemedienverwaltung, Printmedienverwaltung printmedienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung,Historyverwaltung historyverwaltung) {
+    public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung,Historyverwaltung historyverwaltung) {
         this.accountverwaltung = accountverwaltung;
-        this.anderemedienverwaltung = anderemedienverwaltung;
-        this.printmedienverwaltung = printmedienverwaltung;
+        this.medienverwaltung = medienverwaltung;
         this.ausleiheverwaltung = ausleiheverwaltung;
         this.kategorienverwaltung = kategorienverwaltung;
         this.genreverwaltung = genreverwaltung;
@@ -54,7 +53,7 @@ public class Controller {
 
     private void start() {
         accountverwaltung.laden();
-        anderemedienverwaltung.laden();
+        medienverwaltung.laden();
         ausleiheverwaltung.laden();
         kategorienverwaltung.laden();
         genreverwaltung.laden();
@@ -107,7 +106,7 @@ public class Controller {
         return null;
     }
 
-    private List<History> ladeHistory() {
+    private ArrayList<History> ladeHistory() {
         int userid = aktuellerUser.getUserid();
         ArrayList<History> list = new ArrayList<History>();
         
@@ -120,7 +119,7 @@ public class Controller {
         return list;
     }
 
-    private List<Ausleihe> ladeAusleihe() {
+    private ArrayList<Ausleihe> ladeAusleihe() {
         int userid = aktuellerUser.getUserid();
         ArrayList<Ausleihe> list = new ArrayList<Ausleihe>();
         
@@ -133,11 +132,11 @@ public class Controller {
         return list;
     }
 
-    public List<History> getHistoryListe() {
+    public ArrayList<History> getHistoryListe() {
         return historyListe;
     }
 
-    public List<Ausleihe> getAusleiheListe() {
+    public ArrayList<Ausleihe> getAusleiheListe() {
         return ausleiheListe;
     }
 
@@ -149,6 +148,49 @@ public class Controller {
                 accountverwaltung.add(a);
             }
         }
+    }
+
+    public void saveMediumChange(Medien m) {
+        List<Medien> list = medienverwaltung.get();
+        for(int i = 0; i < list.size() ; i++){
+            if(list.get(i).getId() ==m.getId()){
+                medienverwaltung.delete(list.get(i));
+                medienverwaltung.add(m);
+            }
+        }
+    }
+
+    public void deleteAusleihe(Ausleihe a) {
+       ausleiheverwaltung.delete(a);
+    }
+
+    public void saveAccount(Account account) {
+        accountverwaltung.add(account);
+    }
+
+    public void deleteHistory(History h) {
+        historyverwaltung.delete(h);
+    }
+
+    public ArrayList<Ausleihe> getAllAusleihenListe() {
+        return ausleiheverwaltung.get();
+    }
+
+    public ArrayList<Account> getAllAccountsListe() {
+        return accountverwaltung.get();
+    }
+
+    public ArrayList<Medien> getAllMedien() {
+        return medienverwaltung.get();
+    }
+
+    public void saveDB() throws IOException {
+        accountverwaltung.speichern();
+        medienverwaltung.speichern();
+        ausleiheverwaltung.speichern();
+        kategorienverwaltung.speichern();
+        genreverwaltung.speichern();
+        historyverwaltung.speichern();
     }
     
     

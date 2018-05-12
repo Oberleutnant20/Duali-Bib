@@ -5,7 +5,9 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.UI.PanelHandler;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +16,7 @@ import de.dualibib.UI.PanelHandler;
 public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
 
     private final PanelHandler panelHandler;
+    ArrayList<Ausleihe> ausleiheListe;
 
     /**
      * Creates new form AusleihenBearbeitenPanel
@@ -34,7 +37,6 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        addButton = new javax.swing.JButton();
         entfernenButton = new javax.swing.JButton();
         sucheField = new javax.swing.JTextField();
 
@@ -50,8 +52,6 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
-
-        addButton.setText("Hinzufügen");
 
         entfernenButton.setText("Entfernen");
         entfernenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -71,19 +71,18 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(addButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(entfernenButton)
-                .addGap(26, 26, 26))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(entfernenButton)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,15 +91,16 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
                 .addGap(53, 53, 53)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addButton)
-                    .addComponent(entfernenButton))
+                .addComponent(entfernenButton)
                 .addContainerGap(59, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void entfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entfernenButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            panelHandler.deleteAusleihe(getAusleihefromIndices(getListSelections()));
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_entfernenButtonActionPerformed
 
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
@@ -111,10 +111,29 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addButton;
     private javax.swing.JButton entfernenButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
+
+
+    public void setAusleihenListe(ArrayList<Ausleihe> ausleihe){
+        ausleiheListe = ausleihe;
+    }
+    
+    private Ausleihe getAusleihefromIndices(int position) {
+		Ausleihe selected = null;
+		selected = ausleiheListe.get(position);
+		return selected;
+	}
+    
+    private int getListSelections() {
+	int[] selected = jTable1.getSelectedRows();
+	for (int i = 0; i < selected.length; i++) {
+		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+	}
+	return selected[0];
+    }
+    
 }

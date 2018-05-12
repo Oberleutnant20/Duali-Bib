@@ -7,6 +7,7 @@ package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.UI.PanelHandler;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ import java.util.List;
 public class AusleihenPanel extends javax.swing.JPanel {
 
     private final PanelHandler panelHandler;
+    ArrayList<Ausleihe> ausleiheListe;
 
     /**
      * Creates new form AusleihenPanel
@@ -37,7 +39,6 @@ public class AusleihenPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         entfernenButton = new javax.swing.JButton();
-        bestaettgenButton = new javax.swing.JButton();
         sucheField = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -60,8 +61,6 @@ public class AusleihenPanel extends javax.swing.JPanel {
             }
         });
 
-        bestaettgenButton.setText("Bestätigen");
-
         sucheField.setText("Titelsuche...");
         sucheField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,9 +75,7 @@ public class AusleihenPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(entfernenButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
-                .addComponent(bestaettgenButton)
-                .addGap(34, 34, 34))
+                .addGap(34, 286, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -94,15 +91,16 @@ public class AusleihenPanel extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(entfernenButton)
-                    .addComponent(bestaettgenButton))
+                .addComponent(entfernenButton)
                 .addGap(56, 56, 56))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void entfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entfernenButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            panelHandler.deleteAusleihe(getAusleihefromIndices(getListSelections()));
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_entfernenButtonActionPerformed
 
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
@@ -113,14 +111,27 @@ public class AusleihenPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bestaettgenButton;
     private javax.swing.JButton entfernenButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    public void setUserAusleihe(List<Ausleihe> ausleiheListe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setUserAusleihe(ArrayList<Ausleihe> ausleihe) {
+        ausleiheListe = ausleihe;
+    }
+    
+    private Ausleihe getAusleihefromIndices(int position) {
+		Ausleihe selected = null;
+		selected = ausleiheListe.get(position);
+		return selected;
+	}
+    
+    private int getListSelections() {
+	int[] selected = jTable1.getSelectedRows();
+	for (int i = 0; i < selected.length; i++) {
+		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+	}
+	return selected[0];
     }
 }

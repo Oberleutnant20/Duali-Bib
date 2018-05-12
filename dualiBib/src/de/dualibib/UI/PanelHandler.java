@@ -6,7 +6,10 @@
 package de.dualibib.UI;
 
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Controller;
+import de.dualibib.Fachlogik.Historyverwaltung.History;
+import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
 import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
 import de.dualibib.UI.Panels.AusleihenBearbeitenPanel;
@@ -16,6 +19,8 @@ import de.dualibib.UI.Panels.LoginPanel;
 import de.dualibib.UI.Panels.OptionPanel;
 import de.dualibib.UI.Panels.SelectPanel;
 import de.dualibib.UI.Panels.SuchePanel;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -116,21 +121,67 @@ public class PanelHandler {
         ausleihenBearbeitenPanel.setVisible(false);
     }
 
-    public void login(String accountname, String passwort) {
+    public boolean login(String accountname, String passwort) {
         if(controller.setAktuellerUser(accountname, passwort)!=null){
-            this.aktuellerUser =aktuellerUser;
+            this.aktuellerUser =controller.setAktuellerUser(accountname, passwort);
             if(controller.isMitarbeiter()){
                 ui.setMitarbeiterOnline();
             }
             ui.setUserOnline();
             ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
             historyPanel.setUserHistory(controller.getHistoryListe());
+            return true;
         }
+        return false;
     }
 
     public void saveAccountChange(int id,String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort,boolean mitarbeiter) {
         Account a = new Account(vorname, passwort, mitarbeiter, id, vorname, vorname);
         controller.saveAccountChange(a);
+    }
+
+    public void saveMediumChange(Medien m) {
+        controller.saveMediumChange(m);
+    }
+
+    public void deleteAusleihe(Ausleihe a) {
+        controller.deleteAusleihe(a);
+    }
+
+    public void saveAccount(int userid, String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort, boolean mitarbeiter) {
+        controller.saveAccount(new Account(vorname, passwort, mitarbeiter, userid, vorname, vorname));
+    }
+
+    void loadUserAusleihe() {
+        ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
+    }
+
+    void loadUserHistory() {
+        historyPanel.setUserHistory(controller.getHistoryListe());
+    }
+
+    void loadAdminAccounts() {
+        accountsBearbeitenPanel.setAccountListe(controller.getAllAccountsListe());
+    }
+
+    void loadAdminAusleihen() {
+        ausleihenBearbeitenPanel.setAusleihenListe(controller.getAllAusleihenListe());
+    }
+
+    public Medien mapHistoryAndMedium(History selected) {
+        Medien medium = null;
+        ArrayList<Medien> liste = controller.getAllMedien();
+        for (int i = 0; i < liste.size(); i++) {
+            if(liste.get(i).getId()==selected.getMedienid())
+                medium = liste.get(i);
+        }
+        return medium;
+    }
+
+    public void ausloggen() throws IOException {
+        controller.saveDB();
+        ui.setUserOffline();
+        aktuellerUser = null;
     }
 
     

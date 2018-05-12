@@ -12,7 +12,7 @@ import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
  *
  * @author Carina
  */
-public abstract class Medien {
+public class Medien {
     
     private Kategorie kategorien;
     private Genre genre;
@@ -21,14 +21,21 @@ public abstract class Medien {
     private boolean ausgeliehen;
     private boolean vorgemerkt;
     private long id;
+    private String isbn;
+    private long barcodenummer;
+    private int anzahl;
+    private int verfuegbar_anzahl;
 
-    public Medien(Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id) {
+    public Medien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id, int anzahl) {
         this.kategorien = kategorien;
         this.name = name;
         this.ausgeliehen = ausgeliehen;
         this.vorgemerkt = vorgemerkt;
         this.id = id;
         this.genre = genre;
+        this.barcodenummer = barcodenummer;
+        this.isbn = isbn;
+        this.anzahl = anzahl;
     }
 
     public void setKategorien(Kategorie kategorien) {
@@ -78,7 +85,32 @@ public abstract class Medien {
     public Genre getGenre() {
         return genre;
     }
+    public void berechneVerfuegbare(int ausgeliehene){
+        verfuegbar_anzahl = verfuegbar_anzahl - ausgeliehene;
+    }
     
+    public int getVerfuegbare(){
+        return verfuegbar_anzahl;
+    }
+    
+    public int getAnzahl(){
+        return anzahl;
+    }
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setBarcodenummer(long barcodenummer) {
+        this.barcodenummer = barcodenummer;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public long getBarcodenummer() {
+        return barcodenummer;
+    }
     
     
 }
