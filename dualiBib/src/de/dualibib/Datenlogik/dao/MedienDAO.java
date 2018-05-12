@@ -60,7 +60,6 @@ public class MedienDAO implements IMedienDAO {
                     Genre genre = matchGenre(genreListe, gid);
                     Kategorie kat = matchKategorie(kategorieListe, kmid);
                     
-                    System.out.println("lädt");
                     
                     ret.add(new Medien(isbn, barcode, genre, kat, titel, ausgeliehen, vorgemerkt, id, anzahl));
                 }
