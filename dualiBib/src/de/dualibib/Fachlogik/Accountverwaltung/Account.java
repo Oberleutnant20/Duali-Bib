@@ -17,14 +17,38 @@ public class Account {
     private int userid;
     private String vorname;
     private String nachname;
+    private int plz;
+    private String strasse;
+    private String hausnummer;
+    private String ort;
 
-    public Account(String username, String passwort, boolean mitarbeiter, int userid, String vorname, String nachname) {
+    public Account(String username, String passwort, boolean mitarbeiter, int userid, String vorname, String nachname, int plz, String strasse, String hausnummer, String ort) {
         this.username = username;
         this.passwort = passwort;
         this.mitarbeiter = mitarbeiter;
         this.userid = userid;
         this.vorname = vorname;
         this.nachname = nachname;
+        this.plz = plz;
+        this.strasse = strasse;
+        this.hausnummer = hausnummer;
+        this.ort = ort;
+    }
+
+    public String getOrt() {
+        return ort;
+    }
+
+    public int getPlz() {
+        return plz;
+    }
+
+    public String getStrasse() {
+        return strasse;
+    }
+
+    public String getHausnummer() {
+        return hausnummer;
     }
 
     public void setUsername(String username) {

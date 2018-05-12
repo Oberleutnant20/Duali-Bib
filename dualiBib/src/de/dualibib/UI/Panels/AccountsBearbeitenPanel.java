@@ -148,7 +148,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
             panelHandler.panelUnsichtbar();
             panelHandler.getUi().add(panelHandler.getAccountBearbeitenPanel());
             panelHandler.getAccountBearbeitenPanel().bearbeitenMitarbeiter();
-            panelHandler.getAccountBearbeitenPanel().setNewAccount(new Account(accountnameField.getText(), "todo", true, 1, "todo", "todo"));
+            panelHandler.getAccountBearbeitenPanel().setNewAccount(new Account(accountnameField.getText(), TOOL_TIP_TEXT_KEY, true, ERROR, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, WIDTH, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY));
             panelHandler.getAccountBearbeitenPanel().setVisible(true);
         }
     }//GEN-LAST:event_anlegenButtonActionPerformed

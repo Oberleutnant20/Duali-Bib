@@ -147,8 +147,8 @@ public class PanelHandler {
         return false;
     }
 
-    public void saveAccountChange(int id,String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort,boolean mitarbeiter) {
-        Account a = new Account(vorname, passwort, mitarbeiter, id, vorname, vorname);
+    public void saveAccountChange(int id, String hausnummer, String name, int plz, String ort, String strasse, String vorname, String passwort, boolean mitarbeiter, String accountname) {
+        Account a = new Account(accountname,passwort, mitarbeiter, id, vorname, name, plz, strasse, hausnummer, ort);
         controller.saveAccountChange(a);
     }
 
@@ -160,8 +160,8 @@ public class PanelHandler {
         controller.deleteAusleihe(a);
     }
 
-    public void saveAccount(int userid, String hausnummer, String name, String plz, String stadt, String strasse, String vorname, String passwort, boolean mitarbeiter) {
-        controller.saveAccount(new Account(vorname, passwort, mitarbeiter, userid, vorname, vorname));
+    public void saveAccount(int id, String hausnummer, String name, int plz, String ort, String strasse, String vorname, String passwort, boolean mitarbeiter, String accountname) {
+        controller.saveAccount(new Account(accountname,passwort, mitarbeiter, id, vorname, name, plz, strasse, hausnummer, ort));
     }
 
     void loadUserAusleihe() {

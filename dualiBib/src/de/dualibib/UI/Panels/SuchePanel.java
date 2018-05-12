@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -73,6 +74,11 @@ public class SuchePanel extends javax.swing.JPanel {
         genreLable.setText("Genre");
 
         kategorieComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        kategorieComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategorieComboBoxActionPerformed(evt);
+            }
+        });
 
         genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -139,6 +145,10 @@ public class SuchePanel extends javax.swing.JPanel {
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         setSearchTitel(sucheField.getText());
     }//GEN-LAST:event_sucheFieldActionPerformed
+
+    private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kategorieComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
