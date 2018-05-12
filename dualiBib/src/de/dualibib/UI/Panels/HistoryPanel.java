@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -65,7 +66,7 @@ public class HistoryPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "HistoryID", "UserID", "MedienID", "KategorieID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -174,6 +175,10 @@ public class HistoryPanel extends javax.swing.JPanel {
 
     public void setUserHistory(ArrayList<History> history) {
        historyListe = history;
+       DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = 0; i < historyListe.size(); i++) {
+          model.addRow(new Object[]{historyListe.get(i).getId(),historyListe.get(i).getUserid(),historyListe.get(i).getMedienid(),historyListe.get(i).getKategorieid()});  
+        }
     }
     
     private Medien getMediumfromHistoryIndices(int position) {
