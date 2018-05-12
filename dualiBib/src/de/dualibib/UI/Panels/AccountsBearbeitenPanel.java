@@ -143,7 +143,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
     private void anlegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anlegenButtonActionPerformed
-        if(acountNameZulaessig(accountnameField.getText()){}
+        if(!acountNameZulaessig(accountnameField.getText())){}
         else{
             panelHandler.panelUnsichtbar();
             panelHandler.getUi().add(panelHandler.getAccountBearbeitenPanel());
@@ -172,8 +172,6 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         for (int i = 0; i < accountListe.size(); i++) {
           model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
         }
-        
-        
     }
     
     private Account getAccountfromIndices(int position) {

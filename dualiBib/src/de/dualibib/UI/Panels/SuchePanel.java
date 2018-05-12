@@ -60,13 +60,10 @@ public class SuchePanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Kategorie", "Genre", "ISBN", "Verfügbar"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -161,6 +158,10 @@ public class SuchePanel extends javax.swing.JPanel {
     
     public void setMedienListe(ArrayList<Medien> medien){
         medienListe = medien;
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = 0; i < medienListe.size(); i++) {
+          model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});  
+        }
     }
     
     private Medien getMediumfromIndices(int position) {
