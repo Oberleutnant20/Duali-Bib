@@ -32,7 +32,7 @@ public class AccountDAO implements IAccountDAO {
     @Override
     public List<Account> laden() throws IOException, ConnectionError {
         ArrayList<Account> ret = new ArrayList<>();
-        if (con != null) {            
+        if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("user"));
                 rs = ptsm.executeQuery();
@@ -48,8 +48,8 @@ public class AccountDAO implements IAccountDAO {
                     int plz = rs.getInt("u_PLZ");
                     String ort = rs.getString("u_ort");
                     String anrede = rs.getString("u_anrede");
-                                        
-                    ret.add(new Account(login,passwd, mitarbeiter, id, vorname, nachname, plz, strasse, hausnummer, ort));
+
+                    ret.add(new Account(login, passwd, mitarbeiter, id, vorname, nachname, plz, strasse, hausnummer, ort));
                 }
             } catch (SQLException ex) {
                 System.err.println("AccountDAO laden: " + ex);
@@ -61,17 +61,20 @@ public class AccountDAO implements IAccountDAO {
     }
 
     @Override
-    public void speichern(List<Account> accountListe) throws IOException {
+    public void speichern(List<Account> accountListe) throws IOException, ConnectionError {
         for (Account account : accountListe) {
-            try {
-                PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
-                        + "VALUES('"+account.getVorname()+"','"+account.getNachname()+"','"+account.getUsername()+"','"+account.getPasswort()+"', "+account.isMitarbeiter()+", "+account.getStrasse()+", "+account.getHausnummer()+", "+account.getPlz()+", "+account.getOrt()+")");
-                ptsm.execute();
-            } catch (SQLException ex) {
-                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }            
+            if (con != null) {
+                try {
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
+                            + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                throw new ConnectionError();
+            }
         }
-        
     }
 
 }
