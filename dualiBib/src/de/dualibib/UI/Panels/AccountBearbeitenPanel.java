@@ -218,7 +218,7 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
             String vorname = vornameField.getText();
             String passwort = passwortField.getText();
             boolean mitarbeiter = mitarbeiterCheckBox.isSelected();
-            panelHandler.saveAccountChange(account.getUserid(),hausnummer, name, plz, stadt, strasse, vorname, passwort,mitarbeiter);
+            save(account.getUserid(),hausnummer, name, plz, stadt, strasse, vorname, passwort,mitarbeiter);
             meldungText.setText("Änderungen wurden übernommen.");
         }
         else{
