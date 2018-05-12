@@ -37,11 +37,10 @@ public class MedienDAO implements IMedienDAO {
         if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("medien"));
-                PreparedStatement ptsm1 = con.prepareStatement(db.getResultSQLStatement("genre"));
-                PreparedStatement ptsm2 = con.prepareStatement(db.getResultSQLStatement("kategorieMedien"));
+                
                 rs = ptsm.executeQuery();
-                rs1 = ptsm1.executeQuery();
-                rs2 = ptsm2.executeQuery();
+                ArrayList<Genre> genreListe = getGenre();
+                ArrayList<Kategorie> kategorieListe = getKategorie();
                 while (rs.next()) {
                     String isbn = rs.getString("m_ISBN");
                     long barcode = rs.getLong("m_barcode");
@@ -50,11 +49,14 @@ public class MedienDAO implements IMedienDAO {
                     boolean vorgemerkt = rs.getBoolean("m_vorgemerkt");
                     int id = rs.getInt("m_ID");
                     int anzahl = rs.getInt("m_Anzahl");
+                    int kmid = rs.getInt("km_ID");
+                    int gid = rs.getInt("g_ID");
                     
-                    // Fehlerhaft??
-                    Genre genre = new Genre(rs1.getString("g_Name"));
-                    Kategorie kat = new Kategorie(rs2.getInt("km_id"), rs2.getString("km_name"), rs2.getString("km_beschreibung"));
-
+                    
+                    
+                    Genre genre = matchGenre(genreListe, gid);
+                    Kategorie kat = matchKategorie(kategorieListe, kmid);
+                    
                     ret.add(new Medien(isbn, barcode, genre, kat, titel, ausgeliehen, vorgemerkt, id, anzahl));
                 }
             } catch (SQLException ex) {
@@ -66,9 +68,45 @@ public class MedienDAO implements IMedienDAO {
         return ret;
     }
 
+    public ArrayList<Genre> getGenre() throws SQLException{
+        PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("genre"));
+        rs = ptsm.executeQuery();
+        ArrayList<Genre> list = new ArrayList();
+        while (rs.next()) {
+            list.add(new Genre(rs1.getString("g_Name")));
+        }
+        return list;
+    }
+    
+    public ArrayList<Kategorie> getKategorie() throws SQLException{
+        PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("kategorieMedien"));
+        rs = ptsm.executeQuery();
+        ArrayList<Kategorie> list = new ArrayList();
+        while (rs.next()) {
+            list.add(new Kategorie(rs2.getInt("km_id"), rs2.getString("km_name"), rs2.getString("km_beschreibung")));
+        }
+        return list;
+    }
+    
     @Override
     public void speichern(List<Medien> medienListe) throws IOException {
         //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private Genre matchGenre(ArrayList<Genre> genreListe, int gid) {
+        for (int i = 0; i < genreListe.size(); i++) {
+            if(genreListe.get(i).getId()==gid)
+                return genreListe.get(i);
+        }
+        return null;
+    }
+
+    private Kategorie matchKategorie(ArrayList<Kategorie> kategorieListe, int kmid) {
+        for (int i = 0; i < kategorieListe.size(); i++) {
+            if(kategorieListe.get(i).getId()==kmid)
+                return kategorieListe.get(i);
+        }
+        return null;
     }
 
 }
