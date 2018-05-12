@@ -6,7 +6,9 @@
 
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.UI.PanelHandler;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +17,7 @@ import de.dualibib.UI.PanelHandler;
 public class AccountsBearbeitenPanel extends javax.swing.JPanel {
 
     private final PanelHandler panelHandler;
+    ArrayList<Account> accountListe;
 
     /** Creates new form AccountsBearbeiten */
     public AccountsBearbeitenPanel(PanelHandler panelHandler) {
@@ -136,4 +139,22 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
+    
+    public void setAccountListe(ArrayList<Account> account){
+        accountListe = account;
+    }
+    
+    private Account getAccountfromIndices(int position) {
+		Account selected = null;
+		selected = accountListe.get(position);
+		return selected;
+	}
+    
+    private int getListSelections() {
+	int[] selected = jTable1.getSelectedRows();
+	for (int i = 0; i < selected.length; i++) {
+		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+	}
+	return selected[0];
+    }
 }

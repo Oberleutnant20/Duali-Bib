@@ -6,6 +6,7 @@
 package de.dualibib.UI;
 
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Controller;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
@@ -138,6 +139,10 @@ public class PanelHandler {
 
     public void saveMediumChange(Medien m) {
         controller.saveMediumChange(m);
+    }
+
+    public void deleteAusleihe(Ausleihe a) {
+        controller.deleteAusleihe(a);
     }
 
     

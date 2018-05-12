@@ -158,6 +158,10 @@ public class Controller {
             }
         }
     }
+
+    public void deleteAusleihe(Ausleihe a) {
+       ausleiheverwaltung.delete(a);
+    }
     
     
 }

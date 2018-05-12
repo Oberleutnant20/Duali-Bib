@@ -120,12 +120,16 @@ public class SuchePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
-        panelHandler.panelUnsichtbar();
-        panelHandler.getSelectPanel().setMedium(getMediumfromIndices(getListSelections()));
-        if(panelHandler.getAktuellerUser().isMitarbeiter()){
-            panelHandler.getSelectPanel().setMitarbeiter();
+      try {
+            panelHandler.getSelectPanel().setMedium(getMediumfromIndices(getListSelections()));
+            panelHandler.panelUnsichtbar();
+            if(panelHandler.getAktuellerUser().isMitarbeiter()){
+                panelHandler.getSelectPanel().setMitarbeiter();
+            }
+            panelHandler.getSelectPanel().setVisible(true);
+        } catch (Exception e) {
         }
-        panelHandler.getSelectPanel().setVisible(true);
+        
     }//GEN-LAST:event_selectButtonActionPerformed
 
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
@@ -147,6 +151,7 @@ public class SuchePanel extends javax.swing.JPanel {
     void setSearchTitel(String text) {
         System.out.println("TODO!");
     }
+    
     public void setMedienListe(ArrayList<Medien> medien){
         medienListe = medien;
     }
@@ -158,10 +163,10 @@ public class SuchePanel extends javax.swing.JPanel {
 	}
     
     private int getListSelections() {
-		int[] selected = jTable1.getSelectedRows();
-		for (int i = 0; i < selected.length; i++) {
-			selected[i] = jTable1.convertRowIndexToModel(selected[i]);
-		}
-		return selected[0];
+	int[] selected = jTable1.getSelectedRows();
+	for (int i = 0; i < selected.length; i++) {
+		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
 	}
+	return selected[0];
+    }
 }
