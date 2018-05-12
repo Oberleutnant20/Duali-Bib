@@ -108,6 +108,7 @@ public class PanelHandler {
         initPanels();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
+        suchePanel.setMedienListe(controller.getAllMedien());
         suchePanel.setVisible(true);
         this.controller = controller;
     }

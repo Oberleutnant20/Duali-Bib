@@ -145,6 +145,7 @@ public class UI extends javax.swing.JFrame {
         helpMenu.add(jSeparator3);
 
         optionMenu.setText("Option");
+        optionMenu.setEnabled(false);
         optionMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optionMenuActionPerformed(evt);
