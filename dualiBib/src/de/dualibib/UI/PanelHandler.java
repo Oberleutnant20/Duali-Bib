@@ -44,9 +44,19 @@ public class PanelHandler {
     private boolean eingeloggt;
     private boolean mitarbeiter;
     private Account aktuellerUser;
+    private List genreListe;
+    private List kategorieListe;
 
     public UI getUi() {
         return ui;
+    }
+
+    public List getGenreListe() {
+        return genreListe;
+    }
+
+    public List getKategorieListe() {
+        return kategorieListe;
     }
 
     public Account getAktuellerUser() {
@@ -91,6 +101,8 @@ public class PanelHandler {
 
     public PanelHandler(Controller controller, List genreListe, List kategorieListe) {
         ui = new UI(genreListe, kategorieListe,this, false);
+        this.genreListe = genreListe;
+        this.kategorieListe = kategorieListe;
         initPanels();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);

@@ -60,7 +60,7 @@ public class Controller {
         genreverwaltung.laden();
         historyverwaltung.laden();
         ausleihenPruefen();
-        panelHandler = new PanelHandler(this, kategorienverwaltung.get(),genreverwaltung.get());
+        panelHandler = new PanelHandler(this, genreverwaltung.get(),kategorienverwaltung.get());
     }
     
     public Account getAktuellerUser(){

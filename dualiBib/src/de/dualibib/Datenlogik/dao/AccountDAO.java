@@ -16,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,7 +57,16 @@ public class AccountDAO implements IAccountDAO {
 
     @Override
     public void speichern(List<Account> accountListe) throws IOException {
-        //To change body of generated methods, choose Tools | Templates.
+        for (Account account : accountListe) {
+            try {
+                PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort, u_Anrede) "
+                        + "VALUES('"+account.getVorname()+"','"+account.getNachname()+"','"+account.getUsername()+"','"+account.getPasswort()+"')");
+                ptsm.execute();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }
+        
     }
 
 }

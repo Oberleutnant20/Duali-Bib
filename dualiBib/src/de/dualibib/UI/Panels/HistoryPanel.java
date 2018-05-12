@@ -5,6 +5,7 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
@@ -29,6 +30,8 @@ public class HistoryPanel extends javax.swing.JPanel {
     public HistoryPanel(PanelHandler panelHandler) {
         initComponents();
         this.panelHandler = panelHandler;
+        setComboboxKategorie(katgorieComboBox, panelHandler.getKategorieListe());
+        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
     }
 
     /**
@@ -192,7 +195,15 @@ public class HistoryPanel extends javax.swing.JPanel {
 	return selected[0];
     }
     
-    private void setCombobox(JComboBox combobox,List<Kategorie> list){
+    private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+    
+    private void setComboboxGenre(JComboBox combobox,List<Genre> list){
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();

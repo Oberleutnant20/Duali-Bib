@@ -111,6 +111,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(!online){
             einloggen();
+            
         }
         else{
             try {
@@ -148,6 +149,8 @@ public class LoginPanel extends javax.swing.JPanel {
             passwortField.setEnabled(false);
             loginButton.setText("Logout");
             online = true;
+            panelHandler.panelUnsichtbar();
+            panelHandler.getSuchePanel().setVisible(true);
         }else{
             meldungText.setText("Accountname oder Passwort falsch.");
         }

@@ -143,8 +143,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
     private void anlegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anlegenButtonActionPerformed
-        System.out.println(accountnameField.getText());
-        if(accountnameField.getText().equals("Accountname")){}
+        if(acountNameZulaessig(accountnameField.getText()){}
         else{
             panelHandler.panelUnsichtbar();
             panelHandler.getUi().add(panelHandler.getAccountBearbeitenPanel());
@@ -189,5 +188,19 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
 		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
 	}
 	return selected[0];
+    }
+
+    private boolean acountNameZulaessig(String text) {
+        if(text.length()<8||text.length()>0){
+
+            for (int i = 0; i < accountListe.size(); i++) {
+                if(accountListe.get(i).getUsername().equals(text))
+                        return  false;
+            }
+            return true;
+        } else {
+            return false;
+        }  
+        
     }
 }
