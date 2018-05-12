@@ -210,6 +210,7 @@ public class UI extends javax.swing.JFrame {
 
     private void accountsBearbeitenItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountsBearbeitenItemActionPerformed
         panelHandler.panelUnsichtbar();
+        panelHandler.getAccountsBearbeitenPanel().fillTable();
         add(panelHandler.getAccountsBearbeitenPanel());
         panelHandler.getAccountsBearbeitenPanel().setVisible(true);
     }//GEN-LAST:event_accountsBearbeitenItemActionPerformed

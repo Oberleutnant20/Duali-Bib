@@ -31,8 +31,7 @@ public class HistoryPanel extends javax.swing.JPanel {
     public HistoryPanel(PanelHandler panelHandler) {
         initComponents();
         this.panelHandler = panelHandler;
-        setComboboxKategorie(katgorieComboBox, panelHandler.getKategorieListe());
-        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
     }
 
     /**
@@ -49,9 +48,7 @@ public class HistoryPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         auswaehlenButton = new javax.swing.JButton();
         kategorieLable = new javax.swing.JLabel();
-        katgorieComboBox = new javax.swing.JComboBox<>();
-        genreComboBox = new javax.swing.JComboBox<>();
-        genreLable = new javax.swing.JLabel();
+        kategorieComboBox = new javax.swing.JComboBox<>();
         sucheField = new javax.swing.JTextField();
 
         historysuchField.setText("Historysuche...");
@@ -63,10 +60,7 @@ public class HistoryPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "HistoryID", "UserID", "MedienID", "KategorieID"
@@ -83,11 +77,12 @@ public class HistoryPanel extends javax.swing.JPanel {
 
         kategorieLable.setText("Kategorie:");
 
-        katgorieComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        genreComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        genreLable.setText("Genre:");
+        kategorieComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        kategorieComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategorieComboBoxActionPerformed(evt);
+            }
+        });
 
         sucheField.setText("Titelsuche...");
         sucheField.addActionListener(new java.awt.event.ActionListener() {
@@ -103,17 +98,13 @@ public class HistoryPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(kategorieLable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(katgorieComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(genreLable)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(kategorieComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(auswaehlenButton)
                 .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
@@ -136,9 +127,7 @@ public class HistoryPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(auswaehlenButton)
                     .addComponent(kategorieLable)
-                    .addComponent(katgorieComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(genreLable))
+                    .addComponent(kategorieComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -163,16 +152,35 @@ public class HistoryPanel extends javax.swing.JPanel {
         System.out.println("tabelle anpassen");
     }//GEN-LAST:event_historysuchFieldActionPerformed
 
+    private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        String text = kategorieComboBox.getItemAt(0);
+        int selectedID = -1;
+        panelHandler.getKategorieListe();
+        
+        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
+            if(panelHandler.getKategorieListe().get(i).getBezeichnung().equals(text))
+                selectedID=(int) panelHandler.getKategorieListe().get(i).getId();
+        }
+        
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
+        for (int i = 0; i < historyListe.size(); i++) {
+            if(historyListe.get(i).getKategorieid()==selectedID)
+             model.addRow(new Object[]{historyListe.get(i).getId()});    
+        }
+        
+    }//GEN-LAST:event_kategorieComboBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton auswaehlenButton;
-    private javax.swing.JComboBox<String> genreComboBox;
-    private javax.swing.JLabel genreLable;
     private javax.swing.JTextField historysuchField;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> kategorieComboBox;
     private javax.swing.JLabel kategorieLable;
-    private javax.swing.JComboBox<String> katgorieComboBox;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
@@ -208,11 +216,4 @@ public class HistoryPanel extends javax.swing.JPanel {
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
     
-    private void setComboboxGenre(JComboBox combobox,List<Genre> list){
-        String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            tmp[i] = list.get(i).getBezeichnung();
-        }        
-        combobox.setModel(new DefaultComboBoxModel(tmp));
-    }
 }
