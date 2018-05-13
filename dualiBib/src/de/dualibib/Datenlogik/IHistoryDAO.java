@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface IHistoryDAO {
     List<History> laden() throws IOException, ConnectionError;
-    void speichern(List<History> historyListe)  throws IOException;
+    void speichern(List<History> historyListe)  throws IOException, ConnectionError;
 }

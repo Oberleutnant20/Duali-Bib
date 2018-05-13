@@ -25,8 +25,10 @@ public class Medien {
     private long barcodenummer;
     private int anzahl;
     private int verfuegbar_anzahl;
+    private String author;
+    private String desc;
 
-    public Medien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id, int anzahl) {
+    public Medien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id, int anzahl, String author, String desc) {
         this.kategorien = kategorien;
         this.name = name;
         this.ausgeliehen = ausgeliehen;
@@ -36,6 +38,8 @@ public class Medien {
         this.barcodenummer = barcodenummer;
         this.isbn = isbn;
         this.anzahl = anzahl;
+        this.author = author;
+        this.desc = desc;
     }
 
     public void setKategorien(Kategorie kategorien) {
@@ -112,5 +116,19 @@ public class Medien {
         return barcodenummer;
     }
     
-    
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 }
