@@ -37,7 +37,7 @@ public class GenreDAO implements IGenreDAO {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("genre"));
                 rs = ptsm.executeQuery();
                 while (rs.next()) {
-                    ret.add(new Genre(rs.getString(2)));
+                    ret.add(new Genre(rs.getInt(1),rs.getString(2)));
                 }
             } catch (SQLException ex) {
                 System.err.println("GenreDAO laden: " + ex);

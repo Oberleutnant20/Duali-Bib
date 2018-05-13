@@ -91,6 +91,7 @@ public class MedienDAO implements IMedienDAO {
 
     private Genre matchGenre(List<Genre> genreListe, int gid) {
         for (int i = 0; i < genreListe.size(); i++) {
+            System.out.println(genreListe.get(i).getId() +" "+ gid);
             if (genreListe.get(i).getId() == gid) {
                 return genreListe.get(i);
             }
