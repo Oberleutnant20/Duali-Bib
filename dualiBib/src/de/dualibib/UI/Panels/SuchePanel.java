@@ -137,11 +137,11 @@ public class SuchePanel extends javax.swing.JPanel {
     private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
       try {
             panelHandler.getSelectPanel().setMedium(getMediumfromIndices(getListSelections()));
-            panelHandler.panelUnsichtbar();
-            panelHandler.getUi().add(panelHandler.getSelectPanel());
             if(panelHandler.getAktuellerUser().isMitarbeiter()){
                 panelHandler.getSelectPanel().setMitarbeiter();
             }
+            panelHandler.panelUnsichtbar();
+            panelHandler.getUi().add(panelHandler.getSelectPanel());
             panelHandler.getSelectPanel().setVisible(true);
         } catch (Exception e) {
             System.err.println("problem beim aufrufen vom selectpanel");
