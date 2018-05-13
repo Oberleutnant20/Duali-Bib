@@ -16,6 +16,7 @@ import de.dualibib.Fachlogik.Historyverwaltung.Historyverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 import de.dualibib.UI.PanelHandler;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -187,7 +188,7 @@ public class Controller {
         return medienverwaltung.get();
     }
 
-    public void saveDB() throws IOException {
+    public void saveDB() throws IOException, ConnectionError {
         accountverwaltung.speichern();
         medienverwaltung.speichern();
         ausleiheverwaltung.speichern();
