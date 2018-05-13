@@ -8,6 +8,7 @@ package de.dualibib.Fachlogik.Medienverwaltung;
 import java.util.HashSet;
 import java.util.Set;
 import de.dualibib.Datenlogik.IMedienDAO;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Medienverwaltung{
         this.medienDAO = medienDAO;
     }
 
-    public void speichern() throws IOException{
+    public void speichern() throws IOException, ConnectionError{
         List<Medien> liste = new ArrayList<>();
 		for (Medien m : medienListe)
 			liste.add(m);

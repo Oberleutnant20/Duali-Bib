@@ -16,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,7 +38,7 @@ public class HistoryDAO implements IHistoryDAO {
                 rs = ptsm.executeQuery();
                 int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
-                        ret.add(new History(rs.getLong(1), rs.getInt(2), rs.getInt(3),rs.getInt(4)));
+                    ret.add(new History(rs.getLong(1), rs.getInt(2), rs.getInt(3), rs.getInt(4)));
                 }
             } catch (SQLException ex) {
                 System.err.println("HistoryDAO laden: " + ex);
@@ -48,8 +50,23 @@ public class HistoryDAO implements IHistoryDAO {
     }
 
     @Override
-    public void speichern(List<History> historyListe) throws IOException {
-        //To change body of generated methods, choose Tools | Templates.
+    public void speichern(List<History> historyListe) throws IOException, ConnectionError {
+        if (con != null) {
+            for (History history : historyListe) {
+                try {
+                    history.getKategorieid();
+                    history.getMedienid();
+                    history.getUserid();
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO History(u_ID, km_ID, m_ID) "
+                            + "VALUES(" + history.getUserid() + ", " + history.getKategorieid() + ", " + history.getMedienid() + ");");
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            throw new ConnectionError();
+        }
     }
 
 }

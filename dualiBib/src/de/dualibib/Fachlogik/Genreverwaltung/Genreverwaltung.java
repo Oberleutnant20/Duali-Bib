@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Genreverwaltung;
 
 import de.dualibib.Datenlogik.IGenreDAO;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ public class Genreverwaltung{
         this.genreDAO = genreDAO;
     }
     
-    public void speichern() throws IOException{
+    public void speichern() throws IOException, ConnectionError{
         List<Genre> liste = new ArrayList<>();
         genreListe.forEach((genre) -> {
             liste.add(genre);

@@ -62,8 +62,8 @@ public class AccountDAO implements IAccountDAO {
 
     @Override
     public void speichern(List<Account> accountListe) throws IOException, ConnectionError {
-        for (Account account : accountListe) {
-            if (con != null) {
+        if (con != null) {
+            for (Account account : accountListe) {
                 try {
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
                             + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
@@ -71,9 +71,9 @@ public class AccountDAO implements IAccountDAO {
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } else {
-                throw new ConnectionError();
             }
+        } else {
+            throw new ConnectionError();
         }
     }
 

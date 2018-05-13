@@ -16,6 +16,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +37,7 @@ public class KategorieDAO implements IKategorieDAO {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("kategorieMedien"));
                 rs = ptsm.executeQuery();
                 while (rs.next()) {
-                        ret.add(new Kategorie(rs.getInt(1) , rs.getString(2), rs.getString(3)));
+                    ret.add(new Kategorie(rs.getInt(1), rs.getString(2), rs.getString(3)));
                 }
             } catch (SQLException ex) {
                 System.err.println("KategorieDAO laden: " + ex);
@@ -47,8 +49,20 @@ public class KategorieDAO implements IKategorieDAO {
     }
 
     @Override
-    public void speichern(List<Kategorie> kategorieListe) throws IOException {
-        //To change body of generated methods, choose Tools | Templates.
+    public void speichern(List<Kategorie> kategorieListe) throws IOException, ConnectionError {
+        if (con != null) {
+            for (Kategorie kategorie : kategorieListe) {
+                try {
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO KategorieMedien(km_name, km_beschreibung) "
+                            + "VALUES('" + kategorie.getName() + "', '" + kategorie.getBezeichnung() + "');");
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            throw new ConnectionError();
+        }
     }
 
 }
