@@ -6,6 +6,7 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.UI.PanelHandler;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 
 /**
@@ -156,7 +157,7 @@ public class LoginPanel extends javax.swing.JPanel {
         }
     }
     
-    private void ausloggen() throws IOException{
+    private void ausloggen() throws IOException, ConnectionError{
         panelHandler.ausloggen();
         meldungText.setText("Erfolgreich ausgeloggt.");
         loginButton.setText("Login");

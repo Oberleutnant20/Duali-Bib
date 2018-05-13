@@ -24,6 +24,7 @@ import de.dualibib.UI.Panels.SuchePanel;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -198,6 +199,11 @@ public class PanelHandler {
         controller.saveDB();
         ui.setUserOffline();
         aktuellerUser = null;
+    }
+
+    public void createNewAusleihe(long userid, Date date, long katid) {
+        Ausleihe a = new Ausleihe(controller.getAllAusleihenListe().size()+1, userid, date, aktuellerUser.getUserid(), katid);
+        controller.saveAusleihe(a);
     }
 
     
