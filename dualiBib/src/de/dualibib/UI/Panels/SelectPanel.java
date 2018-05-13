@@ -231,12 +231,26 @@ public class SelectPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sucheFieldActionPerformed
 
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
-        statusField.getText();
-        beschreibungField.getText();
-        nameField.getText();
-        kategorieComboBox.getSelectedItem();
-        genreComboBox.getSelectedItem();
-        panelHandler.saveMediumChange(medium);
+        String  beschreibung = beschreibungField.getText();
+        String  name = nameField.getText();
+        
+        Kategorie kategorie = null;// kategorieComboBox.getSelectedItem();
+        
+        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
+            if(panelHandler.getKategorieListe().get(i).getBezeichnung().equals(kategorieComboBox.getSelectedItem()))
+            kategorie = panelHandler.getKategorieListe().get(i);
+        }
+        
+        Genre genre = null;//genreComboBox.getSelectedItem();
+        
+        for (int i = 0; i < panelHandler.getGenreListe().size(); i++) {
+            if(panelHandler.getGenreListe().get(i).getBezeichnung().equals(kategorieComboBox.getSelectedItem()))
+            genre = panelHandler.getGenreListe().get(i);
+        }
+        
+        
+        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre, kategorie, name, medium.isAusgeliehen(), medium.isVorgemerkt(), medium.getId(), medium.getAnzahl());
+        panelHandler.saveMediumChange(m);
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
     private void ausleihenVormerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenVormerkenButtonActionPerformed
@@ -271,11 +285,11 @@ public class SelectPanel extends javax.swing.JPanel {
             statusField.setText("ausgeliehen");
             if(m.isVorgemerkt())
             statusField.setText("bereits vorgemerkt");
+        }else{
+            statusField.setText("vorhanden");
         }
         beschreibungField.setText("blablalba - in arbeit");
         nameField.setText(m.getName());
-        //kategorieComboBox.setSelectedItem();
-        //genreComboBox.setSelectedItem();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
