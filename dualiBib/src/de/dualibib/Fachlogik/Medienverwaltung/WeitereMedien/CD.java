@@ -15,8 +15,8 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medien;
  */
 public class CD extends Medien{
 
-    public CD(String isbn, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id,int anzahl) {
-        super(isbn, barcodenummer, genre, kategorien, name, ausgeliehen, vorgemerkt, id, anzahl);
+    public CD(String isbn, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id,int anzahl ,String interpret, String beschreibung) {
+        super(isbn, barcodenummer, genre, kategorien, name, ausgeliehen, vorgemerkt, id, anzahl, interpret, beschreibung);
 
     }    
 }

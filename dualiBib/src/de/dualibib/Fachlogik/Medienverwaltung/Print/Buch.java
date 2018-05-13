@@ -15,8 +15,8 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medien;
  */
 public class Buch extends Medien{
     
-    public Buch(String isbn, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id,int anzahl) {
-        super(isbn, barcodenummer, genre, kategorien, name, ausgeliehen, vorgemerkt, id, anzahl);
+    public Buch(String isbn, int barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, int id,int anzahl, String author, String beschreibung) {
+        super(isbn, barcodenummer, genre, kategorien, name, ausgeliehen, vorgemerkt, id, anzahl, author, beschreibung);
     }
     
     
