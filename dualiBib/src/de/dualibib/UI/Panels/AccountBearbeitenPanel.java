@@ -92,9 +92,9 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
 
         stadtField.setText("jTextField4");
 
-        checkPasswortField.setText("jTextField5");
+        checkPasswortField.setText("bestätigen");
 
-        passwortField.setText("jTextField6");
+        passwortField.setText("Passwort");
 
         plzField.setText("jTextField7");
 
@@ -126,8 +126,13 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(saveButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                                 .addComponent(meldungText))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkPasswortLable)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(checkPasswortField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(plzLable)
@@ -135,30 +140,22 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
                                     .addComponent(vornameLable)
                                     .addComponent(passwortLable))
                                 .addGap(64, 64, 64)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(vornameField, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                    .addComponent(strasseField, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                    .addComponent(plzField, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                    .addComponent(passwortField, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+                                .addGap(61, 61, 61)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(vornameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(strasseField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(plzField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(71, 71, 71)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(hausnummerLable)
-                                            .addComponent(nameLable)
-                                            .addComponent(stadtLable))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(stadtField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(hausnummerField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(passwortField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(checkPasswortLable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(checkPasswortField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(hausnummerLable)
+                                    .addComponent(nameLable)
+                                    .addComponent(stadtLable))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(stadtField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(hausnummerField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -258,12 +255,13 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
         account =a;
         if(a==null)
             System.out.println("null");
-        hausnummerField.setText(TOOL_TIP_TEXT_KEY);
+        hausnummerField.setText(a.getHausnummer());
         nameField.setText(a.getNachname());
-        plzField.setText(TOOL_TIP_TEXT_KEY);
-        stadtField.setText(TOOL_TIP_TEXT_KEY);
-        strasseField.setText(TOOL_TIP_TEXT_KEY);
+        plzField.setText(""+a.getPlz());
+        stadtField.setText(a.getOrt());
+        strasseField.setText(a.getStrasse());
         vornameField.setText(a.getVorname());
+        mitarbeiterCheckBox.setSelected(a.isMitarbeiter());
     }
         
     public void save(int id,String hausnummer, String name, int plz, String ort, String strasse, String vorname,String  passwort, boolean mitarbeiter){
@@ -282,11 +280,12 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
         account =a;
         if(a==null)
             System.out.println("null");
-        hausnummerField.setText(TOOL_TIP_TEXT_KEY);
+        hausnummerField.setText(a.getHausnummer());
         nameField.setText(a.getNachname());
-        plzField.setText(TOOL_TIP_TEXT_KEY);
-        stadtField.setText(TOOL_TIP_TEXT_KEY);
-        strasseField.setText(TOOL_TIP_TEXT_KEY);
+        plzField.setText(""+a.getPlz());
+        stadtField.setText(a.getOrt());
+        strasseField.setText(a.getStrasse());
         vornameField.setText(a.getVorname());
+        mitarbeiterCheckBox.setSelected(a.isMitarbeiter());
     }
 }
