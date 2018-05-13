@@ -11,6 +11,7 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
@@ -200,7 +201,7 @@ public class SuchePanel extends javax.swing.JPanel {
         
         if(text.equals("")||text.equals("Suche")||text.equals("Titelsuchen...")){
             for (int i = 0; i < medienListe.size(); i++) {
-                model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});  
+                model.addRow(addObject(i)); 
             }
             return;
         }
@@ -247,5 +248,9 @@ public class SuchePanel extends javax.swing.JPanel {
             tmp[i] = list.get(i).getBezeichnung();
         }        
         combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+
+    private Object[] addObject(int i) {
+        return new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()}
     }
 }

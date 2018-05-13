@@ -233,6 +233,7 @@ public class SelectPanel extends javax.swing.JPanel {
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
         String  beschreibung = beschreibungField.getText();
         String  name = nameField.getText();
+        String desc = beschreibungField.getText();
         
         Kategorie kategorie = null;// kategorieComboBox.getSelectedItem();
         
@@ -249,7 +250,7 @@ public class SelectPanel extends javax.swing.JPanel {
         }
         
         
-        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre, kategorie, name, medium.isAusgeliehen(), medium.isVorgemerkt(), medium.getId(), medium.getAnzahl());
+        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre, kategorie, name, medium.isAusgeliehen(), medium.isVorgemerkt(), medium.getId(), medium.getAnzahl(),medium.getAuthor(),desc);
         panelHandler.saveMediumChange(m);
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
