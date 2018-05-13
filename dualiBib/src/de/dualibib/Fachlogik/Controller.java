@@ -209,6 +209,10 @@ public class Controller {
             }
         }
     }
+
+    public void saveAusleihe(Ausleihe a) {
+        ausleiheverwaltung.add(a);
+    }
     
     
 }

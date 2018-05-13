@@ -5,10 +5,14 @@
  */
 package de.dualibib.UI.Panels;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -114,6 +118,11 @@ public class SelectPanel extends javax.swing.JPanel {
 
         kategorieComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         kategorieComboBox.setEnabled(false);
+        kategorieComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kategorieComboBoxActionPerformed(evt);
+            }
+        });
 
         sucheField.setText("Titelsuche...");
         sucheField.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +172,6 @@ public class SelectPanel extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -206,7 +214,6 @@ public class SelectPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
                         .addComponent(bearbeitenButton)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -263,13 +270,17 @@ public class SelectPanel extends javax.swing.JPanel {
             }
        }
        else{
-           dateComboBox.getSelectedItem();
+           Date date = new Date(dateComboBox.getSelectedItem()+"");
            medium.berechneVerfuegbare(1);
+            panelHandler.createNewAusleihe(medium.getId(),date,medium.getKategorien().getId());
        }
-       
-        panelHandler.saveMediumChange(medium);
+       panelHandler.saveMediumChange(medium);
         
     }//GEN-LAST:event_ausleihenVormerkenButtonActionPerformed
+
+    private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_kategorieComboBoxActionPerformed
 
     public void setMitarbeiter(){
         bearbeitenButton.setEnabled(true);
@@ -323,6 +334,16 @@ private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+    
+    private void setComboboxDate(JComboBox combobox,List<Date> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            DateFormat  formatter = new SimpleDateFormat("EEE, dd MMM yyyy");
+            String date = formatter.format(list.get(i));
+            tmp[i] = date;
         }        
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
