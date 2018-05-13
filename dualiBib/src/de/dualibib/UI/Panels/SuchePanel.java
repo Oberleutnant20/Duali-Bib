@@ -138,11 +138,13 @@ public class SuchePanel extends javax.swing.JPanel {
       try {
             panelHandler.getSelectPanel().setMedium(getMediumfromIndices(getListSelections()));
             panelHandler.panelUnsichtbar();
+            panelHandler.getUi().add(panelHandler.getSelectPanel());
             if(panelHandler.getAktuellerUser().isMitarbeiter()){
                 panelHandler.getSelectPanel().setMitarbeiter();
             }
             panelHandler.getSelectPanel().setVisible(true);
         } catch (Exception e) {
+            System.err.println("problem beim aufrufen vom selectpanel");
         }
         
     }//GEN-LAST:event_selectButtonActionPerformed
@@ -194,6 +196,13 @@ public class SuchePanel extends javax.swing.JPanel {
         
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
+        }
+        
+        if(text.equals("")||text.equals("Suche")||text.equals("Titelsuchen...")){
+            for (int i = 0; i < medienListe.size(); i++) {
+                model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});  
+            }
+            return;
         }
         
         for (int i = 0; i < medienListe.size(); i++) {

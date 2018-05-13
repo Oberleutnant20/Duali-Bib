@@ -58,7 +58,6 @@ public class SelectPanel extends javax.swing.JPanel {
         beschreibungLable = new javax.swing.JLabel();
         genreComboBox = new javax.swing.JComboBox<>();
         kategorieComboBox = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
         sucheField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         dateComboBox = new javax.swing.JComboBox<>();
@@ -116,8 +115,6 @@ public class SelectPanel extends javax.swing.JPanel {
         kategorieComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         kategorieComboBox.setEnabled(false);
 
-        jTextField1.setText("Suche");
-
         sucheField.setText("Titelsuche...");
         sucheField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,11 +169,6 @@ public class SelectPanel extends javax.swing.JPanel {
                                 .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(ausleihenVormerkenButton))
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(184, 184, 184)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(185, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,11 +199,6 @@ public class SelectPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(140, 140, 140)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(140, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -287,7 +274,6 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel genreLable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> kategorieComboBox;
     private javax.swing.JLabel kategorieLable;
     private javax.swing.JTextField nameField;
