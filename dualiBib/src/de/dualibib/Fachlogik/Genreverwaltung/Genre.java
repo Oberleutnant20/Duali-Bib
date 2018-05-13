@@ -22,7 +22,8 @@ public class Genre {
     }
     private String bezeichnung;
 
-    public Genre(String bezeichnung) {
+    public Genre(int id, String bezeichnung) {
+        this.id=id;
         this.bezeichnung = bezeichnung;
     }
 
