@@ -12,6 +12,7 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
@@ -96,22 +97,20 @@ public class HistoryPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(kategorieLable)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(kategorieComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(auswaehlenButton)
-                .addGap(25, 25, 25))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(historysuchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(kategorieLable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(kategorieComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                        .addComponent(auswaehlenButton)
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(historysuchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +148,7 @@ public class HistoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_auswaehlenButtonActionPerformed
 
     private void historysuchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historysuchFieldActionPerformed
-        System.out.println("tabelle anpassen");
+        setSearchKategorie(kategorieComboBox.getSelectedItem()+"");
     }//GEN-LAST:event_historysuchFieldActionPerformed
 
     private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
@@ -188,7 +187,7 @@ public class HistoryPanel extends javax.swing.JPanel {
        historyListe = history;
        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         for (int i = 0; i < historyListe.size(); i++) {
-          model.addRow(new Object[]{historyListe.get(i).getId(),historyListe.get(i).getUserid(),historyListe.get(i).getMedienid(),historyListe.get(i).getKategorieid()});  
+          model.addRow(addObject(i));  
         }
     }
     
@@ -214,6 +213,28 @@ public class HistoryPanel extends javax.swing.JPanel {
             tmp[i] = list.get(i).getBezeichnung();
         }        
         combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+
+    private void setSearchKategorie(String kategorie) {
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
+        int kategorieid = -1;
+        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
+         if(panelHandler.getKategorieListe().get(i).getBezeichnung().equals(kategorie))   
+             kategorieid=(int) panelHandler.getKategorieListe().get(i).getId();
+        }
+                        
+        for (int i = 0; i < historyListe.size(); i++) {
+            if(historyListe.get(i).getKategorieid()==kategorieid)
+             model.addRow(addObject(i));    
+        }
+    }
+
+    private Object[] addObject(int i) {
+        return new Object[]{historyListe.get(i).getId(),historyListe.get(i).getUserid(),historyListe.get(i).getMedienid(),historyListe.get(i).getKategorieid()};
     }
     
 }

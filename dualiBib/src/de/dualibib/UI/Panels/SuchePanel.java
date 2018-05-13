@@ -157,9 +157,15 @@ public class SuchePanel extends javax.swing.JPanel {
             model.removeRow(i);
         }
         
+        int kategorieid = -1;
+        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
+         if(panelHandler.getKategorieListe().get(i).getBezeichnung().equals(text))   
+             kategorieid=(int) panelHandler.getKategorieListe().get(i).getId();
+        }
+        
         for (int i = 0; i < medienListe.size(); i++) {
-            if(medienListe.get(i).getName().equals(text))
-             model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});    
+            if(medienListe.get(i).getKategorien().getId()==kategorieid)
+             model.addRow(addObject(i));    
         }
     }//GEN-LAST:event_kategorieComboBoxActionPerformed
 
@@ -170,9 +176,15 @@ public class SuchePanel extends javax.swing.JPanel {
             model.removeRow(i);
         }
         
+        int genreid = -1;
+        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
+         if(panelHandler.getGenreListe().get(i).getBezeichnung().equals(text))   
+             genreid=(int) panelHandler.getGenreListe().get(i).getId();
+        }
+        
         for (int i = 0; i < medienListe.size(); i++) {
-            if(medienListe.get(i).getName().equals(text))
-             model.addRow(new Object[]{medienListe.get(i).getName(),medienListe.get(i).getKategorien(),medienListe.get(i).getGenre(),medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()});    
+            if(medienListe.get(i).getGenre().getId()==genreid)
+             model.addRow(addObject(i));    
         }
     }//GEN-LAST:event_genreComboBoxActionPerformed
 
