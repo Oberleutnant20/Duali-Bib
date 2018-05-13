@@ -7,6 +7,7 @@ package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
 import de.dualibib.Datenlogik.IGenreDAO;
+import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +38,7 @@ public class GenreDAO implements IGenreDAO {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("genre"));
                 rs = ptsm.executeQuery();
                 while (rs.next()) {
-                        ret.add(new Genre(rs.getString(2)));
+                    ret.add(new Genre(rs.getString(2)));
                 }
             } catch (SQLException ex) {
                 System.err.println("GenreDAO laden: " + ex);
@@ -48,7 +51,19 @@ public class GenreDAO implements IGenreDAO {
 
     @Override
     public void speichern(List<Genre> genreListe) throws IOException {
-        //To change body of generated methods, choose Tools | Templates.
+        if (con != null) {
+            for (Genre genre : genreListe) {
+                try {
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO Genre(g_Name) "
+                            + "VALUES('" + genre.getBezeichnung() + "');");
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            throw new ConnectionError();
+        }
     }
 
 }

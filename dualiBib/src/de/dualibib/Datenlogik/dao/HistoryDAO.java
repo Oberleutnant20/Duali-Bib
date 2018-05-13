@@ -7,6 +7,7 @@ package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
 import de.dualibib.Datenlogik.IHistoryDAO;
+import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -49,7 +52,22 @@ public class HistoryDAO implements IHistoryDAO {
 
     @Override
     public void speichern(List<History> historyListe) throws IOException {
-        //To change body of generated methods, choose Tools | Templates.
+        if (con != null) {
+            for (History history : historyListe) {
+                try {
+                    history.getKategorieid();
+                    history.getMedienid();
+                    history.getUserid();
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
+                            + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            throw new ConnectionError();
+        }
     }
 
 }

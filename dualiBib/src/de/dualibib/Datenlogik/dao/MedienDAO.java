@@ -17,9 +17,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import de.dualibib.Datenlogik.IMedienDAO;
+import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,13 +57,10 @@ public class MedienDAO implements IMedienDAO {
                     int anzahl = rs.getInt("m_Anzahl");
                     int kmid = rs.getInt("km_ID");
                     int gid = rs.getInt("g_ID");
-                    
-                    
-                    
+
                     Genre genre = matchGenre(genreListe, gid);
                     Kategorie kat = matchKategorie(kategorieListe, kmid);
-                    
-                    
+
                     ret.add(new Medien(isbn, barcode, genre, kat, titel, ausgeliehen, vorgemerkt, id, anzahl));
                 }
             } catch (SQLException ex) {
@@ -71,24 +71,45 @@ public class MedienDAO implements IMedienDAO {
         }
         return ret;
     }
-   
+
     @Override
     public void speichern(List<Medien> medienListe) throws IOException {
-        //To change body of generated methods, choose Tools | Templates.
+        if (con != null) {
+            for (Medien medien : medienListe) {
+                try {
+                    medien.getAnzahl();
+                    medien.getBarcodenummer();
+                    medien.getGenre();
+                    medien.getIsbn();
+                    medien.getKategorien();
+                    medien.getName();
+                    medien.getVerfuegbare();
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_ausgeliehen, m_Vorgemerkt, m_Anzahl, m_beschreibung, km_ID, g_ID) "
+                            + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            throw new ConnectionError();
+        }
     }
 
     private Genre matchGenre(List<Genre> genreListe, int gid) {
         for (int i = 0; i < genreListe.size(); i++) {
-            if(genreListe.get(i).getId()==gid)
+            if (genreListe.get(i).getId() == gid) {
                 return genreListe.get(i);
+            }
         }
         return null;
     }
 
     private Kategorie matchKategorie(List<Kategorie> kategorieListe, int kmid) {
         for (int i = 0; i < kategorieListe.size(); i++) {
-            if(kategorieListe.get(i).getId()==kmid)
+            if (kategorieListe.get(i).getId() == kmid) {
                 return kategorieListe.get(i);
+            }
         }
         return null;
     }
