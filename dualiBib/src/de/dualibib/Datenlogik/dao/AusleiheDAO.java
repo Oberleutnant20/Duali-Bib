@@ -14,7 +14,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,10 +36,15 @@ public class AusleiheDAO implements IAusleiheDAO {
         ArrayList<Ausleihe> ret = new ArrayList<>();
         if (con != null) {
             try {
-                PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("Ausleihe"));
+                PreparedStatement ptsm = con.prepareStatement("SELECT a_ID, a_Date, u_ID, m_ID, km_ID FROM ausleihe;");
                 rs = ptsm.executeQuery();
                 while (rs.next()) {
-                    ret.add(new Ausleihe(rs.getLong(1), rs.getLong(3), rs.getDate(2), rs.getInt(4), rs.getInt(5)));
+                    long id = rs.getLong("a_ID");
+                    long medienID = rs.getLong("m_ID");
+                    Date datum = rs.getDate("a_Date");
+                    int uID = rs.getInt("u_ID");
+                    long kID = rs.getLong("km_ID");
+                    ret.add(new Ausleihe(id, medienID, datum, uID, kID));
                 }
             } catch (SQLException ex) {
                 System.err.println("AusleiheDAO laden: " + ex);
@@ -53,12 +60,15 @@ public class AusleiheDAO implements IAusleiheDAO {
         if (con != null) {
             for (Ausleihe ausleihe : ausleiheListe) {
                 try {
+                    String pattern = "YYYY-MM-DD";
+                    String mysqlDateString = new SimpleDateFormat(pattern).format(ausleihe.getDate());
                     ausleihe.getKategorieid();
                     ausleihe.getMedienid();
                     ausleihe.getUserid();
                     ausleihe.getDate();
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO Ausleihe(a_DATE, u_ID, m_id, km_id) "
-                            + "VALUES('TO_DATE('" + ausleihe.getDate() + "', 'DD.MM.YYYY')," + ausleihe.getUserid() + ", " + ausleihe.getMedienid() + ", " + ausleihe.getKategorieid() + ");");
+                            + "VALUES('" + mysqlDateString + "', " + ausleihe.getUserid() + ", " + ausleihe.getMedienid() + ", " + ausleihe.getKategorieid() + ");");
+
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
