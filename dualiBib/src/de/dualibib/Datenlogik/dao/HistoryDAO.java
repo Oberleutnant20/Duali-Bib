@@ -7,7 +7,6 @@ package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
 import de.dualibib.Datenlogik.IHistoryDAO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class HistoryDAO implements IHistoryDAO {
                 rs = ptsm.executeQuery();
                 int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
-                        ret.add(new History(rs.getLong(1), rs.getInt(2), rs.getInt(3),rs.getInt(4)));
+                    ret.add(new History(rs.getLong(1), rs.getInt(2), rs.getInt(3), rs.getInt(4)));
                 }
             } catch (SQLException ex) {
                 System.err.println("HistoryDAO laden: " + ex);
@@ -51,15 +50,15 @@ public class HistoryDAO implements IHistoryDAO {
     }
 
     @Override
-    public void speichern(List<History> historyListe) throws IOException {
+    public void speichern(List<History> historyListe) throws IOException, ConnectionError {
         if (con != null) {
             for (History history : historyListe) {
                 try {
                     history.getKategorieid();
                     history.getMedienid();
                     history.getUserid();
-                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
-                            + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO History(u_ID, km_ID, m_ID) "
+                            + "VALUES(" + history.getUserid() + ", " + history.getKategorieid() + ", " + history.getMedienid() + ");");
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

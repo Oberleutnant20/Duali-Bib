@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface IKategorieDAO {
     List<Kategorie> laden() throws IOException, ConnectionError;
-    void speichern(List<Kategorie> kategorieListe)  throws IOException;
+    void speichern(List<Kategorie> kategorieListe)  throws IOException, ConnectionError;
 }

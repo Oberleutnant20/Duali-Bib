@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface IAusleiheDAO {
     List<Ausleihe> laden() throws IOException, ConnectionError;
-    void speichern(List<Ausleihe> ausleiheListe)  throws IOException;
+    void speichern(List<Ausleihe> ausleiheListe)  throws IOException, ConnectionError;
 }

@@ -7,7 +7,6 @@ package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
 import de.dualibib.Datenlogik.IGenreDAO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -50,7 +49,7 @@ public class GenreDAO implements IGenreDAO {
     }
 
     @Override
-    public void speichern(List<Genre> genreListe) throws IOException {
+    public void speichern(List<Genre> genreListe) throws IOException, ConnectionError {
         if (con != null) {
             for (Genre genre : genreListe) {
                 try {

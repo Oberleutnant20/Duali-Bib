@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Ausleihverwaltung;
 
 import de.dualibib.Datenlogik.IAusleiheDAO;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ public class Ausleiheverwaltung{
         this.ausleiheDAO = ausleiheDAO;
     }
 
-    public void speichern() throws IOException{
+    public void speichern() throws IOException, ConnectionError{
         List<Ausleihe> liste = new ArrayList<>();
 		for (Ausleihe a : ausleiheListe)
 			liste.add(a);

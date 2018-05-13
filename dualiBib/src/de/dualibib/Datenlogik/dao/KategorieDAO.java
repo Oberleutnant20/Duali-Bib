@@ -7,7 +7,6 @@ package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
 import de.dualibib.Datenlogik.IKategorieDAO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -50,12 +49,12 @@ public class KategorieDAO implements IKategorieDAO {
     }
 
     @Override
-    public void speichern(List<Kategorie> kategorieListe) throws IOException {
+    public void speichern(List<Kategorie> kategorieListe) throws IOException, ConnectionError {
         if (con != null) {
             for (Kategorie kategorie : kategorieListe) {
                 try {
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO KategorieMedien(km_name, km_beschreibung) "
-                            + "VALUES('"+kategorie.getName()+"', '"+kategorie.getBezeichnung()+"');");
+                            + "VALUES('" + kategorie.getName() + "', '" + kategorie.getBezeichnung() + "');");
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

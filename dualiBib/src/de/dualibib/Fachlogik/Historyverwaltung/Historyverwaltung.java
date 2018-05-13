@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Historyverwaltung;
 
 import de.dualibib.Datenlogik.IHistoryDAO;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ public class Historyverwaltung {
         this.historyDAO = historyDAO;
     }
 
-    public void speichern() throws IOException {
+    public void speichern() throws IOException, ConnectionError {
         List<History> liste = new ArrayList<>();
         historyListe.forEach((kategorie) -> {
             liste.add(kategorie);

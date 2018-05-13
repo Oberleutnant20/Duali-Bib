@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Kategorieverwaltung;
 
 import de.dualibib.Datenlogik.IKategorieDAO;
+import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +27,7 @@ public class Kategorienverwaltung{
         this.kategorieDAO = kategorieDAO;
     }
     
-    public void speichern() throws IOException{
+    public void speichern() throws IOException, ConnectionError{
         List<Kategorie> liste = new ArrayList<>();
         kategorieListe.forEach((kategorie) -> {
             liste.add(kategorie);

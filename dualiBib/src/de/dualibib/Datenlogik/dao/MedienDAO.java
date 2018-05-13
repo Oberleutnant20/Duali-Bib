@@ -7,17 +7,14 @@ package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
-import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import de.dualibib.Datenlogik.IMedienDAO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import java.util.ArrayList;
@@ -57,11 +54,13 @@ public class MedienDAO implements IMedienDAO {
                     int anzahl = rs.getInt("m_Anzahl");
                     int kmid = rs.getInt("km_ID");
                     int gid = rs.getInt("g_ID");
+                    String author = rs.getString("m_Author");
+                    String desc = rs.getString("m_Beschreibung");
 
                     Genre genre = matchGenre(genreListe, gid);
                     Kategorie kat = matchKategorie(kategorieListe, kmid);
 
-                    ret.add(new Medien(isbn, barcode, genre, kat, titel, ausgeliehen, vorgemerkt, id, anzahl));
+                    ret.add(new Medien(isbn, barcode, genre, kat, titel, ausgeliehen, vorgemerkt, id, anzahl, author, desc));
                 }
             } catch (SQLException ex) {
                 System.err.println("MedienDAO laden: " + ex);
@@ -73,19 +72,13 @@ public class MedienDAO implements IMedienDAO {
     }
 
     @Override
-    public void speichern(List<Medien> medienListe) throws IOException {
+    public void speichern(List<Medien> medienListe) throws IOException, ConnectionError {
         if (con != null) {
             for (Medien medien : medienListe) {
                 try {
-                    medien.getAnzahl();
-                    medien.getBarcodenummer();
-                    medien.getGenre();
-                    medien.getIsbn();
-                    medien.getKategorien();
-                    medien.getName();
-                    medien.getVerfuegbare();
+                    
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_ausgeliehen, m_Vorgemerkt, m_Anzahl, m_beschreibung, km_ID, g_ID) "
-                            + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
+                            + "VALUES('" + medien.getName() + "','" + medien.getAuthor() + "','" + medien.getIsbn() + "',"+medien.getBarcodenummer()+", " + medien.getVerfuegbare() + ", " + medien.getAnzahl() + ", '" + medien.getDesc() + "', " + medien.getKategorien().getId() + ", " + medien.getGenre().getId() + ");");
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

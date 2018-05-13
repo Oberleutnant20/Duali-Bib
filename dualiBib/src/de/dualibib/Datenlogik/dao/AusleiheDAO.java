@@ -7,7 +7,6 @@ package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
 import de.dualibib.Datenlogik.IAusleiheDAO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -50,7 +49,7 @@ public class AusleiheDAO implements IAusleiheDAO {
     }
 
     @Override
-    public void speichern(List<Ausleihe> ausleiheListe) throws IOException {
+    public void speichern(List<Ausleihe> ausleiheListe) throws IOException, ConnectionError {
         if (con != null) {
             for (Ausleihe ausleihe : ausleiheListe) {
                 try {
@@ -58,8 +57,8 @@ public class AusleiheDAO implements IAusleiheDAO {
                     ausleihe.getMedienid();
                     ausleihe.getUserid();
                     ausleihe.getDate();
-                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
-                            + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO Ausleihe(a_DATE, u_ID, m_id, km_id) "
+                            + "VALUES('TO_DATE('" + ausleihe.getDate() + "', 'DD.MM.YYYY')," + ausleihe.getUserid() + ", " + ausleihe.getMedienid() + ", " + ausleihe.getKategorieid() + ");");
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

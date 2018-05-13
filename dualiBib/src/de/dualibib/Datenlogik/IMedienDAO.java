@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface IMedienDAO {
     List<Medien> laden() throws IOException, ConnectionError;
-    void speichern(List<Medien> medienListe)  throws IOException;
+    void speichern(List<Medien> medienListe)  throws IOException, ConnectionError;
 }
