@@ -166,10 +166,17 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
-        
+        if(sucheAccountField.getText().equals("Suche Account")||sucheAccountField.getText().equals(""))
+        {
+         for (int i = 0; i < accountListe.size(); i++) {
+            model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
+        }   
+        }
+        else{
         for (int i = 0; i < accountListe.size(); i++) {
             if(accountListe.get(i).getUsername().equals(sucheAccountField.getText()))
              model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
+        }
         }
     }//GEN-LAST:event_sucheAccountFieldActionPerformed
 
@@ -215,7 +222,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     }
 
     private boolean acountNameZulaessig(String text) {
-        if(text.length()<8||text.length()>0){
+        if(text.length()<8&&text.length()>0){
 
             for (int i = 0; i < accountListe.size(); i++) {
                 if(accountListe.get(i).getUsername().equals(text))

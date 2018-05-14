@@ -207,7 +207,7 @@ public class SuchePanel extends javax.swing.JPanel {
             model.removeRow(i);
         }
         
-        if(text.equals("")||text.equals("Suche")||text.equals("Titelsuchen...")){
+        if(text.equals("")||text.equals("Suche")||text.equals("Titelsuchen...")||text.equals("Titelsuche...")){
             for (int i = 0; i < medienListe.size(); i++) {
                 model.addRow(addObject(i)); 
             }
