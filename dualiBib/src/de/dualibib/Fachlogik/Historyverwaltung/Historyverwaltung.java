@@ -9,9 +9,7 @@ import de.dualibib.Datenlogik.IHistoryDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -19,19 +17,21 @@ import java.util.Set;
  */
 public class Historyverwaltung {
 
-    private Set<History> historyListe;
+    private ArrayList<History> historyListe;
+    private ArrayList<History> historyListeRef;
     private IHistoryDAO historyDAO;
 
     public Historyverwaltung(IHistoryDAO historyDAO) {
-        historyListe = new HashSet<>();
+        historyListe = new ArrayList<History>();
+        historyListeRef = new ArrayList<History>();
         this.historyDAO = historyDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<History> liste = new ArrayList<>();
-        historyListe.forEach((kategorie) -> {
-            liste.add(kategorie);
-        });
+        if(historyListe.size() != historyListeRef.size()){
+            liste = historyListe.subList(historyListeRef.size(), historyListe.size());
+        }
         historyDAO.speichern(liste);
     }
 

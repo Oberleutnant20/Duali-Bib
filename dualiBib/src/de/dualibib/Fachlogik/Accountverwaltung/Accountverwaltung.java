@@ -9,9 +9,7 @@ import de.dualibib.Datenlogik.IAccountDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -19,29 +17,32 @@ import java.util.Set;
  */
 public class Accountverwaltung {
 
-    private Set<Account> accountListe;
-    private Set<Account> neueAccountListe;
+    private ArrayList<Account> accountListe;
+    private ArrayList<Account> accountListeRef;
     private IAccountDAO accountDAO;
 
     public Accountverwaltung(IAccountDAO accountDAO) {
-        accountListe = new HashSet<Account>();
+        accountListe = new ArrayList<Account>();
+        accountListeRef = new ArrayList<Account>();
         this.accountDAO = accountDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<Account> liste = new ArrayList<>();
-        for (Account a : accountListe) {
-            liste.add(a);
+        if (accountListe.size()!= accountListeRef.size()) {
+            liste = accountListe.subList(accountListeRef.size(), accountListe.size());
         }
         accountDAO.speichern(liste);
     }
 
     public void laden() {
         accountListe.clear();
+        accountListeRef.clear();
         try {
             List<Account> liste = accountDAO.laden();
             for (Account account : liste) {
-                this.add(account);
+                accountListe.add(account);
+                accountListeRef.add(account);
             }
 
         } catch (Exception e) {
