@@ -196,6 +196,7 @@ public class UI extends javax.swing.JFrame {
 
     private void beendenMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beendenMenuActionPerformed
         // TODO - Speichern beim Beenden
+        // Zum beenden der Anwendung. System.exit(0);
     }//GEN-LAST:event_beendenMenuActionPerformed
 
     private void LoginLogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginLogoutMenuActionPerformed
