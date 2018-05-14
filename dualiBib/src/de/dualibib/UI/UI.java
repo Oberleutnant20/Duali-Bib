@@ -5,8 +5,10 @@
  */
 package de.dualibib.UI;
 
+import de.dualibib.info.Informationen;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -193,7 +195,7 @@ public class UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void beendenMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beendenMenuActionPerformed
-        // TODO add your handling code here:
+        // TODO - Speichern beim Beenden
     }//GEN-LAST:event_beendenMenuActionPerformed
 
     private void LoginLogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginLogoutMenuActionPerformed
@@ -273,13 +275,14 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem optionMenu;
     private javax.swing.JMenuItem supportMenu;
     // End of variables declaration//GEN-END:variables
-
+    Informationen inform = new Informationen();
+    
     private void info() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JOptionPane.showMessageDialog(rootPane, inform.printEntwickler(), "Entwicklerinfo", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void entwicklung() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JOptionPane.showMessageDialog(rootPane, inform.printEntwicklung(""), "Entwicklung", JOptionPane.ERROR_MESSAGE);
     }
 
     void setMitarbeiterOnline() {
