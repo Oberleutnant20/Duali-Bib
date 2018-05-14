@@ -9,59 +9,64 @@ import de.dualibib.Datenlogik.IAusleiheDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
  * @author Carina
  */
-public class Ausleiheverwaltung{
+public class Ausleiheverwaltung {
 
-    private Set<Ausleihe> ausleiheListe;
+    private ArrayList<Ausleihe> ausleiheListe;
+    private ArrayList<Ausleihe> ausleiheListeRef;
     private IAusleiheDAO ausleiheDAO;
-    
+
     public Ausleiheverwaltung(IAusleiheDAO ausleiheDAO) {
-        ausleiheListe = new HashSet<Ausleihe>();
+        ausleiheListe = new ArrayList<Ausleihe>();
+        ausleiheListeRef = new ArrayList<Ausleihe>();
         this.ausleiheDAO = ausleiheDAO;
     }
 
-    public void speichern() throws IOException, ConnectionError{
+    public void speichern() throws IOException, ConnectionError {
         List<Ausleihe> liste = new ArrayList<>();
-		for (Ausleihe a : ausleiheListe)
-			liste.add(a);
-		ausleiheDAO.speichern(liste);
+        if(ausleiheListe.size() != ausleiheListeRef.size()){
+            liste = ausleiheListe.subList(ausleiheListeRef.size(), ausleiheListe.size());
+        }
+        ausleiheDAO.speichern(liste);
     }
 
     public void laden() {
         ausleiheListe.clear();
-		try {
-			List<Ausleihe> liste = ausleiheDAO.laden();
-			for (Ausleihe ausleihe : liste)
-				this.add(ausleihe);
+        ausleiheListeRef.clear();
+        try {
+            List<Ausleihe> liste = ausleiheDAO.laden();
+            for (Ausleihe ausleihe : liste) {
+                ausleiheListe.add(ausleihe);
+                ausleiheListeRef.add(ausleihe);
+            }
 
-		} catch (Exception e) {	}
+        } catch (Exception e) {
+        }
     }
 
     public void add(Ausleihe ausleihe) {
         if (!ausleiheListe.add(ausleihe)) {
-			String error = "Ausleihe gibt es bereits.";
-		}
+            String error = "Ausleihe gibt es bereits.";
+        }
     }
 
     public void delete(Ausleihe ausleihe) {
         if (!ausleiheListe.remove(ausleihe)) {
-			String error = "Ausleihe gibt es nicht.";
-		}
+            String error = "Ausleihe gibt es nicht.";
+        }
     }
 
     public ArrayList<Ausleihe> get() {
         ArrayList<Ausleihe> liste = new ArrayList<Ausleihe>();
-		for (Ausleihe ausleihe : ausleiheListe) {
-			liste.add(ausleihe);
-		}
-		return liste;
+        for (Ausleihe ausleihe : ausleiheListe) {
+            liste.add(ausleihe);
+        }
+        return liste;
     }
-    
+
 }

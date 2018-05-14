@@ -5,8 +5,6 @@
  */
 package de.dualibib.Fachlogik.Medienverwaltung;
 
-import java.util.HashSet;
-import java.util.Set;
 import de.dualibib.Datenlogik.IMedienDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -17,43 +15,50 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Medienverwaltung{
+public class Medienverwaltung {
 
-    private Set<Medien> medienListe;
+    private ArrayList<Medien> medienListe;
+    private ArrayList<Medien> medienListeRef;
     private IMedienDAO medienDAO;
-    
+
     public Medienverwaltung(IMedienDAO medienDAO) {
-      medienListe = new HashSet<Medien>();
+        medienListe = new ArrayList<Medien>();
+        medienListeRef = new ArrayList<Medien>();
         this.medienDAO = medienDAO;
     }
 
-    public void speichern() throws IOException, ConnectionError{
+    public void speichern() throws IOException, ConnectionError {
         List<Medien> liste = new ArrayList<>();
-		for (Medien m : medienListe)
-			liste.add(m);
-		medienDAO.speichern(liste);
+        if(medienListe.size() != medienListeRef.size()){
+            liste = medienListe.subList(medienListeRef.size(), medienListe.size());
+        }
+        medienDAO.speichern(liste);
     }
 
     public void laden() {
         medienListe.clear();
-		try {
-			List<Medien> liste = medienDAO.laden();
-			for (Medien medium : liste)
-				this.add(medium);
+        medienListeRef.clear();
+        try {
+            List<Medien> liste = medienDAO.laden();
+            for (Medien medium : liste) {
+                medienListe.add(medium);
+                medienListeRef.add(medium);
+            }
 
-		} catch (Exception e) {	}
+        } catch (Exception e) {
+        }
     }
 
     public void add(Medien medium) {
         if (!medienListe.add(medium)) {
-			String error = "Medium gibt es bereits.";
-		}
+            String error = "Medium gibt es bereits.";
+        }
     }
 
     public void delete(Medien medien) {
         if (!medienListe.remove(medien)) {
-			String error = "Medium gibt es nicht.";
-		}
+            String error = "Medium gibt es nicht.";
+        }
     }
 
     public ArrayList<Medien> get() {
@@ -63,5 +68,5 @@ public class Medienverwaltung{
 		}
 		return liste;
     }
-    
+
 }

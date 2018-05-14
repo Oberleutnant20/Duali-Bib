@@ -9,60 +9,63 @@ import de.dualibib.Datenlogik.IKategorieDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
  * @author Carina
  */
-public class Kategorienverwaltung{
+public class Kategorienverwaltung {
 
-    private Set<Kategorie> kategorieListe;
+    private ArrayList<Kategorie> kategorieListe;
+    private ArrayList<Kategorie> kategorieListeRef;
     private IKategorieDAO kategorieDAO;
-    
+
     public Kategorienverwaltung(IKategorieDAO kategorieDAO) {
-        kategorieListe = new HashSet<>();
+        kategorieListe = new ArrayList<Kategorie>();
+        kategorieListeRef = new ArrayList<Kategorie>();
         this.kategorieDAO = kategorieDAO;
     }
-    
-    public void speichern() throws IOException, ConnectionError{
+
+    public void speichern() throws IOException, ConnectionError {
         List<Kategorie> liste = new ArrayList<>();
-        kategorieListe.forEach((kategorie) -> {
-            liste.add(kategorie);
-         });
-		kategorieDAO.speichern(liste);
+        if(kategorieListe.size() != kategorieListeRef.size()){
+            liste = kategorieListe.subList(kategorieListeRef.size(), kategorieListe.size());
+        }
+        kategorieDAO.speichern(liste);
     }
 
     public void laden() {
         kategorieListe.clear();
-		try {
-			List<Kategorie> liste = kategorieDAO.laden();
-                        liste.forEach((kategorie) -> {
-                            this.add(kategorie);
+        kategorieListeRef.clear();
+        try {
+            List<Kategorie> liste = kategorieDAO.laden();
+            liste.forEach((kategorie) -> {
+                kategorieListe.add(kategorie);
+                kategorieListeRef.add(kategorie);
             });
 
-		} catch (Exception e) {	}
+        } catch (Exception e) {
+        }
     }
 
     public void add(Kategorie kategorie) {
         if (!kategorieListe.add(kategorie)) {
-			String error = "Ausleihe gibt es bereits.";
-		}
+            String error = "Ausleihe gibt es bereits.";
+        }
     }
 
     public void delete(Kategorie kategorie) {
         if (!kategorieListe.remove(kategorie)) {
-			String error = "Ausleihe gibt es nicht.";
-		}
+            String error = "Ausleihe gibt es nicht.";
+        }
     }
 
     public List<Kategorie> get() {
         ArrayList<Kategorie> liste = new ArrayList<>();
         kategorieListe.forEach((kategorie) -> {
             liste.add(kategorie);
-         });
-		return liste;
+        });
+        return liste;
     }
 }
