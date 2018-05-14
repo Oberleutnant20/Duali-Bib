@@ -8,4 +8,4 @@
  * Created: 14.05.2018
  */
 USE dualibib;
-SELECT * FROM USer;
+SELECT * FROM User;
