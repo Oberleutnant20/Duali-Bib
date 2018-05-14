@@ -5,14 +5,16 @@
  */
 package de.dualibib.UI.Panels;
 
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -29,15 +31,15 @@ public class SelectPanel extends javax.swing.JPanel {
 //    private final ArrayList<String> genreListe;
 //
 //    private final ArrayList<String> kategorieListe;
-
     /**
      * Creates new form SelectPanel
      */
-    public SelectPanel(PanelHandler panelHandler){//List genreListe, List kategorieListe) {
+    public SelectPanel(PanelHandler panelHandler) {//List genreListe, List kategorieListe) {
         initComponents();
         this.panelHandler = panelHandler;
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
+        setComboboxDate(dateComboBox);
     }
 
     /**
@@ -238,52 +240,51 @@ public class SelectPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_sucheFieldActionPerformed
 
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
-        String  beschreibung = beschreibungField.getText();
-        String  name = nameField.getText();
+        String beschreibung = beschreibungField.getText();
+        String name = nameField.getText();
         String desc = beschreibungField.getText();
-        
+
         Kategorie kategorie = null;// kategorieComboBox.getSelectedItem();
-        
+
         for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
-            if(panelHandler.getKategorieListe().get(i).getBezeichnung().equals(kategorieComboBox.getSelectedItem()))
-            kategorie = panelHandler.getKategorieListe().get(i);
+            if (panelHandler.getKategorieListe().get(i).getBezeichnung().equals(kategorieComboBox.getSelectedItem())) {
+                kategorie = panelHandler.getKategorieListe().get(i);
+            }
         }
-        
+
         Genre genre = null;//genreComboBox.getSelectedItem();
-        
+
         for (int i = 0; i < panelHandler.getGenreListe().size(); i++) {
-            if(panelHandler.getGenreListe().get(i).getBezeichnung().equals(genreComboBox.getSelectedItem())){
+            if (panelHandler.getGenreListe().get(i).getBezeichnung().equals(genreComboBox.getSelectedItem())) {
                 genre = panelHandler.getGenreListe().get(i);
             }
         }
-        
-        
-        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre, kategorie, name, medium.isAusgeliehen(), medium.isVorgemerkt(), medium.getId(), medium.getAnzahl(),medium.getAuthor(),desc);
+
+        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre, kategorie, name, medium.isAusgeliehen(), medium.isVorgemerkt(), medium.getId(), medium.getAnzahl(), medium.getAuthor(), desc);
         panelHandler.saveMediumChange(m);
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
     private void ausleihenVormerkenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenVormerkenButtonActionPerformed
-       if(statusField.getText().equals("ausgeliehen")||statusField.getText().equals("bereits vorgemerkt")){
-            if(statusField.getText().equals("bereits vorgemerkt")){
-        }else{
+        if (statusField.getText().equals("ausgeliehen") || statusField.getText().equals("bereits vorgemerkt")) {
+            if (statusField.getText().equals("bereits vorgemerkt")) {
+            } else {
                 medium.setVorgemerkt(true);
                 statusField.setText("bereits vorgemerkt");
             }
-       }
-       else{
-           Date date = new Date(dateComboBox.getSelectedItem()+"");
-           medium.berechneVerfuegbare(1);
-            panelHandler.createNewAusleihe(medium.getId(),date,medium.getKategorien().getId());
-       }
-       panelHandler.saveMediumChange(medium);
-        
+        } else {
+            Date date = new Date(dateComboBox.getSelectedItem() + "");
+            medium.berechneVerfuegbare(1);
+            panelHandler.createNewAusleihe(medium.getId(), date, medium.getKategorien().getId());
+        }
+        panelHandler.saveMediumChange(medium);
+
     }//GEN-LAST:event_ausleihenVormerkenButtonActionPerformed
 
     private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_kategorieComboBoxActionPerformed
 
-    public void setMitarbeiter(){
+    public void setMitarbeiter() {
         bearbeitenButton.setEnabled(true);
         genreComboBox.setEnabled(true);
         kategorieComboBox.setEnabled(true);
@@ -291,14 +292,15 @@ public class SelectPanel extends javax.swing.JPanel {
         nameField.setEnabled(true);
         statusField.setEnabled(true);
     }
-    
-    public void setMedium(Medien m){
+
+    public void setMedium(Medien m) {
         medium = m;
-        if(m.isAusgeliehen()){
+        if (m.isAusgeliehen()) {
             statusField.setText("ausgeliehen");
-            if(m.isVorgemerkt())
-            statusField.setText("bereits vorgemerkt");
-        }else{
+            if (m.isVorgemerkt()) {
+                statusField.setText("bereits vorgemerkt");
+            }
+        } else {
             statusField.setText("vorhanden");
         }
         beschreibungField.setText("blablalba - in arbeit");
@@ -323,30 +325,41 @@ public class SelectPanel extends javax.swing.JPanel {
     private javax.swing.JLabel statusLable;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
-private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
+private void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
-        }        
+        }
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
-    
-    private void setComboboxGenre(JComboBox combobox,List<Genre> list){
+
+    private void setComboboxGenre(JComboBox combobox, List<Genre> list) {
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
-        }        
+        }
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
-    
-    private void setComboboxDate(JComboBox combobox,List<Date> list){
+
+    private void setComboboxDate(JComboBox combobox) {
+        ArrayList<Date> list = new ArrayList<Date>();
+        for(int i = 15; i<=45;i+=15){
+            list.add(addDays(i));
+        }
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            DateFormat  formatter = new SimpleDateFormat("EEE, dd MMM yyyy");
+            DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy");
             String date = formatter.format(list.get(i));
             tmp[i] = date;
-        }        
+        }
         combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+
+    private static Date addDays(int days) {
+        Calendar c = new GregorianCalendar();
+        c.add(Calendar.DATE, days);
+        Date date = c.getTime();
+        return date;
     }
 
 }
