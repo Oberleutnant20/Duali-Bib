@@ -111,6 +111,7 @@ public class PanelHandler {
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
         suchePanel.setMedienListe(controller.getAllMedien());
+        suchePanel.fillTable();
         suchePanel.setVisible(true);
         this.controller = controller;
     }
@@ -177,11 +178,15 @@ public class PanelHandler {
         historyPanel.setUserHistory(controller.getHistoryListe());
     }
 
-    void loadAdminAccounts() {
+    public void loadMedien(){
+      suchePanel.setMedienListe(controller.getAllMedien());  
+    }
+    
+    public void loadAdminAccounts() {
         accountsBearbeitenPanel.setAccountListe(controller.getAllAccountsListe());
     }
 
-    void loadAdminAusleihen() {
+    public void loadAdminAusleihen() {
         ausleihenBearbeitenPanel.setAusleihenListe(controller.getAllAusleihenListe());
     }
 

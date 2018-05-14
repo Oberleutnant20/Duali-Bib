@@ -146,7 +146,7 @@ public class Controller {
     public void saveAccountChange(Account a) {
         List<Account> list = accountverwaltung.get();
         for(int i = 0; i < list.size() ; i++){
-            if(list.get(i).getPasswort().equals(a.getUserid())){
+            if(list.get(i).getUserid()==(a.getUserid())){
                 accountverwaltung.delete(list.get(i));
                 accountverwaltung.add(a);
             }
