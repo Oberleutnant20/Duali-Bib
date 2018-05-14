@@ -265,7 +265,7 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
     }
         
     public void save(int id,String hausnummer, String name, int plz, String ort, String strasse, String vorname,String  passwort, boolean mitarbeiter){
-        if(neu)
+        if(!neu)
         panelHandler.saveAccountChange(account.getUserid(),hausnummer, name ,plz , strasse,ort,vorname,passwort, mitarbeiter,account.getUsername());
         else
           panelHandler.saveAccount(account.getUserid(),hausnummer, name ,plz , strasse,ort,vorname,passwort, mitarbeiter,account.getUsername());  
