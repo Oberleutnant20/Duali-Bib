@@ -231,7 +231,21 @@ public class HistoryPanel extends javax.swing.JPanel {
     }
 
     private Object[] addObject(int i) {
-        return new Object[]{historyListe.get(i).getId(),historyListe.get(i).getUserid(),historyListe.get(i).getMedienid(),historyListe.get(i).getKategorieid()};
+        String medienName = "";
+        
+        for (int j = 0; j < panelHandler.returnMedien().size(); j++) {
+            if(historyListe.get(i).getMedienid() == panelHandler.returnMedien().get(j).getId())
+                medienName = panelHandler.returnMedien().get(j).getName();
+        }
+        
+        String kategorieName = "";
+        
+        for (int j = 0; j < panelHandler.getKategorieListe().size(); j++) {
+            if(historyListe.get(i).getKategorieid() == panelHandler.getKategorieListe().get(j).getId())
+                medienName = panelHandler.getKategorieListe().get(j).getName();
+        }
+        
+        return new Object[]{historyListe.get(i).getId(),panelHandler.getAktuellerUser().getUsername(),medienName,kategorieName};
     }
 
     public void fillTable() {
