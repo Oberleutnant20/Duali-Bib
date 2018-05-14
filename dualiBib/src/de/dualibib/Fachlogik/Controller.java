@@ -203,8 +203,6 @@ public class Controller {
         int id = historyverwaltung.get().size();
         for (int i = 0; i < liste.size(); i++) {
             if(liste.get(i).getDate().before(heute)){
-                System.out.println("For Schleife i -->"+i);
-                System.out.println("ID -->"+id);
                 History history = new History(id++,liste.get(i).getUserid(),liste.get(i).getMedienid(), liste.get(i).getKategorieid());
                 historyListe.add(history);
                 ausleiheverwaltung.delete(liste.get(i));
