@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
@@ -272,7 +273,7 @@ public class SelectPanel extends javax.swing.JPanel {
                 statusField.setText("bereits vorgemerkt");
             }
         } else {
-            Date date = new Date(dateComboBox.getSelectedItem() + "");
+            Date date = new Date(dateComboBox.getSelectedItem().toString()+"");
             medium.berechneVerfuegbare(1);
             panelHandler.createNewAusleihe(medium.getId(), date, medium.getKategorien().getId());
         }
@@ -348,7 +349,7 @@ private void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
         }
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy");
+            DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);//
             String date = formatter.format(list.get(i));
             tmp[i] = date;
         }
