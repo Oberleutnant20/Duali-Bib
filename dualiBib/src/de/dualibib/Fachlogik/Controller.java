@@ -204,7 +204,7 @@ public class Controller {
         for (int i = 0; i < liste.size(); i++) {
             if(liste.get(i).getDate().before(heute)){
                 History history = new History(id++,liste.get(i).getUserid(),liste.get(i).getMedienid(), liste.get(i).getKategorieid());
-                historyListe.add(history);
+                //historyListe.add(history);
                 ausleiheverwaltung.delete(liste.get(i));
             }
         }
