@@ -201,6 +201,7 @@ public class SuchePanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     void setSearchTitel(String text) {
+        panelHandler.loadMedien();
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         
         for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -222,6 +223,9 @@ public class SuchePanel extends javax.swing.JPanel {
     
     public void setMedienListe(ArrayList<Medien> medien){
         medienListe = medien;
+    }
+    
+    public void fillTable(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         for (int i = 0; i < medienListe.size(); i++) {
           model.addRow(addObject(i));  
