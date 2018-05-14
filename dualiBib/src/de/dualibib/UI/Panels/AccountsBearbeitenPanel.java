@@ -223,7 +223,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     }
 
     private boolean acountNameZulaessig(String text) {
-        if(text.length()<8&&text.length()>0){
+        if(text.length()<=8&&text.length()>0){
 
             for (int i = 0; i < accountListe.size(); i++) {
                 if(accountListe.get(i).getUsername().equals(text))
