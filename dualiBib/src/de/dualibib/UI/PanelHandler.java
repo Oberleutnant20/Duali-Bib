@@ -178,8 +178,8 @@ public class PanelHandler {
         historyPanel.setUserHistory(controller.getHistoryListe());
     }
 
-    public void loadMedien(){
-      suchePanel.setMedienListe(controller.getAllMedien());  
+    public ArrayList<Medien> returnMedien(){
+      return controller.getAllMedien();  
     }
     
     public void loadAdminAccounts() {

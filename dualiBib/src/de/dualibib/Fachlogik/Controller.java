@@ -184,7 +184,7 @@ public class Controller {
     }
 
     public ArrayList<Medien> getAllMedien() {
-        System.out.println(medienverwaltung.get().get(0)+"getAllMedien in Controller");
+        System.out.println("getAllMedien in Controller");
         return medienverwaltung.get();
     }
 
