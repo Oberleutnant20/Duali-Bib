@@ -24,6 +24,8 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     public AccountsBearbeitenPanel(PanelHandler panelHandler) {
         initComponents();
         this.panelHandler = panelHandler;
+        //setAccountListe();
+        //fillTable();
     }
 
     /** This method is called from within the constructor to

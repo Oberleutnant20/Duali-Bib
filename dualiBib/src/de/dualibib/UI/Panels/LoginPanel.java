@@ -118,6 +118,7 @@ public class LoginPanel extends javax.swing.JPanel {
             try {
                 ausloggen();
             } catch (Exception e) {
+                System.err.println(e);
                 meldungText.setText("Speichern der Sitzung nicht möglich");
             }
         }

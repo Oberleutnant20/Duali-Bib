@@ -22,7 +22,7 @@ public class UI extends javax.swing.JFrame {
     /**
      * Creates new form UI
      */
-    public UI(List genreListe, List kategorieListe,PanelHandler panelHandler, boolean online) {
+    public UI(List genreListe, List kategorieListe, PanelHandler panelHandler, boolean online) {
         this.genreListe = new ArrayList<String>();
         this.kategorieListe = new ArrayList<String>();
         initComponents();
@@ -36,7 +36,6 @@ public class UI extends javax.swing.JFrame {
         return jPanel1;
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -195,8 +194,12 @@ public class UI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void beendenMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beendenMenuActionPerformed
-        // TODO - Speichern beim Beenden
-        // Zum beenden der Anwendung. System.exit(0);
+        try {
+            //panelHandler.ausloggen();
+            System.exit(0);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Speichern nicht möglich.", "Beenden", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_beendenMenuActionPerformed
 
     private void LoginLogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginLogoutMenuActionPerformed
@@ -251,11 +254,6 @@ public class UI extends javax.swing.JFrame {
         entwicklung();
     }//GEN-LAST:event_supportMenuActionPerformed
 
-    List genreListe;
-    List kategorieListe;
-    
-    PanelHandler panelHandler;
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem LoginLogoutMenu;
     private javax.swing.JMenu accountMenu;
@@ -276,20 +274,23 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem optionMenu;
     private javax.swing.JMenuItem supportMenu;
     // End of variables declaration//GEN-END:variables
-    Informationen inform = new Informationen();
-    
+    // Variablen
+    List genreListe;
+    List kategorieListe;
+    PanelHandler panelHandler;
+
     private void info() {
-        JOptionPane.showMessageDialog(rootPane, inform.printEntwickler(), "Entwicklerinfo", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(rootPane, new Informationen().printEntwickler(), "Entwicklerinfo", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void entwicklung() {
-        JOptionPane.showMessageDialog(rootPane, inform.printEntwicklung(""), "Entwicklung", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(rootPane, new Informationen().printEntwicklung(""), "Entwicklung", JOptionPane.ERROR_MESSAGE);
     }
 
     void setMitarbeiterOnline() {
         System.out.println("enable admin");
         administrationMenu.setEnabled(true);
-        
+
         panelHandler.loadAdminAccounts();
         panelHandler.loadAdminAusleihen();
     }
@@ -299,7 +300,7 @@ public class UI extends javax.swing.JFrame {
         editAccountMenu.setEnabled(true);
         historyMenu.setEnabled(true);
         aktuelleAusleiheMenu.setEnabled(true);
-        
+
         panelHandler.loadUserHistory();
         panelHandler.loadUserAusleihe();
     }
