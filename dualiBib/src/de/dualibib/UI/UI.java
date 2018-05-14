@@ -224,6 +224,7 @@ public class UI extends javax.swing.JFrame {
 
     private void historyMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyMenuActionPerformed
         panelHandler.panelUnsichtbar();
+        panelHandler.getHistoryPanel().fillTable();
         add(panelHandler.getHistoryPanel());
         panelHandler.getHistoryPanel().setVisible(true);
     }//GEN-LAST:event_historyMenuActionPerformed

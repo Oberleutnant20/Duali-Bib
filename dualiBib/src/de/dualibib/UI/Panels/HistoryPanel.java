@@ -5,14 +5,12 @@
  */
 package de.dualibib.UI.Panels;
 
-import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
@@ -142,6 +140,9 @@ public class HistoryPanel extends javax.swing.JPanel {
             panelHandler.getSelectPanel().setMedium(getMediumfromHistoryIndices(getListSelections()));
             panelHandler.panelUnsichtbar();
             panelHandler.getUi().add(panelHandler.getSelectPanel());
+            if(panelHandler.getAktuellerUser().isMitarbeiter()){
+                panelHandler.getSelectPanel().setMitarbeiter();
+            }
             panelHandler.getSelectPanel().setVisible(true);
         } catch (Exception e) {
         }
@@ -185,10 +186,6 @@ public class HistoryPanel extends javax.swing.JPanel {
 
     public void setUserHistory(ArrayList<History> history) {
        historyListe = history;
-       DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        for (int i = 0; i < historyListe.size(); i++) {
-          model.addRow(addObject(i));  
-        }
     }
     
     private Medien getMediumfromHistoryIndices(int position) {
@@ -235,6 +232,13 @@ public class HistoryPanel extends javax.swing.JPanel {
 
     private Object[] addObject(int i) {
         return new Object[]{historyListe.get(i).getId(),historyListe.get(i).getUserid(),historyListe.get(i).getMedienid(),historyListe.get(i).getKategorieid()};
+    }
+
+    public void fillTable() {
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = 0; i < historyListe.size(); i++) {
+          model.addRow(addObject(i));  
+        }
     }
     
 }
