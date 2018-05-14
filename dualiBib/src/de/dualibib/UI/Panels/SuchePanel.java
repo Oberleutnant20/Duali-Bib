@@ -201,7 +201,7 @@ public class SuchePanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     void setSearchTitel(String text) {
-        panelHandler.loadMedien();
+        medienListe = panelHandler.returnMedien();
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         
         for (int i = model.getRowCount() - 1; i > -1; i--) {

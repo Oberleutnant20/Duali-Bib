@@ -252,8 +252,9 @@ public class SelectPanel extends javax.swing.JPanel {
         Genre genre = null;//genreComboBox.getSelectedItem();
         
         for (int i = 0; i < panelHandler.getGenreListe().size(); i++) {
-            if(panelHandler.getGenreListe().get(i).getBezeichnung().equals(kategorieComboBox.getSelectedItem()))
-            genre = panelHandler.getGenreListe().get(i);
+            if(panelHandler.getGenreListe().get(i).getBezeichnung().equals(genreComboBox.getSelectedItem())){
+                genre = panelHandler.getGenreListe().get(i);
+            }
         }
         
         
