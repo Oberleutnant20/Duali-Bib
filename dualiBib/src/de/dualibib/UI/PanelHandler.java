@@ -211,6 +211,10 @@ public class PanelHandler {
         controller.saveAusleihe(a);
     }
 
+    public Object getMedienliste() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     
 }
