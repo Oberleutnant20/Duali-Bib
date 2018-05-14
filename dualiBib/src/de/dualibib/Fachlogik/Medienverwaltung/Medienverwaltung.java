@@ -51,20 +51,23 @@ public class Medienverwaltung {
 
     public void add(Medien medium) {
         if (!medienListe.add(medium)) {
-            String error = "Medium gibt es bereits.";
-        }
+			String error = "Medium gibt es bereits.";
+                        System.out.println(error);
+		}
     }
 
     public void delete(Medien medien) {
         if (!medienListe.remove(medien)) {
-            String error = "Medium gibt es nicht.";
-        }
+			String error = "Medium gibt es nicht.";
+                        System.out.println(error);
+		}
     }
 
     public ArrayList<Medien> get() {
         ArrayList<Medien> liste = new ArrayList<Medien>();
 		for (Medien medien : medienListe) {
 			liste.add(medien);
+                        System.out.println(medien.getName());
 		}
 		return liste;
     }
