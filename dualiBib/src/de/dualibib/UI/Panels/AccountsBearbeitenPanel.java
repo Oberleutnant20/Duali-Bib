@@ -198,6 +198,7 @@ public class AccountsBearbeitenPanel extends javax.swing.JPanel {
     }
     
     public void fillTable(){
+        panelHandler.loadAdminAccounts();
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);

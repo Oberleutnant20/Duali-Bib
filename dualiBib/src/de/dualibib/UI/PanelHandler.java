@@ -177,11 +177,11 @@ public class PanelHandler {
         historyPanel.setUserHistory(controller.getHistoryListe());
     }
 
-    void loadAdminAccounts() {
+    public void loadAdminAccounts() {
         accountsBearbeitenPanel.setAccountListe(controller.getAllAccountsListe());
     }
 
-    void loadAdminAusleihen() {
+    public void loadAdminAusleihen() {
         ausleihenBearbeitenPanel.setAusleihenListe(controller.getAllAusleihenListe());
     }
 
