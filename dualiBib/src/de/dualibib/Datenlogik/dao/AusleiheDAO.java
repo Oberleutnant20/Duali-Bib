@@ -60,7 +60,7 @@ public class AusleiheDAO implements IAusleiheDAO {
         if (con != null) {
             for (Ausleihe ausleihe : ausleiheListe) {
                 try {
-                    String pattern = "YYYY-MM-DD";
+                    String pattern = "YYYY-MM-DD"; 
                     String mysqlDateString = new SimpleDateFormat(pattern).format(ausleihe.getDate());
                     ausleihe.getKategorieid();
                     ausleihe.getMedienid();
