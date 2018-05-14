@@ -6,6 +6,7 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
