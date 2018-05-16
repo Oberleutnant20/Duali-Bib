@@ -64,7 +64,7 @@ public class UI extends javax.swing.JFrame {
         accountsBearbeitenItem = new javax.swing.JMenuItem();
         ausleihenBearbeiten = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,7 +195,7 @@ public class UI extends javax.swing.JFrame {
 
     private void beendenMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beendenMenuActionPerformed
         try {
-            //panelHandler.ausloggen();
+            panelHandler.ausloggen();
             System.exit(0);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, "Speichern nicht möglich.", "Beenden", JOptionPane.ERROR_MESSAGE);
