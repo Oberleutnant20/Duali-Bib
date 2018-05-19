@@ -29,7 +29,7 @@ public class Accountverwaltung {
 
     public void speichern() throws IOException, ConnectionError {
         List<Account> liste = new ArrayList<>();
-        if (accountListe.size()!= accountListeRef.size()) {
+        if (accountListe.size() > accountListeRef.size()) {
             liste = accountListe.subList(accountListeRef.size(), accountListe.size());
         }
         accountDAO.speichern(liste);
@@ -44,7 +44,6 @@ public class Accountverwaltung {
                 accountListe.add(account);
                 accountListeRef.add(account);
             }
-
         } catch (Exception e) {
         }
     }

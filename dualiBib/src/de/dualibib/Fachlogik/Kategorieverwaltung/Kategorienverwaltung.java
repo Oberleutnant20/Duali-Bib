@@ -29,7 +29,7 @@ public class Kategorienverwaltung {
 
     public void speichern() throws IOException, ConnectionError {
         List<Kategorie> liste = new ArrayList<>();
-        if(kategorieListe.size() != kategorieListeRef.size()){
+        if(kategorieListe.size() > kategorieListeRef.size()){
             liste = kategorieListe.subList(kategorieListeRef.size(), kategorieListe.size());
         }
         kategorieDAO.speichern(liste);

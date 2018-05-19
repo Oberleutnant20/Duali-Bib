@@ -29,7 +29,7 @@ public class Genreverwaltung {
 
     public void speichern() throws IOException, ConnectionError {
         List<Genre> liste = new ArrayList<>();
-        if(genreListe.size() != genreListeRef.size()){
+        if(genreListe.size() > genreListeRef.size()){
             liste = genreListe.subList(genreListeRef.size(), genreListe.size());
         }
         genreDAO.speichern(liste);
