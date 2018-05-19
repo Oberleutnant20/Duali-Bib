@@ -7,6 +7,7 @@ package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -15,17 +16,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Carina
  */
-public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
+public class AusleihenBearbeitenPanel extends ElternPanel {
 
-    private final PanelHandler panelHandler;
     ArrayList<Ausleihe> ausleiheListe;
 
     /**
      * Creates new form AusleihenBearbeitenPanel
      */
     public AusleihenBearbeitenPanel(PanelHandler panelHandler) {
+        super(panelHandler);
         initComponents();
-        this.panelHandler = panelHandler;
     }
 
     /**
@@ -116,10 +116,6 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
 
     public void setAusleihenListe(ArrayList<Ausleihe> ausleihe){
         ausleiheListe = ausleihe;
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        for (int i = 0; i < ausleiheListe.size(); i++) {
-          model.addRow(new Object[]{ausleiheListe.get(i).getId(),ausleiheListe.get(i).getMedienid(),ausleiheListe.get(i).getDate(),ausleiheListe.get(i).getUserid(),ausleiheListe.get(i).getKategorieid()});  
-        }
     }
     
     private Ausleihe getAusleihefromIndices(int position) {
@@ -136,4 +132,32 @@ public class AusleihenBearbeitenPanel extends javax.swing.JPanel {
 	return selected[0];
     }
     
+    public void fillTable() {
+        panelHandler.loadAusleihen();
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
+        for (int i = 0; i < ausleiheListe.size(); i++) {
+          model.addRow(addObject(i));  
+        }
+    }
+    
+     private Object[] addObject(int i) {
+        String medienName = "";
+        
+        for (int j = 0; j < panelHandler.returnMedien().size(); j++) {
+            if(ausleiheListe.get(i).getMedienid() == panelHandler.returnMedien().get(j).getId())
+                medienName = panelHandler.returnMedien().get(j).getName();
+        }
+        
+        String kategorieName = "";
+        
+        for (int j = 0; j < panelHandler.getKategorieListe().size(); j++) {
+            if(ausleiheListe.get(i).getKategorieid() == panelHandler.getKategorieListe().get(j).getId())
+                medienName = panelHandler.getKategorieListe().get(j).getName();
+        }
+        
+        return new Object[]{ausleiheListe.get(i).getId(),medienName,ausleiheListe.get(i).getDate(),panelHandler.getAktuellerUser().getUsername(),kategorieName};
+    }
 }

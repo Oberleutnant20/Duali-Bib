@@ -7,6 +7,7 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -15,15 +16,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Carina
  */
-public class AccountsBearbeitenPanel extends javax.swing.JPanel {
+public class AccountsBearbeitenPanel extends ElternPanel {
 
-    private final PanelHandler panelHandler;
     ArrayList<Account> accountListe;
 
     /** Creates new form AccountsBearbeiten */
     public AccountsBearbeitenPanel(PanelHandler panelHandler) {
+        super(panelHandler);
         initComponents();
-        this.panelHandler = panelHandler;
         //setAccountListe();
         //fillTable();
     }
