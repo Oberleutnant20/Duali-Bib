@@ -76,9 +76,9 @@ public class MedienDAO implements IMedienDAO {
         if (con != null) {
             for (Medien medien : medienListe) {
                 try {
-                    
+
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_ausgeliehen, m_Vorgemerkt, m_Anzahl, m_beschreibung, km_ID, g_ID) "
-                            + "VALUES('" + medien.getName() + "','" + medien.getAuthor() + "','" + medien.getIsbn() + "',"+medien.getBarcodenummer()+", " + medien.getVerfuegbare() + ", " + medien.getAnzahl() + ", '" + medien.getDesc() + "', " + medien.getKategorien().getId() + ", " + medien.getGenre().getId() + ");");
+                            + "VALUES('" + medien.getName() + "','" + medien.getAuthor() + "','" + medien.getIsbn() + "'," + medien.getBarcodenummer() + ", " + medien.getVerfuegbare() + ", " + medien.getAnzahl() + ", '" + medien.getDesc() + "', " + medien.getKategorien().getId() + ", " + medien.getGenre().getId() + ");");
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,6 +105,33 @@ public class MedienDAO implements IMedienDAO {
             }
         }
         return null;
+    }
+
+    @Override
+    public void update(List<Medien> medienListe) throws IOException, ConnectionError {
+        if (con != null) {
+            for (Medien medien : medienListe) {
+                try {
+                    String name = medien.getName();
+                    String ISBN = medien.getIsbn();
+                    long barcode = medien.getBarcodenummer();
+                    int anzahl = medien.getAnzahl();
+                    String author = medien.getAuthor();
+                    String desc = medien.getDesc();
+                    int gID = medien.getGenre().getId();
+                    long mID = medien.getId();
+                    long kID = medien.getKategorien().getId();
+                    boolean ausgeliehen = medien.isAusgeliehen();
+                    boolean vorgemerkt = medien.isVorgemerkt();
+                    PreparedStatement ptsm = con.prepareStatement("UPDATE Medien SET m_Titel = '" + name + "', m_Author = '" + author + "', m_ISBN = '" + ISBN + "', m_Barcode =" + barcode + ", m_ausgeliehen = " + ausgeliehen + ", m_Vorgemerkt = " + vorgemerkt + ", m_Anzahl = " + anzahl + ", m_beschreibung = '" + desc + "', km_ID = " + kID + ", g_ID = " + gID + " WHERE m_ID LIKE " + mID + ";");
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MedienDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            throw new ConnectionError();
+        }
     }
 
 }
