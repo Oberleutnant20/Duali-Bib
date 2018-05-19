@@ -6,15 +6,14 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 
 /**
  *
  * @author Carina
  */
-public class AccountBearbeitenPanel extends javax.swing.JPanel {
-
-    private final PanelHandler panelHandler;
+public class AccountBearbeitenPanel extends ElternPanel {
 
     /**
      * Creates new form AccountBearbeiten
@@ -23,9 +22,13 @@ public class AccountBearbeitenPanel extends javax.swing.JPanel {
     private Account account;
     private boolean neu;
             
+    /**
+     *
+     * @param panelHandler
+     */
     public AccountBearbeitenPanel(PanelHandler panelHandler) {
+        super(panelHandler);
         initComponents();
-        this.panelHandler = panelHandler;
     }
 
     /**

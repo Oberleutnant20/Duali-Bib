@@ -8,6 +8,7 @@ package de.dualibib.UI.Panels;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +20,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Carina
  */
-public class HistoryPanel extends javax.swing.JPanel {
+public class HistoryPanel extends ElternPanel {
 
-    private final PanelHandler panelHandler;
     ArrayList<History> historyListe;
 
     /**
      * Creates new form HistoryPanel
      */
     public HistoryPanel(PanelHandler panelHandler) {
+        super(panelHandler);
         initComponents();
-        this.panelHandler = panelHandler;
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
     }
 
@@ -250,6 +250,9 @@ public class HistoryPanel extends javax.swing.JPanel {
 
     public void fillTable() {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
         for (int i = 0; i < historyListe.size(); i++) {
           model.addRow(addObject(i));  
         }

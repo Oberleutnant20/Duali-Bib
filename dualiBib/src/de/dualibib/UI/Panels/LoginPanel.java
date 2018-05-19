@@ -5,6 +5,7 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -13,17 +14,16 @@ import java.io.IOException;
  *
  * @author Carina
  */
-public class LoginPanel extends javax.swing.JPanel {
+public class LoginPanel extends ElternPanel {
 
-    private final PanelHandler panelHandler;
     private boolean online = false;
 
     /**
      * Creates new form Login
      */
     public LoginPanel(PanelHandler panelHandler) {
+        super(panelHandler);
         initComponents();
-        this.panelHandler = panelHandler;
     }
 
     /**

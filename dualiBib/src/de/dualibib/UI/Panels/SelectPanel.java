@@ -8,6 +8,7 @@ package de.dualibib.UI.Panels;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,9 +25,8 @@ import javax.swing.JComboBox;
  *
  * @author Carina
  */
-public class SelectPanel extends javax.swing.JPanel {
+public class SelectPanel extends ElternPanel {
 
-    private final PanelHandler panelHandler;
     private Medien medium;
 
 //    private final ArrayList<String> genreListe;
@@ -35,9 +35,9 @@ public class SelectPanel extends javax.swing.JPanel {
     /**
      * Creates new form SelectPanel
      */
-    public SelectPanel(PanelHandler panelHandler) {//List genreListe, List kategorieListe) {
+    public SelectPanel(PanelHandler panelHandler) {
+        super(panelHandler);
         initComponents();
-        this.panelHandler = panelHandler;
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
         setComboboxDate(dateComboBox);

@@ -5,22 +5,22 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 
 /**
  *
  * @author Carina
  */
-public class OptionPanel extends javax.swing.JPanel {
+public class OptionPanel extends ElternPanel {
 
-    private final PanelHandler panelHandler;
 
     /**
      * Creates new form OptionPanel
      */
     public OptionPanel(PanelHandler panelHandler) {
+        super(panelHandler);
         initComponents();
-        this.panelHandler = panelHandler;
     }
 
     /**
