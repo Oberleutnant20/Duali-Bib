@@ -29,7 +29,7 @@ public class Historyverwaltung {
 
     public void speichern() throws IOException, ConnectionError {
         List<History> liste = new ArrayList<>();
-        if(historyListe.size() != historyListeRef.size()){
+        if(historyListe.size() > historyListeRef.size()){
             liste = historyListe.subList(historyListeRef.size(), historyListe.size());
         }
         historyDAO.speichern(liste);

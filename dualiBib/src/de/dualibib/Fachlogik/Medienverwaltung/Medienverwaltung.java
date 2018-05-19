@@ -29,7 +29,7 @@ public class Medienverwaltung {
 
     public void speichern() throws IOException, ConnectionError {
         List<Medien> liste = new ArrayList<>();
-        if(medienListe.size() != medienListeRef.size()){
+        if(medienListe.size() > medienListeRef.size()){
             liste = medienListe.subList(medienListeRef.size(), medienListe.size());
         }
         medienDAO.speichern(liste);
