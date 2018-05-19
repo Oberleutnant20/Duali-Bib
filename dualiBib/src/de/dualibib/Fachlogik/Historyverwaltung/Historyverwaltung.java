@@ -31,6 +31,7 @@ public class Historyverwaltung {
         List<History> liste = new ArrayList<>();
         if(historyListe.size() > historyListeRef.size()){
             liste = historyListe.subList(historyListeRef.size(), historyListe.size());
+            System.out.println("hm");
         }
         historyDAO.speichern(liste);
     }
@@ -39,9 +40,10 @@ public class Historyverwaltung {
         historyListe.clear();
         try {
             List<History> liste = historyDAO.laden();
-            liste.forEach((history) -> {
-                this.add(history);
-            });
+            for (History history : liste) {
+                historyListe.add(history);
+                historyListeRef.add(history);
+            }
 
         } catch (Exception e) {
         }
@@ -61,8 +63,8 @@ public class Historyverwaltung {
 
     public List<History> get() {
         ArrayList<History> liste = new ArrayList<>();
-        historyListe.forEach((kategorie) -> {
-            liste.add(kategorie);
+        historyListe.forEach((history) -> {
+            liste.add(history);
         });
         return liste;
     }

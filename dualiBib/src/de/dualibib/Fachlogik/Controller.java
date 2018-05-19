@@ -143,23 +143,11 @@ public class Controller {
     }
 
     public void saveAccountChange(Account a) {
-        List<Account> list = accountverwaltung.get();
-        for(int i = 0; i < list.size() ; i++){
-            if(list.get(i).getUserid()==(a.getUserid())){
-                accountverwaltung.delete(list.get(i));
-                accountverwaltung.add(a);
-            }
-        }
+       accountverwaltung.update(a);
     }
 
     public void saveMediumChange(Medien m) {
-        List<Medien> list = medienverwaltung.get();
-        for(int i = 0; i < list.size() ; i++){
-            if(list.get(i).getId() ==m.getId()){
-                medienverwaltung.delete(list.get(i));
-                medienverwaltung.add(m);
-            }
-        }
+       medienverwaltung.update(m);
     }
 
     public void deleteAusleihe(Ausleihe a) {
@@ -206,6 +194,7 @@ public class Controller {
                 //historyListe.add(history);
                 ausleiheverwaltung.delete(liste.get(i));
             }
+            System.out.println("ka");
         }
     }
 
