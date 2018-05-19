@@ -29,7 +29,7 @@ public class Ausleiheverwaltung {
 
     public void speichern() throws IOException, ConnectionError {
         List<Ausleihe> liste = new ArrayList<>();
-        if(ausleiheListe.size() != ausleiheListeRef.size()){
+        if(ausleiheListe.size() > ausleiheListeRef.size()){
             liste = ausleiheListe.subList(ausleiheListeRef.size(), ausleiheListe.size());
         }
         ausleiheDAO.speichern(liste);

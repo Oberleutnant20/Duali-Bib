@@ -89,6 +89,7 @@ public class Medien {
     public Genre getGenre() {
         return genre;
     }
+    
     public void berechneVerfuegbare(int ausgeliehene){
         verfuegbar_anzahl = verfuegbar_anzahl - ausgeliehene;
     }

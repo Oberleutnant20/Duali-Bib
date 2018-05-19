@@ -96,7 +96,6 @@ public class Controller {
     private void ladeUserDaten() {
         historyListe = ladeHistory();
         ausleiheListe = ladeAusleihe();
-        //TODO
     }
 
     private Account matchingUser(String accountname, String passwort) {
