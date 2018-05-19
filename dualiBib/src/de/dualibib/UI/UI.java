@@ -231,6 +231,8 @@ public class UI extends javax.swing.JFrame {
 
     private void aktuelleAusleiheMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aktuelleAusleiheMenuActionPerformed
         panelHandler.panelUnsichtbar();
+        panelHandler.getAusleihenPanel().setAccount(panelHandler.getAktuellerUser());
+        panelHandler.getAusleihenPanel().fillTable();
         add(panelHandler.getAusleihenPanel());
         panelHandler.getAusleihenPanel().setVisible(true);
     }//GEN-LAST:event_aktuelleAusleiheMenuActionPerformed
@@ -243,6 +245,7 @@ public class UI extends javax.swing.JFrame {
 
     private void ausleihenBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenBearbeitenActionPerformed
         panelHandler.panelUnsichtbar();
+        panelHandler.getAusleihenBearbeitenPanel().fillTable();
         add(panelHandler.getAusleihenBearbeitenPanel());
         panelHandler.getAusleihenBearbeitenPanel().setVisible(true);
     }//GEN-LAST:event_ausleihenBearbeitenActionPerformed
@@ -293,7 +296,7 @@ public class UI extends javax.swing.JFrame {
         administrationMenu.setEnabled(true);
 
         panelHandler.loadAdminAccounts();
-        panelHandler.loadAdminAusleihen();
+        panelHandler.loadAusleihen();
     }
 
     void setUserOnline() {

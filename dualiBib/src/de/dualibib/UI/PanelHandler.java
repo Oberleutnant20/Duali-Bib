@@ -186,8 +186,9 @@ public class PanelHandler {
         accountsBearbeitenPanel.setAccountListe(controller.getAllAccountsListe());
     }
 
-    public void loadAdminAusleihen() {
+    public void loadAusleihen() {
         ausleihenBearbeitenPanel.setAusleihenListe(controller.getAllAusleihenListe());
+        ausleihenPanel.setAusleihenListe(controller.getAllAusleihenListe());
     }
 
     public Medien mapHistoryAndMedium(History selected) {
@@ -207,7 +208,13 @@ public class PanelHandler {
     }
 
     public void createNewAusleihe(long userid, Date date, long katid) {
-        Ausleihe a = new Ausleihe(controller.getAllAusleihenListe().size()+1, userid, date, aktuellerUser.getUserid(), katid);
+       long id;
+        try {
+            id = controller.getAllAusleihenListe().get(controller.getAllAusleihenListe().size()).getId()+1;
+        } catch (Exception e) {
+            id=0;
+        }
+        Ausleihe a = new Ausleihe(id, userid, date, aktuellerUser.getUserid(), katid);
         controller.saveAusleihe(a);
     }
 

@@ -8,6 +8,7 @@ package de.dualibib.UI.Panels;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +20,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Carina
  */
-public class SuchePanel extends javax.swing.JPanel {
+public class SuchePanel extends ElternPanel {
 
-    private final PanelHandler panelHandler;
     ArrayList<Medien> medienListe;
 
     /**
      * Creates new form SuchePanel
      */
     public SuchePanel(PanelHandler panelHandler) {
+        super(panelHandler);
         initComponents();
-        this.panelHandler = panelHandler;
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
     }
