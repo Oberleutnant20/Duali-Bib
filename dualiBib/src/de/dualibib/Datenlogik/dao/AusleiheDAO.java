@@ -62,10 +62,6 @@ public class AusleiheDAO implements IAusleiheDAO {
                 try {
                     String pattern = "YYYY-MM-DD";
                     String mysqlDateString = new SimpleDateFormat(pattern).format(ausleihe.getDate());
-                    ausleihe.getKategorieid();
-                    ausleihe.getMedienid();
-                    ausleihe.getUserid();
-                    ausleihe.getDate();
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO Ausleihe(a_DATE, u_ID, m_id, km_id) "
                             + "VALUES('" + mysqlDateString + "', " + ausleihe.getUserid() + ", " + ausleihe.getMedienid() + ", " + ausleihe.getKategorieid() + ");");
 
@@ -79,4 +75,20 @@ public class AusleiheDAO implements IAusleiheDAO {
         }
     }
 
+    @Override
+    public void loeschen(List<Ausleihe> ausleiheListe) throws IOException, ConnectionError {
+        if(con != null){
+            for (Ausleihe ausleihe : ausleiheListe) {
+                try {
+                    PreparedStatement ptsm = con.prepareStatement("DELETE FROM Ausleihe WHERE a_ID LIKE "+ausleihe.getId());
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AusleiheDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        } else {
+            throw new ConnectionError();
+        }
+    }
 }

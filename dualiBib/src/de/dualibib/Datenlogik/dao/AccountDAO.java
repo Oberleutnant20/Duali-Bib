@@ -79,4 +79,30 @@ public class AccountDAO implements IAccountDAO {
         }
     }
 
+    @Override
+    public void update(List<Account> accountListe) throws IOException, ConnectionError {
+        if(con != null){
+            for (Account account : accountListe) {
+                try {
+                    String vorname = account.getVorname();
+                    String nachname = account.getNachname();
+                    String username = account.getUsername();
+                    String passwd = account.getPasswort();
+                    String str = account.getStrasse();
+                    String hausnr = account.getHausnummer();
+                    int plz = account.getPlz();
+                    int id = account.getUserid();
+                    String ort = account.getOrt();                    
+                    boolean mitarbeiter = account.isMitarbeiter();
+                    PreparedStatement ptsm = con .prepareStatement("UPDATE USER SET u_Vorname = '"+vorname+"', u_Nachname = '"+nachname+"', u_login = '"+username+"', u_passwd = '"+passwd+"', u_Mitarbeiter ="+mitarbeiter+", u_Strasse = '"+str+"', u_Hausnummer = '"+hausnr+"', u_PLZ = "+plz+", u_Ort = '"+ort+"' WHERE u_ID LIKE "+id+";");
+                    ptsm.execute();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } else {
+            throw new ConnectionError();
+        }
+    }
+
 }
