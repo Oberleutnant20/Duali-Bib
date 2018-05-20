@@ -19,11 +19,15 @@ public class Medienverwaltung {
 
     private ArrayList<Medien> medienListe;
     private ArrayList<Medien> medienListeRef;
+    private ArrayList<Medien> medienListeUpdate;
+    private ArrayList<Medien> medienListeDelete;
     private IMedienDAO medienDAO;
 
     public Medienverwaltung(IMedienDAO medienDAO) {
         medienListe = new ArrayList<Medien>();
         medienListeRef = new ArrayList<Medien>();
+        medienListeUpdate = new ArrayList<Medien>();
+        medienListeDelete = new ArrayList<Medien>();
         this.medienDAO = medienDAO;
     }
 
@@ -33,6 +37,7 @@ public class Medienverwaltung {
             liste = medienListe.subList(medienListeRef.size(), medienListe.size());
         }
         medienDAO.speichern(liste);
+        medienDAO.update(medienListeUpdate);
     }
 
     public void laden() {
@@ -58,6 +63,13 @@ public class Medienverwaltung {
 
     public void delete(Medien medien) {
         if (!medienListe.remove(medien)) {
+			String error = "Medium gibt es nicht.";
+                        System.out.println(error);
+		}
+    }
+    
+    public void update(Medien medien){
+        if (!medienListeUpdate.add(medien)) {
 			String error = "Medium gibt es nicht.";
                         System.out.println(error);
 		}
