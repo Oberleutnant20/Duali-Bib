@@ -19,11 +19,15 @@ public class Ausleiheverwaltung {
 
     private ArrayList<Ausleihe> ausleiheListe;
     private ArrayList<Ausleihe> ausleiheListeRef;
+    private ArrayList<Ausleihe> ausleiheListeUpdate;
+    private ArrayList<Ausleihe> ausleiheListeDelete;
     private IAusleiheDAO ausleiheDAO;
 
     public Ausleiheverwaltung(IAusleiheDAO ausleiheDAO) {
         ausleiheListe = new ArrayList<Ausleihe>();
         ausleiheListeRef = new ArrayList<Ausleihe>();
+        ausleiheListeUpdate = new ArrayList<Ausleihe>();
+        ausleiheListeDelete = new ArrayList<Ausleihe>();
         this.ausleiheDAO = ausleiheDAO;
     }
 
@@ -33,6 +37,7 @@ public class Ausleiheverwaltung {
             liste = ausleiheListe.subList(ausleiheListeRef.size(), ausleiheListe.size());
         }
         ausleiheDAO.speichern(liste);
+        ausleiheDAO.loeschen(ausleiheListeDelete);
     }
 
     public void laden() {
@@ -56,7 +61,13 @@ public class Ausleiheverwaltung {
     }
 
     public void delete(Ausleihe ausleihe) {
-        if (!ausleiheListe.remove(ausleihe)) {
+        if (!ausleiheListeDelete.add(ausleihe)) {
+            String error = "Ausleihe gibt es nicht.";
+        }
+    }
+    
+    public void update(Ausleihe ausleihe){
+        if (!ausleiheListeUpdate.add(ausleihe)) {
             String error = "Ausleihe gibt es nicht.";
         }
     }
