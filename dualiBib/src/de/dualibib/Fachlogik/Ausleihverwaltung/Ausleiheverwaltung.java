@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Ausleihverwaltung;
 
 import de.dualibib.Datenlogik.idao.IAusleiheDAO;
+import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Ausleiheverwaltung {
+public class Ausleiheverwaltung extends ElternVerwaltung{
 
     private ArrayList<Ausleihe> ausleiheListe;
     private ArrayList<Ausleihe> ausleiheListeRef;

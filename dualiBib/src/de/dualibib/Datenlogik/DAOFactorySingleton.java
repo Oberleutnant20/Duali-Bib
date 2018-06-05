@@ -6,7 +6,12 @@
 package de.dualibib.Datenlogik;
 
 import de.dualibib.Datenlogik.dao.AccountDAO;
+import de.dualibib.Datenlogik.dao.AusleiheDAO;
 import de.dualibib.Datenlogik.dao.ElternDAO;
+import de.dualibib.Datenlogik.dao.GenreDAO;
+import de.dualibib.Datenlogik.dao.HistoryDAO;
+import de.dualibib.Datenlogik.dao.KategorieDAO;
+import de.dualibib.Datenlogik.dao.MedienDAO;
 
 /**
  *
@@ -29,6 +34,16 @@ class DAOFactorySingleton {
        switch (art){
           case "Account" :
               return new AccountDAO();
+          case "Medien" :
+              return new MedienDAO();
+          case "Ausleihe" :
+              return new AusleiheDAO();
+          case "Kategorien" :
+              return new KategorieDAO();
+          case "Genre" :
+              return new GenreDAO();
+          case "History" :
+              return new HistoryDAO();
           default:return null;
               
       }

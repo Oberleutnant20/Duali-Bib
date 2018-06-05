@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Genreverwaltung;
 
 import de.dualibib.Datenlogik.idao.IGenreDAO;
+import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Genreverwaltung {
+public class Genreverwaltung extends ElternVerwaltung{
 
     private ArrayList<Genre> genreListe;
     private ArrayList<Genre> genreListeRef;

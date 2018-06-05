@@ -16,13 +16,14 @@ import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
 import de.dualibib.Fachlogik.Historyverwaltung.Historyverwaltung;
+import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 
 /**
  *
  * @author Carina
  */
-class VerwaltungsFactorySingleton {
+public class VerwaltungsFactorySingleton {
     //create an object of SingleObject
    private static VerwaltungsFactorySingleton instance = new VerwaltungsFactorySingleton();
 
@@ -39,23 +40,23 @@ class VerwaltungsFactorySingleton {
       DAOFactorySingleton singleton = DAOFactorySingleton.getInstance();
        switch (art){
           case "Account" :
-              AccountDAO dao = (AccountDAO)singleton.getDAO("Account");
-              return new Accountverwaltung(dao);
+              AccountDAO accountdao = (AccountDAO)singleton.getDAO("Account");
+              return new Accountverwaltung(accountdao);
           case "Medien" :
-              MedienDAO dao = (MedienDAO)singleton.getDAO("Medien");
-              return new Medienverwaltung(dao);
+              MedienDAO mediendao = (MedienDAO)singleton.getDAO("Medien");
+              return new Medienverwaltung(mediendao);
           case "Ausleihe" :
-              AusleiheDAO dao = (AusleiheDAO)singleton.getDAO("Ausleihe");
-              return new Ausleiheverwaltung(dao);
+              AusleiheDAO ausleihedao = (AusleiheDAO)singleton.getDAO("Ausleihe");
+              return new Ausleiheverwaltung(ausleihedao);
           case "Kategorien" :
-              KategorieDAO dao = (KategorieDAO)singleton.getDAO("Kategorien");
-              return new Kategorieverwaltung(dao);
+              KategorieDAO kategoriedao = (KategorieDAO)singleton.getDAO("Kategorien");
+              return new Kategorienverwaltung(kategoriedao);
           case "Genre" :
-              GenreDAO dao = (GenreDAO)singleton.getDAO("Genre");
-              return new Genreverwaltung(dao);
+              GenreDAO genredao = (GenreDAO)singleton.getDAO("Genre");
+              return new Genreverwaltung(genredao);
           case "History" :
-              HistoryDAO dao = (HistoryDAO)singleton.getDAO("History");
-              return new Historyverwaltung(dao);
+              HistoryDAO historydao = (HistoryDAO)singleton.getDAO("History");
+              return new Historyverwaltung(historydao);
           default:return null;
               
       }

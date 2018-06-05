@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Historyverwaltung;
 
 import de.dualibib.Datenlogik.idao.IHistoryDAO;
+import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Historyverwaltung {
+public class Historyverwaltung extends ElternVerwaltung{
 
     private ArrayList<History> historyListe;
     private ArrayList<History> historyListeRef;

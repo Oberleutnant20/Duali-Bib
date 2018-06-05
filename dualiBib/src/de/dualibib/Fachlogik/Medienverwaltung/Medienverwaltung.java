@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Medienverwaltung;
 
 import de.dualibib.Datenlogik.idao.IMedienDAO;
+import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Medienverwaltung {
+public class Medienverwaltung extends ElternVerwaltung{
 
     private ArrayList<Medien> medienListe;
     private ArrayList<Medien> medienListeRef;

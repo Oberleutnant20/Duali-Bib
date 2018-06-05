@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Kategorieverwaltung;
 
 import de.dualibib.Datenlogik.idao.IKategorieDAO;
+import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Kategorienverwaltung {
+public class Kategorienverwaltung extends ElternVerwaltung{
 
     private ArrayList<Kategorie> kategorieListe;
     private ArrayList<Kategorie> kategorieListeRef;
