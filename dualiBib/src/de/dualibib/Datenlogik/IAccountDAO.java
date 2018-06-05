@@ -5,17 +5,16 @@
  */
 package de.dualibib.Datenlogik;
 
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Datenlogik.dao.AccountDTO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
-import java.util.List;
 
 /**
  *
  * @author Carina
  */
 public interface IAccountDAO {
-    List<Account> laden() throws IOException, ConnectionError;
-    void speichern(List<Account> accountListe)  throws IOException, ConnectionError;
-    void update(List<Account> accountListe) throws IOException, ConnectionError;
+    AccountDTO laden() throws IOException, ConnectionError;
+    void speichern(AccountDTO accountListe)  throws IOException, ConnectionError;
+    void update(AccountDTO accountListe) throws IOException, ConnectionError;
 }

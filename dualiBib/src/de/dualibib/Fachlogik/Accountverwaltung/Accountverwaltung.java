@@ -6,6 +6,7 @@
 package de.dualibib.Fachlogik.Accountverwaltung;
 
 import de.dualibib.Datenlogik.IAccountDAO;
+import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Accountverwaltung {
+public class Accountverwaltung extends ElternVerwaltung{
 
     private ArrayList<Account> accountListe;
     private ArrayList<Account> accountListeUpdate;

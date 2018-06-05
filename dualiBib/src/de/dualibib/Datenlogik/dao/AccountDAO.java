@@ -23,15 +23,16 @@ import java.util.logging.Logger;
  *
  * @author Carina
  */
-public class AccountDAO implements IAccountDAO {
+public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
 
     @Override
-    public List<Account> laden() throws IOException, ConnectionError {
+    public AccountDTO laden() throws IOException, ConnectionError {
         ArrayList<Account> ret = new ArrayList<>();
+        AccountDTO accountDTO = new AccountDTO();
         if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("user"));
@@ -50,6 +51,7 @@ public class AccountDAO implements IAccountDAO {
                     String anrede = rs.getString("u_anrede");
 
                     ret.add(new Account(login, passwd, mitarbeiter, id, vorname, nachname, plz, strasse, hausnummer, ort));
+                    
                 }
             } catch (SQLException ex) {
                 System.err.println("AccountDAO laden: " + ex);
@@ -57,7 +59,8 @@ public class AccountDAO implements IAccountDAO {
         } else {
             throw new ConnectionError();
         }
-        return ret;
+        accountDTO.setList(ret);
+        return accountDTO;
     }
 
     @Override
