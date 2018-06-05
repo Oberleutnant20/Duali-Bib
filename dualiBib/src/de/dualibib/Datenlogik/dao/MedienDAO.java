@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import de.dualibib.Datenlogik.IMedienDAO;
+import de.dualibib.Datenlogik.idao.IMedienDAO;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author Carina
  */
-public class MedienDAO implements IMedienDAO {
+public class MedienDAO extends ElternDAO implements IMedienDAO {
 
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();

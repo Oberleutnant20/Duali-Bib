@@ -5,6 +5,7 @@
  */
 package de.dualibib;
 
+import de.dualibib.Datenlogik.VerwaltungsFactorySingleton;
 import de.dualibib.Datenlogik.dao.AccountDAO;
 import de.dualibib.Datenlogik.dao.AusleiheDAO;
 import de.dualibib.Datenlogik.dao.GenreDAO;

@@ -5,7 +5,7 @@
  */
 package de.dualibib.Fachlogik.Kategorieverwaltung;
 
-import de.dualibib.Datenlogik.IKategorieDAO;
+import de.dualibib.Datenlogik.idao.IKategorieDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;

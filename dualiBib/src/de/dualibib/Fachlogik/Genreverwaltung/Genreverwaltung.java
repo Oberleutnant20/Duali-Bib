@@ -5,7 +5,7 @@
  */
 package de.dualibib.Fachlogik.Genreverwaltung;
 
-import de.dualibib.Datenlogik.IGenreDAO;
+import de.dualibib.Datenlogik.idao.IGenreDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;

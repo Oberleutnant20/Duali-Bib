@@ -5,7 +5,7 @@
  */
 package de.dualibib.Fachlogik.Accountverwaltung;
 
-import de.dualibib.Datenlogik.IAccountDAO;
+import de.dualibib.Datenlogik.idao.IAccountDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;

@@ -5,7 +5,7 @@
  */
 package de.dualibib.Fachlogik.Ausleihverwaltung;
 
-import de.dualibib.Datenlogik.IAusleiheDAO;
+import de.dualibib.Datenlogik.idao.IAusleiheDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;

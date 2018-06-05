@@ -5,8 +5,9 @@
  */
 package de.dualibib.Datenlogik.dao;
 
+import de.dualibib.Datenlogik.dto.AccountDTO;
 import de.dualibib.Datenlogik.Database;
-import de.dualibib.Datenlogik.IAccountDAO;
+import de.dualibib.Datenlogik.idao.IAccountDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;

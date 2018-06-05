@@ -5,7 +5,7 @@
  */
 package de.dualibib.Fachlogik.Medienverwaltung;
 
-import de.dualibib.Datenlogik.IMedienDAO;
+import de.dualibib.Datenlogik.idao.IMedienDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;

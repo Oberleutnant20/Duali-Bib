@@ -6,7 +6,7 @@
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
-import de.dualibib.Datenlogik.IKategorieDAO;
+import de.dualibib.Datenlogik.idao.IKategorieDAO;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Carina
  */
-public class KategorieDAO implements IKategorieDAO {
+public class KategorieDAO extends ElternDAO implements IKategorieDAO {
 
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();

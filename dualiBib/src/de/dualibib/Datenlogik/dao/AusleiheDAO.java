@@ -6,7 +6,7 @@
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
-import de.dualibib.Datenlogik.IAusleiheDAO;
+import de.dualibib.Datenlogik.idao.IAusleiheDAO;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  *
  * @author Carina
  */
-public class AusleiheDAO implements IAusleiheDAO {
+public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
 
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();

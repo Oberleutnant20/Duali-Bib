@@ -6,7 +6,7 @@
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
-import de.dualibib.Datenlogik.IGenreDAO;
+import de.dualibib.Datenlogik.idao.IGenreDAO;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Carina
  */
-public class GenreDAO implements IGenreDAO {
+public class GenreDAO extends ElternDAO implements IGenreDAO {
 
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();

@@ -6,7 +6,7 @@
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
-import de.dualibib.Datenlogik.IHistoryDAO;
+import de.dualibib.Datenlogik.idao.IHistoryDAO;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  *
  * @author Carina
  */
-public class HistoryDAO implements IHistoryDAO {
+public class HistoryDAO extends ElternDAO implements IHistoryDAO {
 
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();

@@ -5,7 +5,7 @@
  */
 package de.dualibib.Fachlogik.Historyverwaltung;
 
-import de.dualibib.Datenlogik.IHistoryDAO;
+import de.dualibib.Datenlogik.idao.IHistoryDAO;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
