@@ -257,5 +257,10 @@ public class HistoryPanel extends ElternPanel {
           model.addRow(addObject(i));  
         }
     }
+
+    @Override
+    public void update() {
+        fillTable();
+    }
     
 }

@@ -6,6 +6,7 @@
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
+import de.dualibib.Datenlogik.dto.GenreDTO;
 import de.dualibib.Datenlogik.idao.IGenreDAO;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.info.exceptions.ConnectionError;
@@ -15,7 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,10 +28,12 @@ public class GenreDAO extends ElternDAO implements IGenreDAO {
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
+    GenreDTO dto;
 
     @Override
-    public List<Genre> laden() throws IOException, ConnectionError {
+    public GenreDTO laden() throws IOException, ConnectionError {
         ArrayList<Genre> ret = new ArrayList<>();
+        dto = new GenreDTO();
         if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("genre"));
@@ -45,13 +47,15 @@ public class GenreDAO extends ElternDAO implements IGenreDAO {
         } else {
             throw new ConnectionError();
         }
-        return ret;
+        dto.set(ret);
+        return dto;
     }
 
     @Override
-    public void speichern(List<Genre> genreListe) throws IOException, ConnectionError {
+    public void speichern() throws IOException, ConnectionError {
         if (con != null) {
-            for (Genre genre : genreListe) {
+            ArrayList<Genre> liste  = dto.get();
+            for (Genre genre : liste) {
                 try {
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO Genre(g_Name) "
                             + "VALUES('" + genre.getBezeichnung() + "');");

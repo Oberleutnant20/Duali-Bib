@@ -5,7 +5,7 @@
  */
 package de.dualibib.Datenlogik.dto;
 
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.UI.ElternPanel;
 import java.util.ArrayList;
 
@@ -13,41 +13,42 @@ import java.util.ArrayList;
  *
  * @author Carina
  */
-public class AccountDTO implements DataTransferObject{
+public class AusleiheDTO implements DataTransferObject{
 
-    private ArrayList<Account> accountListe;
+    private ArrayList<Ausleihe> ausleiheListe;
     private ArrayList<ElternPanel> panelListe;
     
-    public AccountDTO(){
-        accountListe = new ArrayList<>();
+    public AusleiheDTO(){
+        ausleiheListe = new ArrayList<>();
     }
     
     @Override
     public ArrayList get() {
-        return accountListe;
+        return ausleiheListe;
     }
 
     @Override
     public void set(ArrayList list) {
-        accountListe = list;
+        ausleiheListe = list;
     }
 
-    public boolean add(Account a) {
-        boolean success = accountListe.add(a);
+    public boolean add(Ausleihe a) {
+        boolean success = ausleiheListe.add(a);
         return success;
     }
 
-    public boolean remove(Account a) {
-        boolean success = accountListe.remove(a);
+    public boolean remove(Ausleihe a) {
+        boolean success = ausleiheListe.remove(a);
         return success;
     }
 
     @Override
     public int size() {
-        return accountListe.size();
+        return ausleiheListe.size();
     }
     
-    public Account get(int i){
-        return accountListe.get(i);
+    public Ausleihe get(int i){
+        return ausleiheListe.get(i);
     }
+    
 }

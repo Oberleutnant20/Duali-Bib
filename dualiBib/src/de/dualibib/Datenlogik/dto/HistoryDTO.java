@@ -5,7 +5,7 @@
  */
 package de.dualibib.Datenlogik.dto;
 
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.UI.ElternPanel;
 import java.util.ArrayList;
 
@@ -13,41 +13,42 @@ import java.util.ArrayList;
  *
  * @author Carina
  */
-public class AccountDTO implements DataTransferObject{
+public class HistoryDTO implements DataTransferObject{
 
-    private ArrayList<Account> accountListe;
+    private ArrayList<History> historyListe;
     private ArrayList<ElternPanel> panelListe;
     
-    public AccountDTO(){
-        accountListe = new ArrayList<>();
+    public HistoryDTO(){
+        historyListe = new ArrayList<>();
     }
     
     @Override
     public ArrayList get() {
-        return accountListe;
+        return historyListe;
     }
 
     @Override
     public void set(ArrayList list) {
-        accountListe = list;
+        historyListe = list;
     }
 
-    public boolean add(Account a) {
-        boolean success = accountListe.add(a);
+    public boolean add(History a) {
+        boolean success = historyListe.add(a);
         return success;
     }
 
-    public boolean remove(Account a) {
-        boolean success = accountListe.remove(a);
+    public boolean remove(History a) {
+        boolean success = historyListe.remove(a);
         return success;
     }
 
     @Override
     public int size() {
-        return accountListe.size();
+        return historyListe.size();
     }
     
-    public Account get(int i){
-        return accountListe.get(i);
+    public History get(int i){
+        return historyListe.get(i);
     }
+    
 }

@@ -167,4 +167,8 @@ public class LoginPanel extends ElternPanel {
         online = false;
     }
 
+    @Override
+    public void update() {
+        }
+
 }

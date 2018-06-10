@@ -5,6 +5,7 @@
  */
 package de.dualibib.Fachlogik.Medienverwaltung;
 
+import de.dualibib.Datenlogik.dto.MedienDTO;
 import de.dualibib.Datenlogik.idao.IMedienDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
@@ -18,39 +19,31 @@ import java.util.List;
  */
 public class Medienverwaltung extends ElternVerwaltung{
 
-    private ArrayList<Medien> medienListe;
-    private ArrayList<Medien> medienListeRef;
-    private ArrayList<Medien> medienListeUpdate;
-    private ArrayList<Medien> medienListeDelete;
+    private MedienDTO medienListe;
+    private MedienDTO medienListeRef;
+    private MedienDTO medienListeUpdate;
+    private MedienDTO medienListeDelete;
     private IMedienDAO medienDAO;
 
     public Medienverwaltung(IMedienDAO medienDAO) {
-        medienListe = new ArrayList<Medien>();
-        medienListeRef = new ArrayList<Medien>();
-        medienListeUpdate = new ArrayList<Medien>();
-        medienListeDelete = new ArrayList<Medien>();
+        medienListeRef = new MedienDTO();
+        medienListeUpdate = new MedienDTO();
+        medienListeDelete = new MedienDTO();
         this.medienDAO = medienDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<Medien> liste = new ArrayList<>();
         if(medienListe.size() > medienListeRef.size()){
-            liste = medienListe.subList(medienListeRef.size(), medienListe.size());
+            //liste = medienListe.subList(medienListeRef.size(), medienListe.size());
         }
-        medienDAO.speichern(liste);
-        medienDAO.update(medienListeUpdate);
+        medienDAO.speichern();
+        //medienDAO.update(medienListeUpdate);
     }
 
     public void laden() {
-        medienListe.clear();
-        medienListeRef.clear();
         try {
-            List<Medien> liste = medienDAO.laden();
-            for (Medien medium : liste) {
-                medienListe.add(medium);
-                medienListeRef.add(medium);
-            }
-
+            medienDAO.laden();
         } catch (Exception e) {
         }
     }
@@ -60,6 +53,7 @@ public class Medienverwaltung extends ElternVerwaltung{
 			String error = "Medium gibt es bereits.";
                         System.out.println(error);
 		}
+        notifyPanels();
     }
 
     public void delete(Medien medien) {
@@ -67,6 +61,7 @@ public class Medienverwaltung extends ElternVerwaltung{
 			String error = "Medium gibt es nicht.";
                         System.out.println(error);
 		}
+        notifyPanels();
     }
     
     public void update(Medien medien){
@@ -74,15 +69,11 @@ public class Medienverwaltung extends ElternVerwaltung{
 			String error = "Medium gibt es nicht.";
                         System.out.println(error);
 		}
+        notifyPanels();
     }
 
-    public ArrayList<Medien> get() {
-        ArrayList<Medien> liste = new ArrayList<Medien>();
-		for (Medien medien : medienListe) {
-			liste.add(medien);
-                        System.out.println(medien.getName());
-		}
-		return liste;
+    public MedienDTO get() {
+	return medienListe;
     }
 
 }

@@ -5,6 +5,9 @@
  */
 package de.dualibib.UI;
 
+import de.dualibib.Datenlogik.dto.GenreDTO;
+import de.dualibib.Datenlogik.dto.KategorieDTO;
+import de.dualibib.Datenlogik.dto.MedienDTO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Controller;
@@ -51,63 +54,14 @@ public class PanelHandler {
     private List<Genre> genreListe;
     private List<Kategorie> kategorieListe;
 
-    public UI getUi() {
-        return ui;
-    }
+    
 
-    public List<Genre> getGenreListe() {
-        return genreListe;
-    }
-
-    public List<Kategorie> getKategorieListe() {
-        return kategorieListe;
-    }
-
-    public Account getAktuellerUser() {
-        return aktuellerUser;
-    }
-
-    public SuchePanel getSuchePanel() {
-        return suchePanel;
-    }
-
-    public AusleihenBearbeitenPanel getAusleihenBearbeitenPanel() {
-        return ausleihenBearbeitenPanel;
-    }
-
-    public OptionPanel getOptionPanel() {
-        return optionPanel;
-    }
-
-    public AusleihenPanel getAusleihenPanel() {
-        return ausleihenPanel;
-    }
-
-    public HistoryPanel getHistoryPanel() {
-        return historyPanel;
-    }
-
-    public AccountsBearbeitenPanel getAccountsBearbeitenPanel() {
-        return accountsBearbeitenPanel;
-    }
-
-    public AccountBearbeitenPanel getAccountBearbeitenPanel() {
-        return accountBearbeitenPanel;
-    }
-
-    public LoginPanel getLoginPanel() {
-        return loginPanel;
-    }
-
-    public SelectPanel getSelectPanel() {
-        return selectPanel;
-    }
-
-    public PanelHandler(Controller controller, List genreListe, List kategorieListe) {
+    public PanelHandler(Controller controller, GenreDTO genreListe, KategorieDTO kategorieListe) {
         ui = new UI(genreListe, kategorieListe,this, false);
         this.genreListe = genreListe;
         this.kategorieListe = kategorieListe;
         initPanels();
+        initObsever();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
         suchePanel.setMedienListe(controller.getAllMedien());
@@ -116,6 +70,16 @@ public class PanelHandler {
         this.controller = controller;
     }
 
+    private void initObsever(){
+        controller.setAccountObserver(accountBearbeitenPanel,accountsBearbeitenPanel);
+        controller.setAusleiheObserver(ausleihenPanel,ausleihenBearbeitenPanel);
+        controller.setGenreObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
+        controller.setHistoryObserver(historyPanel);
+        controller.setKategorieObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
+        controller.setMedienObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
+        
+    }
+    
     private void initPanels(){
         loginPanel = new LoginPanel(this);
         accountBearbeitenPanel = new AccountBearbeitenPanel(this);
@@ -178,7 +142,7 @@ public class PanelHandler {
         historyPanel.setUserHistory(controller.getHistoryListe());
     }
 
-    public ArrayList<Medien> returnMedien(){
+    public MedienDTO returnMedien(){
       return controller.getAllMedien();  
     }
     
@@ -193,7 +157,7 @@ public class PanelHandler {
 
     public Medien mapHistoryAndMedium(History selected) {
         Medien medium = null;
-        ArrayList<Medien> liste = controller.getAllMedien();
+        MedienDTO liste = controller.getAllMedien();
         for (int i = 0; i < liste.size(); i++) {
             if(liste.get(i).getId()==selected.getMedienid())
                 medium = liste.get(i);
@@ -220,5 +184,55 @@ public class PanelHandler {
 
 
     
-    
+    public UI getUi() {
+        return ui;
+    }
+
+    public List<Genre> getGenreListe() {
+        return genreListe;
+    }
+
+    public List<Kategorie> getKategorieListe() {
+        return kategorieListe;
+    }
+
+    public Account getAktuellerUser() {
+        return aktuellerUser;
+    }
+
+    public SuchePanel getSuchePanel() {
+        return suchePanel;
+    }
+
+    public AusleihenBearbeitenPanel getAusleihenBearbeitenPanel() {
+        return ausleihenBearbeitenPanel;
+    }
+
+    public OptionPanel getOptionPanel() {
+        return optionPanel;
+    }
+
+    public AusleihenPanel getAusleihenPanel() {
+        return ausleihenPanel;
+    }
+
+    public HistoryPanel getHistoryPanel() {
+        return historyPanel;
+    }
+
+    public AccountsBearbeitenPanel getAccountsBearbeitenPanel() {
+        return accountsBearbeitenPanel;
+    }
+
+    public AccountBearbeitenPanel getAccountBearbeitenPanel() {
+        return accountBearbeitenPanel;
+    }
+
+    public LoginPanel getLoginPanel() {
+        return loginPanel;
+    }
+
+    public SelectPanel getSelectPanel() {
+        return selectPanel;
+    }
 }

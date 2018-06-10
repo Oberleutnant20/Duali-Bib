@@ -6,6 +6,9 @@
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
+import de.dualibib.Datenlogik.dto.GenreDTO;
+import de.dualibib.Datenlogik.dto.KategorieDTO;
+import de.dualibib.Datenlogik.dto.MedienDTO;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -13,7 +16,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import de.dualibib.Datenlogik.idao.IMedienDAO;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
@@ -34,16 +36,18 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
     private ResultSet rs2 = null;
     GenreDAO gen = new GenreDAO();
     KategorieDAO kat = new KategorieDAO();
+    MedienDTO dto;
 
     @Override
-    public List<Medien> laden() throws IOException, ConnectionError {
+    public MedienDTO laden() throws IOException, ConnectionError {
         ArrayList<Medien> ret = new ArrayList<>();
+        dto = new MedienDTO();
         if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("medien"));
                 rs = ptsm.executeQuery();
-                List<Genre> genreListe = gen.laden();
-                List<Kategorie> kategorieListe = kat.laden();
+                GenreDTO genreListe = gen.laden();
+                KategorieDTO kategorieListe = kat.laden();
                 while (rs.next()) {
                     String isbn = rs.getString("m_ISBN");
                     long barcode = rs.getLong("m_barcode");
@@ -68,13 +72,15 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
         } else {
             throw new ConnectionError();
         }
-        return ret;
+        dto.set(ret);
+        return dto;
     }
 
     @Override
-    public void speichern(List<Medien> medienListe) throws IOException, ConnectionError {
+    public void speichern() throws IOException, ConnectionError {
         if (con != null) {
-            for (Medien medien : medienListe) {
+            ArrayList<Medien> liste  = dto.get();
+            for (Medien medien : liste) {
                 try {
 
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_ausgeliehen, m_Vorgemerkt, m_Anzahl, m_beschreibung, km_ID, g_ID) "
@@ -89,7 +95,7 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
         }
     }
 
-    private Genre matchGenre(List<Genre> genreListe, int gid) {
+    private Genre matchGenre(GenreDTO genreListe, int gid) {
         for (int i = 0; i < genreListe.size(); i++) {
             if (genreListe.get(i).getId() == gid) {
                 return genreListe.get(i);
@@ -98,7 +104,7 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
         return null;
     }
 
-    private Kategorie matchKategorie(List<Kategorie> kategorieListe, int kmid) {
+    private Kategorie matchKategorie(KategorieDTO kategorieListe, int kmid) {
         for (int i = 0; i < kategorieListe.size(); i++) {
             if (kategorieListe.get(i).getId() == kmid) {
                 return kategorieListe.get(i);
@@ -108,9 +114,10 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
     }
 
     @Override
-    public void update(List<Medien> medienListe) throws IOException, ConnectionError {
+    public void update() throws IOException, ConnectionError {
         if (con != null) {
-            for (Medien medien : medienListe) {
+            ArrayList<Medien> liste  = dto.get();
+            for (Medien medien : liste) {
                 try {
                     String name = medien.getName();
                     String ISBN = medien.getIsbn();

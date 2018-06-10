@@ -15,6 +15,6 @@ import java.io.IOException;
  */
 public interface IAccountDAO {
     AccountDTO laden() throws IOException, ConnectionError;
-    void speichern(AccountDTO accountListe)  throws IOException, ConnectionError;
-    void update(AccountDTO accountListe) throws IOException, ConnectionError;
+    void speichern()  throws IOException, ConnectionError;
+    void update() throws IOException, ConnectionError;
 }

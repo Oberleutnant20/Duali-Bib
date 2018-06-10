@@ -12,9 +12,7 @@ import java.util.ArrayList;
  * @author Carina
  */
 interface DataTransferObject {
-    public ArrayList getList();
-    public void setList(ArrayList list);
-    public ArrayList addToList(); //boolean?
-    public void removeFromList();
-    public int getSizeFromList();
+    public ArrayList get();
+    public void set(ArrayList list);
+    public int size();
 }

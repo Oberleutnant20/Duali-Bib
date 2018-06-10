@@ -6,6 +6,7 @@
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
+import de.dualibib.Datenlogik.dto.HistoryDTO;
 import de.dualibib.Datenlogik.idao.IHistoryDAO;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.info.exceptions.ConnectionError;
@@ -15,7 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,10 +28,12 @@ public class HistoryDAO extends ElternDAO implements IHistoryDAO {
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
+    HistoryDTO dto;
 
     @Override
-    public List<History> laden() throws IOException, ConnectionError {
+    public HistoryDTO laden() throws IOException, ConnectionError {
         ArrayList<History> ret = new ArrayList<>();
+        dto = new HistoryDTO();
         if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("History"));
@@ -46,13 +48,15 @@ public class HistoryDAO extends ElternDAO implements IHistoryDAO {
         } else {
             throw new ConnectionError();
         }
-        return ret;
+        dto.set(ret);
+        return dto;
     }
 
     @Override
-    public void speichern(List<History> historyListe) throws IOException, ConnectionError {
+    public void speichern() throws IOException, ConnectionError {
         if (con != null) {
-            for (History history : historyListe) {
+            ArrayList<History> liste  = dto.get();
+            for (History history : liste) {
                 try {
                     history.getKategorieid();
                     history.getMedienid();

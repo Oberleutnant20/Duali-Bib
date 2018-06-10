@@ -267,4 +267,9 @@ public class SuchePanel extends ElternPanel {
         String genre = medienListe.get(i).getGenre().getBezeichnung();
         return new Object[]{medienListe.get(i).getName(),kategorie,genre,medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()};
     }
+
+    @Override
+    public void update() {
+        fillTable();
+    }
 }

@@ -5,6 +5,8 @@
  */
 package de.dualibib.UI;
 
+import de.dualibib.Datenlogik.dto.GenreDTO;
+import de.dualibib.Datenlogik.dto.KategorieDTO;
 import de.dualibib.info.Informationen;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +24,9 @@ public class UI extends javax.swing.JFrame {
     /**
      * Creates new form UI
      */
-    public UI(List genreListe, List kategorieListe, PanelHandler panelHandler, boolean online) {
-        this.genreListe = new ArrayList<String>();
-        this.kategorieListe = new ArrayList<String>();
+    public UI(GenreDTO genreListe, KategorieDTO kategorieListe, PanelHandler panelHandler, boolean online) {
+        this.genreListe = genreListe;
+        this.kategorieListe = kategorieListe;
         initComponents();
         setLayout(new java.awt.BorderLayout());
         setVisible(true);

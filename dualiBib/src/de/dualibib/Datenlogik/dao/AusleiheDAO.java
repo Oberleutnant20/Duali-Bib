@@ -6,6 +6,7 @@
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
+import de.dualibib.Datenlogik.dto.AusleiheDTO;
 import de.dualibib.Datenlogik.idao.IAusleiheDAO;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.info.exceptions.ConnectionError;
@@ -17,7 +18,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,10 +30,12 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
+    AusleiheDTO dto;
 
     @Override
-    public List<Ausleihe> laden() throws IOException, ConnectionError {
+    public AusleiheDTO laden() throws IOException, ConnectionError {
         ArrayList<Ausleihe> ret = new ArrayList<>();
+        dto = new AusleiheDTO();
         if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement("SELECT a_ID, a_Date, u_ID, m_ID, km_ID FROM ausleihe;");
@@ -52,13 +54,15 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
         } else {
             throw new ConnectionError();
         }
-        return ret;
+        dto.set(ret);
+        return dto;
     }
 
     @Override
-    public void speichern(List<Ausleihe> ausleiheListe) throws IOException, ConnectionError {
+    public void speichern() throws IOException, ConnectionError {
         if (con != null) {
-            for (Ausleihe ausleihe : ausleiheListe) {
+            ArrayList<Ausleihe> liste  = dto.get();
+            for (Ausleihe ausleihe : liste) {
                 try {
                     String pattern = "YYYY-MM-DD";
                     String mysqlDateString = new SimpleDateFormat(pattern).format(ausleihe.getDate());
@@ -76,9 +80,10 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
     }
 
     @Override
-    public void loeschen(List<Ausleihe> ausleiheListe) throws IOException, ConnectionError {
+    public void loeschen() throws IOException, ConnectionError {
         if(con != null){
-            for (Ausleihe ausleihe : ausleiheListe) {
+            ArrayList<Ausleihe> liste  = dto.get();
+            for (Ausleihe ausleihe : liste) {
                 try {
                     PreparedStatement ptsm = con.prepareStatement("DELETE FROM Ausleihe WHERE a_ID LIKE "+ausleihe.getId());
                     ptsm.execute();

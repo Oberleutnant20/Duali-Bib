@@ -6,7 +6,6 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
@@ -159,5 +158,10 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
         }
         
         return new Object[]{ausleiheListe.get(i).getId(),medienName,ausleiheListe.get(i).getDate(),panelHandler.getAktuellerUser().getUsername(),kategorieName};
+    }
+
+    @Override
+    public void update() {
+        fillTable();
     }
 }

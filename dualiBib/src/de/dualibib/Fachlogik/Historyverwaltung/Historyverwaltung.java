@@ -5,6 +5,7 @@
  */
 package de.dualibib.Fachlogik.Historyverwaltung;
 
+import de.dualibib.Datenlogik.dto.HistoryDTO;
 import de.dualibib.Datenlogik.idao.IHistoryDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
@@ -18,34 +19,27 @@ import java.util.List;
  */
 public class Historyverwaltung extends ElternVerwaltung{
 
-    private ArrayList<History> historyListe;
-    private ArrayList<History> historyListeRef;
+    private HistoryDTO historyListe;
+    private HistoryDTO historyListeRef;
     private IHistoryDAO historyDAO;
 
     public Historyverwaltung(IHistoryDAO historyDAO) {
-        historyListe = new ArrayList<History>();
-        historyListeRef = new ArrayList<History>();
+        historyListeRef = new HistoryDTO();
         this.historyDAO = historyDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<History> liste = new ArrayList<>();
         if(historyListe.size() > historyListeRef.size()){
-            liste = historyListe.subList(historyListeRef.size(), historyListe.size());
+            //liste = historyListe.subList(historyListeRef.size(), historyListe.size());
             System.out.println("hm");
         }
-        historyDAO.speichern(liste);
+        historyDAO.speichern();
     }
 
     public void laden() {
-        historyListe.clear();
         try {
-            List<History> liste = historyDAO.laden();
-            for (History history : liste) {
-                historyListe.add(history);
-                historyListeRef.add(history);
-            }
-
+            HistoryDTO liste = historyDAO.laden();
         } catch (Exception e) {
         }
     }
@@ -54,19 +48,17 @@ public class Historyverwaltung extends ElternVerwaltung{
         if (!historyListe.add(history)) {
             String error = "Ausleihe gibt es bereits.";
         }
+        notifyPanels();
     }
 
     public void delete(History history) {
         if (!historyListe.remove(history)) {
             String error = "Ausleihe gibt es nicht.";
         }
+        notifyPanels();
     }
 
-    public List<History> get() {
-        ArrayList<History> liste = new ArrayList<>();
-        historyListe.forEach((history) -> {
-            liste.add(history);
-        });
-        return liste;
+    public HistoryDTO get() {
+        return historyListe;
     }
 }

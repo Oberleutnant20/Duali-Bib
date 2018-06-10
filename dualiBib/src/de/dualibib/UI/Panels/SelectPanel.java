@@ -363,4 +363,9 @@ private void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
         return date;
     }
 
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

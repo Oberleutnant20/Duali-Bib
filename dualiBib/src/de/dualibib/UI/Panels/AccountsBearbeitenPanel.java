@@ -235,4 +235,9 @@ public class AccountsBearbeitenPanel extends ElternPanel {
         }  
         
     }
+
+    @Override
+    public void update() {
+        fillTable();
+    }
 }

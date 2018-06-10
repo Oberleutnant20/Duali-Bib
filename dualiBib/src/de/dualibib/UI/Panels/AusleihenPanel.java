@@ -171,4 +171,9 @@ public class AusleihenPanel extends ElternPanel {
     public void setAusleihenListe(ArrayList<Ausleihe> allAusleihenListe) {
         ausleiheListe = allAusleihenListe;
     }
+
+    @Override
+    public void update() {
+        fillTable();
+    }
 }

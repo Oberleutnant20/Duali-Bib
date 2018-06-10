@@ -5,12 +5,13 @@
  */
 package de.dualibib.Fachlogik.Genreverwaltung;
 
+import de.dualibib.Datenlogik.dto.GenreDTO;
 import de.dualibib.Datenlogik.idao.IGenreDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,35 +19,30 @@ import java.util.List;
  */
 public class Genreverwaltung extends ElternVerwaltung{
 
-    private ArrayList<Genre> genreListe;
-    private ArrayList<Genre> genreListeRef;
+    private GenreDTO genreListe;
+    private GenreDTO genreListeRef;
     private IGenreDAO genreDAO;
 
     public Genreverwaltung(IGenreDAO genreDAO) {
-        genreListe = new ArrayList<Genre>();
-        genreListeRef = new ArrayList<Genre>();
+        genreListeRef = new GenreDTO();
         this.genreDAO = genreDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
-        List<Genre> liste = new ArrayList<>();
+        /*List<Genre> liste = new ArrayList<>();
         if(genreListe.size() > genreListeRef.size()){
             liste = genreListe.subList(genreListeRef.size(), genreListe.size());
-        }
-        genreDAO.speichern(liste);
+        }*/
+        genreDAO.speichern();
     }
 
     public void laden() {
-        genreListe.clear();
-        genreListeRef.clear();
         try {
-            List<Genre> liste = genreDAO.laden();
-            liste.forEach((genre) -> {
-                genreListe.add(genre);
-                genreListeRef.add(genre);
-            });
-
-        } catch (Exception e) {
+            genreListe = genreDAO.laden();
+        } catch (IOException ex) {
+            Logger.getLogger(Genreverwaltung.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConnectionError ex) {
+            Logger.getLogger(Genreverwaltung.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -54,19 +50,19 @@ public class Genreverwaltung extends ElternVerwaltung{
         if (!genreListe.add(genre)) {
             String error = "Ausleihe gibt es bereits.";
         }
+        notifyPanels();
     }
 
     public void delete(Genre genre) {
         if (!genreListe.remove(genre)) {
             String error = "Ausleihe gibt es nicht.";
         }
+        else{
+            notifyPanels();
+        }
     }
 
-    public List<Genre> get() {
-        ArrayList<Genre> liste = new ArrayList<>();
-        genreListe.forEach((genre) -> {
-            liste.add(genre);
-        });
-        return liste;
+    public GenreDTO get() {
+        return genreListe;
     }
 }
