@@ -281,8 +281,8 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem supportMenu;
     // End of variables declaration//GEN-END:variables
     // Variablen
-    List genreListe;
-    List kategorieListe;
+    GenreDTO genreListe;
+    KategorieDTO kategorieListe;
     PanelHandler panelHandler;
 
     private void info() {

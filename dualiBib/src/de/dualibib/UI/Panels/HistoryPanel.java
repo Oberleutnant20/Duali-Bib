@@ -5,12 +5,12 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Datenlogik.dto.HistoryDTO;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class HistoryPanel extends ElternPanel {
 
-    ArrayList<History> historyListe;
+    HistoryDTO historyListe;
 
     /**
      * Creates new form HistoryPanel
@@ -30,7 +30,7 @@ public class HistoryPanel extends ElternPanel {
     public HistoryPanel(PanelHandler panelHandler) {
         super(panelHandler);
         initComponents();
-        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe().get());
     }
 
     /**
@@ -184,7 +184,7 @@ public class HistoryPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    public void setUserHistory(ArrayList<History> history) {
+    public void setUserHistory(HistoryDTO history) {
        historyListe = history;
     }
     

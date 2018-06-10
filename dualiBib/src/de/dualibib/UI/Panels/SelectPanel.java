@@ -38,8 +38,8 @@ public class SelectPanel extends ElternPanel {
     public SelectPanel(PanelHandler panelHandler) {
         super(panelHandler);
         initComponents();
-        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
-        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe().get());
+        setComboboxGenre(genreComboBox, panelHandler.getGenreListe().get());
         setComboboxDate(dateComboBox);
     }
 

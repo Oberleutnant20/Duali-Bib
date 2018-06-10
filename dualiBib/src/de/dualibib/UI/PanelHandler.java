@@ -11,9 +11,7 @@ import de.dualibib.Datenlogik.dto.MedienDTO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Controller;
-import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Historyverwaltung.History;
-import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
 import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
@@ -26,9 +24,7 @@ import de.dualibib.UI.Panels.SelectPanel;
 import de.dualibib.UI.Panels.SuchePanel;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -51,8 +47,8 @@ public class PanelHandler {
     private boolean eingeloggt;
     private boolean mitarbeiter;
     private Account aktuellerUser;
-    private List<Genre> genreListe;
-    private List<Kategorie> kategorieListe;
+    private GenreDTO genreListe;
+    private KategorieDTO kategorieListe;
 
     
 
@@ -188,11 +184,11 @@ public class PanelHandler {
         return ui;
     }
 
-    public List<Genre> getGenreListe() {
+    public GenreDTO getGenreListe() {
         return genreListe;
     }
 
-    public List<Kategorie> getKategorieListe() {
+    public KategorieDTO getKategorieListe() {
         return kategorieListe;
     }
 

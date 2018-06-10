@@ -6,10 +6,10 @@
 
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Datenlogik.dto.AccountDTO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AccountsBearbeitenPanel extends ElternPanel {
 
-    ArrayList<Account> accountListe;
+    AccountDTO accountListe;
 
     /** Creates new form AccountsBearbeiten */
     public AccountsBearbeitenPanel(PanelHandler panelHandler) {
@@ -193,7 +193,7 @@ public class AccountsBearbeitenPanel extends ElternPanel {
     // End of variables declaration//GEN-END:variables
 
     
-    public void setAccountListe(ArrayList<Account> account){
+    public void setAccountListe(AccountDTO account){
         accountListe = account;
     }
     

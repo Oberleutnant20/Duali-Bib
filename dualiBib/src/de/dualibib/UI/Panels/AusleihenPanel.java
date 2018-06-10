@@ -5,11 +5,11 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Datenlogik.dto.AusleiheDTO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AusleihenPanel extends ElternPanel {
 
-    ArrayList<Ausleihe> ausleiheListe;
+    AusleiheDTO ausleiheListe;
     Account account;
 
     /**
@@ -116,7 +116,7 @@ public class AusleihenPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    public void setUserAusleihe(ArrayList<Ausleihe> ausleihe) {
+    public void setUserAusleihe(AusleiheDTO ausleihe) {
         ausleiheListe = ausleihe;
     }
     
@@ -168,7 +168,7 @@ public class AusleihenPanel extends ElternPanel {
         account = aktuellerUser;
     }
 
-    public void setAusleihenListe(ArrayList<Ausleihe> allAusleihenListe) {
+    public void setAusleihenListe(AusleiheDTO allAusleihenListe) {
         ausleiheListe = allAusleihenListe;
     }
 
