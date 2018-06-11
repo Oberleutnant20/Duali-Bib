@@ -5,11 +5,10 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Datenlogik.dto.AusleiheDTO;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
-import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AusleihenBearbeitenPanel extends ElternPanel {
 
-    ArrayList<Ausleihe> ausleiheListe;
+    AusleiheDTO ausleiheListe;
 
     /**
      * Creates new form AusleihenBearbeitenPanel
@@ -114,7 +113,7 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
     // End of variables declaration//GEN-END:variables
 
 
-    public void setAusleihenListe(ArrayList<Ausleihe> ausleihe){
+    public void setAusleihenListe(AusleiheDTO ausleihe){
         ausleiheListe = ausleihe;
     }
     
@@ -159,5 +158,10 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
         }
         
         return new Object[]{ausleiheListe.get(i).getId(),medienName,ausleiheListe.get(i).getDate(),panelHandler.getAktuellerUser().getUsername(),kategorieName};
+    }
+
+    @Override
+    public void update() {
+        fillTable();
     }
 }

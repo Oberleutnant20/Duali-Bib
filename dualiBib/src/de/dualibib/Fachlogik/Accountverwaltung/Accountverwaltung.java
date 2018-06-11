@@ -1,79 +1,87 @@
 package de.dualibib.Fachlogik.Accountverwaltung;
 
-import de.dualibib.Datenlogik.IAccountDAO;
+import de.dualibib.Datenlogik.dto.AccountDTO;
+import de.dualibib.Datenlogik.idao.IAccountDAO;
+import de.dualibib.Fachlogik.ElternVerwaltung;
+import de.dualibib.UI.ElternPanel;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Carina
  */
-public class Accountverwaltung {
+public class Accountverwaltung extends ElternVerwaltung{
 
-    private ArrayList<Account> accountListe;
-    private ArrayList<Account> accountListeUpdate;
-    private ArrayList<Account> accountListeDelete;
-    private ArrayList<Account> accountListeRef;
+    private AccountDTO accountListe;
+    private AccountDTO accountListeUpdate;
+    private AccountDTO accountListeDelete;
+    private AccountDTO accountListeRef;
     private IAccountDAO accountDAO;
 
     public Accountverwaltung(IAccountDAO accountDAO) {
-        accountListe = new ArrayList<Account>();
-        accountListeRef = new ArrayList<Account>();
-        accountListeUpdate = new ArrayList<Account>();
-        accountListeDelete = new ArrayList<Account>();
+        accountListeRef = new AccountDTO();
+        accountListeUpdate = new AccountDTO();
+        accountListeDelete = new AccountDTO();
         this.accountDAO = accountDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<Account> liste = new ArrayList<>();
         if (accountListe.size() > accountListeRef.size()) {
-            liste = accountListe.subList(accountListeRef.size(), accountListe.size());
+            //liste = accountListe.subList(accountListeRef.size(), accountListe.size());
         }
-        accountDAO.speichern(liste);
-        accountDAO.update(accountListeUpdate);
+        accountDAO.speichern();
+        //accountDAO.update(accountListeUpdate);
     }
 
     public void laden() {
-        accountListe.clear();
-        accountListeRef.clear();
         try {
-            List<Account> liste = accountDAO.laden();
-            for (Account account : liste) {
-                accountListe.add(account);
-                accountListeRef.add(account);
-            }
-        } catch (Exception e) {
+            accountListe = accountDAO.laden();
+            accountListeRef = accountDAO.laden();
+        } catch (IOException ex) {
+            Logger.getLogger(Accountverwaltung.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConnectionError ex) {
+            Logger.getLogger(Accountverwaltung.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    public void add(Account account) {
-        if (!accountListe.add(account)) {
+    public void update(Account account){
+        if (!accountListeUpdate.add(account)) {
             String error = "Account gibt es bereits.";
         }
+        accountListe.add(account);
+        notifyPanels();
     }
-
+    
     public void delete(Account account) {
         if (!accountListeDelete.add(account)) {
             String error = "Account gibt es bereits.";
         }
-        accountListe.remove(account);
+        else{
+            accountListe.remove(account);
+            notifyPanels();
     }
 
     public void update(Account account) {
         if (!accountListeUpdate.add(account)) {
             String error = "Account gibt es bereits.";
         }
-        accountListe.add(account);
     }
-
-    public ArrayList<Account> get() {
-        ArrayList<Account> liste = new ArrayList<Account>();
-        for (Account account : accountListe) {
-            liste.add(account);
+   
+    public void add(Account account) {
+        if (!accountListe.add(account)) {
+            String error = "Ausleihe gibt es bereits.";
         }
-        return liste;
+        notifyPanels();
     }
-
+    
+    public AccountDTO get() {
+        return accountListe;
+    }
 }

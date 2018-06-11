@@ -291,4 +291,9 @@ public class AccountBearbeitenPanel extends ElternPanel {
         vornameField.setText(a.getVorname());
         mitarbeiterCheckBox.setSelected(a.isMitarbeiter());
     }
+
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
