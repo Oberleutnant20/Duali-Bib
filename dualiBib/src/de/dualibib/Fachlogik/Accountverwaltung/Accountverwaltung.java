@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Fachlogik.Accountverwaltung;
 
 import de.dualibib.Datenlogik.IAccountDAO;
@@ -27,7 +22,7 @@ public class Accountverwaltung {
         accountListe = new ArrayList<Account>();
         accountListeRef = new ArrayList<Account>();
         accountListeUpdate = new ArrayList<Account>();
-        accountListeDelete = new ArrayList<Account>();     
+        accountListeDelete = new ArrayList<Account>();
         this.accountDAO = accountDAO;
     }
 
@@ -66,13 +61,13 @@ public class Accountverwaltung {
         accountListe.remove(account);
     }
 
-    public void update(Account account){
+    public void update(Account account) {
         if (!accountListeUpdate.add(account)) {
             String error = "Account gibt es bereits.";
         }
         accountListe.add(account);
     }
-    
+
     public ArrayList<Account> get() {
         ArrayList<Account> liste = new ArrayList<Account>();
         for (Account account : accountListe) {
