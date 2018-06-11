@@ -106,4 +106,9 @@ public class OptionPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     private javax.swing.JButton uebernehmenButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update() {
+        //Sprache ändern
+    }
 }

@@ -5,12 +5,12 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Datenlogik.dto.MedienDTO;
 import de.dualibib.Fachlogik.Genreverwaltung.Genre;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
 import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SuchePanel extends ElternPanel {
 
-    ArrayList<Medien> medienListe;
+    MedienDTO medienListe;
 
     /**
      * Creates new form SuchePanel
@@ -30,8 +30,8 @@ public class SuchePanel extends ElternPanel {
     public SuchePanel(PanelHandler panelHandler) {
         super(panelHandler);
         initComponents();
-        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
-        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe().get());
+        setComboboxGenre(genreComboBox, panelHandler.getGenreListe().get());
     }
 
     /**
@@ -221,7 +221,7 @@ public class SuchePanel extends ElternPanel {
         }
     }
     
-    public void setMedienListe(ArrayList<Medien> medien){
+    public void setMedienListe(MedienDTO medien){
         medienListe = medien;
     }
     
@@ -266,5 +266,10 @@ public class SuchePanel extends ElternPanel {
         String kategorie = medienListe.get(i).getKategorien().getBezeichnung();
         String genre = medienListe.get(i).getGenre().getBezeichnung();
         return new Object[]{medienListe.get(i).getName(),kategorie,genre,medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()};
+    }
+
+    @Override
+    public void update() {
+        fillTable();
     }
 }

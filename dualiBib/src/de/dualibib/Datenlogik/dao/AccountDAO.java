@@ -5,8 +5,9 @@
  */
 package de.dualibib.Datenlogik.dao;
 
+import de.dualibib.Datenlogik.dto.AccountDTO;
 import de.dualibib.Datenlogik.Database;
-import de.dualibib.Datenlogik.IAccountDAO;
+import de.dualibib.Datenlogik.idao.IAccountDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Account;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
@@ -15,7 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,15 +23,17 @@ import java.util.logging.Logger;
  *
  * @author Carina
  */
-public class AccountDAO implements IAccountDAO {
+public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
+    AccountDTO dto;
 
     @Override
-    public List<Account> laden() throws IOException, ConnectionError {
+    public AccountDTO laden() throws IOException, ConnectionError {
         ArrayList<Account> ret = new ArrayList<>();
+        dto = new AccountDTO();
         if (con != null) {
             try {
                 PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("user"));
@@ -50,6 +52,7 @@ public class AccountDAO implements IAccountDAO {
                     String anrede = rs.getString("u_anrede");
 
                     ret.add(new Account(login, passwd, mitarbeiter, id, vorname, nachname, plz, strasse, hausnummer, ort));
+                    
                 }
             } catch (SQLException ex) {
                 System.err.println("AccountDAO laden: " + ex);
@@ -57,13 +60,15 @@ public class AccountDAO implements IAccountDAO {
         } else {
             throw new ConnectionError();
         }
-        return ret;
+        dto.set(ret);
+        return dto;
     }
 
     @Override
-    public void speichern(List<Account> accountListe) throws IOException, ConnectionError {
-        if (con != null) {            
-            for (Account account : accountListe) {
+    public void speichern() throws IOException, ConnectionError {
+        if (con != null) {     
+            ArrayList<Account> liste  = dto.get();
+            for (Account account : liste) {
                 try {
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
                             + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
@@ -80,9 +85,10 @@ public class AccountDAO implements IAccountDAO {
     }
 
     @Override
-    public void update(List<Account> accountListe) throws IOException, ConnectionError {
+    public void update() throws IOException, ConnectionError {
         if(con != null){
-            for (Account account : accountListe) {
+            ArrayList<Account> liste  = dto.get();
+            for (Account account : liste) {
                 try {
                     String vorname = account.getVorname();
                     String nachname = account.getNachname();
