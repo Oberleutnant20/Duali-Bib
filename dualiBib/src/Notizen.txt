@@ -6,3 +6,6 @@ Beispiel MySQL --> https://github.com/Oberleutnant20/dms/blob/master/dms/src/de/
 
 ResultSet --> ArrayList
 https://stackoverflow.com/questions/26127305/resultset-how-to-put-it-into-a-arraylist
+
+Pattern Tutorial:
+https://www.tutorialspoint.com/design_pattern/index.htm

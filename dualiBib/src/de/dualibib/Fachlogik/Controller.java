@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Fachlogik;
 
 import de.dualibib.Datenlogik.dto.AccountDTO;
@@ -45,14 +40,14 @@ public class Controller {
     private Kategorienverwaltung kategorienverwaltung;
     private Genreverwaltung genreverwaltung;
     private Historyverwaltung historyverwaltung;
-    
+
     private PanelHandler panelHandler;
-    
+
     private Account aktuellerUser;
     private HistoryDTO historyListe;
     private AusleiheDTO ausleiheListe;
 
-    public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung,Historyverwaltung historyverwaltung) {
+    public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung, Historyverwaltung historyverwaltung) {
         this.accountverwaltung = accountverwaltung;
         this.medienverwaltung = medienverwaltung;
         this.ausleiheverwaltung = ausleiheverwaltung;
@@ -61,8 +56,6 @@ public class Controller {
         this.historyverwaltung = historyverwaltung;
         start();
     }
-         
-    
 
     private void start() {
         accountverwaltung.laden();
@@ -72,38 +65,38 @@ public class Controller {
         genreverwaltung.laden();
         historyverwaltung.laden();
         ausleihenPruefen();
-        panelHandler = new PanelHandler(this, genreverwaltung.get(),kategorienverwaltung.get());
+        panelHandler = new PanelHandler(this, genreverwaltung.get(), kategorienverwaltung.get());
     }
-    
-    public Account getAktuellerUser(){
+
+    public Account getAktuellerUser() {
         return aktuellerUser;
     }
-    
-    public Account setAktuellerUser(String accountname, String passwort){
+
+    public Account setAktuellerUser(String accountname, String passwort) {
         aktuellerUser = matchingUser(accountname, passwort);
-        if(aktuellerUser!=null){
-           ladeUserDaten();
-           return aktuellerUser;
+        if (aktuellerUser != null) {
+            ladeUserDaten();
+            return aktuellerUser;
         }
-        
+
         return null;
     }
 
     public boolean isMitarbeiter() {
-        if(aktuellerUser!=null){
+        if (aktuellerUser != null) {
             return aktuellerUser.isMitarbeiter();
         }
         return false;
     }
 
-    public void addHistory(History history){
+    public void addHistory(History history) {
         historyverwaltung.add(history);
     }
-    
-    public void addAusleihe(Ausleihe ausleihe){
+
+    public void addAusleihe(Ausleihe ausleihe) {
         ausleiheverwaltung.add(ausleihe);
     }
-    
+
     private void ladeUserDaten() {
         historyListe = ladeHistory();
         ausleiheListe = ladeAusleihe();
@@ -121,8 +114,7 @@ public class Controller {
 
     private HistoryDTO ladeHistory() {
         int userid = aktuellerUser.getUserid();
-        HistoryDTO list = new HistoryDTO();
-        
+        HistoryDTO list = new HistoryDTO();        
         HistoryDTO listegesamt = historyverwaltung.get();
         for(int i = 0; i < listegesamt.size() ; i++){
             if(listegesamt.get(i).getUserid()==userid){
@@ -134,8 +126,7 @@ public class Controller {
 
     private AusleiheDTO ladeAusleihe() {
         int userid = aktuellerUser.getUserid();
-        AusleiheDTO list = new AusleiheDTO();
-        
+        AusleiheDTO list = new AusleiheDTO();        
         AusleiheDTO listegesamt = ausleiheverwaltung.get();
         for(int i = 0; i < listegesamt.size() ; i++){
             if(listegesamt.get(i).getUserid()==userid){
@@ -154,15 +145,15 @@ public class Controller {
     }
 
     public void saveAccountChange(Account a) {
-       accountverwaltung.update(a);
+        accountverwaltung.update(a);
     }
 
     public void saveMediumChange(Medien m) {
-       medienverwaltung.update(m);
+        medienverwaltung.update(m);
     }
 
     public void deleteAusleihe(Ausleihe a) {
-       ausleiheverwaltung.delete(a);
+        ausleiheverwaltung.delete(a);
     }
 
     public void saveAccount(Account account) {
@@ -200,8 +191,8 @@ public class Controller {
         Date heute = new Date();
         int id = historyverwaltung.get().size();
         for (int i = 0; i < liste.size(); i++) {
-            if(liste.get(i).getDate().before(heute)){
-                History history = new History(id++,liste.get(i).getUserid(),liste.get(i).getMedienid(), liste.get(i).getKategorieid());
+            if (liste.get(i).getDate().before(heute)) {
+                History history = new History(id++, liste.get(i).getUserid(), liste.get(i).getMedienid(), liste.get(i).getKategorieid());
                 //historyListe.add(history);
                 ausleiheverwaltung.delete(liste.get(i));
             }
@@ -248,6 +239,5 @@ public class Controller {
            accountverwaltung.addPanelList(panel);
        }
     }
-    
-    
+  
 }
