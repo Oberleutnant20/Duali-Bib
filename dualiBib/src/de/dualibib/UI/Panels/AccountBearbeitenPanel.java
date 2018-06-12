@@ -294,6 +294,14 @@ public class AccountBearbeitenPanel extends ElternPanel {
 
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(account!=null){
+        hausnummerField.setText(account.getHausnummer());
+        nameField.setText(account.getNachname());
+        plzField.setText(""+account.getPlz());
+        stadtField.setText(account.getOrt());
+        strasseField.setText(account.getStrasse());
+        vornameField.setText(account.getVorname());
+        mitarbeiterCheckBox.setSelected(account.isMitarbeiter());
+        }
     }
 }

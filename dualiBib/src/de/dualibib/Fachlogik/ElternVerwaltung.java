@@ -7,7 +7,7 @@ package de.dualibib.Fachlogik;
 
 import de.dualibib.UI.ElternPanel;
 import java.util.ArrayList;
-
+import de.dualibib.Logger;
 /**
  *
  * @author Carina
@@ -18,9 +18,11 @@ public abstract class ElternVerwaltung {
     
     public void addPanelList(ElternPanel e) {
         panelListe.add(e);
+        e.update();
     }
     
     public void notifyPanels() {
+        Logger.debug(this,"notify");
         panelListe.stream().forEach(p -> p.update());
     }
 }

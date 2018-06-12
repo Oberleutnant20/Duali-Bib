@@ -40,6 +40,7 @@ public class Accountverwaltung extends ElternVerwaltung{
     }
 
     public void laden() {
+        de.dualibib.Logger.debug(this,"laden");
         try {
             accountListe = accountDAO.laden();
             accountListeRef = accountDAO.laden();
@@ -66,14 +67,9 @@ public class Accountverwaltung extends ElternVerwaltung{
         else{
             accountListe.remove(account);
             notifyPanels();
-    }
-
-    public void update(Account account) {
-        if (!accountListeUpdate.add(account)) {
-            String error = "Account gibt es bereits.";
         }
     }
-   
+    
     public void add(Account account) {
         if (!accountListe.add(account)) {
             String error = "Ausleihe gibt es bereits.";

@@ -42,9 +42,11 @@ public class Medienverwaltung extends ElternVerwaltung{
     }
 
     public void laden() {
+        de.dualibib.Logger.debug(this,"laden");
         try {
-            medienDAO.laden();
+            medienListe = medienDAO.laden();
         } catch (Exception e) {
+            de.dualibib.Logger.error(this,"laden");
         }
     }
 

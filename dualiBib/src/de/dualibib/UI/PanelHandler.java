@@ -54,19 +54,19 @@ public class PanelHandler {
 
     public PanelHandler(Controller controller, GenreDTO genreListe, KategorieDTO kategorieListe) {
         ui = new UI(genreListe, kategorieListe,this, false);
+        this.controller = controller;
         this.genreListe = genreListe;
         this.kategorieListe = kategorieListe;
         initPanels();
-        initObsever();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
         suchePanel.setMedienListe(controller.getAllMedien());
-        suchePanel.fillTable();
+        initObsever();
         suchePanel.setVisible(true);
-        this.controller = controller;
     }
 
     private void initObsever(){
+        de.dualibib.Logger.debug(this,"initObsever");
         controller.setAccountObserver(accountBearbeitenPanel,accountsBearbeitenPanel);
         controller.setAusleiheObserver(ausleihenPanel,ausleihenBearbeitenPanel);
         controller.setGenreObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
@@ -77,6 +77,7 @@ public class PanelHandler {
     }
     
     private void initPanels(){
+        de.dualibib.Logger.debug(this,"initPanels");
         loginPanel = new LoginPanel(this);
         accountBearbeitenPanel = new AccountBearbeitenPanel(this);
         historyPanel = new HistoryPanel(this);
@@ -88,6 +89,7 @@ public class PanelHandler {
         suchePanel= new SuchePanel(this);
     }
     public void panelUnsichtbar() {
+        de.dualibib.Logger.debug(this,"panelUnsichtbar");
         selectPanel.setVisible(false);
         loginPanel.setVisible(false);
         suchePanel.setVisible(false); 
@@ -100,6 +102,7 @@ public class PanelHandler {
     }
 
     public boolean login(String accountname, String passwort) {
+        de.dualibib.Logger.debug(this,"login");
         if(controller.setAktuellerUser(accountname, passwort)!=null){
             this.aktuellerUser =controller.setAktuellerUser(accountname, passwort);
             if(controller.isMitarbeiter()){

@@ -19,7 +19,6 @@ public class Medien {
     private String name;
     //mehr Infos über Ausleihe
     private boolean ausgeliehen;
-    private boolean vorgemerkt;
     private long id;
     private String isbn;
     private long barcodenummer;
@@ -28,11 +27,10 @@ public class Medien {
     private String author;
     private String desc;
 
-    public Medien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, boolean vorgemerkt, long id, int anzahl, String author, String desc) {
+    public Medien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, long id, int anzahl, String author, String desc) {
         this.kategorien = kategorien;
         this.name = name;
         this.ausgeliehen = ausgeliehen;
-        this.vorgemerkt = vorgemerkt;
         this.id = id;
         this.genre = genre;
         this.barcodenummer = barcodenummer;
@@ -66,20 +64,12 @@ public class Medien {
         return ausgeliehen;
     }
 
-    public boolean isVorgemerkt() {
-        return vorgemerkt;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
     public void setAusgeliehen(boolean ausgeliehen) {
         this.ausgeliehen = ausgeliehen;
-    }
-
-    public void setVorgemerkt(boolean vorgemerkt) {
-        this.vorgemerkt = vorgemerkt;
     }
 
     public Kategorie getKategorien() {

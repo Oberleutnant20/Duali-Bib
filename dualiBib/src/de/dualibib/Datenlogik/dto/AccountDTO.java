@@ -30,6 +30,7 @@ public class AccountDTO implements DataTransferObject{
     @Override
     public void set(ArrayList list) {
         accountListe = list;
+        de.dualibib.Logger.debug(this,accountListe.size()+"");
     }
 
     public boolean add(Account a) {

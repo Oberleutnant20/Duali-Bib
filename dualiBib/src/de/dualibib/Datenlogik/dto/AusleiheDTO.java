@@ -30,6 +30,7 @@ public class AusleiheDTO implements DataTransferObject{
     @Override
     public void set(ArrayList list) {
         ausleiheListe = list;
+        de.dualibib.Logger.debug(this,ausleiheListe.size()+"");
     }
 
     public boolean add(Ausleihe a) {

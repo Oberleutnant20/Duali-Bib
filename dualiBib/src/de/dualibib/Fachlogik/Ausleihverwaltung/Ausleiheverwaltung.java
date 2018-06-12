@@ -8,7 +8,6 @@ package de.dualibib.Fachlogik.Ausleihverwaltung;
 import de.dualibib.Datenlogik.dto.AusleiheDTO;
 import de.dualibib.Datenlogik.idao.IAusleiheDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
-import de.dualibib.UI.ElternPanel;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,8 +42,9 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
     }
 
     public void laden() {
+        de.dualibib.Logger.debug(this,"laden");
         try {
-            AusleiheDTO liste = ausleiheDAO.laden();
+            ausleiheListe = ausleiheDAO.laden();
 
         } catch (Exception e) {
         }

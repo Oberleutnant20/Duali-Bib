@@ -30,6 +30,7 @@ public class KategorieDTO implements DataTransferObject{
     @Override
     public void set(ArrayList list) {
         kategorieListe = list;
+        de.dualibib.Logger.debug(this,kategorieListe.size()+"");
     }
 
     public boolean add(Kategorie a) {

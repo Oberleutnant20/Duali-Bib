@@ -37,11 +37,10 @@ public class Genreverwaltung extends ElternVerwaltung{
     }
 
     public void laden() {
+        de.dualibib.Logger.debug(this,"laden");
         try {
             genreListe = genreDAO.laden();
-        } catch (IOException ex) {
-            Logger.getLogger(Genreverwaltung.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConnectionError ex) {
+        } catch (IOException | ConnectionError ex) {
             Logger.getLogger(Genreverwaltung.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

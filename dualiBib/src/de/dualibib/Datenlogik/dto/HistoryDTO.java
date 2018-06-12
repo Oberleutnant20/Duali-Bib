@@ -30,6 +30,7 @@ public class HistoryDTO implements DataTransferObject{
     @Override
     public void set(ArrayList list) {
         historyListe = list;
+        de.dualibib.Logger.debug(this,historyListe.size()+"");
     }
 
     public boolean add(History a) {

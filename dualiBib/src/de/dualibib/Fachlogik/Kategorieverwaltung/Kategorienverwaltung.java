@@ -37,8 +37,9 @@ public class Kategorienverwaltung extends ElternVerwaltung{
     }
 
     public void laden() {
+        de.dualibib.Logger.debug(this,"laden");
         try {
-            KategorieDTO liste = kategorieDAO.laden();
+            kategorieListe = kategorieDAO.laden();
         } catch (Exception e) {
         }
     }

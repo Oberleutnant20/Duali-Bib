@@ -30,6 +30,7 @@ public class MedienDTO implements DataTransferObject{
     @Override
     public void set(ArrayList list) {
         medienListe = list;
+        de.dualibib.Logger.debug(this,medienListe.size()+"");
     }
 
     public boolean add(Medien a) {

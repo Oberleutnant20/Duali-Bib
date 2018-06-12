@@ -38,8 +38,9 @@ public class Historyverwaltung extends ElternVerwaltung{
     }
 
     public void laden() {
+        de.dualibib.Logger.debug(this,"laden");
         try {
-            HistoryDTO liste = historyDAO.laden();
+            historyListe = historyDAO.laden();
         } catch (Exception e) {
         }
     }

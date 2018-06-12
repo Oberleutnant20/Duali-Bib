@@ -30,7 +30,6 @@ public class HistoryPanel extends ElternPanel {
     public HistoryPanel(PanelHandler panelHandler) {
         super(panelHandler);
         initComponents();
-        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe().get());
     }
 
     /**
@@ -260,6 +259,8 @@ public class HistoryPanel extends ElternPanel {
 
     @Override
     public void update() {
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe().get());
+        if(historyListe!=null)
         fillTable();
     }
     
