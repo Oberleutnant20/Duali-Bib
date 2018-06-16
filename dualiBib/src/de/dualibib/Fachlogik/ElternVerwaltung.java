@@ -18,7 +18,6 @@ public abstract class ElternVerwaltung {
     
     public void addPanelList(ElternPanel e) {
         panelListe.add(e);
-        e.update();
     }
     
     public void notifyPanels() {

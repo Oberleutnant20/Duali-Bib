@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Genreverwaltung;
+package de.dualibib.Datenlogik.dto;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Carina
  */
-public class Genre {
+public class Genre implements Serializable{
 
     private int id;
 
@@ -35,4 +37,5 @@ public class Genre {
         this.bezeichnung = bezeichnung;
     }
 
+    
 }

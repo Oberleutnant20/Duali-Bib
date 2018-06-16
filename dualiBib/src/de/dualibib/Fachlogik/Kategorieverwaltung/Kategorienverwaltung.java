@@ -5,7 +5,7 @@
  */
 package de.dualibib.Fachlogik.Kategorieverwaltung;
 
-import de.dualibib.Datenlogik.dto.KategorieDTO;
+import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.idao.IKategorieDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
@@ -19,27 +19,35 @@ import java.util.List;
  */
 public class Kategorienverwaltung extends ElternVerwaltung{
 
-    private KategorieDTO kategorieListe;
-    private KategorieDTO kategorieListeRef;
+    private ArrayList<Kategorie> kategorieListe;
+    private ArrayList<Kategorie> kategorieListeRef;
     private IKategorieDAO kategorieDAO;
 
     public Kategorienverwaltung(IKategorieDAO kategorieDAO) {
-        kategorieListeRef = new KategorieDTO();
+        kategorieListe = new ArrayList<Kategorie>();
+        kategorieListeRef = new ArrayList<Kategorie>();
         this.kategorieDAO = kategorieDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<Kategorie> liste = new ArrayList<>();
         if(kategorieListe.size() > kategorieListeRef.size()){
-            //liste = kategorieListe.subList(kategorieListeRef.size(), kategorieListe.size());
+            liste = kategorieListe.subList(kategorieListeRef.size(), kategorieListe.size());
         }
-        kategorieDAO.speichern();
+        kategorieDAO.speichern(liste);
     }
 
     public void laden() {
+        kategorieListe.clear();
+        kategorieListeRef.clear();
         de.dualibib.Logger.debug(this,"laden");
         try {
-            kategorieListe = kategorieDAO.laden();
+            List<Kategorie> liste = kategorieDAO.laden();
+            liste.forEach((kategorie) -> {
+                kategorieListe.add(kategorie);
+                kategorieListeRef.add(kategorie);
+            });
+
         } catch (Exception e) {
         }
     }
@@ -58,7 +66,11 @@ public class Kategorienverwaltung extends ElternVerwaltung{
         notifyPanels();
     }
 
-    public KategorieDTO get() {
-        return kategorieListe;
+    public List<Kategorie> get() {
+        ArrayList<Kategorie> liste = new ArrayList<>();
+        kategorieListe.forEach((kategorie) -> {
+            liste.add(kategorie);
+        });
+        return liste;
     }
 }

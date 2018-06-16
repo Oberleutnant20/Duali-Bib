@@ -5,9 +5,9 @@
  */
 package de.dualibib.UI.Panels;
 
-import de.dualibib.Fachlogik.Genreverwaltung.Genre;
-import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
-import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.Datenlogik.dto.Genre;
+import de.dualibib.Datenlogik.dto.Kategorie;
+import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.text.DateFormat;
@@ -260,7 +260,7 @@ public class SelectPanel extends ElternPanel {
             }
         }
 
-        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre, kategorie, name, medium.isAusgeliehen(), medium.getId(), medium.getAnzahl(), medium.getAuthor(), desc);
+        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre.getId(), kategorie.getId(), name, medium.isAusgeliehen(), medium.getId(), medium.getAnzahl(), medium.getAuthor(), desc);
         panelHandler.saveMediumChange(m);
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
@@ -269,9 +269,9 @@ public class SelectPanel extends ElternPanel {
             infoLabel.setText("Status: Ist bereits ausgeliehen");            
         } else {
             Date date = new Date(dateComboBox.getSelectedItem().toString()+"");
-            medium.berechneVerfuegbare(1);
-            panelHandler.createNewAusleihe(medium.getId(), date, medium.getKategorien().getId());
+            panelHandler.createNewAusleihe(medium.getId(), date, medium.getKategorienId());
             infoLabel.setText("Status: erfolgreich ausgeliehen");
+            ausleihenButton.setEnabled(false);
         }
         panelHandler.saveMediumChange(medium);
         
@@ -295,11 +295,10 @@ public class SelectPanel extends ElternPanel {
         medium = m;
         if (m.isAusgeliehen()) {
             statusField.setText("ausgeliehen");
-            if (m.isVorgemerkt()) {
-                statusField.setText("bereits vorgemerkt");
-            }
+            ausleihenButton.setEnabled(false);
         } else {
             statusField.setText("vorhanden");
+            ausleihenButton.setEnabled(true);
         }
         beschreibungField.setText("blablalba - in arbeit");
         nameField.setText(m.getName());
@@ -363,8 +362,8 @@ private void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
 
     @Override
     public void update() {
-        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe().get());
-        setComboboxGenre(genreComboBox, panelHandler.getGenreListe().get());
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
+        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
 
     }
 

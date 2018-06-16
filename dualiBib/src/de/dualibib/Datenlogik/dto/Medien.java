@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Medienverwaltung;
+package de.dualibib.Datenlogik.dto;
 
-import de.dualibib.Fachlogik.Genreverwaltung.Genre;
-import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
+import java.io.Serializable;
 
 /**
  *
  * @author Carina
  */
-public class Medien {
-    
-    private Kategorie kategorien;
-    private Genre genre;
+public class Medien implements Serializable{
+
+     private long kategorienId;
+    private long genreId;
     private String name;
     //mehr Infos über Ausleihe
     private boolean ausgeliehen;
@@ -23,16 +22,15 @@ public class Medien {
     private String isbn;
     private long barcodenummer;
     private int anzahl;
-    private int verfuegbar_anzahl;
     private String author;
     private String desc;
 
-    public Medien(String isbn, long barcodenummer, Genre genre, Kategorie kategorien, String name, boolean ausgeliehen, long id, int anzahl, String author, String desc) {
-        this.kategorien = kategorien;
+    public Medien(String isbn, long barcodenummer, long genreId, long kategorienId, String name, boolean ausgeliehen, long id, int anzahl, String author, String desc) {
+        this.kategorienId = kategorienId;
         this.name = name;
         this.ausgeliehen = ausgeliehen;
         this.id = id;
-        this.genre = genre;
+        this.genreId = genreId;
         this.barcodenummer = barcodenummer;
         this.isbn = isbn;
         this.anzahl = anzahl;
@@ -40,12 +38,12 @@ public class Medien {
         this.desc = desc;
     }
 
-    public void setKategorien(Kategorie kategorien) {
-        this.kategorien = kategorien;
+    public void setKategorien(long kategorienId) {
+        this.kategorienId = kategorienId;
     }
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void setGenre(long genreId) {
+        this.genreId = genreId;
     }
 
     public void setId(long id) {
@@ -72,20 +70,12 @@ public class Medien {
         this.ausgeliehen = ausgeliehen;
     }
 
-    public Kategorie getKategorien() {
-        return kategorien;
+    public long getKategorienId() {
+        return kategorienId;
     }
 
-    public Genre getGenre() {
-        return genre;
-    }
-    
-    public void berechneVerfuegbare(int ausgeliehene){
-        verfuegbar_anzahl = verfuegbar_anzahl - ausgeliehene;
-    }
-    
-    public int getVerfuegbare(){
-        return verfuegbar_anzahl;
+    public long getGenreId() {
+        return genreId;
     }
     
     public int getAnzahl(){

@@ -5,8 +5,8 @@
  */
 package de.dualibib.UI;
 
-import de.dualibib.Datenlogik.dto.GenreDTO;
-import de.dualibib.Datenlogik.dto.KategorieDTO;
+import de.dualibib.Datenlogik.dto.Genre;
+import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.info.Informationen;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +18,16 @@ import javax.swing.JPanel;
  * @author Carina
  */
 public class UI extends javax.swing.JFrame {
-
+    
+    List<Genre> genreListe;
+    List<Kategorie> kategorieListe;
+    PanelHandler panelHandler;
     private boolean online;
 
     /**
      * Creates new form UI
      */
-    public UI(GenreDTO genreListe, KategorieDTO kategorieListe, PanelHandler panelHandler, boolean online) {
+    public UI(List<Genre> genreListe, List<Kategorie> kategorieListe, PanelHandler panelHandler, boolean online) {
         this.genreListe = genreListe;
         this.kategorieListe = kategorieListe;
         initComponents();
@@ -59,7 +62,6 @@ public class UI extends javax.swing.JFrame {
         beendenMenu = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         informationMenu = new javax.swing.JMenuItem();
-        supportMenu = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         optionMenu = new javax.swing.JMenuItem();
         administrationMenu = new javax.swing.JMenu();
@@ -137,14 +139,6 @@ public class UI extends javax.swing.JFrame {
             }
         });
         helpMenu.add(informationMenu);
-
-        supportMenu.setText("Support");
-        supportMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                supportMenuActionPerformed(evt);
-            }
-        });
-        helpMenu.add(supportMenu);
         helpMenu.add(jSeparator3);
 
         optionMenu.setText("Option");
@@ -256,10 +250,6 @@ public class UI extends javax.swing.JFrame {
         info();
     }//GEN-LAST:event_informationMenuActionPerformed
 
-    private void supportMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supportMenuActionPerformed
-        entwicklung();
-    }//GEN-LAST:event_supportMenuActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem LoginLogoutMenu;
     private javax.swing.JMenu accountMenu;
@@ -278,12 +268,9 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JMenuItem optionMenu;
-    private javax.swing.JMenuItem supportMenu;
     // End of variables declaration//GEN-END:variables
     // Variablen
-    GenreDTO genreListe;
-    KategorieDTO kategorieListe;
-    PanelHandler panelHandler;
+    
 
     private void info() {
         JOptionPane.showMessageDialog(rootPane, new Informationen().printEntwickler(), "Entwicklerinfo", JOptionPane.INFORMATION_MESSAGE);

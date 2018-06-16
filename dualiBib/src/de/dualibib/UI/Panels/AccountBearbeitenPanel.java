@@ -5,7 +5,7 @@
  */
 package de.dualibib.UI.Panels;
 
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Datenlogik.dto.Account;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 
