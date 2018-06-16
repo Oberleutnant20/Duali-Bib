@@ -182,9 +182,6 @@ public class HistoryPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    public void setUserHistory(List<History> history) {
-       historyListe = history;
-    }
     
     private Medien getMediumfromHistoryIndices(int position) {
 		History selected = null;
@@ -258,6 +255,7 @@ public class HistoryPanel extends ElternPanel {
 
     @Override
     public void update() {
+        historyListe = panelHandler.getHistory();
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         if(historyListe!=null)
         fillTable();

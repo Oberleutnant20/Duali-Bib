@@ -116,10 +116,6 @@ public class AusleihenPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    public void setUserAusleihe(List<Ausleihe> ausleihe) {
-        ausleiheListe = ausleihe;
-    }
-    
     private Ausleihe getAusleihefromIndices(int position) {
 		Ausleihe selected = null;
 		selected = ausleiheListe.get(position);
@@ -174,7 +170,8 @@ public class AusleihenPanel extends ElternPanel {
 
     @Override
     public void update() {
+        ausleiheListe = panelHandler.getAusleihe();
         fillTable();
-        System.out.println(ausleiheListe.size());
+        System.out.println(ausleiheListe.size()+"blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
 }

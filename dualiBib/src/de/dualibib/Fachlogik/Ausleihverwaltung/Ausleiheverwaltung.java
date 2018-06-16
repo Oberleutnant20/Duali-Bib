@@ -54,6 +54,7 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
             }
 
         } catch (Exception e) {
+            de.dualibib.Logger.error(this,"laden Error");
         }
     }
 

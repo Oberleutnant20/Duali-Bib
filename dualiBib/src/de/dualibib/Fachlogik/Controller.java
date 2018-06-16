@@ -50,14 +50,26 @@ public class Controller {
 
     private void start() {
         Logger.info(this,"starten");
-        accountverwaltung.laden();
+        initVerwaltungLaden();
+        ausleihenPruefen();
+        panelHandler = new PanelHandler(this, genreverwaltung.get(), kategorienverwaltung.get());
+    }
+    
+     private void initVerwaltungLaden() {accountverwaltung.laden();
         medienverwaltung.laden();
         ausleiheverwaltung.laden();
         kategorienverwaltung.laden();
         genreverwaltung.laden();
         historyverwaltung.laden();
-        panelHandler = new PanelHandler(this, genreverwaltung.get(), kategorienverwaltung.get());
-        ausleihenPruefen();
+    }
+     
+    public void initUpdate() {
+        Logger.info(this, "initUpdate");
+        medienverwaltung.notifyPanels();
+        ausleiheverwaltung.notifyPanels();
+        kategorienverwaltung.notifyPanels();
+        genreverwaltung.notifyPanels();
+        historyverwaltung.notifyPanels();
     }
 
     public Account getAktuellerUser() {
@@ -93,7 +105,7 @@ public class Controller {
         ausleiheverwaltung.add(ausleihe);
     }
 
-    private void ladeUserDaten() {
+    public void ladeUserDaten() {
         historyListe = ladeHistory();
         ausleiheListe = ladeAusleihe();
     }
@@ -116,6 +128,7 @@ public class Controller {
         List<History> listegesamt = historyverwaltung.get();
         for (int i = 0; i < listegesamt.size(); i++) {
             if (listegesamt.get(i).getUserid() == userid) {
+                Logger.debug(this, "ladeHistory, History füllen");
                 list.add(listegesamt.get(i));
             }
         }
@@ -125,10 +138,12 @@ public class Controller {
     private ArrayList<Ausleihe> ladeAusleihe() {
         int userid = aktuellerUser.getUserid();
         ArrayList<Ausleihe> list = new ArrayList<Ausleihe>();
-
+        Logger.info(this,"ladeAusleihe");
         List<Ausleihe> listegesamt = ausleiheverwaltung.get();
         for (int i = 0; i < listegesamt.size(); i++) {
+            Logger.debug(this, "ladeAusleihe, Ausleihe Schleife");
             if (listegesamt.get(i).getUserid() == userid) {
+                Logger.debug(this, "ladeAusleihe, Ausleihe füllen");
                 list.add(listegesamt.get(i));
             }
         }
@@ -247,5 +262,7 @@ public class Controller {
            accountverwaltung.addPanelList(panel);
        }
     }
+
+    
   
 }

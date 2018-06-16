@@ -16,8 +16,6 @@ public class Medien implements Serializable{
      private long kategorienId;
     private long genreId;
     private String name;
-    //mehr Infos über Ausleihe
-    private boolean ausgeliehen;
     private long id;
     private String isbn;
     private long barcodenummer;
@@ -25,10 +23,9 @@ public class Medien implements Serializable{
     private String author;
     private String desc;
 
-    public Medien(String isbn, long barcodenummer, long genreId, long kategorienId, String name, boolean ausgeliehen, long id, int anzahl, String author, String desc) {
+    public Medien(String isbn, long barcodenummer, long genreId, long kategorienId, String name, long id, int anzahl, String author, String desc) {
         this.kategorienId = kategorienId;
         this.name = name;
-        this.ausgeliehen = ausgeliehen;
         this.id = id;
         this.genreId = genreId;
         this.barcodenummer = barcodenummer;
@@ -58,16 +55,8 @@ public class Medien implements Serializable{
         return name;
     }
 
-    public boolean isAusgeliehen() {
-        return ausgeliehen;
-    }
-
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setAusgeliehen(boolean ausgeliehen) {
-        this.ausgeliehen = ausgeliehen;
     }
 
     public long getKategorienId() {

@@ -48,8 +48,6 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
                     String isbn = rs.getString("m_ISBN");
                     long barcode = rs.getLong("m_barcode");
                     String titel = rs.getString("m_Titel");
-                    boolean ausgeliehen = rs.getBoolean("m_ausgeliehen");
-                    boolean vorgemerkt = rs.getBoolean("m_vorgemerkt");
                     int id = rs.getInt("m_ID");
                     int anzahl = rs.getInt("m_Anzahl");
                     long kmid = rs.getInt("km_ID");
@@ -57,7 +55,7 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
                     String author = rs.getString("m_Author");
                     String desc = rs.getString("m_Beschreibung");
 
-                    ret.add(new Medien(isbn, barcode, gid, kmid, titel, ausgeliehen, id, anzahl, author, desc));
+                    ret.add(new Medien(isbn, barcode, gid, kmid, titel, id, anzahl, author, desc));
                 }
             } catch (SQLException ex) {
                 System.err.println("MedienDAO laden: " + ex);
@@ -74,8 +72,8 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
             for (Medien medien : medienListe) {
                 try {
 
-                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_ausgeliehen, m_Vorgemerkt, m_Anzahl, m_beschreibung, km_ID, g_ID) "
-                            + "VALUES('" + medien.getName() + "','" + medien.getAuthor() + "','" + medien.getIsbn() + "'," + medien.getBarcodenummer() + ", " + medien.getAnzahl() + ", " + medien.getAnzahl() + ", '" + medien.getDesc() + "', " + medien.getKategorienId() + ", " + medien.getGenreId() + ");");
+                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibung, km_ID, g_ID) "
+                            + "VALUES('" + medien.getName() + "','" + medien.getAuthor() + "','" + medien.getIsbn() + "'," + medien.getBarcodenummer() +", " + medien.getAnzahl() + ", '" + medien.getDesc() + "', " + medien.getKategorienId() + ", " + medien.getGenreId() + ");");
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,8 +98,7 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
                     long gID = medien.getGenreId();
                     long mID = medien.getId();
                     long kID = medien.getKategorienId();
-                    boolean ausgeliehen = medien.isAusgeliehen();
-                    PreparedStatement ptsm = con.prepareStatement("UPDATE Medien SET m_Titel = '" + name + "', m_Author = '" + author + "', m_ISBN = '" + ISBN + "', m_Barcode =" + barcode + ", m_ausgeliehen = " + ausgeliehen +  ", m_Anzahl = " + anzahl + ", m_beschreibung = '" + desc + "', km_ID = " + kID + ", g_ID = " + gID + " WHERE m_ID LIKE " + mID + ";");
+                    PreparedStatement ptsm = con.prepareStatement("UPDATE Medien SET m_Titel = '" + name + "', m_Author = '" + author + "', m_ISBN = '" + ISBN + "', m_Barcode =" + barcode +  ", m_Anzahl = " + anzahl + ", m_beschreibung = '" + desc + "', km_ID = " + kID + ", g_ID = " + gID + " WHERE m_ID LIKE " + mID + ";");
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(MedienDAO.class.getName()).log(Level.SEVERE, null, ex);

@@ -22,19 +22,17 @@ public class UI extends javax.swing.JFrame {
     List<Genre> genreListe;
     List<Kategorie> kategorieListe;
     PanelHandler panelHandler;
-    private boolean online;
 
     /**
      * Creates new form UI
      */
-    public UI(List<Genre> genreListe, List<Kategorie> kategorieListe, PanelHandler panelHandler, boolean online) {
+    public UI(List<Genre> genreListe, List<Kategorie> kategorieListe, PanelHandler panelHandler) {
         this.genreListe = genreListe;
         this.kategorieListe = kategorieListe;
         initComponents();
         setLayout(new java.awt.BorderLayout());
         setVisible(true);
         this.panelHandler = panelHandler;
-        this.online = online;
     }
 
     public JPanel getjPanel1() {
@@ -294,8 +292,8 @@ public class UI extends javax.swing.JFrame {
         historyMenu.setEnabled(true);
         aktuelleAusleiheMenu.setEnabled(true);
 
-        panelHandler.loadUserHistory();
-        panelHandler.loadUserAusleihe();
+        panelHandler.getHistory();
+        panelHandler.getAusleihe();
     }
 
     void setUserOffline() {

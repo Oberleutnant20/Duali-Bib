@@ -218,11 +218,6 @@ public class SuchePanel extends ElternPanel {
         }
     }
     
-    public void setMedienListe(List<Medien> medien){
-        System.out.println("Suchepanel: Medienliste übergeben");
-        medienListe = medien;
-    }
-    
     public void fillTable(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -266,11 +261,12 @@ public class SuchePanel extends ElternPanel {
     private Object[] addObject(int i) {
         String kategorie = panelHandler.getKatBezeichnung(medienListe.get(i).getKategorienId());
         String genre = panelHandler.getGenBezeichnung(medienListe.get(i).getGenreId());
-        return new Object[]{medienListe.get(i).getName(),kategorie,genre,medienListe.get(i).getIsbn(),panelHandler.getVerfuegbare(i)};
+        return new Object[]{medienListe.get(i).getName(),kategorie,genre,medienListe.get(i).getIsbn(),panelHandler.getVerfuegbare((int) medienListe.get(i).getId())};
     }
 
     @Override
     public void update() {
+        medienListe = panelHandler.getMedienliste();
         fillTable();
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());

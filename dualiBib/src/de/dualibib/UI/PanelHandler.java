@@ -12,6 +12,7 @@ import de.dualibib.Datenlogik.dto.History;
 import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Controller;
+import de.dualibib.Logger;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
 import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
 import de.dualibib.UI.Panels.AusleihenBearbeitenPanel;
@@ -53,16 +54,15 @@ public class PanelHandler {
     
 
     public PanelHandler(Controller controller, List<Genre> genreListe, List<Kategorie> kategorieListe) {
-        ui = new UI(genreListe, kategorieListe,this, false);
+        ui = new UI(genreListe, kategorieListe,this);
         this.controller = controller;
         this.genreListe = genreListe;
         this.kategorieListe = kategorieListe;
         initPanels();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
-        suchePanel.setMedienListe(controller.getAllMedien());
-        suchePanel.update();
         initObsever();
+        suchePanel.update();
         suchePanel.setVisible(true);
     }
 
@@ -110,8 +110,8 @@ public class PanelHandler {
                 ui.setMitarbeiterOnline();
             }
             ui.setUserOnline();
-            ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
-            historyPanel.setUserHistory(controller.getHistoryListe());
+            controller.ladeUserDaten();
+            controller.initUpdate();
             return true;
         }
         return false;
@@ -134,12 +134,12 @@ public class PanelHandler {
         controller.saveAccount(new Account(accountname,passwort, mitarbeiter, id, vorname, name, plz, strasse, hausnummer, ort));
     }
 
-    void loadUserAusleihe() {
-        ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
+    public List<Ausleihe> getAusleihe() {
+        return controller.getAusleiheListe();
     }
 
-    void loadUserHistory() {
-        historyPanel.setUserHistory(controller.getHistoryListe());
+    public List<History> getHistory() {
+        return controller.getHistoryListe();
     }
 
     public List<Medien> returnMedien(){
@@ -260,14 +260,21 @@ public class PanelHandler {
          int verfuegbare = 0;
          
          for(Medien medien : controller.getAllMedien()){
-             if(medien.getId()==medienId)
+             if(medien.getId()==medienId){
                  verfuegbare=medien.getAnzahl();
+                 Logger.info(this, "gefunden");
+             }
          }
-         
+         Logger.info(this, verfuegbare+"verfügbare gefunden");
          for(Ausleihe ausleihe : controller.getAllAusleihenListe()){
              if(ausleihe.getMedienid()==medienId)
                  verfuegbare--;
          }
          return verfuegbare;
+    }
+
+    public List<Medien> getMedienliste() {
+        Logger.info(this, "Medienliste gezogen");
+        return controller.getAllMedien();
     }
 }

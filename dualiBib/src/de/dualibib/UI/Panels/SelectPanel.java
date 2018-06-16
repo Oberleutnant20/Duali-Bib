@@ -260,8 +260,9 @@ public class SelectPanel extends ElternPanel {
             }
         }
 
-        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre.getId(), kategorie.getId(), name, medium.isAusgeliehen(), medium.getId(), medium.getAnzahl(), medium.getAuthor(), desc);
+        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre.getId(), kategorie.getId(), name, medium.getId(), medium.getAnzahl(), medium.getAuthor(), desc);
         panelHandler.saveMediumChange(m);
+        infoLabel.setText("Status: Erfolgreich gespeichert");
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
     private void ausleihenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenButtonActionPerformed
@@ -293,7 +294,7 @@ public class SelectPanel extends ElternPanel {
 
     public void setMedium(Medien m) {
         medium = m;
-        if (m.isAusgeliehen()) {
+        if (panelHandler.getVerfuegbare((int) m.getId())==0) {
             statusField.setText("ausgeliehen");
             ausleihenButton.setEnabled(false);
         } else {
