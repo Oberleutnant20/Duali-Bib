@@ -5,8 +5,7 @@
  */
 package de.dualibib.Datenlogik.idao;
 
-import de.dualibib.Datenlogik.dto.AusleiheDTO;
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
+import de.dualibib.Datenlogik.dto.Ausleihe;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
  * @author Carina
  */
 public interface IAusleiheDAO {
-    AusleiheDTO laden() throws IOException, ConnectionError;
-    void speichern()  throws IOException, ConnectionError;
-    void loeschen () throws IOException, ConnectionError;
+    List<Ausleihe> laden() throws IOException, ConnectionError;
+    void speichern(List<Ausleihe> ausleiheListe)  throws IOException, ConnectionError;
+    void loeschen (List<Ausleihe> ausleiheListe) throws IOException, ConnectionError;
 }

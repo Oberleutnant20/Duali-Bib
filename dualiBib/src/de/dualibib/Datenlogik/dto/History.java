@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Historyverwaltung;
+package de.dualibib.Datenlogik.dto;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Carina
  */
-public class History {
-    long id;
+public class History implements Serializable{
+
+     long id;
     int userid;
     long medienid;
     long kategorieid;
@@ -55,5 +58,4 @@ public class History {
     public void setKategorieid(long kategorieid) {
         this.kategorieid = kategorieid;
     }
-    
 }

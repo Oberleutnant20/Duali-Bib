@@ -5,10 +5,9 @@
  */
 package de.dualibib.Fachlogik.Ausleihverwaltung;
 
-import de.dualibib.Datenlogik.dto.AusleiheDTO;
+import de.dualibib.Datenlogik.dto.Ausleihe;
 import de.dualibib.Datenlogik.idao.IAusleiheDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
-import de.dualibib.UI.ElternPanel;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,33 +19,42 @@ import java.util.List;
  */
 public class Ausleiheverwaltung extends ElternVerwaltung{
 
-    private AusleiheDTO ausleiheListe;
-    private AusleiheDTO ausleiheListeRef;
-    private AusleiheDTO ausleiheListeUpdate;
-    private AusleiheDTO ausleiheListeDelete;
+    private ArrayList<Ausleihe> ausleiheListe;
+    private ArrayList<Ausleihe> ausleiheListeRef;
+    private ArrayList<Ausleihe> ausleiheListeUpdate;
+    private ArrayList<Ausleihe> ausleiheListeDelete;
     private IAusleiheDAO ausleiheDAO;
 
     public Ausleiheverwaltung(IAusleiheDAO ausleiheDAO) {
-        ausleiheListeRef = new AusleiheDTO();
-        ausleiheListeUpdate = new AusleiheDTO();
-        ausleiheListeDelete = new AusleiheDTO();
+        ausleiheListe = new ArrayList<Ausleihe>();
+        ausleiheListeRef = new ArrayList<Ausleihe>();
+        ausleiheListeUpdate = new ArrayList<Ausleihe>();
+        ausleiheListeDelete = new ArrayList<Ausleihe>();
         this.ausleiheDAO = ausleiheDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<Ausleihe> liste = new ArrayList<>();
         if(ausleiheListe.size() > ausleiheListeRef.size()){
-            //liste = ausleiheListe.subList(ausleiheListeRef.size(), ausleiheListe.size());
+            liste = ausleiheListe.subList(ausleiheListeRef.size(), ausleiheListe.size());
         }
-        ausleiheDAO.speichern();
-        //ausleiheDAO.loeschen(ausleiheListeDelete);
+        ausleiheDAO.speichern(liste);
+        ausleiheDAO.loeschen(ausleiheListeDelete);
     }
 
     public void laden() {
+        ausleiheListe.clear();
+        ausleiheListeRef.clear();
+        de.dualibib.Logger.debug(this,"laden");
         try {
-            AusleiheDTO liste = ausleiheDAO.laden();
+            List<Ausleihe> liste = ausleiheDAO.laden();
+            for (Ausleihe ausleihe : liste) {
+                ausleiheListe.add(ausleihe);
+                ausleiheListeRef.add(ausleihe);
+            }
 
         } catch (Exception e) {
+            de.dualibib.Logger.error(this,"laden Error");
         }
     }
 
@@ -74,7 +82,12 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
         notifyPanels();
     }
 
-    public AusleiheDTO get() {
-        return ausleiheListe;
+    public ArrayList<Ausleihe> get() {
+        ArrayList<Ausleihe> liste = new ArrayList<Ausleihe>();
+        for (Ausleihe ausleihe : ausleiheListe) {
+            liste.add(ausleihe);
     }
+        return liste;
+}
+
 }

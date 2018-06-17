@@ -5,10 +5,9 @@
  */
 package de.dualibib.UI.Panels;
 
-import de.dualibib.Datenlogik.dto.MedienDTO;
-import de.dualibib.Fachlogik.Genreverwaltung.Genre;
-import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorie;
-import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.Datenlogik.dto.Genre;
+import de.dualibib.Datenlogik.dto.Kategorie;
+import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
@@ -22,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SuchePanel extends ElternPanel {
 
-    MedienDTO medienListe;
+    List<Medien> medienListe;
 
     /**
      * Creates new form SuchePanel
@@ -30,8 +29,6 @@ public class SuchePanel extends ElternPanel {
     public SuchePanel(PanelHandler panelHandler) {
         super(panelHandler);
         initComponents();
-        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe().get());
-        setComboboxGenre(genreComboBox, panelHandler.getGenreListe().get());
     }
 
     /**
@@ -164,7 +161,7 @@ public class SuchePanel extends ElternPanel {
         }
         
         for (int i = 0; i < medienListe.size(); i++) {
-            if(medienListe.get(i).getKategorien().getId()==kategorieid)
+            if(medienListe.get(i).getKategorienId()==kategorieid)
              model.addRow(addObject(i));    
         }
     }//GEN-LAST:event_kategorieComboBoxActionPerformed
@@ -183,7 +180,7 @@ public class SuchePanel extends ElternPanel {
         }
         
         for (int i = 0; i < medienListe.size(); i++) {
-            if(medienListe.get(i).getGenre().getId()==genreid)
+            if(medienListe.get(i).getGenreId()==genreid)
              model.addRow(addObject(i));    
         }
     }//GEN-LAST:event_genreComboBoxActionPerformed
@@ -221,12 +218,11 @@ public class SuchePanel extends ElternPanel {
         }
     }
     
-    public void setMedienListe(MedienDTO medien){
-        medienListe = medien;
-    }
-    
     public void fillTable(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        for (int i = model.getRowCount() - 1; i > -1; i--) {
+            model.removeRow(i);
+        }
         for (int i = 0; i < medienListe.size(); i++) {
           model.addRow(addObject(i));  
         }
@@ -263,13 +259,17 @@ public class SuchePanel extends ElternPanel {
     }
 
     private Object[] addObject(int i) {
-        String kategorie = medienListe.get(i).getKategorien().getBezeichnung();
-        String genre = medienListe.get(i).getGenre().getBezeichnung();
-        return new Object[]{medienListe.get(i).getName(),kategorie,genre,medienListe.get(i).getIsbn(),medienListe.get(i).getVerfuegbare()};
+        String kategorie = panelHandler.getKatBezeichnung(medienListe.get(i).getKategorienId());
+        String genre = panelHandler.getGenBezeichnung(medienListe.get(i).getGenreId());
+        return new Object[]{medienListe.get(i).getName(),kategorie,genre,medienListe.get(i).getIsbn(),panelHandler.getVerfuegbare((int) medienListe.get(i).getId())};
     }
 
     @Override
     public void update() {
+        medienListe = panelHandler.getMedienliste();
         fillTable();
+        setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
+        setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
+        System.out.println("-------------------------------------------------------------");
     }
 }

@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Ausleihverwaltung;
+package de.dualibib.Datenlogik.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Carina
  */
-public class Ausleihe {
-    
+public class Ausleihe implements Serializable{
+
     private long id;
     private long medienid;
     private Date date;
     private int userid;
     private long kategorieid;
-
+    
     public Ausleihe(long id,long medienid, Date date, int userid, long kategorieid) {
         this.id = id;
         this.medienid = medienid;
@@ -26,7 +27,7 @@ public class Ausleihe {
         this.userid = userid;
         this.kategorieid = kategorieid;
     }
-
+    
     public long getId() {
         return id;
     }
@@ -66,5 +67,4 @@ public class Ausleihe {
     public void setUserid(int userid) {
         this.userid = userid;
     }
-    
 }

@@ -5,10 +5,10 @@
  */
 package de.dualibib.UI.Panels;
 
-import de.dualibib.Datenlogik.dto.AusleiheDTO;
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
+import de.dualibib.Datenlogik.dto.Ausleihe;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AusleihenBearbeitenPanel extends ElternPanel {
 
-    AusleiheDTO ausleiheListe;
+    List<Ausleihe> ausleiheListe;
 
     /**
      * Creates new form AusleihenBearbeitenPanel
@@ -113,7 +113,7 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
     // End of variables declaration//GEN-END:variables
 
 
-    public void setAusleihenListe(AusleiheDTO ausleihe){
+    public void setAusleihenListe(List<Ausleihe> ausleihe){
         ausleiheListe = ausleihe;
     }
     
