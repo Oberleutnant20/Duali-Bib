@@ -5,7 +5,7 @@
  */
 package de.dualibib.Fachlogik.Historyverwaltung;
 
-import de.dualibib.Datenlogik.dto.HistoryDTO;
+import de.dualibib.Datenlogik.dto.History;
 import de.dualibib.Datenlogik.idao.IHistoryDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
@@ -19,27 +19,35 @@ import java.util.List;
  */
 public class Historyverwaltung extends ElternVerwaltung{
 
-    private HistoryDTO historyListe;
-    private HistoryDTO historyListeRef;
+    private ArrayList<History> historyListe;
+    private ArrayList<History> historyListeRef;
     private IHistoryDAO historyDAO;
 
     public Historyverwaltung(IHistoryDAO historyDAO) {
-        historyListeRef = new HistoryDTO();
+        historyListe = new ArrayList<History>();
+        historyListeRef = new ArrayList<History>();
         this.historyDAO = historyDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<History> liste = new ArrayList<>();
         if(historyListe.size() > historyListeRef.size()){
-            //liste = historyListe.subList(historyListeRef.size(), historyListe.size());
+            liste = historyListe.subList(historyListeRef.size(), historyListe.size());
             System.out.println("hm");
         }
-        historyDAO.speichern();
+        historyDAO.speichern(liste);
     }
 
     public void laden() {
+        historyListe.clear();
+        de.dualibib.Logger.debug(this,"laden");
         try {
-            HistoryDTO liste = historyDAO.laden();
+            List<History> liste = historyDAO.laden();
+            for (History history : liste) {
+                historyListe.add(history);
+                historyListeRef.add(history);
+            }
+
         } catch (Exception e) {
         }
     }
@@ -58,7 +66,11 @@ public class Historyverwaltung extends ElternVerwaltung{
         notifyPanels();
     }
 
-    public HistoryDTO get() {
-        return historyListe;
+    public List<History> get() {
+        ArrayList<History> liste = new ArrayList<>();
+        historyListe.forEach((history) -> {
+            liste.add(history);
+        });
+        return liste;
     }
 }

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Accountverwaltung;
+package de.dualibib.Datenlogik.dto;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Carina
  */
-public class Account {
+public class Account implements Serializable{
 
     private String username;
     private String passwort;
@@ -21,7 +23,7 @@ public class Account {
     private String strasse;
     private String hausnummer;
     private String ort;
-
+    
     public Account(String username, String passwort, boolean mitarbeiter, int userid, String vorname, String nachname, int plz, String strasse, String hausnummer, String ort) {
         this.username = username;
         this.passwort = passwort;
@@ -33,22 +35,6 @@ public class Account {
         this.strasse = strasse;
         this.hausnummer = hausnummer;
         this.ort = ort;
-    }
-
-    public String getOrt() {
-        return ort;
-    }
-
-    public int getPlz() {
-        return plz;
-    }
-
-    public String getStrasse() {
-        return strasse;
-    }
-
-    public String getHausnummer() {
-        return hausnummer;
     }
 
     public void setUsername(String username) {
@@ -75,6 +61,22 @@ public class Account {
         this.nachname = nachname;
     }
 
+    public void setPlz(int plz) {
+        this.plz = plz;
+    }
+
+    public void setStrasse(String strasse) {
+        this.strasse = strasse;
+    }
+
+    public void setHausnummer(String hausnummer) {
+        this.hausnummer = hausnummer;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -99,5 +101,21 @@ public class Account {
         return nachname;
     }
 
+    public int getPlz() {
+        return plz;
+    }
 
+    public String getStrasse() {
+        return strasse;
+    }
+
+    public String getHausnummer() {
+        return hausnummer;
+    }
+
+    public String getOrt() {
+        return ort;
+    }
+    
+   
 }

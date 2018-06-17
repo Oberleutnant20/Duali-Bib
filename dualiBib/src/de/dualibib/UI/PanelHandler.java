@@ -5,14 +5,14 @@
  */
 package de.dualibib.UI;
 
-import de.dualibib.Datenlogik.dto.GenreDTO;
-import de.dualibib.Datenlogik.dto.KategorieDTO;
-import de.dualibib.Datenlogik.dto.MedienDTO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
+import de.dualibib.Datenlogik.dto.Account;
+import de.dualibib.Datenlogik.dto.Ausleihe;
+import de.dualibib.Datenlogik.dto.Genre;
+import de.dualibib.Datenlogik.dto.History;
+import de.dualibib.Datenlogik.dto.Kategorie;
+import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Controller;
-import de.dualibib.Fachlogik.Historyverwaltung.History;
-import de.dualibib.Fachlogik.Medienverwaltung.Medien;
+import de.dualibib.Logger;
 import de.dualibib.UI.Panels.AccountBearbeitenPanel;
 import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
 import de.dualibib.UI.Panels.AusleihenBearbeitenPanel;
@@ -25,6 +25,7 @@ import de.dualibib.UI.Panels.SuchePanel;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -47,36 +48,37 @@ public class PanelHandler {
     private boolean eingeloggt;
     private boolean mitarbeiter;
     private Account aktuellerUser;
-    private GenreDTO genreListe;
-    private KategorieDTO kategorieListe;
+    private List<Genre> genreListe;
+    private List<Kategorie> kategorieListe;
 
     
 
-    public PanelHandler(Controller controller, GenreDTO genreListe, KategorieDTO kategorieListe) {
-        ui = new UI(genreListe, kategorieListe,this, false);
+    public PanelHandler(Controller controller, List<Genre> genreListe, List<Kategorie> kategorieListe) {
+        ui = new UI(genreListe, kategorieListe,this);
+        this.controller = controller;
         this.genreListe = genreListe;
         this.kategorieListe = kategorieListe;
         initPanels();
-        initObsever();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
-        suchePanel.setMedienListe(controller.getAllMedien());
-        suchePanel.fillTable();
+        initObsever();
+        suchePanel.update();
         suchePanel.setVisible(true);
-        this.controller = controller;
     }
 
     private void initObsever(){
+        de.dualibib.Logger.debug(this,"initObsever");
         controller.setAccountObserver(accountBearbeitenPanel,accountsBearbeitenPanel);
         controller.setAusleiheObserver(ausleihenPanel,ausleihenBearbeitenPanel);
-        controller.setGenreObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
+        controller.setGenreObserver(selectPanel,suchePanel);
         controller.setHistoryObserver(historyPanel);
-        controller.setKategorieObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
+        controller.setKategorieObserver(selectPanel,suchePanel);
         controller.setMedienObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
         
     }
     
     private void initPanels(){
+        de.dualibib.Logger.debug(this,"initPanels");
         loginPanel = new LoginPanel(this);
         accountBearbeitenPanel = new AccountBearbeitenPanel(this);
         historyPanel = new HistoryPanel(this);
@@ -88,6 +90,7 @@ public class PanelHandler {
         suchePanel= new SuchePanel(this);
     }
     public void panelUnsichtbar() {
+        de.dualibib.Logger.debug(this,"panelUnsichtbar");
         selectPanel.setVisible(false);
         loginPanel.setVisible(false);
         suchePanel.setVisible(false); 
@@ -100,14 +103,15 @@ public class PanelHandler {
     }
 
     public boolean login(String accountname, String passwort) {
+        de.dualibib.Logger.debug(this,"login");
         if(controller.setAktuellerUser(accountname, passwort)!=null){
             this.aktuellerUser =controller.setAktuellerUser(accountname, passwort);
             if(controller.isMitarbeiter()){
                 ui.setMitarbeiterOnline();
             }
             ui.setUserOnline();
-            ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
-            historyPanel.setUserHistory(controller.getHistoryListe());
+            controller.ladeUserDaten();
+            controller.initUpdate();
             return true;
         }
         return false;
@@ -130,15 +134,15 @@ public class PanelHandler {
         controller.saveAccount(new Account(accountname,passwort, mitarbeiter, id, vorname, name, plz, strasse, hausnummer, ort));
     }
 
-    void loadUserAusleihe() {
-        ausleihenPanel.setUserAusleihe(controller.getAusleiheListe());
+    public List<Ausleihe> getAusleihe() {
+        return controller.getAllAusleihenListe();
     }
 
-    void loadUserHistory() {
-        historyPanel.setUserHistory(controller.getHistoryListe());
+    public List<History> getHistory() {
+        return controller.getHistoryListe();
     }
 
-    public MedienDTO returnMedien(){
+    public List<Medien> returnMedien(){
       return controller.getAllMedien();  
     }
     
@@ -148,12 +152,11 @@ public class PanelHandler {
 
     public void loadAusleihen() {
         ausleihenBearbeitenPanel.setAusleihenListe(controller.getAllAusleihenListe());
-        ausleihenPanel.setAusleihenListe(controller.getAllAusleihenListe());
     }
 
     public Medien mapHistoryAndMedium(History selected) {
         Medien medium = null;
-        MedienDTO liste = controller.getAllMedien();
+        List<Medien> liste = controller.getAllMedien();
         for (int i = 0; i < liste.size(); i++) {
             if(liste.get(i).getId()==selected.getMedienid())
                 medium = liste.get(i);
@@ -170,7 +173,7 @@ public class PanelHandler {
     public void createNewAusleihe(long userid, Date date, long katid) {
        long id;
         try {
-            id = controller.getAllAusleihenListe().get(controller.getAllAusleihenListe().size()).getId()+1;
+            id = controller.getAllAusleihenListe().get(controller.getAllAusleihenListe().size()-1).getId()+1;
         } catch (Exception e) {
             id=0;
         }
@@ -184,11 +187,11 @@ public class PanelHandler {
         return ui;
     }
 
-    public GenreDTO getGenreListe() {
+    public List<Genre> getGenreListe() {
         return genreListe;
     }
 
-    public KategorieDTO getKategorieListe() {
+    public List<Kategorie> getKategorieListe() {
         return kategorieListe;
     }
 
@@ -230,5 +233,47 @@ public class PanelHandler {
 
     public SelectPanel getSelectPanel() {
         return selectPanel;
+    }
+
+    public String getKatBezeichnung(long kategorienId) {
+        List<Kategorie> kat = getKategorieListe();
+        String bez = "";
+        for(Kategorie kategorie : kat){
+            if(kategorie.getId()==kategorienId)
+                return kategorie.getBezeichnung();
+        }
+        return bez;
+    }
+
+    public String getGenBezeichnung(long genreId) {
+        List<Genre> gen = getGenreListe();
+        String bez = "";
+        for(Genre genre : gen){
+            if(genre.getId()==genreId)
+                return genre.getBezeichnung();
+        }
+        return bez;
+    }
+
+    public int getVerfuegbare(int medienId) {
+         int verfuegbare = 0;
+         
+         for(Medien medien : controller.getAllMedien()){
+             if(medien.getId()==medienId){
+                 verfuegbare=medien.getAnzahl();
+                 Logger.info(this, "gefunden");
+             }
+         }
+         Logger.info(this, verfuegbare+"verfügbare gefunden");
+         for(Ausleihe ausleihe : controller.getAllAusleihenListe()){
+             if(ausleihe.getMedienid()==medienId)
+                 verfuegbare--;
+         }
+         return verfuegbare;
+    }
+
+    public List<Medien> getMedienliste() {
+        Logger.info(this, "Medienliste gezogen");
+        return controller.getAllMedien();
     }
 }

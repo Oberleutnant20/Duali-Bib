@@ -28,7 +28,8 @@ public class Main {
         Kategorienverwaltung kategorienverwaltung = (Kategorienverwaltung)singleton.getVerwaltung("Kategorien");
         Genreverwaltung genreverwaltung = (Genreverwaltung)singleton.getVerwaltung("Genre");
         Historyverwaltung historyverwaltung = (Historyverwaltung)singleton.getVerwaltung("History");
-        
+        Logger.enableDebug(true);
+        Logger.enableWarnung(true);
         Controller controller = new Controller(accountverwaltung, medienverwaltung,ausleiheverwaltung, kategorienverwaltung,genreverwaltung, historyverwaltung);
         
     }

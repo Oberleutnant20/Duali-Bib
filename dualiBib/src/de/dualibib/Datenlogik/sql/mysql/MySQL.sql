@@ -66,8 +66,6 @@ m_Titel VARCHAR(150),
 m_Author VARCHAR(150),
 m_ISBN VARCHAR(24) UNIQUE,
 m_Barcode BIGINT UNIQUE,
-m_ausgeliehen   BOOLEAN DEFAULT FALSE,
-m_Vorgemerkt    BOOLEAN DEFAULT FALSE,
 m_Anzahl        INTEGER,
 m_beschreibung  VARCHAR(500),
 km_ID INTEGER,
@@ -117,7 +115,9 @@ INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibun
 VALUES('Datenbanken-Implementierungste', 'Andreas Heuer', '978-3826691560', 9783826691560, 1, 'Dieses Buch behandelt Konzepte und Techniken der Implementierung von Datenbanksystemen, die heutzutage die Kernkomponente von Informationssystemen darstellen.', 1, 1);
 INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibung, km_id, g_id) 
 VALUES('BLub Buch', 'Test Author', '978-3826691561', 9783826691561, 2,'blub', 2, 2);
-INSERT INTO Ausleihe(a_Date, u_ID, m_ID, km_ID) VALUES('2018-05-13',1,1,1);
-INSERT INTO Ausleihe(a_Date, u_ID, m_ID, km_ID) VALUES('2018-05-12',2,2,2);
+INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibung, km_id, g_id) 
+VALUES('BBuch', 'Test Author', '978-3826691562', 9783826691562, 5,'bblub', 2, 2);
+INSERT INTO Ausleihe(a_Date, u_ID, m_ID, km_ID) VALUES('2018-08-13',1,1,1);
+INSERT INTO Ausleihe(a_Date, u_ID, m_ID, km_ID) VALUES('2018-08-12',2,2,2);
 INSERT INTO History(u_ID, km_ID, m_ID) VALUES(1, 1, 1);
 INSERT INTO History(u_ID, km_ID, m_ID) VALUES(2, 2, 2);

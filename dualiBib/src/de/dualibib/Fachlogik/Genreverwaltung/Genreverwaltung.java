@@ -5,13 +5,13 @@
  */
 package de.dualibib.Fachlogik.Genreverwaltung;
 
-import de.dualibib.Datenlogik.dto.GenreDTO;
+import de.dualibib.Datenlogik.dto.Genre;
 import de.dualibib.Datenlogik.idao.IGenreDAO;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,30 +19,36 @@ import java.util.logging.Logger;
  */
 public class Genreverwaltung extends ElternVerwaltung{
 
-    private GenreDTO genreListe;
-    private GenreDTO genreListeRef;
+    private ArrayList<Genre> genreListe;
+    private ArrayList<Genre> genreListeRef;
     private IGenreDAO genreDAO;
 
     public Genreverwaltung(IGenreDAO genreDAO) {
-        genreListeRef = new GenreDTO();
+        genreListe = new ArrayList<Genre>();
+        genreListeRef = new ArrayList<Genre>();
         this.genreDAO = genreDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
-        /*List<Genre> liste = new ArrayList<>();
+        List<Genre> liste = new ArrayList<>();
         if(genreListe.size() > genreListeRef.size()){
             liste = genreListe.subList(genreListeRef.size(), genreListe.size());
-        }*/
-        genreDAO.speichern();
+    }
+        genreDAO.speichern(liste);
     }
 
     public void laden() {
+        genreListe.clear();
+        genreListeRef.clear();
+        de.dualibib.Logger.debug(this,"laden");
         try {
-            genreListe = genreDAO.laden();
-        } catch (IOException ex) {
-            Logger.getLogger(Genreverwaltung.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConnectionError ex) {
-            Logger.getLogger(Genreverwaltung.class.getName()).log(Level.SEVERE, null, ex);
+            List<Genre> liste = genreDAO.laden();
+            liste.forEach((genre) -> {
+                genreListe.add(genre);
+                genreListeRef.add(genre);
+            });
+
+        } catch (Exception e) {
         }
     }
 
@@ -62,7 +68,11 @@ public class Genreverwaltung extends ElternVerwaltung{
         }
     }
 
-    public GenreDTO get() {
-        return genreListe;
+    public List<Genre> get() {
+        ArrayList<Genre> liste = new ArrayList<>();
+        genreListe.forEach((genre) -> {
+            liste.add(genre);
+        });
+        return liste;
     }
 }

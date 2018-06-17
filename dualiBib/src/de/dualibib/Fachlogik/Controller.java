@@ -1,32 +1,23 @@
 package de.dualibib.Fachlogik;
 
-import de.dualibib.Datenlogik.dto.AccountDTO;
-import de.dualibib.Datenlogik.dto.AusleiheDTO;
-import de.dualibib.Datenlogik.dto.HistoryDTO;
-import de.dualibib.Datenlogik.dto.MedienDTO;
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Datenlogik.dto.Account;
+import de.dualibib.Datenlogik.dto.Ausleihe;
+import de.dualibib.Datenlogik.dto.History;
+import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
-import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Historyverwaltung.Historyverwaltung;
-import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
+import de.dualibib.Logger;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
-import de.dualibib.UI.Panels.AccountBearbeitenPanel;
-import de.dualibib.UI.Panels.AccountsBearbeitenPanel;
-import de.dualibib.UI.Panels.AusleihenBearbeitenPanel;
-import de.dualibib.UI.Panels.AusleihenPanel;
-import de.dualibib.UI.Panels.HistoryPanel;
-import de.dualibib.UI.Panels.SelectPanel;
-import de.dualibib.UI.Panels.SuchePanel;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -44,8 +35,8 @@ public class Controller {
     private PanelHandler panelHandler;
 
     private Account aktuellerUser;
-    private HistoryDTO historyListe;
-    private AusleiheDTO ausleiheListe;
+    private ArrayList<History> historyListe;
+    private ArrayList<Ausleihe> ausleiheListe;
 
     public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung, Historyverwaltung historyverwaltung) {
         this.accountverwaltung = accountverwaltung;
@@ -58,14 +49,27 @@ public class Controller {
     }
 
     private void start() {
-        accountverwaltung.laden();
+        Logger.info(this,"starten");
+        initVerwaltungLaden();
+        ausleihenPruefen();
+        panelHandler = new PanelHandler(this, genreverwaltung.get(), kategorienverwaltung.get());
+    }
+    
+     private void initVerwaltungLaden() {accountverwaltung.laden();
         medienverwaltung.laden();
         ausleiheverwaltung.laden();
         kategorienverwaltung.laden();
         genreverwaltung.laden();
         historyverwaltung.laden();
-        ausleihenPruefen();
-        panelHandler = new PanelHandler(this, genreverwaltung.get(), kategorienverwaltung.get());
+    }
+     
+    public void initUpdate() {
+        Logger.info(this, "initUpdate");
+        medienverwaltung.notifyPanels();
+        ausleiheverwaltung.notifyPanels();
+        kategorienverwaltung.notifyPanels();
+        genreverwaltung.notifyPanels();
+        historyverwaltung.notifyPanels();
     }
 
     public Account getAktuellerUser() {
@@ -73,6 +77,7 @@ public class Controller {
     }
 
     public Account setAktuellerUser(String accountname, String passwort) {
+        Logger.info(this,"setAktuellerUser");
         aktuellerUser = matchingUser(accountname, passwort);
         if (aktuellerUser != null) {
             ladeUserDaten();
@@ -83,6 +88,7 @@ public class Controller {
     }
 
     public boolean isMitarbeiter() {
+        Logger.info(this,"isMitarbeiter");
         if (aktuellerUser != null) {
             return aktuellerUser.isMitarbeiter();
         }
@@ -90,58 +96,62 @@ public class Controller {
     }
 
     public void addHistory(History history) {
+        Logger.info(this,"addHistory");
         historyverwaltung.add(history);
     }
 
     public void addAusleihe(Ausleihe ausleihe) {
+        Logger.info(this,"addAusleihe");
         ausleiheverwaltung.add(ausleihe);
     }
 
-    private void ladeUserDaten() {
+    public void ladeUserDaten() {
         historyListe = ladeHistory();
         ausleiheListe = ladeAusleihe();
     }
 
     private Account matchingUser(String accountname, String passwort) {
-        AccountDTO list = accountverwaltung.get();
-        for(int i = 0; i < list.size() ; i++){
-            if(list.get(i).getPasswort().equals(passwort)&&list.get(i).getUsername().equals(accountname)){
+        Logger.info(this,"matchingUser");
+        List<Account> list = accountverwaltung.get();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getPasswort().equals(passwort) && list.get(i).getUsername().equals(accountname)) {
                 return list.get(i);
             }
         }
         return null;
     }
 
-    private HistoryDTO ladeHistory() {
+    private ArrayList<History> ladeHistory() {
         int userid = aktuellerUser.getUserid();
-        HistoryDTO list = new HistoryDTO();        
-        HistoryDTO listegesamt = historyverwaltung.get();
-        for(int i = 0; i < listegesamt.size() ; i++){
-            if(listegesamt.get(i).getUserid()==userid){
+        ArrayList<History> list = new ArrayList<History>();
+        Logger.info(this,"ladeHistory");
+        List<History> listegesamt = historyverwaltung.get();
+        for (int i = 0; i < listegesamt.size(); i++) {
+            if (listegesamt.get(i).getUserid() == userid) {
+                Logger.debug(this, "ladeHistory, History füllen");
                 list.add(listegesamt.get(i));
             }
         }
         return list;
     }
 
-    private AusleiheDTO ladeAusleihe() {
+    private ArrayList<Ausleihe> ladeAusleihe() {
         int userid = aktuellerUser.getUserid();
-        AusleiheDTO list = new AusleiheDTO();        
-        AusleiheDTO listegesamt = ausleiheverwaltung.get();
-        for(int i = 0; i < listegesamt.size() ; i++){
-            if(listegesamt.get(i).getUserid()==userid){
+        ArrayList<Ausleihe> list = new ArrayList<Ausleihe>();
+        Logger.info(this,"ladeAusleihe");
+        List<Ausleihe> listegesamt = ausleiheverwaltung.get();
+        for (int i = 0; i < listegesamt.size(); i++) {
+            Logger.debug(this, "ladeAusleihe, Ausleihe Schleife");
+            if (listegesamt.get(i).getUserid() == userid) {
+                Logger.debug(this, "ladeAusleihe, Ausleihe füllen");
                 list.add(listegesamt.get(i));
             }
         }
         return list;
     }
 
-    public HistoryDTO getHistoryListe() {
-        return historyListe;
-    }
-
-    public AusleiheDTO getAusleiheListe() {
-        return ausleiheListe;
+    public List<History> getHistoryListe() {
+        return historyverwaltung.get();
     }
 
     public void saveAccountChange(Account a) {
@@ -149,35 +159,48 @@ public class Controller {
     }
 
     public void saveMediumChange(Medien m) {
+        de.dualibib.Logger.info(this,"saveMediumChange");
+        for(Medien medium : getAllMedien()){
+            if(medium.getId()==m.getId())
+                medienverwaltung.delete(medium);
+        }
+        
         medienverwaltung.update(m);
     }
 
     public void deleteAusleihe(Ausleihe a) {
+        de.dualibib.Logger.info(this,"deleteAusleihe");
         ausleiheverwaltung.delete(a);
     }
 
     public void saveAccount(Account account) {
+        de.dualibib.Logger.info(this,"saveAccount");
         accountverwaltung.add(account);
     }
 
     public void deleteHistory(History h) {
+        de.dualibib.Logger.info(this,"deleteHistory");
         historyverwaltung.delete(h);
     }
 
-    public AusleiheDTO getAllAusleihenListe() {
+    public ArrayList<Ausleihe> getAllAusleihenListe() {
+        de.dualibib.Logger.info(this,"getAllAusleihenListe");
         return ausleiheverwaltung.get();
     }
 
-    public AccountDTO getAllAccountsListe() {
+    public ArrayList<Account> getAllAccountsListe() {
+        de.dualibib.Logger.info(this,"getAllAccountsListe");
         return accountverwaltung.get();
     }
 
-    public MedienDTO getAllMedien() {
-        System.out.println("getAllMedien in Controller");
+    public ArrayList<Medien> getAllMedien() {
+        de.dualibib.Logger.info(this,"getAllMedien");
+        de.dualibib.Logger.debug(this,"medien"+medienverwaltung.get().size()+"");
         return medienverwaltung.get();
     }
 
     public void saveDB() throws IOException, ConnectionError {
+        de.dualibib.Logger.info(this,"Speichern");
         accountverwaltung.speichern();
         medienverwaltung.speichern();
         ausleiheverwaltung.speichern();
@@ -187,7 +210,8 @@ public class Controller {
     }
 
     private void ausleihenPruefen() {
-        AusleiheDTO liste = ausleiheverwaltung.get();
+        de.dualibib.Logger.debug(this,"Ausleihe prüfen");
+        ArrayList<Ausleihe> liste = ausleiheverwaltung.get();
         Date heute = new Date();
         int id = historyverwaltung.get().size();
         for (int i = 0; i < liste.size(); i++) {
@@ -239,5 +263,7 @@ public class Controller {
            accountverwaltung.addPanelList(panel);
        }
     }
+
+    
   
 }

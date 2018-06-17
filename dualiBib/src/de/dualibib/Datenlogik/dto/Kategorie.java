@@ -3,14 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.dualibib.Fachlogik.Kategorieverwaltung;
+package de.dualibib.Datenlogik.dto;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Carina
  */
-public class Kategorie {
-    private long id;
+public class Kategorie implements Serializable{
+
+     private long id;
     private String name;
     private String bezeichnung;
 
@@ -43,5 +46,4 @@ public class Kategorie {
     public void setName(String name) {
         this.name = name;
     }
-    
 }
