@@ -270,6 +270,6 @@ public class SuchePanel extends ElternPanel {
         fillTable();
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
-
+        System.out.println("-------------------------------------------------------------");
     }
 }

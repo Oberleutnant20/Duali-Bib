@@ -150,12 +150,8 @@ public class Controller {
         return list;
     }
 
-    public ArrayList<History> getHistoryListe() {
-        return historyListe;
-    }
-
-    public ArrayList<Ausleihe> getAusleiheListe() {
-        return ausleiheListe;
+    public List<History> getHistoryListe() {
+        return historyverwaltung.get();
     }
 
     public void saveAccountChange(Account a) {
@@ -164,6 +160,11 @@ public class Controller {
 
     public void saveMediumChange(Medien m) {
         de.dualibib.Logger.info(this,"saveMediumChange");
+        for(Medien medium : getAllMedien()){
+            if(medium.getId()==m.getId())
+                medienverwaltung.delete(medium);
+        }
+        
         medienverwaltung.update(m);
     }
 

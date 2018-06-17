@@ -61,9 +61,8 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
             for (Ausleihe ausleihe : ausleiheListe) {
                 try {
                     String pattern = "YYYY-MM-DD";
-                    String mysqlDateString = new SimpleDateFormat(pattern).format(ausleihe.getDate());
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO Ausleihe(a_DATE, u_ID, m_id, km_id) "
-                            + "VALUES('" + mysqlDateString + "', " + ausleihe.getUserid() + ", " + ausleihe.getMedienid() + ", " + ausleihe.getKategorieid() + ");");
+                            + "VALUES('" + new java.sql.Date(ausleihe.getDate().getTime()) + "', " + ausleihe.getUserid() + ", " + ausleihe.getMedienid() + ", " + ausleihe.getKategorieid() + ");");
 
                     ptsm.execute();
                 } catch (SQLException ex) {

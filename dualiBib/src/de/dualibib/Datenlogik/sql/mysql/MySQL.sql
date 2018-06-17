@@ -117,7 +117,7 @@ INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibun
 VALUES('BLub Buch', 'Test Author', '978-3826691561', 9783826691561, 2,'blub', 2, 2);
 INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibung, km_id, g_id) 
 VALUES('BBuch', 'Test Author', '978-3826691562', 9783826691562, 5,'bblub', 2, 2);
-INSERT INTO Ausleihe(a_Date, u_ID, m_ID, km_ID) VALUES('2018-08-13',2,1,1);
+INSERT INTO Ausleihe(a_Date, u_ID, m_ID, km_ID) VALUES('2018-08-13',1,1,1);
 INSERT INTO Ausleihe(a_Date, u_ID, m_ID, km_ID) VALUES('2018-08-12',2,2,2);
 INSERT INTO History(u_ID, km_ID, m_ID) VALUES(1, 1, 1);
 INSERT INTO History(u_ID, km_ID, m_ID) VALUES(2, 2, 2);

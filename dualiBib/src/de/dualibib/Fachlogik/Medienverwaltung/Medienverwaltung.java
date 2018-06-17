@@ -75,10 +75,11 @@ public class Medienverwaltung extends ElternVerwaltung{
     }
     
     public void update(Medien medien){
-        if (!medienListeUpdate.add(medien)) {
-			String error = "Medium gibt es nicht.";
+        if (!medienListe.add(medien)) {
+            String error = "Medium gibt es bereits.";
                         System.out.println(error);
 		}
+        medienListeUpdate.add(medien);
         notifyPanels();
     }
 

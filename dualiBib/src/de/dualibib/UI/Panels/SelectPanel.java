@@ -294,6 +294,7 @@ public class SelectPanel extends ElternPanel {
 
     public void setMedium(Medien m) {
         medium = m;
+        infoLabel.setText("Status:");
         if (panelHandler.getVerfuegbare((int) m.getId())==0) {
             statusField.setText("ausgeliehen");
             ausleihenButton.setEnabled(false);
@@ -341,14 +342,14 @@ private void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
     }
 
     private void setComboboxDate(JComboBox combobox) {
-        ArrayList<Date> list = new ArrayList<Date>();
+        ArrayList<Date> datelist = new ArrayList<Date>();
         for(int i = 15; i<=45;i+=15){
-            list.add(addDays(i));
+            datelist.add(addDays(i));
         }
-        String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
+        String[] tmp = new String[datelist.size()];
+        for (int i = 0; i < datelist.size(); i++) {
             DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);//
-            String date = formatter.format(list.get(i));
+            String date = formatter.format(datelist.get(i));
             tmp[i] = date;
         }
         combobox.setModel(new DefaultComboBoxModel(tmp));

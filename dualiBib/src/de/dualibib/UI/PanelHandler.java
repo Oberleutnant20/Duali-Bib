@@ -70,9 +70,9 @@ public class PanelHandler {
         de.dualibib.Logger.debug(this,"initObsever");
         controller.setAccountObserver(accountBearbeitenPanel,accountsBearbeitenPanel);
         controller.setAusleiheObserver(ausleihenPanel,ausleihenBearbeitenPanel);
-        controller.setGenreObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
+        controller.setGenreObserver(selectPanel,suchePanel);
         controller.setHistoryObserver(historyPanel);
-        controller.setKategorieObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
+        controller.setKategorieObserver(selectPanel,suchePanel);
         controller.setMedienObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
         
     }
@@ -135,7 +135,7 @@ public class PanelHandler {
     }
 
     public List<Ausleihe> getAusleihe() {
-        return controller.getAusleiheListe();
+        return controller.getAllAusleihenListe();
     }
 
     public List<History> getHistory() {
@@ -152,7 +152,6 @@ public class PanelHandler {
 
     public void loadAusleihen() {
         ausleihenBearbeitenPanel.setAusleihenListe(controller.getAllAusleihenListe());
-        ausleihenPanel.setAusleihenListe(controller.getAllAusleihenListe());
     }
 
     public Medien mapHistoryAndMedium(History selected) {
@@ -174,7 +173,7 @@ public class PanelHandler {
     public void createNewAusleihe(long userid, Date date, long katid) {
        long id;
         try {
-            id = controller.getAllAusleihenListe().get(controller.getAllAusleihenListe().size()).getId()+1;
+            id = controller.getAllAusleihenListe().get(controller.getAllAusleihenListe().size()-1).getId()+1;
         } catch (Exception e) {
             id=0;
         }
