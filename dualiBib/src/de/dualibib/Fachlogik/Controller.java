@@ -110,7 +110,7 @@ public class Controller {
         ausleiheListe = ladeAusleihe();
     }
 
-    private Account matchingUser(String accountname, String passwort) {
+    public Account matchingUser(String accountname, String passwort) {
         Logger.info(this,"matchingUser");
         List<Account> list = accountverwaltung.get();
         for (int i = 0; i < list.size(); i++) {
@@ -121,6 +121,7 @@ public class Controller {
         return null;
     }
 
+    
     private ArrayList<History> ladeHistory() {
         int userid = aktuellerUser.getUserid();
         ArrayList<History> list = new ArrayList<History>();
