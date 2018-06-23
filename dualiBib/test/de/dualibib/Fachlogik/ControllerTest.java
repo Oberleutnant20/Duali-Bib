@@ -5,24 +5,19 @@
  */
 package de.dualibib.Fachlogik;
 
-import de.dualibib.Fachlogik.Accountverwaltung.Account;
+import de.dualibib.Datenlogik.dto.Account;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
-import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleihe;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
-import de.dualibib.Fachlogik.Historyverwaltung.History;
 import de.dualibib.Fachlogik.Historyverwaltung.Historyverwaltung;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
-import de.dualibib.Fachlogik.Medienverwaltung.Medien;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 import java.util.ArrayList;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import static org.junit.Assert.*;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 /**
@@ -49,62 +44,81 @@ public class ControllerTest {
     public ControllerTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         sut = new Controller(accountverwaltung, medienverwaltung, ausleiheverwaltung, kategorienverwaltung, genreverwaltung, historyverwaltung);
     }
-    
-    @After
-    public void tearDown() {
-    }
-
-    
-
-    /**
-     * Test of setAktuellerUser method, of class Controller.
-     */
+        
     @Test
-    public void testSetAktuellerUser() {
-        System.out.println("setAktuellerUser");
-        String accountname = "";
-        String passwort = "";
-        Controller instance = null;
-        Account expResult = null;
-        Account result = instance.setAktuellerUser(accountname, passwort);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetAktuellerUser(){
+        assertTrue(sut.getAktuellerUser()==null);
     }
-
-    /**
-     * Test of saveDB method, of class Controller.
-     */
+    
     @Test
-    public void testSaveDB() throws Exception {
-        System.out.println("saveDB");
-        Controller instance = null;
-        instance.saveDB();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testmatchinguserTrue(){
+        //GIVEN
+        String pw="blub";
+        String user="bloed";
+        Account a = new Account(user, pw, true, 0, user, user, 0, user, user, pw);
+        ArrayList<Account> liste = new ArrayList<>();
+        liste.add(a);
+        //WHEN
+        Mockito.when(accountverwaltung.get()).thenReturn(liste);
+        //THEN
+        assertTrue(sut.matchingUser(user, pw)==a);
+    }
+    
+    @Test
+    public void testmatchinguserFalse(){
+        //GIVEN
+        String pw="blub";
+        String user="bloed";
+        Account a = new Account(user, pw, true, 0, user, user, 0, user, user, pw);
+        ArrayList<Account> liste = new ArrayList<>();
+        liste.add(a);
+        //WHEN
+        Mockito.when(accountverwaltung.get()).thenReturn(liste);
+        //THEN
+        assertFalse(sut.matchingUser("user", "pw")==a);
+    }
+    
+    @Test
+    public void testIsMitarbeiter(){
+        assertFalse(sut.isMitarbeiter());
+    }
+    
+    @Test
+    public void testIsMitarbeiterTrue(){
+       //GIVEN
+       String pw="BLÄH";
+       String user="BLÖH";
+       Account a = new Account(user, pw, true, 0, user, user, 0, user, user, pw);
+       ArrayList<Account> liste = new ArrayList<>();
+       liste.add(a);
+       //WHEN
+       Mockito.when(accountverwaltung.get()).thenReturn(liste);
+       sut.setAktuellerUser(user, pw);
+       //THEN
+       assertTrue(sut.isMitarbeiter());
+    }
+    
+    @Test
+    public void testIsMitarbeiterFalse(){
+       //GIVEN
+       String pw="BLÄH";
+       String user="BLÖH";
+       Account a = new Account(user, pw, false, 0, user, user, 0, user, user, pw);
+       ArrayList<Account> liste = new ArrayList<>();
+       liste.add(a);
+       //WHEN
+       Mockito.when(accountverwaltung.get()).thenReturn(liste);
+       sut.setAktuellerUser(user, pw);
+       //THEN
+       assertFalse(sut.isMitarbeiter());
     }
 
-    /*
-    start - werden methoden aufgerufen?
-setaktuelleuser matchingccount - stubben
-ladeUserdaten - prüfen ob listen da sind
-matchinguser
-ladeHistory
-ladeAusleihe
-savedb - methodenaufruf
-ausleiheprüfen -methodenaufruf
-    */
+    
+
+    
 }
