@@ -6,6 +6,7 @@ import de.dualibib.Datenlogik.dto.History;
 import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
+import de.dualibib.Fachlogik.Accountverwaltung.Languageverwaltung.Languageverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
 import de.dualibib.Fachlogik.Historyverwaltung.Historyverwaltung;
@@ -31,6 +32,7 @@ public class Controller {
     private Kategorienverwaltung kategorienverwaltung;
     private Genreverwaltung genreverwaltung;
     private Historyverwaltung historyverwaltung;
+    private Languageverwaltung languageverwaltung;
 
     private PanelHandler panelHandler;
 
@@ -38,7 +40,8 @@ public class Controller {
     private ArrayList<History> historyListe;
     private ArrayList<Ausleihe> ausleiheListe;
 
-    public Controller(Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung, Historyverwaltung historyverwaltung) {
+    public Controller(Languageverwaltung languageverwaltung,Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung, Historyverwaltung historyverwaltung) {
+        this.languageverwaltung = languageverwaltung;
         this.accountverwaltung = accountverwaltung;
         this.medienverwaltung = medienverwaltung;
         this.ausleiheverwaltung = ausleiheverwaltung;
@@ -261,6 +264,12 @@ public class Controller {
     public void setAccountObserver(ElternPanel... panels) {
         for(ElternPanel panel : panels){
            accountverwaltung.addPanelList(panel);
+       }
+    }
+
+    public void setLanguageObserver(ElternPanel... panels) {
+        for(ElternPanel panel : panels){
+           languageverwaltung.addPanelList(panel);
        }
     }
 

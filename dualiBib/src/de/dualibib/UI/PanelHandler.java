@@ -77,7 +77,7 @@ public class PanelHandler {
         controller.setHistoryObserver(historyPanel);
         controller.setKategorieObserver(selectPanel,suchePanel);
         controller.setMedienObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
-        
+        controller.setLanguageObserver(ausleihenBearbeitenPanel,optionPanel,ausleihenPanel,historyPanel,accountsBearbeitenPanel,accountBearbeitenPanel,loginPanel,selectPanel,suchePanel);
     }
     
     private void initPanels(){
