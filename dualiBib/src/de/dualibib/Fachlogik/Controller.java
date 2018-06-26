@@ -45,14 +45,13 @@ public class Controller {
         this.kategorienverwaltung = kategorienverwaltung;
         this.genreverwaltung = genreverwaltung;
         this.historyverwaltung = historyverwaltung;
-        start();
     }
 
-    private void start() {
+    public void start(PanelHandler panelHandler) {
         Logger.info(this,"starten");
         initVerwaltungLaden();
         ausleihenPruefen();
-        panelHandler = new PanelHandler(this, genreverwaltung.get(), kategorienverwaltung.get());
+        this.panelHandler = panelHandler;
     }
     
      private void initVerwaltungLaden() {accountverwaltung.laden();
