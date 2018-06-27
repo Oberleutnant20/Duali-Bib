@@ -5,21 +5,17 @@
  */
 package de.dualibib.UI.Panels;
 
-import de.dualibib.Datenlogik.dto.Genre;
-import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.dto.Medien;
-import de.dualibib.UI.ElternPanel;
+import de.dualibib.UI.ElternComboboxPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Carina
  */
-public class SuchePanel extends ElternPanel {
+public class SuchePanel extends ElternComboboxPanel {
 
     List<Medien> medienListe;
 
@@ -130,13 +126,7 @@ public class SuchePanel extends ElternPanel {
 
     private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
       try {
-            panelHandler.getSelectPanel().setMedium(getMediumfromIndices(getListSelections()));
-            if(panelHandler.getAktuellerUser().isMitarbeiter()){
-                panelHandler.getSelectPanel().setMitarbeiter();
-            }
-            panelHandler.panelUnsichtbar();
-            panelHandler.getUi().add(panelHandler.getSelectPanel());
-            panelHandler.getSelectPanel().setVisible(true);
+            panelHandler.setSelectPanel(getMediumfromIndices(getListSelections()));
         } catch (Exception e) {
             System.err.println("problem beim aufrufen vom selectpanel");
         }
@@ -241,22 +231,6 @@ public class SuchePanel extends ElternPanel {
 	}
 	return selected[0];
     }
-    
-    private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
-        String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            tmp[i] = list.get(i).getBezeichnung();
-        }        
-        combobox.setModel(new DefaultComboBoxModel(tmp));
-    }
-    
-    private void setComboboxGenre(JComboBox combobox,List<Genre> list){
-        String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            tmp[i] = list.get(i).getBezeichnung();
-        }        
-        combobox.setModel(new DefaultComboBoxModel(tmp));
-    }
 
     private Object[] addObject(int i) {
         String kategorie = panelHandler.getKatBezeichnung(medienListe.get(i).getKategorienId());
@@ -270,6 +244,5 @@ public class SuchePanel extends ElternPanel {
         fillTable();
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
-        System.out.println("-------------------------------------------------------------");
     }
 }

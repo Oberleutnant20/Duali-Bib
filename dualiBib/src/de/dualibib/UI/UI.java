@@ -19,16 +19,12 @@ import javax.swing.JPanel;
  */
 public class UI extends javax.swing.JFrame {
     
-    List<Genre> genreListe;
-    List<Kategorie> kategorieListe;
     PanelHandler panelHandler;
 
     /**
      * Creates new form UI
      */
-    public UI(List<Genre> genreListe, List<Kategorie> kategorieListe, PanelHandler panelHandler) {
-        this.genreListe = genreListe;
-        this.kategorieListe = kategorieListe;
+    public UI(PanelHandler panelHandler) {
         initComponents();
         setLayout(new java.awt.BorderLayout());
         setVisible(true);

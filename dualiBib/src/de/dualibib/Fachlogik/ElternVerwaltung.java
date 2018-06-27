@@ -14,7 +14,7 @@ import de.dualibib.Logger;
  */
 public abstract class ElternVerwaltung {
     
-    public ArrayList<ElternPanel> panelListe = new  ArrayList<ElternPanel>();
+    public ArrayList<ElternPanel> panelListe = new  ArrayList<>();
     
     public void addPanelList(ElternPanel e) {
         panelListe.add(e);
@@ -23,5 +23,10 @@ public abstract class ElternVerwaltung {
     public void notifyPanels() {
         Logger.debug(this,"notify");
         panelListe.stream().forEach(p -> p.update());
+    }
+    
+    public void notifyLanguagePanels() {
+        Logger.debug(this,"notify Language");
+        panelListe.stream().forEach(p -> p.updateLanguage());
     }
 }

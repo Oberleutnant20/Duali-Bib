@@ -12,6 +12,7 @@ import de.dualibib.Datenlogik.dao.HistoryDAO;
 import de.dualibib.Datenlogik.dao.KategorieDAO;
 import de.dualibib.Datenlogik.dao.MedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
+import de.dualibib.Fachlogik.Accountverwaltung.Languageverwaltung.Languageverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
@@ -39,6 +40,8 @@ public class VerwaltungsFactorySingleton {
    public ElternVerwaltung getVerwaltung(String art){
       DAOFactorySingleton singleton = DAOFactorySingleton.getInstance();
        switch (art){
+          case "Language" :
+              return new Languageverwaltung();
           case "Account" :
               AccountDAO accountdao = (AccountDAO)singleton.getDAO("Account");
               return new Accountverwaltung(accountdao);

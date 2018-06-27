@@ -5,23 +5,41 @@
  */
 package de.dualibib.UI;
 
+import de.dualibib.Datenlogik.dto.Genre;
+import de.dualibib.Datenlogik.dto.Kategorie;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
 /**
  *
  * @author Carina
  */
-public abstract class ElternPanel extends javax.swing.JPanel {
+public abstract class ElternComboboxPanel extends ElternPanel {
 
-    public final PanelHandler panelHandler;
     /**
      * Creates new form ElternPanel
      */
-    public ElternPanel(PanelHandler panelHandler) {
-        this.panelHandler = panelHandler;
+    public ElternComboboxPanel(PanelHandler panelHandler) {
+        super(panelHandler);
     }
 
     
-    public abstract void update();
-    public abstract void updateLanguage();
+    public void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+    
+    public void setComboboxGenre(JComboBox combobox,List<Genre> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i).getBezeichnung();
+        }        
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

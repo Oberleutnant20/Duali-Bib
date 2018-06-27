@@ -54,10 +54,13 @@ public class PanelHandler {
     
 
     public PanelHandler(Controller controller, List<Genre> genreListe, List<Kategorie> kategorieListe) {
-        ui = new UI(genreListe, kategorieListe,this);
         this.controller = controller;
         this.genreListe = genreListe;
         this.kategorieListe = kategorieListe;
+    }
+    
+    public void start(){
+        ui = new UI(this);
         initPanels();
         ui.add(suchePanel);
         ui.getjPanel1().setVisible(false);
@@ -74,7 +77,7 @@ public class PanelHandler {
         controller.setHistoryObserver(historyPanel);
         controller.setKategorieObserver(selectPanel,suchePanel);
         controller.setMedienObserver(ausleihenPanel,ausleihenBearbeitenPanel,selectPanel,suchePanel);
-        
+        controller.setLanguageObserver(ausleihenBearbeitenPanel,optionPanel,ausleihenPanel,historyPanel,accountsBearbeitenPanel,accountBearbeitenPanel,loginPanel,selectPanel,suchePanel);
     }
     
     private void initPanels(){
@@ -102,19 +105,21 @@ public class PanelHandler {
         ausleihenBearbeitenPanel.setVisible(false);
     }
 
-    public boolean login(String accountname, String passwort) {
+    public void login(String accountname, String passwort) {
         de.dualibib.Logger.debug(this,"login");
+        boolean login = false;
         if(controller.setAktuellerUser(accountname, passwort)!=null){
             this.aktuellerUser =controller.setAktuellerUser(accountname, passwort);
             if(controller.isMitarbeiter()){
                 ui.setMitarbeiterOnline();
+                selectPanel.setMitarbeiter();
             }
             ui.setUserOnline();
             controller.ladeUserDaten();
             controller.initUpdate();
-            return true;
+            login = true;
         }
-        return false;
+        loginPanel.einloggen(login);
     }
 
     public void saveAccountChange(int id, String hausnummer, String name, int plz, String ort, String strasse, String vorname, String passwort, boolean mitarbeiter, String accountname) {
@@ -122,7 +127,23 @@ public class PanelHandler {
         controller.saveAccountChange(a);
     }
 
-    public void saveMediumChange(Medien m) {
+    public void saveMediumChange(String isbn, long barcodenummer, Object selectedGenre, Object selectedKategorie, String name, long id, int anzahl, String author, String desc) {
+        Kategorie kategorie = null;// kategorieComboBox.getSelectedItem();
+
+        for (int i = 0; i < getKategorieListe().size(); i++) {
+            if (getKategorieListe().get(i).getBezeichnung().equals(selectedKategorie)) {
+                kategorie = getKategorieListe().get(i);
+            }
+        }
+
+        Genre genre = null;//genreComboBox.getSelectedItem();
+
+        for (int i = 0; i < getGenreListe().size(); i++) {
+            if (getGenreListe().get(i).getBezeichnung().equals(selectedGenre)) {
+                genre = getGenreListe().get(i);
+            }
+        }
+        Medien m = new Medien(isbn, barcodenummer, genre.getId(), kategorie.getId(), name, id, anzahl, author, desc);
         controller.saveMediumChange(m);
     }
 
@@ -168,6 +189,7 @@ public class PanelHandler {
         controller.saveDB();
         ui.setUserOffline();
         aktuellerUser = null;
+        loginPanel.ausloggen();
     }
 
     public void createNewAusleihe(long userid, Date date, long katid) {
@@ -275,5 +297,11 @@ public class PanelHandler {
     public List<Medien> getMedienliste() {
         Logger.info(this, "Medienliste gezogen");
         return controller.getAllMedien();
+    }
+
+    public void setSelectPanel(Medien mediumfromIndices) {
+            selectPanel.setMedium(mediumfromIndices);
+            panelUnsichtbar();
+            selectPanel.setVisible(true);
     }
 }
