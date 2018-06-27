@@ -21,6 +21,7 @@ public abstract class ElternPanel extends javax.swing.JPanel {
 
     
     public abstract void update();
+    public abstract void updateLanguage();
     
     /**
      * This method is called from within the constructor to initialize the form.

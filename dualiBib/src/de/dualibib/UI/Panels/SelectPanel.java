@@ -8,6 +8,7 @@ package de.dualibib.UI.Panels;
 import de.dualibib.Datenlogik.dto.Genre;
 import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.dto.Medien;
+import de.dualibib.UI.ElternComboboxPanel;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.text.DateFormat;
@@ -25,7 +26,7 @@ import javax.swing.JComboBox;
  *
  * @author Carina
  */
-public class SelectPanel extends ElternPanel {
+public class SelectPanel extends ElternComboboxPanel {
 
     private Medien medium;
 
@@ -240,28 +241,12 @@ public class SelectPanel extends ElternPanel {
     }//GEN-LAST:event_sucheFieldActionPerformed
 
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
-        String beschreibung = beschreibungField.getText();
         String name = nameField.getText();
         String desc = beschreibungField.getText();
 
-        Kategorie kategorie = null;// kategorieComboBox.getSelectedItem();
+        
 
-        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
-            if (panelHandler.getKategorieListe().get(i).getBezeichnung().equals(kategorieComboBox.getSelectedItem())) {
-                kategorie = panelHandler.getKategorieListe().get(i);
-            }
-        }
-
-        Genre genre = null;//genreComboBox.getSelectedItem();
-
-        for (int i = 0; i < panelHandler.getGenreListe().size(); i++) {
-            if (panelHandler.getGenreListe().get(i).getBezeichnung().equals(genreComboBox.getSelectedItem())) {
-                genre = panelHandler.getGenreListe().get(i);
-            }
-        }
-
-        Medien m = new Medien(medium.getIsbn(), medium.getBarcodenummer(), genre.getId(), kategorie.getId(), name, medium.getId(), medium.getAnzahl(), medium.getAuthor(), desc);
-        panelHandler.saveMediumChange(m);
+        panelHandler.saveMediumChange(medium.getIsbn(), medium.getBarcodenummer(), genreComboBox.getSelectedItem(), kategorieComboBox.getSelectedItem(), name, medium.getId(), medium.getAnzahl(), medium.getAuthor(), desc);
         infoLabel.setText("Status: Erfolgreich gespeichert");
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
@@ -274,9 +259,6 @@ public class SelectPanel extends ElternPanel {
             infoLabel.setText("Status: erfolgreich ausgeliehen");
             ausleihenButton.setEnabled(false);
         }
-        panelHandler.saveMediumChange(medium);
-        
-
     }//GEN-LAST:event_ausleihenButtonActionPerformed
 
     private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
@@ -325,21 +307,7 @@ public class SelectPanel extends ElternPanel {
     private javax.swing.JLabel statusLable;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
-private void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
-        String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            tmp[i] = list.get(i).getBezeichnung();
-        }
-        combobox.setModel(new DefaultComboBoxModel(tmp));
-    }
 
-    private void setComboboxGenre(JComboBox combobox, List<Genre> list) {
-        String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            tmp[i] = list.get(i).getBezeichnung();
-        }
-        combobox.setModel(new DefaultComboBoxModel(tmp));
-    }
 
     private void setComboboxDate(JComboBox combobox) {
         ArrayList<Date> datelist = new ArrayList<Date>();

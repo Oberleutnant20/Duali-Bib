@@ -111,12 +111,14 @@ public class LoginPanel extends ElternPanel {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(!online){
-            einloggen();
+            String accountname = accountnameField.getText();
+            String passwort = passwortField.getText();
+            panelHandler.login(accountname, passwort);
             
         }
         else{
             try {
-                ausloggen();
+                panelHandler.ausloggen();
             } catch (Exception e) {
                 System.err.println(e);
                 meldungText.setText("Speichern der Sitzung nicht möglich");
@@ -142,10 +144,8 @@ public class LoginPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    private void einloggen(){
-        String accountname = accountnameField.getText();
-        String passwort = passwortField.getText();
-        if(panelHandler.login(accountname, passwort)){
+    public void einloggen(boolean einloggen){
+        if(einloggen){
             meldungText.setText("Erfolgreich eingeloggt.");
             accountnameField.setEnabled(false);
             passwortField.setEnabled(false);
@@ -158,8 +158,7 @@ public class LoginPanel extends ElternPanel {
         }
     }
     
-    private void ausloggen() throws IOException, ConnectionError{
-        panelHandler.ausloggen();
+    public void ausloggen() throws IOException, ConnectionError{
         meldungText.setText("Erfolgreich ausgeloggt.");
         loginButton.setText("Login");
         accountnameField.setEnabled(true);
