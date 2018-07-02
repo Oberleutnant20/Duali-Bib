@@ -34,11 +34,13 @@ public class HistoryDAO extends ElternDAO implements IHistoryDAO {
         ArrayList<History> ret = new ArrayList<>();
         if (con != null) {
             try {
-                PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("History"));
+                String stmnt = db.getResultSQLStatement("History");
+                PreparedStatement ptsm = con.prepareStatement(stmnt);
                 rs = ptsm.executeQuery();
                 int columnCount = db.getMetaData(rs).getColumnCount();
                 while (rs.next()) {
-                    ret.add(new History(rs.getLong(1), rs.getInt(2), rs.getInt(3), rs.getInt(4)));
+                    History history = new History(rs.getLong(1), rs.getInt(2), rs.getInt(3), rs.getInt(4));
+                    ret.add(history);
                 }
             } catch (SQLException ex) {
                 System.err.println("HistoryDAO laden: " + ex);
@@ -52,18 +54,20 @@ public class HistoryDAO extends ElternDAO implements IHistoryDAO {
     @Override
     public void speichern(List<History> historyListe) throws IOException, ConnectionError {
         if (con != null) {
-            for (History history : historyListe) {
+            historyListe.forEach((history) -> {
                 try {
                     history.getKategorieid();
                     history.getMedienid();
                     history.getUserid();
-                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO History(u_ID, km_ID, m_ID) "
-                            + "VALUES(" + history.getUserid() + ", " + history.getKategorieid() + ", " + history.getMedienid() + ");");
+                    String stmnt = "INSERT INTO History(u_ID, km_ID, m_ID) "
+                            + "VALUES(" + history.getUserid() + ", " + history.getKategorieid() + ", "
+                            + history.getMedienid() + ");";
+                    PreparedStatement ptsm = con.prepareStatement(stmnt);
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+            });
         } else {
             throw new ConnectionError();
         }

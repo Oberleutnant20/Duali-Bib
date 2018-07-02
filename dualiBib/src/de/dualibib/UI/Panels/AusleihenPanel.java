@@ -7,11 +7,13 @@ package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Account;
 import de.dualibib.Datenlogik.dto.Ausleihe;
+import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
 import de.dualibib.Logger;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -183,5 +185,11 @@ public class AusleihenPanel extends ElternPanel {
             }
             fillTable();
         }
+    }
+
+    @Override
+    public void updateLanguage(Properties props) {
+        entfernenButton.setText((String) props.get(PropertyName.AUSLEIHENPANEL_ENTFERNENBUTTON));
+        sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
     }
 }

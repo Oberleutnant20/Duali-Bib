@@ -25,7 +25,7 @@ public class Informationen {
         return "Name: " + name + " \n"
                 //+ "Mail: " + mail + " \n"
                 + "Version: " + version + " \n"
-                + "©"+copyright;
+                + "©" + copyright;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Informationen {
      * @return Status der Entwickung
      */
     public String printEntwicklung(String info) {
-        if(info.equals("") || info.isEmpty()){
+        if (info.equals("") || info.isEmpty()) {
             return this.info;
         } else {
             return info;

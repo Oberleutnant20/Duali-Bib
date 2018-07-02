@@ -17,21 +17,21 @@ import de.dualibib.Datenlogik.dao.MedienDAO;
  *
  * @author Carina
  */
-class DAOFactorySingleton {
+public final class DAOFactorySingleton {
     //create an object of SingleObject
-   private static DAOFactorySingleton instance = new DAOFactorySingleton();
+   private static final DAOFactorySingleton INSTANCE = new DAOFactorySingleton();
 
    //make the constructor private so that this class cannot be
    //instantiated
    private DAOFactorySingleton(){}
 
    //Get the only object available
-   public static DAOFactorySingleton getInstance(){
-      return instance;
+   public static DAOFactorySingleton getInstance() {
+      return INSTANCE;
    }
 
-   public ElternDAO getDAO(String art){
-       switch (art){
+   public ElternDAO getDAO(String art) {
+       switch (art) {
           case "Account" :
               return new AccountDAO();
           case "Medien" :
@@ -45,7 +45,6 @@ class DAOFactorySingleton {
           case "History" :
               return new HistoryDAO();
           default:return null;
-              
       }
    }
 }

@@ -8,9 +8,11 @@ package de.dualibib.UI.Panels;
 import de.dualibib.Datenlogik.dto.History;
 import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.dto.Medien;
+import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
+import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
@@ -259,6 +261,14 @@ public class HistoryPanel extends ElternPanel {
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         if(historyListe!=null)
         fillTable();
+    }
+
+    @Override
+    public void updateLanguage(Properties props) {
+        sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
+        historysuchField.setText((String) props.get(PropertyName.HISTORYPANEL_HISTORYSUCHEFIELD));
+        kategorieLable.setText((String) props.get(PropertyName.HISTORYPANEL_KATEGORIELABLE));
+        auswaehlenButton.setText((String) props.get(PropertyName.HISTORYPANEL_AUSWAEHLENBUTTON));
     }
     
 }

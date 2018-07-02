@@ -7,9 +7,11 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Account;
+import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
+import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -145,38 +147,36 @@ public class AccountsBearbeitenPanel extends ElternPanel {
             panelHandler.getAccountBearbeitenPanel().setVisible(true);
         } catch (Exception e) {
         }
-        
-        
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
     private void anlegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anlegenButtonActionPerformed
-        if(!acountNameZulaessig(accountnameField.getText())){}
-        else{
+        if(acountNameZulaessig(accountnameField.getText())){
+            Account account = new Account(accountnameField.getText(), "todo", false, 0, "todo", "todo", 0, "todo", "todo", "todo");
             panelHandler.panelUnsichtbar();
             panelHandler.getUi().add(panelHandler.getAccountBearbeitenPanel());
             panelHandler.getAccountBearbeitenPanel().bearbeitenMitarbeiter();
-            panelHandler.getAccountBearbeitenPanel().setNewAccount(new Account(accountnameField.getText(), "todo", false, 0, "todo", "todo", 0, "todo", "todo", "todo"));
+            panelHandler.getAccountBearbeitenPanel().setNewAccount(account);
             panelHandler.getAccountBearbeitenPanel().setVisible(true);
         }
     }//GEN-LAST:event_anlegenButtonActionPerformed
 
     private void sucheAccountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheAccountFieldActionPerformed
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
-        if(sucheAccountField.getText().equals("Suche Account")||sucheAccountField.getText().equals(""))
-        {
-         for (int i = 0; i < accountListe.size(); i++) {
-            model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
-        }   
+
+        if (sucheAccountField.getText().equals("Suche Account") || sucheAccountField.getText().equals("")) {
+            for (int i = 0; i < accountListe.size(); i++) {
+               model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
+            }
         }
-        else{
-        for (int i = 0; i < accountListe.size(); i++) {
-            if(accountListe.get(i).getUsername().equals(sucheAccountField.getText()))
-             model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
-        }
+        else {
+            for (int i = 0; i < accountListe.size(); i++) {
+                if(accountListe.get(i).getUsername().equals(sucheAccountField.getText()))
+                 model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
+            }
         }
     }//GEN-LAST:event_sucheAccountFieldActionPerformed
 
@@ -196,38 +196,38 @@ public class AccountsBearbeitenPanel extends ElternPanel {
     public void setAccountListe(List<Account> account){
         accountListe = account;
     }
-    
+
     public void fillTable(){
         panelHandler.loadAdminAccounts();
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
         for (int i = 0; i < accountListe.size(); i++) {
-          model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
+            model.addRow(new Object[]{accountListe.get(i).getUsername(),accountListe.get(i).getNachname(),accountListe.get(i).getVorname()});  
         }
     }
-    
+
     private Account getAccountfromIndices(int position) {
-		Account selected = null;
-		selected = accountListe.get(position);
-		return selected;
-	}
-    
+        Account selected = null;
+        selected = accountListe.get(position);
+        return selected;
+    }
+
     private int getListSelections() {
-	int[] selected = jTable1.getSelectedRows();
-	for (int i = 0; i < selected.length; i++) {
+        int[] selected = jTable1.getSelectedRows();
+        for (int i = 0; i < selected.length; i++) {
 		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
 	}
 	return selected[0];
     }
 
     private boolean acountNameZulaessig(String text) {
-        if(text.length()<=8&&text.length()>0){
-
+        if (text.length()<=8&&text.length()>0) {
             for (int i = 0; i < accountListe.size(); i++) {
-                if(accountListe.get(i).getUsername().equals(text))
+                if (accountListe.get(i).getUsername().equals(text)) {
                         return  false;
+                }
             }
             return true;
         } else {
@@ -239,5 +239,13 @@ public class AccountsBearbeitenPanel extends ElternPanel {
     @Override
     public void update() {
         fillTable();
+    }
+
+    @Override
+    public void updateLanguage(Properties props) {
+        sucheAccountField.setText((String) props.get(PropertyName.ACCOUNTSBEARBEITENPANEL_SUCHEACCOUNTFIELD));
+        anlegenButton.setText((String) props.get(PropertyName.ACCOUNTSBEARBEITENPANEL_ANLEGENBUTTON));
+        bearbeitenButton.setText((String) props.get(PropertyName.ACCOUNTSBEARBEITENPANEL_BEARBEITENBUTTON));
+        sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
     }
 }

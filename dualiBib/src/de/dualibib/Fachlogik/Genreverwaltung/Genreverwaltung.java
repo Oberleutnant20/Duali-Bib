@@ -24,8 +24,8 @@ public class Genreverwaltung extends ElternVerwaltung{
     private IGenreDAO genreDAO;
 
     public Genreverwaltung(IGenreDAO genreDAO) {
-        genreListe = new ArrayList<Genre>();
-        genreListeRef = new ArrayList<Genre>();
+        genreListe = new ArrayList<>();
+        genreListeRef = new ArrayList<>();
         this.genreDAO = genreDAO;
     }
 
@@ -40,30 +40,30 @@ public class Genreverwaltung extends ElternVerwaltung{
     public void laden() {
         genreListe.clear();
         genreListeRef.clear();
-        de.dualibib.Logger.debug(this,"laden");
+        de.dualibib.Logger.debug(this, "laden");
         try {
             List<Genre> liste = genreDAO.laden();
             liste.forEach((genre) -> {
                 genreListe.add(genre);
                 genreListeRef.add(genre);
             });
-
         } catch (Exception e) {
+            de.dualibib.Logger.error(this, "laden");
         }
     }
 
     public void add(Genre genre) {
         if (!genreListe.add(genre)) {
-            String error = "Ausleihe gibt es bereits.";
+            de.dualibib.Logger.error(this, "Genre gibt es bereits.");
         }
         notifyPanels();
     }
 
     public void delete(Genre genre) {
         if (!genreListe.remove(genre)) {
-            String error = "Ausleihe gibt es nicht.";
+            de.dualibib.Logger.error(this, "Genre gibt es nicht.");
         }
-        else{
+        else {
             notifyPanels();
         }
     }

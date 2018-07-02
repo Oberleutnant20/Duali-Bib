@@ -24,23 +24,22 @@ public class Historyverwaltung extends ElternVerwaltung{
     private IHistoryDAO historyDAO;
 
     public Historyverwaltung(IHistoryDAO historyDAO) {
-        historyListe = new ArrayList<History>();
-        historyListeRef = new ArrayList<History>();
+        historyListe = new ArrayList<>();
+        historyListeRef = new ArrayList<>();
         this.historyDAO = historyDAO;
     }
 
     public void speichern() throws IOException, ConnectionError {
         List<History> liste = new ArrayList<>();
-        if(historyListe.size() > historyListeRef.size()){
+        if (historyListe.size() > historyListeRef.size()) {
             liste = historyListe.subList(historyListeRef.size(), historyListe.size());
-            System.out.println("hm");
         }
         historyDAO.speichern(liste);
     }
 
     public void laden() {
         historyListe.clear();
-        de.dualibib.Logger.debug(this,"laden");
+        de.dualibib.Logger.debug(this, "laden");
         try {
             List<History> liste = historyDAO.laden();
             for (History history : liste) {
@@ -49,19 +48,20 @@ public class Historyverwaltung extends ElternVerwaltung{
             }
 
         } catch (Exception e) {
+            de.dualibib.Logger.error(this, "laden");
         }
     }
 
     public void add(History history) {
         if (!historyListe.add(history)) {
-            String error = "Ausleihe gibt es bereits.";
+            de.dualibib.Logger.error(this, "History gibt es bereits.");
         }
         notifyPanels();
     }
 
     public void delete(History history) {
         if (!historyListe.remove(history)) {
-            String error = "Ausleihe gibt es nicht.";
+            de.dualibib.Logger.error(this, "History gibt es nicht.");
         }
         notifyPanels();
     }

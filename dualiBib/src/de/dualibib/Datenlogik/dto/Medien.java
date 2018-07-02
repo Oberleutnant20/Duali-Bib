@@ -11,9 +11,9 @@ import java.io.Serializable;
  *
  * @author Carina
  */
-public class Medien implements Serializable{
+public class Medien implements Serializable {
 
-     private long kategorienId;
+    private long kategorienId;
     private long genreId;
     private String name;
     private long id;

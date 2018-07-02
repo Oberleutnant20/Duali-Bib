@@ -5,10 +5,12 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  *
@@ -38,8 +40,8 @@ public class LoginPanel extends ElternPanel {
         accountnameField = new javax.swing.JTextField();
         passwortField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        accountLabel = new javax.swing.JLabel();
+        passwordLabel = new javax.swing.JLabel();
         meldungText = new javax.swing.JLabel();
         sucheField = new javax.swing.JTextField();
 
@@ -54,9 +56,9 @@ public class LoginPanel extends ElternPanel {
             }
         });
 
-        jLabel1.setText("Accountname");
+        accountLabel.setText("Accountname");
 
-        jLabel2.setText("Passwort");
+        passwordLabel.setText("Passwort");
 
         meldungText.setText("Bitte gib deinen Accountnamen und Passwort an.");
 
@@ -77,8 +79,8 @@ public class LoginPanel extends ElternPanel {
                     .addComponent(meldungText)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(passwordLabel)
+                            .addComponent(accountLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(accountnameField)
@@ -98,11 +100,11 @@ public class LoginPanel extends ElternPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(accountnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(accountLabel))
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwortField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(passwordLabel))
                 .addGap(28, 28, 28)
                 .addComponent(loginButton)
                 .addContainerGap(91, Short.MAX_VALUE))
@@ -135,11 +137,11 @@ public class LoginPanel extends ElternPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel accountLabel;
     private javax.swing.JTextField accountnameField;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel meldungText;
+    private javax.swing.JLabel passwordLabel;
     private javax.swing.JTextField passwortField;
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
@@ -169,5 +171,15 @@ public class LoginPanel extends ElternPanel {
     @Override
     public void update() {
         }
+
+    @Override
+    public void updateLanguage(Properties props) {
+        sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
+        meldungText.setText((String) props.get(PropertyName.LOGINPANEL_ACCOUNTLABEL));
+        accountnameField.setText((String) props.get(PropertyName.LOGINPANEL_ACCOUNTNAMEFIELD));
+        passwordLabel.setText((String) props.get(PropertyName.LOGINPANEL_PASSWORDLABEL));
+        passwortField.setText((String) props.get(PropertyName.LOGINPANEL_PASSWORTFIELD));
+        loginButton.setText((String) props.get(PropertyName.LOGINPANEL_LOGINBUTTON));
+    }
 
 }
