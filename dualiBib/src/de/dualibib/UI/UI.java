@@ -7,6 +7,7 @@ package de.dualibib.UI;
 
 import de.dualibib.Datenlogik.dto.Genre;
 import de.dualibib.Datenlogik.dto.Kategorie;
+import de.dualibib.Logger;
 import de.dualibib.info.Informationen;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +137,6 @@ public class UI extends javax.swing.JFrame {
         helpMenu.add(jSeparator3);
 
         optionMenu.setText("Option");
-        optionMenu.setEnabled(false);
         optionMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optionMenuActionPerformed(evt);
@@ -193,12 +193,14 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_beendenMenuActionPerformed
 
     private void LoginLogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginLogoutMenuActionPerformed
+        Logger.debug(this, "LoginLogout");
         panelHandler.panelUnsichtbar();
         add(panelHandler.getLoginPanel());
         panelHandler.getLoginPanel().setVisible(true);
     }//GEN-LAST:event_LoginLogoutMenuActionPerformed
 
     private void editAccountMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAccountMenuActionPerformed
+        Logger.debug(this, "editAccount");
         panelHandler.panelUnsichtbar();
         add(panelHandler.getAccountBearbeitenPanel());
         panelHandler.getAccountBearbeitenPanel().setAccount(panelHandler.getAktuellerUser());
@@ -206,6 +208,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_editAccountMenuActionPerformed
 
     private void accountsBearbeitenItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountsBearbeitenItemActionPerformed
+        Logger.debug(this, "accounts");
         panelHandler.panelUnsichtbar();
         panelHandler.getAccountsBearbeitenPanel().fillTable();
         add(panelHandler.getAccountsBearbeitenPanel());
@@ -213,6 +216,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_accountsBearbeitenItemActionPerformed
 
     private void historyMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyMenuActionPerformed
+        Logger.debug(this, "history");
         panelHandler.panelUnsichtbar();
         panelHandler.getHistoryPanel().fillTable();
         add(panelHandler.getHistoryPanel());
@@ -220,6 +224,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_historyMenuActionPerformed
 
     private void aktuelleAusleiheMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aktuelleAusleiheMenuActionPerformed
+        Logger.debug(this, "ausleihe");
         panelHandler.panelUnsichtbar();
         panelHandler.getAusleihenPanel().setAccount(panelHandler.getAktuellerUser());
         panelHandler.getAusleihenPanel().fillTable();
@@ -234,6 +239,7 @@ public class UI extends javax.swing.JFrame {
     }//GEN-LAST:event_optionMenuActionPerformed
 
     private void ausleihenBearbeitenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenBearbeitenActionPerformed
+        Logger.debug(this, "ausleihen");
         panelHandler.panelUnsichtbar();
         panelHandler.getAusleihenBearbeitenPanel().fillTable();
         add(panelHandler.getAusleihenBearbeitenPanel());
@@ -275,15 +281,12 @@ public class UI extends javax.swing.JFrame {
     }
 
     void setMitarbeiterOnline() {
-        System.out.println("enable admin");
+        Logger.debug(this, "enable admin");
         administrationMenu.setEnabled(true);
-
-        panelHandler.loadAdminAccounts();
-        panelHandler.loadAusleihen();
     }
 
     void setUserOnline() {
-        System.out.println("enable user");
+        Logger.debug(this, "enable user");
         editAccountMenu.setEnabled(true);
         historyMenu.setEnabled(true);
         aktuelleAusleiheMenu.setEnabled(true);

@@ -5,8 +5,14 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -21,8 +27,9 @@ public class OptionPanel extends ElternPanel {
     public OptionPanel(PanelHandler panelHandler) {
         super(panelHandler);
         initComponents();
+        setComboboxLanguage(languageComboBox, getLanguageListe());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,13 +40,13 @@ public class OptionPanel extends ElternPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        languageComboBox = new javax.swing.JComboBox<>();
         uebernehmenButton = new javax.swing.JButton();
         sucheField = new javax.swing.JTextField();
 
         jLabel1.setText("Sprache:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        languageComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         uebernehmenButton.setText("Übernehmen");
         uebernehmenButton.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +70,7 @@ public class OptionPanel extends ElternPanel {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(languageComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(241, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -80,7 +87,7 @@ public class OptionPanel extends ElternPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(languageComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
                 .addComponent(uebernehmenButton)
                 .addGap(44, 44, 44))
@@ -88,27 +95,45 @@ public class OptionPanel extends ElternPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uebernehmenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uebernehmenButtonActionPerformed
-        panelHandler.panelUnsichtbar();
-        panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
-        panelHandler.getSuchePanel().setVisible(true);
+        panelHandler.changeLanguage(languageComboBox.getSelectedItem().toString()+"");
     }//GEN-LAST:event_uebernehmenButtonActionPerformed
 
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
-        //panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
+        panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
 
+    public void setComboboxLanguage(JComboBox combobox,List<String> list){
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i);
+        }
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> languageComboBox;
     private javax.swing.JTextField sucheField;
     private javax.swing.JButton uebernehmenButton;
     // End of variables declaration//GEN-END:variables
 
+    private List<String> getLanguageListe() {
+        ArrayList<String> a = new ArrayList<>();
+        a.add("deutsch");
+        a.add("englisch");
+        a.add("japanisch");
+        return a;
+    }
+    
     @Override
-    public void update() {
-        //Sprache ändern
+    public void update() { }
+
+    @Override
+    public void updateLanguage(Properties props) {
+        sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
+        jLabel1.setText((String) props.get(PropertyName.OPTIONPANEL_OPTIONLABEL));
+        uebernehmenButton.setText((String) props.get(PropertyName.OPTIONPANEL_UEBERNEHMENBUTTON));
     }
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Carina
  */
-public class Genre implements Serializable{
+public class Genre implements Serializable {
 
     private int id;
 
@@ -25,7 +25,7 @@ public class Genre implements Serializable{
     private String bezeichnung;
 
     public Genre(int id, String bezeichnung) {
-        this.id=id;
+        this.id = id;
         this.bezeichnung = bezeichnung;
     }
 
@@ -36,6 +36,4 @@ public class Genre implements Serializable{
     public void setBezeichnung(String bezeichnung) {
         this.bezeichnung = bezeichnung;
     }
-
-    
 }

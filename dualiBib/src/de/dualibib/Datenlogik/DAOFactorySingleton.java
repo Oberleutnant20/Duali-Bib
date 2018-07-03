@@ -17,16 +17,10 @@ import de.dualibib.Datenlogik.dao.MedienDAO;
  *
  * @author Carina
  */
-class DAOFactorySingleton {
-
+public final class DAOFactorySingleton {
     //create an object of SingleObject
-    private static DAOFactorySingleton instance = new DAOFactorySingleton();
+   private static final DAOFactorySingleton INSTANCE = new DAOFactorySingleton();
 
-    /**
-     * Privater Konstruktor um zu verhindern, dass weitere Instanzen erstellt werden.
-     */
-    private DAOFactorySingleton() {
-    }
 
     /**
      * 
@@ -36,28 +30,26 @@ class DAOFactorySingleton {
         return instance;
     }
 
-    /**
-     *
-     * @param art
-     * @return benötigte DAO
-     */
-    public ElternDAO getDAO(String art) {
-        switch (art) {
-            case "Account":
-                return new AccountDAO();
-            case "Medien":
-                return new MedienDAO();
-            case "Ausleihe":
-                return new AusleiheDAO();
-            case "Kategorien":
-                return new KategorieDAO();
-            case "Genre":
-                return new GenreDAO();
-            case "History":
-                return new HistoryDAO();
-            default:
-                return null;
+   //Get the only object available
+   public static DAOFactorySingleton getInstance() {
+      return INSTANCE;
+   }
 
-        }
-    }
+   public ElternDAO getDAO(String art) {
+       switch (art) {
+          case "Account" :
+              return new AccountDAO();
+          case "Medien" :
+              return new MedienDAO();
+          case "Ausleihe" :
+              return new AusleiheDAO();
+          case "Kategorien" :
+              return new KategorieDAO();
+          case "Genre" :
+              return new GenreDAO();
+          case "History" :
+              return new HistoryDAO();
+          default:return null;
+      }
+   }
 }

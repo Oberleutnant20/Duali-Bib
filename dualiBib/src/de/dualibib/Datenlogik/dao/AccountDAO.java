@@ -44,7 +44,8 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
                     String ort = rs.getString("u_ort");
                     String anrede = rs.getString("u_anrede");
 
-                    ret.add(new Account(login, passwd, mitarbeiter, id, vorname, nachname, plz, strasse, hausnummer, ort));
+                    Account account = new Account(login, passwd, mitarbeiter, id, vorname, nachname, plz, strasse, hausnummer, ort);
+                    ret.add(account);
                 }
             } catch (SQLException ex) {
                 System.err.println("AccountDAO laden: " + ex);
@@ -58,17 +59,20 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
     @Override
     public void speichern(List<Account> accountListe) throws IOException, ConnectionError {
         if (con != null) {
-            for (Account account : accountListe) {
+            accountListe.forEach((account) -> {
                 try {
-                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
-                            + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
-                    //System.out.println("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
-                    //        + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','" + account.getUsername() + "','" + account.getPasswort() + "', " + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '" + account.getHausnummer() + "', " + account.getPlz() + ", '" + account.getOrt() + "');");
+                    String stmnt = "INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
+                            + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','"
+                            + account.getUsername() + "','" + account.getPasswort() + "', "
+                            + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '"
+                            + account.getHausnummer() + "', " + account.getPlz() + ", '"
+                            + account.getOrt() + "');";
+                    PreparedStatement ptsm = con.prepareStatement(stmnt);
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+            });
         } else {
             throw new ConnectionError();
         }
@@ -89,7 +93,12 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
                     int id = account.getUserid();
                     String ort = account.getOrt();
                     boolean mitarbeiter = account.isMitarbeiter();
-                    PreparedStatement ptsm = con.prepareStatement("UPDATE USER SET u_Vorname = '" + vorname + "', u_Nachname = '" + nachname + "', u_login = '" + username + "', u_passwd = '" + passwd + "', u_Mitarbeiter =" + mitarbeiter + ", u_Strasse = '" + str + "', u_Hausnummer = '" + hausnr + "', u_PLZ = " + plz + ", u_Ort = '" + ort + "' WHERE u_ID LIKE " + id + ";");
+                    String stmnt = "UPDATE USER SET u_Vorname = '" + vorname + "', u_Nachname = '" + nachname
+                            + "', u_login = '" + username + "', u_passwd = '" + passwd
+                            + "', u_Mitarbeiter =" + mitarbeiter + ", u_Strasse = '" + str
+                            + "', u_Hausnummer = '" + hausnr + "', u_PLZ = " + plz
+                            + ", u_Ort = '" + ort + "' WHERE u_ID LIKE " + id + ";";
+                    PreparedStatement ptsm = con.prepareStatement(stmnt);
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

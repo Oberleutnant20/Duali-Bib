@@ -11,9 +11,9 @@ import java.io.Serializable;
  *
  * @author Carina
  */
-public class Kategorie implements Serializable{
+public class Kategorie implements Serializable {
 
-     private long id;
+    private long id;
     private String name;
     private String bezeichnung;
 

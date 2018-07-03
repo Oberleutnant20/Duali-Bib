@@ -26,10 +26,10 @@ public class Medienverwaltung extends ElternVerwaltung{
     private IMedienDAO medienDAO;
 
     public Medienverwaltung(IMedienDAO medienDAO) {
-        medienListe = new ArrayList<Medien>();
-        medienListeRef = new ArrayList<Medien>();
-        medienListeUpdate = new ArrayList<Medien>();
-        medienListeDelete = new ArrayList<Medien>();
+        medienListe = new ArrayList<>();
+        medienListeRef = new ArrayList<>();
+        medienListeUpdate = new ArrayList<>();
+        medienListeDelete = new ArrayList<>();
         this.medienDAO = medienDAO;
     }
 
@@ -45,7 +45,7 @@ public class Medienverwaltung extends ElternVerwaltung{
     public void laden() {
         medienListe.clear();
         medienListeRef.clear();
-        de.dualibib.Logger.debug(this,"laden");
+        de.dualibib.Logger.debug(this, "laden");
         try {
             List<Medien> liste = medienDAO.laden();
             for (Medien medium : liste) {
@@ -54,42 +54,39 @@ public class Medienverwaltung extends ElternVerwaltung{
             }
 
         } catch (Exception e) {
-            de.dualibib.Logger.error(this,"laden");
+            de.dualibib.Logger.error(this, "laden");
         }
     }
 
     public void add(Medien medium) {
         if (!medienListe.add(medium)) {
-			String error = "Medium gibt es bereits.";
-                        System.out.println(error);
-		}
+            de.dualibib.Logger.error(this, "Medium gibt es bereits.");
+        }
         notifyPanels();
     }
 
     public void delete(Medien medien) {
         if (!medienListe.remove(medien)) {
-			String error = "Medium gibt es nicht.";
-                        System.out.println(error);
-		}
+            de.dualibib.Logger.error(this, "Medium gibt es nicht.");
+        }
         notifyPanels();
     }
     
     public void update(Medien medien){
         if (!medienListe.add(medien)) {
-            String error = "Medium gibt es bereits.";
-                        System.out.println(error);
-		}
+            de.dualibib.Logger.error(this, "Medium gibt es bereits.");
+	}
         medienListeUpdate.add(medien);
         notifyPanels();
     }
 
     public ArrayList<Medien> get() {
-        ArrayList<Medien> liste = new ArrayList<Medien>();
-		for (Medien medien : medienListe) {
-			liste.add(medien);
-                        System.out.println(medien.getName());
-    }
-		return liste;
+        ArrayList<Medien> liste = new ArrayList<>();
+        for (Medien medien : medienListe) {
+                liste.add(medien);
+                de.dualibib.Logger.debug(this, medien.getName());
+        }
+	return liste;
     }
 
 }
