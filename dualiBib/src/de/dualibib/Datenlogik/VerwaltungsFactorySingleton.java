@@ -28,9 +28,13 @@ public final class VerwaltungsFactorySingleton {
     //create an object of SingleObject
    private static final VerwaltungsFactorySingleton INSTANCE = new VerwaltungsFactorySingleton();
 
-   //make the constructor private so that this class cannot be
-   //instantiated
-   private VerwaltungsFactorySingleton(){}
+    /**
+     * 
+     * @return eine einzige Instanz
+     */
+    public static VerwaltungsFactorySingleton getInstance() {
+        return instance;
+    }
 
    //Get the only object available
    public static VerwaltungsFactorySingleton getInstance(){
@@ -64,4 +68,5 @@ public final class VerwaltungsFactorySingleton {
 
       }
    }
+
 }
