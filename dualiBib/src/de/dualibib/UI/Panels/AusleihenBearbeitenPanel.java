@@ -6,6 +6,8 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Ausleihe;
+import de.dualibib.Datenlogik.dto.Kategorie;
+import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
 import de.dualibib.Logger;
 import de.dualibib.UI.ElternPanel;
@@ -146,17 +148,18 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
     
      private Object[] addObject(int i) {
         String medienName = "";
+        List<Medien> medienlist = panelHandler.returnMedien();
         
-        for (int j = 0; j < panelHandler.returnMedien().size(); j++) {
-            if(ausleiheListe.get(i).getMedienid() == panelHandler.returnMedien().get(j).getId())
-                medienName = panelHandler.returnMedien().get(j).getName();
+        for (int j = 0; j < medienlist.size(); j++) {
+            if(ausleiheListe.get(i).getMedienid() == medienlist.get(j).getId())
+                medienName = medienlist.get(j).getName();
         }
         
         String kategorieName = "";
-        
-        for (int j = 0; j < panelHandler.getKategorieListe().size(); j++) {
-            if(ausleiheListe.get(i).getKategorieid() == panelHandler.getKategorieListe().get(j).getId())
-                medienName = panelHandler.getKategorieListe().get(j).getName();
+        List<Kategorie> kategorielist = panelHandler.getKategorieListe();
+        for (int j = 0; j < kategorielist.size(); j++) {
+            if(ausleiheListe.get(i).getKategorieid() == kategorielist.get(j).getId())
+                medienName = kategorielist.get(j).getName();
         }
         
         return new Object[]{ausleiheListe.get(i).getId(),medienName,ausleiheListe.get(i).getDate(),panelHandler.getAktuellerUser().getUsername(),kategorieName};

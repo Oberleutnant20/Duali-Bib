@@ -7,6 +7,7 @@ package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Account;
 import de.dualibib.Datenlogik.dto.Ausleihe;
+import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
 import de.dualibib.Logger;
 import de.dualibib.UI.ElternPanel;
@@ -148,10 +149,10 @@ public class AusleihenPanel extends ElternPanel {
     
     private Object[] addObject(int i) {
         String medienName = "";
-        
-        for (int j = 0; j < panelHandler.returnMedien().size(); j++) {
-            if(ausleiheUserListe.get(i).getMedienid() == panelHandler.returnMedien().get(j).getId())
-                medienName = panelHandler.returnMedien().get(j).getName();
+        List<Medien> medienlist = panelHandler.returnMedien();
+        for (int j = 0; j < medienlist.size(); j++) {
+            if(ausleiheUserListe.get(i).getMedienid() == medienlist.get(j).getId())
+                medienName = medienlist.get(j).getName();
         }
         
         String kategorieName = "";
