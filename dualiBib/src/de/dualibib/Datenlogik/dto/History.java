@@ -11,9 +11,9 @@ import java.io.Serializable;
  *
  * @author Carina
  */
-public class History implements Serializable{
+public class History implements Serializable {
 
-     long id;
+    long id;
     int userid;
     long medienid;
     long kategorieid;
@@ -25,8 +25,6 @@ public class History implements Serializable{
         this.kategorieid = kategorieid;
     }
 
-    
-    
     public long getKategorieid() {
         return kategorieid;
     }

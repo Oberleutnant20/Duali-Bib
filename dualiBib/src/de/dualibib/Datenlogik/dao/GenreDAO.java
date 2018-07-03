@@ -34,10 +34,12 @@ public class GenreDAO extends ElternDAO implements IGenreDAO {
         ArrayList<Genre> ret = new ArrayList<>();
         if (con != null) {
             try {
-                PreparedStatement ptsm = con.prepareStatement(db.getResultSQLStatement("genre"));
+                String stmnt = db.getResultSQLStatement("genre");
+                PreparedStatement ptsm = con.prepareStatement(stmnt);
                 rs = ptsm.executeQuery();
                 while (rs.next()) {
-                    ret.add(new Genre(rs.getInt(1),rs.getString(2)));
+                    Genre genre = new Genre(rs.getInt(1), rs.getString(2));
+                    ret.add(genre);
                 }
             } catch (SQLException ex) {
                 System.err.println("GenreDAO laden: " + ex);
@@ -51,15 +53,16 @@ public class GenreDAO extends ElternDAO implements IGenreDAO {
     @Override
     public void speichern(List<Genre> genreListe) throws IOException, ConnectionError {
         if (con != null) {
-            for (Genre genre : genreListe) {
+            genreListe.forEach((genre) -> {
                 try {
-                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO Genre(g_Name) "
-                            + "VALUES('" + genre.getBezeichnung() + "');");
+                    String stmnt = "INSERT INTO Genre(g_Name) "
+                            + "VALUES('" + genre.getBezeichnung() + "');";
+                    PreparedStatement ptsm = con.prepareStatement(stmnt);
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+            });
         } else {
             throw new ConnectionError();
         }

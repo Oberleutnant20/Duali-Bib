@@ -26,10 +26,10 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
     private IAusleiheDAO ausleiheDAO;
 
     public Ausleiheverwaltung(IAusleiheDAO ausleiheDAO) {
-        ausleiheListe = new ArrayList<Ausleihe>();
-        ausleiheListeRef = new ArrayList<Ausleihe>();
-        ausleiheListeUpdate = new ArrayList<Ausleihe>();
-        ausleiheListeDelete = new ArrayList<Ausleihe>();
+        ausleiheListe = new ArrayList<>();
+        ausleiheListeRef = new ArrayList<>();
+        ausleiheListeUpdate = new ArrayList<>();
+        ausleiheListeDelete = new ArrayList<>();
         this.ausleiheDAO = ausleiheDAO;
     }
 
@@ -45,48 +45,47 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
     public void laden() {
         ausleiheListe.clear();
         ausleiheListeRef.clear();
-        de.dualibib.Logger.debug(this,"laden");
+        de.dualibib.Logger.debug(this, "laden");
         try {
             List<Ausleihe> liste = ausleiheDAO.laden();
             for (Ausleihe ausleihe : liste) {
                 ausleiheListe.add(ausleihe);
                 ausleiheListeRef.add(ausleihe);
             }
-
         } catch (Exception e) {
-            de.dualibib.Logger.error(this,"laden Error");
+            de.dualibib.Logger.error(this, "laden Error");
         }
     }
 
     public void add(Ausleihe ausleihe) {
         if (!ausleiheListe.add(ausleihe)) {
-            String error = "Ausleihe gibt es bereits.";
+            de.dualibib.Logger.error(this, "Ausleihe gibt es bereits.");
         }
         notifyPanels();
     }
 
     public void delete(Ausleihe ausleihe) {
         if (!ausleiheListeDelete.add(ausleihe)) {
-            String error = "Ausleihe gibt es nicht.";
+            de.dualibib.Logger.error(this, "Ausleihe gibt es nicht.");
         }
-        else{
+        else {
             ausleiheListe.remove(ausleihe);
             notifyPanels();
         }
     }
-    
+
     public void update(Ausleihe ausleihe){
         if (!ausleiheListeUpdate.add(ausleihe)) {
-            String error = "Ausleihe gibt es nicht.";
+            de.dualibib.Logger.error(this, "Ausleihe gibt es nicht.");
         }
         notifyPanels();
     }
 
     public ArrayList<Ausleihe> get() {
-        ArrayList<Ausleihe> liste = new ArrayList<Ausleihe>();
-        for (Ausleihe ausleihe : ausleiheListe) {
+        ArrayList<Ausleihe> liste = new ArrayList<>();
+        ausleiheListe.forEach((ausleihe) -> {
             liste.add(ausleihe);
-    }
+        });
         return liste;
 }
 

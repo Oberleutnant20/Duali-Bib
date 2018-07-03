@@ -12,14 +12,14 @@ import java.util.Date;
  *
  * @author Carina
  */
-public class Ausleihe implements Serializable{
+public class Ausleihe implements Serializable {
 
     private long id;
     private long medienid;
     private Date date;
     private int userid;
     private long kategorieid;
-    
+
     public Ausleihe(long id,long medienid, Date date, int userid, long kategorieid) {
         this.id = id;
         this.medienid = medienid;
@@ -27,11 +27,11 @@ public class Ausleihe implements Serializable{
         this.userid = userid;
         this.kategorieid = kategorieid;
     }
-    
+
     public long getId() {
         return id;
     }
-    
+
     public long getMedienid() {
         return medienid;
     }

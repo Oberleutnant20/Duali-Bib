@@ -24,8 +24,8 @@ public class Kategorienverwaltung extends ElternVerwaltung{
     private IKategorieDAO kategorieDAO;
 
     public Kategorienverwaltung(IKategorieDAO kategorieDAO) {
-        kategorieListe = new ArrayList<Kategorie>();
-        kategorieListeRef = new ArrayList<Kategorie>();
+        kategorieListe = new ArrayList<>();
+        kategorieListeRef = new ArrayList<>();
         this.kategorieDAO = kategorieDAO;
     }
 
@@ -40,7 +40,7 @@ public class Kategorienverwaltung extends ElternVerwaltung{
     public void laden() {
         kategorieListe.clear();
         kategorieListeRef.clear();
-        de.dualibib.Logger.debug(this,"laden");
+        de.dualibib.Logger.debug(this, "laden");
         try {
             List<Kategorie> liste = kategorieDAO.laden();
             liste.forEach((kategorie) -> {
@@ -48,20 +48,21 @@ public class Kategorienverwaltung extends ElternVerwaltung{
                 kategorieListeRef.add(kategorie);
             });
 
-        } catch (Exception e) {
+        } catch (Exception e) { 
+            de.dualibib.Logger.error(this, "laden");
         }
     }
 
     public void add(Kategorie kategorie) {
         if (!kategorieListe.add(kategorie)) {
-            String error = "Ausleihe gibt es bereits.";
+            de.dualibib.Logger.error(this, "Kategorie gibt es bereits.");
         }
         notifyPanels();
     }
 
     public void delete(Kategorie kategorie) {
         if (!kategorieListe.remove(kategorie)) {
-            String error = "Ausleihe gibt es nicht.";
+            de.dualibib.Logger.error(this, "Kategorie gibt es nicht.");
         }
         notifyPanels();
     }

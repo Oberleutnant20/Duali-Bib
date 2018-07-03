@@ -23,7 +23,7 @@ public class Account implements Serializable{
     private String strasse;
     private String hausnummer;
     private String ort;
-    
+
     public Account(String username, String passwort, boolean mitarbeiter, int userid, String vorname, String nachname, int plz, String strasse, String hausnummer, String ort) {
         this.username = username;
         this.passwort = passwort;
@@ -116,6 +116,4 @@ public class Account implements Serializable{
     public String getOrt() {
         return ort;
     }
-    
-   
 }

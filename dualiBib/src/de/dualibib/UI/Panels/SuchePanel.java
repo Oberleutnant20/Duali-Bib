@@ -6,9 +6,12 @@
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Medien;
+import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
+import de.dualibib.Logger;
 import de.dualibib.UI.ElternComboboxPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
+import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -195,7 +198,7 @@ public class SuchePanel extends ElternComboboxPanel {
             model.removeRow(i);
         }
         
-        if(text.equals("")||text.equals("Suche")||text.equals("Titelsuchen...")||text.equals("Titelsuche...")){
+        if(defaultText(text)){
             for (int i = 0; i < medienListe.size(); i++) {
                 model.addRow(addObject(i)); 
             }
@@ -206,6 +209,15 @@ public class SuchePanel extends ElternComboboxPanel {
             if(medienListe.get(i).getName().equals(text))
              model.addRow(addObject(i));    
         }
+    }
+    
+    private boolean defaultText(String text){
+        boolean empty = text.equals("");
+        boolean standard1 = text.equals("Suche");
+        boolean standard2 = text.equals("Titelsuchen...");
+        boolean standard3 = text.equals("Titelsuche...");
+        boolean standard4 = text.equals("タイトル...");
+        return empty||standard1||standard2||standard3||standard4;
     }
     
     public void fillTable(){
@@ -240,9 +252,18 @@ public class SuchePanel extends ElternComboboxPanel {
 
     @Override
     public void update() {
+        Logger.info(this, "update");
         medienListe = panelHandler.getMedienliste();
         fillTable();
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
+    }
+
+    @Override
+    public void updateLanguage(Properties props) {
+        sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
+        kategorieLable.setText((String) props.get(PropertyName.SUCHEPANEL_KATEGORIELABLE));
+        genreLable.setText((String) props.get(PropertyName.SUCHEPANEL_GENRELABLE));
+        selectButton.setText((String) props.get(PropertyName.SUCHEPANEL_SELECTBUTTON));
     }
 }

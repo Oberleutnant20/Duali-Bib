@@ -12,7 +12,7 @@ import de.dualibib.Datenlogik.dao.HistoryDAO;
 import de.dualibib.Datenlogik.dao.KategorieDAO;
 import de.dualibib.Datenlogik.dao.MedienDAO;
 import de.dualibib.Fachlogik.Accountverwaltung.Accountverwaltung;
-import de.dualibib.Fachlogik.Accountverwaltung.Languageverwaltung.Languageverwaltung;
+import de.dualibib.Fachlogik.Languageverwaltung.Languageverwaltung;
 import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.ElternVerwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
@@ -24,17 +24,9 @@ import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
  *
  * @author Carina
  */
-public class VerwaltungsFactorySingleton {
-
+public final class VerwaltungsFactorySingleton {
     //create an object of SingleObject
-    private static VerwaltungsFactorySingleton instance = new VerwaltungsFactorySingleton();
-
-    /**
-     * Der Konstruktor für die VerwaltungsFactorysingleton.<br>
-     * Es kann keine neue Instanz davon erstellt werden.
-     */
-    private VerwaltungsFactorySingleton() {
-    }
+   private static final VerwaltungsFactorySingleton INSTANCE = new VerwaltungsFactorySingleton();
 
     /**
      * 
@@ -44,37 +36,37 @@ public class VerwaltungsFactorySingleton {
         return instance;
     }
 
-    /**
-     *
-     * @param art
-     * @return benötigte DAO
-     */
-    public ElternVerwaltung getVerwaltung(String art) {
-        DAOFactorySingleton singleton = DAOFactorySingleton.getInstance();
-        switch (art) {
-            case "Language":
-                return new Languageverwaltung();
-            case "Account":
-                AccountDAO accountdao = (AccountDAO) singleton.getDAO("Account");
-                return new Accountverwaltung(accountdao);
-            case "Medien":
-                MedienDAO mediendao = (MedienDAO) singleton.getDAO("Medien");
-                return new Medienverwaltung(mediendao);
-            case "Ausleihe":
-                AusleiheDAO ausleihedao = (AusleiheDAO) singleton.getDAO("Ausleihe");
-                return new Ausleiheverwaltung(ausleihedao);
-            case "Kategorien":
-                KategorieDAO kategoriedao = (KategorieDAO) singleton.getDAO("Kategorien");
-                return new Kategorienverwaltung(kategoriedao);
-            case "Genre":
-                GenreDAO genredao = (GenreDAO) singleton.getDAO("Genre");
-                return new Genreverwaltung(genredao);
-            case "History":
-                HistoryDAO historydao = (HistoryDAO) singleton.getDAO("History");
-                return new Historyverwaltung(historydao);
-            default:
-                return null;
+   //Get the only object available
+   public static VerwaltungsFactorySingleton getInstance(){
+      return INSTANCE;
+   }
 
-        }
-    }
+   public ElternVerwaltung getVerwaltung(String art){
+      DAOFactorySingleton singleton = DAOFactorySingleton.getInstance();
+       switch (art) {
+          case "Language" :
+              return new Languageverwaltung();
+          case "Account" :
+              AccountDAO accountdao = (AccountDAO) singleton.getDAO("Account");
+              return new Accountverwaltung(accountdao);
+          case "Medien" :
+              MedienDAO mediendao = (MedienDAO) singleton.getDAO("Medien");
+              return new Medienverwaltung(mediendao);
+          case "Ausleihe" :
+              AusleiheDAO ausleihedao = (AusleiheDAO) singleton.getDAO("Ausleihe");
+              return new Ausleiheverwaltung(ausleihedao);
+          case "Kategorien" :
+              KategorieDAO kategoriedao = (KategorieDAO) singleton.getDAO("Kategorien");
+              return new Kategorienverwaltung(kategoriedao);
+          case "Genre" :
+              GenreDAO genredao = (GenreDAO) singleton.getDAO("Genre");
+              return new Genreverwaltung(genredao);
+          case "History" :
+              HistoryDAO historydao = (HistoryDAO) singleton.getDAO("History");
+              return new Historyverwaltung(historydao);
+          default: return null;
+
+      }
+   }
+
 }

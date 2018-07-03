@@ -29,18 +29,18 @@ public abstract class ElternComboboxPanel extends ElternPanel {
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
-        }        
+        }
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
-    
+
     public void setComboboxGenre(JComboBox combobox,List<Genre> list){
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
-        }        
+        }
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

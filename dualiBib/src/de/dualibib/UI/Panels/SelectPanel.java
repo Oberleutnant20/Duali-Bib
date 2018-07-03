@@ -5,11 +5,10 @@
  */
 package de.dualibib.UI.Panels;
 
-import de.dualibib.Datenlogik.dto.Genre;
-import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.dto.Medien;
+import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
+import de.dualibib.Logger;
 import de.dualibib.UI.ElternComboboxPanel;
-import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,8 +16,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
@@ -65,7 +64,7 @@ public class SelectPanel extends ElternComboboxPanel {
         genreComboBox = new javax.swing.JComboBox<>();
         kategorieComboBox = new javax.swing.JComboBox<>();
         sucheField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        dateLable = new javax.swing.JLabel();
         dateComboBox = new javax.swing.JComboBox<>();
         infoLabel = new javax.swing.JLabel();
 
@@ -134,7 +133,7 @@ public class SelectPanel extends ElternComboboxPanel {
             }
         });
 
-        jLabel1.setText("Ausleihen bis:");
+        dateLable.setText("Ausleihen bis:");
 
         dateComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -148,7 +147,7 @@ public class SelectPanel extends ElternComboboxPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(dateLable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -171,9 +170,7 @@ public class SelectPanel extends ElternComboboxPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(genreComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(23, 23, 23))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bearbeitenButton))))
+                                    .addComponent(bearbeitenButton, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -182,9 +179,8 @@ public class SelectPanel extends ElternComboboxPanel {
                                         .addComponent(statusLable))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(68, 68, 68))
+                                .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(sucheField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -220,7 +216,7 @@ public class SelectPanel extends ElternComboboxPanel {
                         .addComponent(bearbeitenButton)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(dateLable)
                     .addComponent(dateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7))
         );
@@ -294,10 +290,10 @@ public class SelectPanel extends ElternComboboxPanel {
     private javax.swing.JTextArea beschreibungField;
     private javax.swing.JLabel beschreibungLable;
     private javax.swing.JComboBox<String> dateComboBox;
+    private javax.swing.JLabel dateLable;
     private javax.swing.JComboBox<String> genreComboBox;
     private javax.swing.JLabel genreLable;
     private javax.swing.JLabel infoLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> kategorieComboBox;
     private javax.swing.JLabel kategorieLable;
@@ -332,9 +328,22 @@ public class SelectPanel extends ElternComboboxPanel {
 
     @Override
     public void update() {
+        Logger.info(this, "update");
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
+    }
 
+    @Override
+    public void updateLanguage(Properties props) {
+        sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
+        nameLable.setText((String) props.get(PropertyName.SELECTPANEL_NAMELABLE));
+        statusLable.setText((String) props.get(PropertyName.SELECTPANEL_STATUSLABLE));
+        beschreibungLable.setText((String) props.get(PropertyName.SELECTPANEL_BESCHREIBUNGLABLE));
+        kategorieLable.setText((String) props.get(PropertyName.SELECTPANEL_KATEGORIELABLE));
+        genreLable.setText((String) props.get(PropertyName.SELECTPANEL_GENRELABLE));
+        ausleihenButton.setText((String) props.get(PropertyName.SELECTPANEL_AUSLEIHENBUTTON));
+        infoLabel.setText((String) props.get(PropertyName.SELECTPANEL_INFOLABEL));
+        dateLable.setText((String) props.get(PropertyName.SELECTPANEL_DATELABLE));
     }
 
 }

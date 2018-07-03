@@ -36,7 +36,8 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
         ArrayList<Ausleihe> ret = new ArrayList<>();
         if (con != null) {
             try {
-                PreparedStatement ptsm = con.prepareStatement("SELECT a_ID, a_Date, u_ID, m_ID, km_ID FROM ausleihe;");
+                String stmnt = "SELECT a_ID, a_Date, u_ID, m_ID, km_ID FROM ausleihe;";
+                PreparedStatement ptsm = con.prepareStatement(stmnt);
                 rs = ptsm.executeQuery();
                 while (rs.next()) {
                     long id = rs.getLong("a_ID");
@@ -61,8 +62,11 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
             for (Ausleihe ausleihe : ausleiheListe) {
                 try {
                     String pattern = "YYYY-MM-DD";
-                    PreparedStatement ptsm = con.prepareStatement("INSERT INTO Ausleihe(a_DATE, u_ID, m_id, km_id) "
-                            + "VALUES('" + new java.sql.Date(ausleihe.getDate().getTime()) + "', " + ausleihe.getUserid() + ", " + ausleihe.getMedienid() + ", " + ausleihe.getKategorieid() + ");");
+                    String stmnt = "INSERT INTO Ausleihe(a_DATE, u_ID, m_id, km_id) "
+                            + "VALUES('" + new java.sql.Date(ausleihe.getDate().getTime()) + "', "
+                            + ausleihe.getUserid() + ", " + ausleihe.getMedienid() + ", "
+                            + ausleihe.getKategorieid() + ");";
+                    PreparedStatement ptsm = con.prepareStatement(stmnt);
 
                     ptsm.execute();
                 } catch (SQLException ex) {
@@ -76,16 +80,16 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
 
     @Override
     public void loeschen(List<Ausleihe> ausleiheListe) throws IOException, ConnectionError {
-        if(con != null){
-            for (Ausleihe ausleihe : ausleiheListe) {
+        if (con != null) {
+            ausleiheListe.forEach((ausleihe) -> {
                 try {
-                    PreparedStatement ptsm = con.prepareStatement("DELETE FROM Ausleihe WHERE a_ID LIKE "+ausleihe.getId());
+                    String stmnt = "DELETE FROM Ausleihe WHERE a_ID LIKE "+ausleihe.getId();
+                    PreparedStatement ptsm = con.prepareStatement(stmnt);
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AusleiheDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-            }
+            });
         } else {
             throw new ConnectionError();
         }
