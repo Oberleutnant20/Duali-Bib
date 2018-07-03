@@ -30,8 +30,6 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
     private final Database db = new Database();
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
-    private ResultSet rs1 = null;
-    private ResultSet rs2 = null;
     GenreDAO gen = new GenreDAO();
     KategorieDAO kat = new KategorieDAO();
 

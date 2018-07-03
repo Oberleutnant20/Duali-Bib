@@ -18,34 +18,46 @@ import de.dualibib.Datenlogik.dao.MedienDAO;
  * @author Carina
  */
 class DAOFactorySingleton {
+
     //create an object of SingleObject
-   private static DAOFactorySingleton instance = new DAOFactorySingleton();
+    private static DAOFactorySingleton instance = new DAOFactorySingleton();
 
-   //make the constructor private so that this class cannot be
-   //instantiated
-   private DAOFactorySingleton(){}
+    /**
+     * Privater Konstruktor um zu verhindern, dass weitere Instanzen erstellt werden.
+     */
+    private DAOFactorySingleton() {
+    }
 
-   //Get the only object available
-   public static DAOFactorySingleton getInstance(){
-      return instance;
-   }
+    /**
+     * 
+     * @return eine Instanz von DAOFactorySingleton
+     */
+    public static DAOFactorySingleton getInstance() {
+        return instance;
+    }
 
-   public ElternDAO getDAO(String art){
-       switch (art){
-          case "Account" :
-              return new AccountDAO();
-          case "Medien" :
-              return new MedienDAO();
-          case "Ausleihe" :
-              return new AusleiheDAO();
-          case "Kategorien" :
-              return new KategorieDAO();
-          case "Genre" :
-              return new GenreDAO();
-          case "History" :
-              return new HistoryDAO();
-          default:return null;
-              
-      }
-   }
+    /**
+     *
+     * @param art
+     * @return benötigte DAO
+     */
+    public ElternDAO getDAO(String art) {
+        switch (art) {
+            case "Account":
+                return new AccountDAO();
+            case "Medien":
+                return new MedienDAO();
+            case "Ausleihe":
+                return new AusleiheDAO();
+            case "Kategorien":
+                return new KategorieDAO();
+            case "Genre":
+                return new GenreDAO();
+            case "History":
+                return new HistoryDAO();
+            default:
+                return null;
+
+        }
+    }
 }

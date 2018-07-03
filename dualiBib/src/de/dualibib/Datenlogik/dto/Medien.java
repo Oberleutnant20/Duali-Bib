@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Medien implements Serializable{
 
-     private long kategorienId;
+    private long kategorienId;
     private long genreId;
     private String name;
     private long id;
