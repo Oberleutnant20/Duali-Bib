@@ -27,11 +27,6 @@ public final class DAOFactorySingleton {
      * @return eine Instanz von DAOFactorySingleton
      */
     public static DAOFactorySingleton getInstance() {
-        return instance;
-    }
-
-   //Get the only object available
-   public static DAOFactorySingleton getInstance() {
       return INSTANCE;
    }
 
