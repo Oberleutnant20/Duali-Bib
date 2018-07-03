@@ -176,6 +176,7 @@ public class LoginPanel extends ElternPanel {
     public void updateLanguage(Properties props) {
         sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
         meldungText.setText((String) props.get(PropertyName.LOGINPANEL_ACCOUNTLABEL));
+        accountLabel.setText((String) props.get(PropertyName.LOGINPANEL_ACCOUNTLABEL));
         accountnameField.setText((String) props.get(PropertyName.LOGINPANEL_ACCOUNTNAMEFIELD));
         passwordLabel.setText((String) props.get(PropertyName.LOGINPANEL_PASSWORDLABEL));
         passwortField.setText((String) props.get(PropertyName.LOGINPANEL_PASSWORTFIELD));

@@ -7,6 +7,7 @@ package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Ausleihe;
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
+import de.dualibib.Logger;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
@@ -134,7 +135,6 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
     }
     
     public void fillTable() {
-        panelHandler.loadAusleihen();
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
@@ -164,6 +164,8 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
 
     @Override
     public void update() {
+        Logger.info(this, "update");
+        ausleiheListe = panelHandler.getAllAusleihen();
         fillTable();
     }
 

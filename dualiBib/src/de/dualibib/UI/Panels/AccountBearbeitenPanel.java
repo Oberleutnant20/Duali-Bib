@@ -309,6 +309,8 @@ public class AccountBearbeitenPanel extends ElternPanel {
 
     @Override
     public void update() {
+        Logger.info(this, "update");
+        account = panelHandler.getAktuellerUser();
         if(account!=null){
         hausnummerField.setText(account.getHausnummer());
         nameField.setText(account.getNachname());

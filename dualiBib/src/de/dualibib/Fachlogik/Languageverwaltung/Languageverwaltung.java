@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,7 +37,7 @@ public class Languageverwaltung extends ElternVerwaltung {
     
     public void getJapanisch() throws FileNotFoundException, IOException {
         de.dualibib.Logger.debug(this, "getJapanisch");
-        FileReader fileReader = new FileReader("/Languages/japanisch.props");
+        FileReader fileReader = new FileReader("japanisch.props");
         props.load(fileReader);
         notifyLanguagePanels(props);
     }

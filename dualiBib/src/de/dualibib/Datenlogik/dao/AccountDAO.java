@@ -63,12 +63,12 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     @Override
     public void speichern(List<Account> accountListe) throws IOException, ConnectionError {
-        if (con != null) {            
+        if (con != null) {
             accountListe.forEach((account) -> {
                 try {
                     String stmnt = "INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
                             + "VALUES('" + account.getVorname() + "','" + account.getNachname() + "','"
-                            + account.getUsername() + "','" + account.getPasswort() + "', " 
+                            + account.getUsername() + "','" + account.getPasswort() + "', "
                             + account.isMitarbeiter() + ", '" + account.getStrasse() + "', '"
                             + account.getHausnummer() + "', " + account.getPlz() + ", '"
                             + account.getOrt() + "');";
@@ -85,7 +85,7 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     @Override
     public void update(List<Account> accountListe) throws IOException, ConnectionError {
-        if(con != null) {
+        if (con != null) {
             for (Account account : accountListe) {
                 try {
                     String vorname = account.getVorname();
@@ -98,13 +98,13 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
                     int id = account.getUserid();
                     String ort = account.getOrt();
                     boolean mitarbeiter = account.isMitarbeiter();
-                    
+
                     String stmnt = "UPDATE USER SET u_Vorname = '" + vorname + "', u_Nachname = '" + nachname
                             + "', u_login = '" + username + "', u_passwd = '" + passwd
                             + "', u_Mitarbeiter =" + mitarbeiter + ", u_Strasse = '" + str
                             + "', u_Hausnummer = '" + hausnr + "', u_PLZ = " + plz
                             + ", u_Ort = '" + ort + "' WHERE u_ID LIKE " + id + ";";
-                    PreparedStatement ptsm = con .prepareStatement(stmnt);
+                    PreparedStatement ptsm = con.prepareStatement(stmnt);
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

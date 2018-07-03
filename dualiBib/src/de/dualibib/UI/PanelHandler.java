@@ -24,6 +24,7 @@ import de.dualibib.UI.Panels.SelectPanel;
 import de.dualibib.UI.Panels.SuchePanel;
 import de.dualibib.info.exceptions.ConnectionError;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -179,12 +180,12 @@ public class PanelHandler {
       return controller.getAllMedien();  
     }
 
-    public void loadAdminAccounts() {
-        accountsBearbeitenPanel.setAccountListe(controller.getAllAccountsListe());
+    public ArrayList<Account> getAllAccounts() {
+        return controller.getAllAccountsListe();
     }
 
-    public void loadAusleihen() {
-        ausleihenBearbeitenPanel.setAusleihenListe(controller.getAllAusleihenListe());
+    public ArrayList<Ausleihe> getAllAusleihen() {
+        return controller.getAllAusleihenListe();
     }
 
     public Medien mapHistoryAndMedium(History selected) {

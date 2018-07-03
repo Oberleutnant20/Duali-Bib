@@ -8,6 +8,7 @@ package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Account;
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
+import de.dualibib.Logger;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
@@ -26,8 +27,6 @@ public class AccountsBearbeitenPanel extends ElternPanel {
     public AccountsBearbeitenPanel(PanelHandler panelHandler) {
         super(panelHandler);
         initComponents();
-        //setAccountListe();
-        //fillTable();
     }
 
     /** This method is called from within the constructor to
@@ -192,13 +191,7 @@ public class AccountsBearbeitenPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    
-    public void setAccountListe(List<Account> account){
-        accountListe = account;
-    }
-
     public void fillTable(){
-        panelHandler.loadAdminAccounts();
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
@@ -238,6 +231,8 @@ public class AccountsBearbeitenPanel extends ElternPanel {
 
     @Override
     public void update() {
+        Logger.info(this, "update");
+        accountListe = panelHandler.getAllAccounts();
         fillTable();
     }
 

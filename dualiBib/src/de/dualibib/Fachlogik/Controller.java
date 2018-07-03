@@ -163,7 +163,8 @@ public class Controller {
 
     public void saveMediumChange(Medien m) {
         de.dualibib.Logger.info(this, "saveMediumChange");
-        for(Medien medium : getAllMedien()){
+        ArrayList<Medien> list = getAllMedien(); 
+        for(Medien medium : list){
             if(medium.getId()==m.getId()) {
                 medienverwaltung.delete(medium);
             }
@@ -198,8 +199,9 @@ public class Controller {
 
     public ArrayList<Medien> getAllMedien() {
         de.dualibib.Logger.info(this, "getAllMedien");
-        de.dualibib.Logger.debug(this, "medien" + medienverwaltung.get().size());
-        return medienverwaltung.get();
+        ArrayList<Medien> list = medienverwaltung.get();
+        de.dualibib.Logger.debug(this, "medien" + list.size());
+        return list;
     }
 
     public void saveDB() throws IOException, ConnectionError {
@@ -276,10 +278,13 @@ public class Controller {
         switch (string) {
           case "deutsch" :
               languageverwaltung.getDeutsch();
+              break;
           case "englisch" :
               languageverwaltung.getEnglisch();
+              break;
           case "japanisch" :
               languageverwaltung.getJapanisch();
+              break;
           default:languageverwaltung.getDeutsch();
             }
         }

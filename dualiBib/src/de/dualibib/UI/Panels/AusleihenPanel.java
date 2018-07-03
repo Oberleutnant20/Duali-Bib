@@ -174,7 +174,7 @@ public class AusleihenPanel extends ElternPanel {
 
     @Override
     public void update() {
-        
+        Logger.info(this, "update");
         account = panelHandler.getAktuellerUser();
         if(account!=null){
             ausleiheUserListe= new ArrayList<>();

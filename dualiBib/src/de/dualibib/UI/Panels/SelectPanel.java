@@ -5,12 +5,10 @@
  */
 package de.dualibib.UI.Panels;
 
-import de.dualibib.Datenlogik.dto.Genre;
-import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
+import de.dualibib.Logger;
 import de.dualibib.UI.ElternComboboxPanel;
-import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
@@ -331,9 +328,9 @@ public class SelectPanel extends ElternComboboxPanel {
 
     @Override
     public void update() {
+        Logger.info(this, "update");
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
-
     }
 
     @Override

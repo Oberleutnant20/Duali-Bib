@@ -7,6 +7,7 @@ package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
+import de.dualibib.Logger;
 import de.dualibib.UI.ElternComboboxPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
@@ -215,7 +216,7 @@ public class SuchePanel extends ElternComboboxPanel {
         boolean standard1 = text.equals("Suche");
         boolean standard2 = text.equals("Titelsuchen...");
         boolean standard3 = text.equals("Titelsuche...");
-        boolean standard4 = text.equals("タイトル");
+        boolean standard4 = text.equals("タイトル...");
         return empty||standard1||standard2||standard3||standard4;
     }
     
@@ -251,6 +252,7 @@ public class SuchePanel extends ElternComboboxPanel {
 
     @Override
     public void update() {
+        Logger.info(this, "update");
         medienListe = panelHandler.getMedienliste();
         fillTable();
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());

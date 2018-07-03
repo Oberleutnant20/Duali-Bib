@@ -9,6 +9,7 @@ import de.dualibib.Datenlogik.dto.History;
 import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
+import de.dualibib.Logger;
 import de.dualibib.UI.ElternPanel;
 import de.dualibib.UI.PanelHandler;
 import java.util.List;
@@ -229,9 +230,9 @@ public class HistoryPanel extends ElternPanel {
 
     private Object[] addObject(int i) {
         String medienName = "";
-        
+        List<Medien> medienliste = panelHandler.returnMedien();
         for (int j = 0; j < panelHandler.returnMedien().size(); j++) {
-            if(historyListe.get(i).getMedienid() == panelHandler.returnMedien().get(j).getId())
+            if(historyListe.get(i).getMedienid() == medienliste.get(j).getId())
                 medienName = panelHandler.returnMedien().get(j).getName();
         }
         
@@ -257,10 +258,12 @@ public class HistoryPanel extends ElternPanel {
 
     @Override
     public void update() {
+        Logger.info(this, "update");
         historyListe = panelHandler.getHistory();
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
-        if(historyListe!=null)
-        fillTable();
+        if(historyListe!=null) {
+            fillTable();
+        }
     }
 
     @Override
