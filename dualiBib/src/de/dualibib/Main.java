@@ -22,6 +22,10 @@ import de.dualibib.UI.PanelHandler;
  */
 public class Main {
 
+    /**
+     * 
+     * @param args 
+     */
     public static void main(String[] args) {
         VerwaltungsFactorySingleton singleton = VerwaltungsFactorySingleton.getInstance();
         Languageverwaltung languageverwaltung = (Languageverwaltung)singleton.getVerwaltung("Language");

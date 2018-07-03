@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
@@ -62,7 +57,7 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     @Override
     public void speichern(List<Account> accountListe) throws IOException, ConnectionError {
-        if (con != null) {            
+        if (con != null) {
             for (Account account : accountListe) {
                 try {
                     PreparedStatement ptsm = con.prepareStatement("INSERT INTO USER(u_Vorname, u_Nachname, u_login, u_Passwd, u_Mitarbeiter, u_Strasse, u_Hausnummer, u_PLZ, u_Ort) "
@@ -81,7 +76,7 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     @Override
     public void update(List<Account> accountListe) throws IOException, ConnectionError {
-        if(con != null){
+        if (con != null) {
             for (Account account : accountListe) {
                 try {
                     String vorname = account.getVorname();
@@ -92,9 +87,9 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
                     String hausnr = account.getHausnummer();
                     int plz = account.getPlz();
                     int id = account.getUserid();
-                    String ort = account.getOrt();                    
+                    String ort = account.getOrt();
                     boolean mitarbeiter = account.isMitarbeiter();
-                    PreparedStatement ptsm = con .prepareStatement("UPDATE USER SET u_Vorname = '"+vorname+"', u_Nachname = '"+nachname+"', u_login = '"+username+"', u_passwd = '"+passwd+"', u_Mitarbeiter ="+mitarbeiter+", u_Strasse = '"+str+"', u_Hausnummer = '"+hausnr+"', u_PLZ = "+plz+", u_Ort = '"+ort+"' WHERE u_ID LIKE "+id+";");
+                    PreparedStatement ptsm = con.prepareStatement("UPDATE USER SET u_Vorname = '" + vorname + "', u_Nachname = '" + nachname + "', u_login = '" + username + "', u_passwd = '" + passwd + "', u_Mitarbeiter =" + mitarbeiter + ", u_Strasse = '" + str + "', u_Hausnummer = '" + hausnr + "', u_PLZ = " + plz + ", u_Ort = '" + ort + "' WHERE u_ID LIKE " + id + ";");
                     ptsm.execute();
                 } catch (SQLException ex) {
                     Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
