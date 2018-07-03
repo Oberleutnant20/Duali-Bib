@@ -157,11 +157,11 @@ public class HistoryPanel extends ElternPanel {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         String text = kategorieComboBox.getItemAt(0);
         int selectedID = -1;
-        panelHandler.getKategorieListe();
+        List<Kategorie> list = panelHandler.getKategorieListe();
         
-        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
-            if(panelHandler.getKategorieListe().get(i).getBezeichnung().equals(text))
-                selectedID=(int) panelHandler.getKategorieListe().get(i).getId();
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getBezeichnung().equals(text))
+                selectedID = (int) list.get(i).getId();
         }
         
         for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -187,12 +187,12 @@ public class HistoryPanel extends ElternPanel {
 
     
     private Medien getMediumfromHistoryIndices(int position) {
-		History selected = null;
-                Medien medium = null;
-		selected = historyListe.get(position);
-                medium = panelHandler.mapHistoryAndMedium(selected);
-		return medium;
-	}
+        History selected = null;
+        Medien medium = null;
+        selected = historyListe.get(position);
+        medium = panelHandler.mapHistoryAndMedium(selected);
+        return medium;
+    }
     
     private int getListSelections() {
 	int[] selected = jTable1.getSelectedRows();
@@ -217,9 +217,10 @@ public class HistoryPanel extends ElternPanel {
             model.removeRow(i);
         }
         int kategorieid = -1;
-        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
-         if(panelHandler.getKategorieListe().get(i).getBezeichnung().equals(kategorie))   
-             kategorieid=(int) panelHandler.getKategorieListe().get(i).getId();
+        List<Kategorie> kategorielist = panelHandler.getKategorieListe();
+        for (int i = 0; i < kategorielist.size(); i++) {
+         if(kategorielist.get(i).getBezeichnung().equals(kategorie))   
+             kategorieid=(int) kategorielist.get(i).getId();
         }
                         
         for (int i = 0; i < historyListe.size(); i++) {
@@ -231,16 +232,16 @@ public class HistoryPanel extends ElternPanel {
     private Object[] addObject(int i) {
         String medienName = "";
         List<Medien> medienliste = panelHandler.returnMedien();
-        for (int j = 0; j < panelHandler.returnMedien().size(); j++) {
+        for (int j = 0; j < medienliste.size(); j++) {
             if(historyListe.get(i).getMedienid() == medienliste.get(j).getId())
-                medienName = panelHandler.returnMedien().get(j).getName();
+                medienName = medienliste.get(j).getName();
         }
         
         String kategorieName = "";
-        
-        for (int j = 0; j < panelHandler.getKategorieListe().size(); j++) {
-            if(historyListe.get(i).getKategorieid() == panelHandler.getKategorieListe().get(j).getId())
-                medienName = panelHandler.getKategorieListe().get(j).getName();
+        List<Kategorie> kategorielist = panelHandler.getKategorieListe();
+        for (int j = 0; j < kategorielist.size(); j++) {
+            if(historyListe.get(i).getKategorieid() == kategorielist.get(j).getId())
+                medienName = kategorielist.get(j).getName();
         }
         
         return new Object[]{historyListe.get(i).getId(),panelHandler.getAktuellerUser().getUsername(),medienName,kategorieName};

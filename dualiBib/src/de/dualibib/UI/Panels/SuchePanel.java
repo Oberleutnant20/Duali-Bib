@@ -5,6 +5,8 @@
  */
 package de.dualibib.UI.Panels;
 
+import de.dualibib.Datenlogik.dto.Genre;
+import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Datenlogik.dto.Medien;
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
 import de.dualibib.Logger;
@@ -148,9 +150,10 @@ public class SuchePanel extends ElternComboboxPanel {
         }
         
         int kategorieid = -1;
-        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
-         if(panelHandler.getKategorieListe().get(i).getBezeichnung().equals(text))   
-             kategorieid=(int) panelHandler.getKategorieListe().get(i).getId();
+        List<Kategorie> list = panelHandler.getKategorieListe();
+        for (int i = 0; i < list.size(); i++) {
+         if(list.get(i).getBezeichnung().equals(text))   
+             kategorieid=(int) list.get(i).getId();
         }
         
         for (int i = 0; i < medienListe.size(); i++) {
@@ -167,9 +170,10 @@ public class SuchePanel extends ElternComboboxPanel {
         }
         
         int genreid = -1;
-        for (int i = 0; i < panelHandler.getKategorieListe().size(); i++) {
-         if(panelHandler.getGenreListe().get(i).getBezeichnung().equals(text))   
-             genreid=(int) panelHandler.getGenreListe().get(i).getId();
+        List<Genre> list = panelHandler.getGenreListe();
+        for (int i = 0; i < list.size(); i++) {
+         if(list.get(i).getBezeichnung().equals(text))   
+             genreid=(int) list.get(i).getId();
         }
         
         for (int i = 0; i < medienListe.size(); i++) {
@@ -231,10 +235,10 @@ public class SuchePanel extends ElternComboboxPanel {
     }
     
     private Medien getMediumfromIndices(int position) {
-		Medien selected = null;
-		selected = medienListe.get(position);
-		return selected;
-	}
+        Medien selected = null;
+        selected = medienListe.get(position);
+        return selected;
+    }
     
     private int getListSelections() {
 	int[] selected = jTable1.getSelectedRows();

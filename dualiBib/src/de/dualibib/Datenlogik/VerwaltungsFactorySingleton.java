@@ -33,11 +33,6 @@ public final class VerwaltungsFactorySingleton {
      * @return eine einzige Instanz
      */
     public static VerwaltungsFactorySingleton getInstance() {
-        return instance;
-    }
-
-   //Get the only object available
-   public static VerwaltungsFactorySingleton getInstance(){
       return INSTANCE;
    }
 
