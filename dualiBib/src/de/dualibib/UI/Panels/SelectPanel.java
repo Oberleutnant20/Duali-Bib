@@ -70,11 +70,6 @@ public class SelectPanel extends ElternComboboxPanel {
 
         nameField.setText("jTextField1");
         nameField.setEnabled(false);
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
 
         beschreibungField.setColumns(20);
         beschreibungField.setRows(5);
@@ -91,11 +86,6 @@ public class SelectPanel extends ElternComboboxPanel {
 
         statusField.setText("jTextField2");
         statusField.setEnabled(false);
-        statusField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                statusFieldActionPerformed(evt);
-            }
-        });
 
         bearbeitenButton.setText("Speichern");
         bearbeitenButton.setEnabled(false);
@@ -221,14 +211,6 @@ public class SelectPanel extends ElternComboboxPanel {
                 .addGap(7, 7, 7))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void statusFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_statusFieldActionPerformed
-
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
-        //TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldActionPerformed
 
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
