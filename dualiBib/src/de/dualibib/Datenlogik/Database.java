@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Database Class with Connect, Disconnect, Resultset and Blobfile.
@@ -96,7 +94,7 @@ public class Database {
     }
 
     /**
-     * Connection for Database MySQL without Login User, Password and URL
+     * Connection for Database MySQL without Login User, Password and URL.
      *
      * @param url URL to the Database for Example<br>
      * <strong>MySQL: </strong>"jdbc:mysql://localhost:3306"
@@ -136,7 +134,7 @@ public class Database {
     }
 
     /**
-     * Disconnect the Database
+     * Disconnect the Database.
      *
      * @param con Connection
      * @return True or False
@@ -157,7 +155,7 @@ public class Database {
     }
 
     /**
-     * Resultset from a complete Table
+     * Resultset from a complete Table.
      *
      * @param con Connection
      * @param table Tablename
@@ -174,7 +172,7 @@ public class Database {
     }
 
     /**
-     * Resultset from a complete Table
+     * Resultset from a complete Table.
      *
      * @param con Connection
      * @param table Tablename
@@ -210,7 +208,7 @@ public class Database {
     }
 
     /**
-     * Resultset from a complete Table
+     * Resultset from a complete Table.
      *
      * @param con Connection
      * @param table Tablename
@@ -229,7 +227,7 @@ public class Database {
     }
 
     /**
-     * Create an new Clob-Blob File
+     * Create an new Clob-Blob File.
      *
      * @param fileName Filename
      * @param writerArg Writer
@@ -255,7 +253,7 @@ public class Database {
     /**
      *
      * @param rs ResultSet
-     * @return
+     * @return Result
      */
     public static ResultSetMetaData getMetaData(ResultSet rs) {
         ResultSetMetaData ret = null;
@@ -268,7 +266,7 @@ public class Database {
     }
     
     /**
-     * SQL Statement für alles abrufen "Select * From Tabelle;"
+     * SQL Statement für alles abrufen "Select * From Tabelle;".
      * @param table angabe der Tabelle
      * @return SQL Statement String
      */

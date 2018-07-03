@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
@@ -98,7 +93,6 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
                     int id = account.getUserid();
                     String ort = account.getOrt();
                     boolean mitarbeiter = account.isMitarbeiter();
-
                     String stmnt = "UPDATE USER SET u_Vorname = '" + vorname + "', u_Nachname = '" + nachname
                             + "', u_login = '" + username + "', u_passwd = '" + passwd
                             + "', u_Mitarbeiter =" + mitarbeiter + ", u_Strasse = '" + str

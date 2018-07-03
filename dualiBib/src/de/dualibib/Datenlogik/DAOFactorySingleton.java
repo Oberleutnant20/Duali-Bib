@@ -21,9 +21,14 @@ public final class DAOFactorySingleton {
     //create an object of SingleObject
    private static final DAOFactorySingleton INSTANCE = new DAOFactorySingleton();
 
-   //make the constructor private so that this class cannot be
-   //instantiated
-   private DAOFactorySingleton(){}
+
+    /**
+     * 
+     * @return eine Instanz von DAOFactorySingleton
+     */
+    public static DAOFactorySingleton getInstance() {
+        return instance;
+    }
 
    //Get the only object available
    public static DAOFactorySingleton getInstance() {
