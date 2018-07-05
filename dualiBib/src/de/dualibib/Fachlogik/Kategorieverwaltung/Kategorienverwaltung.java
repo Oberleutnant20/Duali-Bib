@@ -27,6 +27,7 @@ public class Kategorienverwaltung extends ElternVerwaltung{
         kategorieListe = new ArrayList<>();
         kategorieListeRef = new ArrayList<>();
         this.kategorieDAO = kategorieDAO;
+        laden();
     }
 
     public void speichern() throws IOException, ConnectionError {

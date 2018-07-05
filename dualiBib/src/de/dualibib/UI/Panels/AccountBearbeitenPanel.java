@@ -24,6 +24,7 @@ public class AccountBearbeitenPanel extends ElternPanel {
 
     private Account account;
     private boolean neu;
+    private Properties props;
 
     /**
      *
@@ -214,7 +215,7 @@ public class AccountBearbeitenPanel extends ElternPanel {
 
         boolean checkPLZ = !plzField.getText().matches("[0-9]{5}");
         if (checkPLZ) {
-            meldungText.setText("PLZ ist ungültig.");
+            meldungText.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_PLZ));
             return;
         }
 
@@ -229,10 +230,10 @@ public class AccountBearbeitenPanel extends ElternPanel {
             String passwort = passwortField.getText();
             boolean mitarbeiter = mitarbeiterCheckBox.isSelected();
             save(account.getUserid(),hausnummer, name, plz, stadt, strasse, vorname, passwort,mitarbeiter);
-            meldungText.setText("Änderungen wurden übernommen.");
+            meldungText.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_AENDERUNG));
         }
         else {
-            meldungText.setText("Passwort stimmt nicht überein.");
+            meldungText.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_PASSWORT));
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -324,6 +325,7 @@ public class AccountBearbeitenPanel extends ElternPanel {
 
     @Override
     public void updateLanguage(Properties props) {
+        this.props = props;
         vornameLable.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_VORNAMELABLE));
         strasseLable.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_STRASSELABLE));
         plzLable.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_PLZLABLE));

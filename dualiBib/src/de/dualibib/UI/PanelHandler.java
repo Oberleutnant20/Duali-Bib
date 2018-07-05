@@ -317,9 +317,11 @@ public class PanelHandler {
     }
 
     public void setSelectPanel(Medien mediumfromIndices) {
-            selectPanel.setMedium(mediumfromIndices);
-            panelUnsichtbar();
-            selectPanel.setVisible(true);
+        Logger.info(this, mediumfromIndices.getName() + " wird angezeigt");
+        selectPanel.setMedium(mediumfromIndices);
+        panelUnsichtbar();
+        ui.add(selectPanel);
+        selectPanel.setVisible(true);
     }
 
     public void changeLanguage(String string) {

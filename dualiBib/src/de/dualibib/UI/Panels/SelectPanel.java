@@ -28,6 +28,7 @@ import javax.swing.JComboBox;
 public class SelectPanel extends ElternComboboxPanel {
 
     private Medien medium;
+    private Properties props;
 
 //    private final ArrayList<String> genreListe;
 //
@@ -221,22 +222,15 @@ public class SelectPanel extends ElternComboboxPanel {
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
         String name = nameField.getText();
         String desc = beschreibungField.getText();
-
-        
-
         panelHandler.saveMediumChange(medium.getIsbn(), medium.getBarcodenummer(), genreComboBox.getSelectedItem(), kategorieComboBox.getSelectedItem(), name, medium.getId(), medium.getAnzahl(), medium.getAuthor(), desc);
-        infoLabel.setText("Status: Erfolgreich gespeichert");
+        infoLabel.setText((String) props.get(PropertyName.SELECTPANEL_STATUS_GESPEICHERT));
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
     private void ausleihenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenButtonActionPerformed
-        if (statusField.getText().equals("ausgeliehen")) {
-            infoLabel.setText("Status: Ist bereits ausgeliehen");            
-        } else {
-            Date date = new Date(dateComboBox.getSelectedItem().toString()+"");
-            panelHandler.createNewAusleihe(medium.getId(), date, medium.getKategorienId());
-            infoLabel.setText("Status: erfolgreich ausgeliehen");
-            ausleihenButton.setEnabled(false);
-        }
+        Date date = new Date(dateComboBox.getSelectedItem().toString()+"");
+        panelHandler.createNewAusleihe(medium.getId(), date, medium.getKategorienId());
+        infoLabel.setText((String) props.get(PropertyName.SELECTPANEL_STATUS_AUSGELIEHEN));
+        ausleihenButton.setEnabled(false);
     }//GEN-LAST:event_ausleihenButtonActionPerformed
 
     private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
@@ -254,15 +248,15 @@ public class SelectPanel extends ElternComboboxPanel {
 
     public void setMedium(Medien m) {
         medium = m;
-        infoLabel.setText("Status:");
+        infoLabel.setText((String) props.get(PropertyName.SELECTPANEL_STATUS));
         if (panelHandler.getVerfuegbare((int) m.getId())==0) {
-            statusField.setText("ausgeliehen");
+            statusField.setText((String) props.get(PropertyName.SELECTPANEL_AUSGELIEHEN));
             ausleihenButton.setEnabled(false);
         } else {
-            statusField.setText("vorhanden");
+            statusField.setText((String) props.get(PropertyName.SELECTPANEL_VORHANDEN));
             ausleihenButton.setEnabled(true);
         }
-        beschreibungField.setText("blablalba - in arbeit");
+        beschreibungField.setText(m.getDesc());
         nameField.setText(m.getName());
     }
 
@@ -317,6 +311,7 @@ public class SelectPanel extends ElternComboboxPanel {
 
     @Override
     public void updateLanguage(Properties props) {
+        this.props = props;
         sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
         nameLable.setText((String) props.get(PropertyName.SELECTPANEL_NAMELABLE));
         statusLable.setText((String) props.get(PropertyName.SELECTPANEL_STATUSLABLE));

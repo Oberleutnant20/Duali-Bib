@@ -31,6 +31,7 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
         ausleiheListeUpdate = new ArrayList<>();
         ausleiheListeDelete = new ArrayList<>();
         this.ausleiheDAO = ausleiheDAO;
+        laden();
     }
 
     public void speichern() throws IOException, ConnectionError {
