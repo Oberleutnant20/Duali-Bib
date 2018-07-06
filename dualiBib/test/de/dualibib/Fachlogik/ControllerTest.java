@@ -11,6 +11,7 @@ import de.dualibib.Fachlogik.Ausleihverwaltung.Ausleiheverwaltung;
 import de.dualibib.Fachlogik.Genreverwaltung.Genreverwaltung;
 import de.dualibib.Fachlogik.Historyverwaltung.Historyverwaltung;
 import de.dualibib.Fachlogik.Kategorieverwaltung.Kategorienverwaltung;
+import de.dualibib.Fachlogik.Languageverwaltung.Languageverwaltung;
 import de.dualibib.Fachlogik.Medienverwaltung.Medienverwaltung;
 import java.util.ArrayList;
 import org.junit.Before;
@@ -27,6 +28,8 @@ import org.mockito.MockitoAnnotations;
 public class ControllerTest {
     
     
+    @Mock
+    Languageverwaltung languageverwaltung;
     @Mock
     Accountverwaltung accountverwaltung;
     @Mock
@@ -47,7 +50,7 @@ public class ControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        sut = new Controller(accountverwaltung, medienverwaltung, ausleiheverwaltung, kategorienverwaltung, genreverwaltung, historyverwaltung);
+        sut = new Controller(languageverwaltung, accountverwaltung, medienverwaltung, ausleiheverwaltung, kategorienverwaltung, genreverwaltung, historyverwaltung);
     }
         
     @Test

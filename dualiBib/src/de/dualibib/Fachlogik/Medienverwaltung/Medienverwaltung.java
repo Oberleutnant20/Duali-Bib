@@ -31,6 +31,7 @@ public class Medienverwaltung extends ElternVerwaltung{
         medienListeUpdate = new ArrayList<>();
         medienListeDelete = new ArrayList<>();
         this.medienDAO = medienDAO;
+        laden();
     }
 
     public void speichern() throws IOException, ConnectionError {

@@ -27,7 +27,7 @@ public class Languageverwaltung extends ElternVerwaltung {
         props.load(fileReader);
         notifyLanguagePanels(props);
     }
-    
+
     public void getEnglisch() throws FileNotFoundException, IOException {
         de.dualibib.Logger.debug(this, "getEnglisch");
         FileReader fileReader = new FileReader("englisch.props");

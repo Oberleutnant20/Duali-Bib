@@ -130,12 +130,13 @@ public class SuchePanel extends ElternComboboxPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
-      try {
+      if (panelHandler.getAktuellerUser() != null) {
+        try {
             panelHandler.setSelectPanel(getMediumfromIndices(getListSelections()));
         } catch (Exception e) {
             System.err.println("problem beim aufrufen vom selectpanel");
         }
-        
+      }
     }//GEN-LAST:event_selectButtonActionPerformed
 
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
@@ -144,7 +145,7 @@ public class SuchePanel extends ElternComboboxPanel {
 
     private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        String text = kategorieComboBox.getItemAt(0);
+        String text = (String) kategorieComboBox.getSelectedItem();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
@@ -164,7 +165,7 @@ public class SuchePanel extends ElternComboboxPanel {
 
     private void genreComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreComboBoxActionPerformed
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        String text =genreComboBox.getItemAt(0);
+        String text =  (String) genreComboBox.getSelectedItem();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
@@ -172,13 +173,15 @@ public class SuchePanel extends ElternComboboxPanel {
         int genreid = -1;
         List<Genre> list = panelHandler.getGenreListe();
         for (int i = 0; i < list.size(); i++) {
-         if(list.get(i).getBezeichnung().equals(text))   
+         if(list.get(i).getBezeichnung().equals(text)) {  
              genreid=(int) list.get(i).getId();
+         }
         }
         
         for (int i = 0; i < medienListe.size(); i++) {
-            if(medienListe.get(i).getGenreId()==genreid)
-             model.addRow(addObject(i));    
+            if(medienListe.get(i).getGenreId()==genreid) {
+             model.addRow(addObject(i));
+            }
         }
     }//GEN-LAST:event_genreComboBoxActionPerformed
 
@@ -221,9 +224,10 @@ public class SuchePanel extends ElternComboboxPanel {
         boolean standard2 = text.equals("Titelsuchen...");
         boolean standard3 = text.equals("Titelsuche...");
         boolean standard4 = text.equals("タイトル...");
-        return empty||standard1||standard2||standard3||standard4;
+        boolean standard5 = text.equals("Search...");
+        return empty||standard1||standard2||standard3||standard4||standard5;
     }
-    
+
     public void fillTable(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
