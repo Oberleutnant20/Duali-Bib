@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  *
@@ -53,26 +54,23 @@ public class Controller {
 
     public void start(PanelHandler panelHandler) {
         Logger.info(this, "starten");
-        initVerwaltungLaden();
         ausleihenPruefen();
         this.panelHandler = panelHandler;
     }
 
-     private void initVerwaltungLaden() {accountverwaltung.laden();
-        medienverwaltung.laden();
-        ausleiheverwaltung.laden();
-        kategorienverwaltung.laden();
-        genreverwaltung.laden();
-        historyverwaltung.laden();
-    }
-
     public void initUpdate() {
         Logger.info(this, "initUpdate");
+        accountverwaltung.notifyPanels();
         medienverwaltung.notifyPanels();
         ausleiheverwaltung.notifyPanels();
         kategorienverwaltung.notifyPanels();
         genreverwaltung.notifyPanels();
         historyverwaltung.notifyPanels();
+        try {
+            languageverwaltung.getDeutsch();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Account getAktuellerUser() {

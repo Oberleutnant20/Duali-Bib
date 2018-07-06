@@ -49,6 +49,7 @@ public class Main {
 
         Controller controller;
         controller = new Controller(languageverwaltung,accountverwaltung, medienverwaltung,ausleiheverwaltung, kategorienverwaltung,genreverwaltung, historyverwaltung);
+        
         PanelHandler panelHandler;
         panelHandler = new PanelHandler(controller, genreverwaltung.get(), kategorienverwaltung.get());
         

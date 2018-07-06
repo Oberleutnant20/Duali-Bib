@@ -27,6 +27,7 @@ public class Historyverwaltung extends ElternVerwaltung{
         historyListe = new ArrayList<>();
         historyListeRef = new ArrayList<>();
         this.historyDAO = historyDAO;
+        laden();
     }
 
     public void speichern() throws IOException, ConnectionError {

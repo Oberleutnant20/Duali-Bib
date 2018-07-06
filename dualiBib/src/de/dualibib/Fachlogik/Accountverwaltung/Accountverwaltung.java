@@ -26,6 +26,7 @@ public class Accountverwaltung extends ElternVerwaltung{
         accountListeUpdate = new ArrayList<>();
         accountListeDelete = new ArrayList<>();
         this.accountDAO = accountDAO;
+        laden();
     }
 
     public void speichern() throws IOException, ConnectionError {

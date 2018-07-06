@@ -27,6 +27,7 @@ public class Genreverwaltung extends ElternVerwaltung{
         genreListe = new ArrayList<>();
         genreListeRef = new ArrayList<>();
         this.genreDAO = genreDAO;
+        laden();
     }
 
     public void speichern() throws IOException, ConnectionError {
