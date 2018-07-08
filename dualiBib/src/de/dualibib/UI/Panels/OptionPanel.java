@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
@@ -20,7 +15,6 @@ import javax.swing.JComboBox;
  */
 public class OptionPanel extends ElternPanel {
 
-
     /**
      * Creates new form OptionPanel
      */
@@ -29,7 +23,7 @@ public class OptionPanel extends ElternPanel {
         initComponents();
         setComboboxLanguage(languageComboBox, getLanguageListe());
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -95,7 +89,7 @@ public class OptionPanel extends ElternPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void uebernehmenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uebernehmenButtonActionPerformed
-        panelHandler.changeLanguage(languageComboBox.getSelectedItem().toString()+"");
+        panelHandler.changeLanguage(languageComboBox.getSelectedItem().toString() + "");
     }//GEN-LAST:event_uebernehmenButtonActionPerformed
 
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
@@ -104,7 +98,7 @@ public class OptionPanel extends ElternPanel {
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
 
-    public void setComboboxLanguage(JComboBox combobox,List<String> list){
+    public void setComboboxLanguage(JComboBox combobox, List<String> list) {
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i);
@@ -126,9 +120,10 @@ public class OptionPanel extends ElternPanel {
         a.add("japanisch");
         return a;
     }
-    
+
     @Override
-    public void update() { }
+    public void update() {
+    }
 
     @Override
     public void updateLanguage(Properties props) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
@@ -33,6 +28,13 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
     GenreDAO gen = new GenreDAO();
     KategorieDAO kat = new KategorieDAO();
 
+    /**
+     * Läd die Datenbank Informationen von den Medien in eine Liste.
+     *
+     * @return Liste mit Medien Informationen.
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public List<Medien> laden() throws IOException, ConnectionError {
         ArrayList<Medien> ret = new ArrayList<>();
@@ -66,6 +68,13 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
         return ret;
     }
 
+    /**
+     * Speichert eine MedienListe in der Datenbank ab.
+     *
+     * @param medienListe Medien liste welche eingefügt werden soll
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public void speichern(List<Medien> medienListe) throws IOException, ConnectionError {
         if (con != null) {
@@ -73,7 +82,7 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
                 try {
                     String stmnt = "INSERT INTO Medien(m_Titel, m_Author, m_ISBN, m_Barcode, m_Anzahl, m_beschreibung, km_ID, g_ID) "
                             + "VALUES('" + medien.getName() + "','" + medien.getAuthor() + "','"
-                            + medien.getIsbn() + "'," + medien.getBarcodenummer() +", "
+                            + medien.getIsbn() + "'," + medien.getBarcodenummer() + ", "
                             + medien.getAnzahl() + ", '" + medien.getDesc() + "', "
                             + medien.getKategorienId() + ", " + medien.getGenreId() + ");";
                     PreparedStatement ptsm = con.prepareStatement(stmnt);
@@ -87,6 +96,14 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
         }
     }
 
+    /**
+     * Updatet Medien Einträge.
+     *
+     * @param medienListe MedienListe mit den Einträgen, welche Upgedatet werden
+     * sollen
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public void update(List<Medien> medienListe) throws IOException, ConnectionError {
         if (con != null) {
@@ -103,9 +120,9 @@ public class MedienDAO extends ElternDAO implements IMedienDAO {
                     long kID = medien.getKategorienId();
                     String stmnt = "UPDATE Medien SET m_Titel = '" + name
                             + "', m_Author = '" + author + "', m_ISBN = '" + isbn
-                            + "', m_Barcode =" + barcode +  ", m_Anzahl = " + anzahl
+                            + "', m_Barcode =" + barcode + ", m_Anzahl = " + anzahl
                             + ", m_beschreibung = '" + desc + "', km_ID = " + kID
-                            + ", g_ID = "+ gID + " WHERE m_ID LIKE " + mID + ";";
+                            + ", g_ID = " + gID + " WHERE m_ID LIKE " + mID + ";";
                     PreparedStatement ptsm = con.prepareStatement(stmnt);
                     ptsm.execute();
                 } catch (SQLException ex) {

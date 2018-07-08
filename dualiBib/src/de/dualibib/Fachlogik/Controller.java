@@ -34,14 +34,22 @@ public class Controller {
     private final Genreverwaltung genreverwaltung;
     private final Historyverwaltung historyverwaltung;
     private final Languageverwaltung languageverwaltung;
-
     private PanelHandler panelHandler;
-
     private Account aktuellerUser;
     private ArrayList<History> historyListe;
     private ArrayList<Ausleihe> ausleiheListe;
 
-    public Controller(Languageverwaltung languageverwaltung,Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung, 
+    /**
+     * Konnstruktor für den Controller.
+     * @param languageverwaltung Verwaltungsklasse für die Sprache 
+     * @param accountverwaltung Verwaltungsklasse für die Accounts
+     * @param medienverwaltung Verwaltungsklasse für die Medien
+     * @param ausleiheverwaltung Verwaltungsklasse für die Ausleihen
+     * @param kategorienverwaltung Verwaltungsklasse für die Kategorien
+     * @param genreverwaltung Verwaltungsklasse für die Genres
+     * @param historyverwaltung Verwaltungsklasse für die History
+     */
+    public Controller(Languageverwaltung languageverwaltung, Accountverwaltung accountverwaltung, Medienverwaltung medienverwaltung,
             Ausleiheverwaltung ausleiheverwaltung, Kategorienverwaltung kategorienverwaltung, Genreverwaltung genreverwaltung, Historyverwaltung historyverwaltung) {
         this.languageverwaltung = languageverwaltung;
         this.accountverwaltung = accountverwaltung;
@@ -52,12 +60,19 @@ public class Controller {
         this.historyverwaltung = historyverwaltung;
     }
 
+    /**
+     * TODO
+     * @param panelHandler Panelhandler
+     */
     public void start(PanelHandler panelHandler) {
         Logger.info(this, "starten");
         ausleihenPruefen();
         this.panelHandler = panelHandler;
     }
 
+    /**
+     * TODO
+     */
     public void initUpdate() {
         Logger.info(this, "initUpdate");
         accountverwaltung.notifyPanels();
@@ -78,7 +93,7 @@ public class Controller {
     }
 
     public Account setAktuellerUser(String accountname, String passwort) {
-        Logger.info(this,"setAktuellerUser");
+        Logger.info(this, "setAktuellerUser");
         aktuellerUser = matchingUser(accountname, passwort);
         if (aktuellerUser != null) {
             ladeUserDaten();
@@ -89,7 +104,7 @@ public class Controller {
     }
 
     public boolean isMitarbeiter() {
-        Logger.info(this,"isMitarbeiter");
+        Logger.info(this, "isMitarbeiter");
         if (aktuellerUser != null) {
             return aktuellerUser.isMitarbeiter();
         }
@@ -97,22 +112,31 @@ public class Controller {
     }
 
     public void addHistory(History history) {
-        Logger.info(this,"addHistory");
+        Logger.info(this, "addHistory");
         historyverwaltung.add(history);
     }
 
     public void addAusleihe(Ausleihe ausleihe) {
-        Logger.info(this,"addAusleihe");
+        Logger.info(this, "addAusleihe");
         ausleiheverwaltung.add(ausleihe);
     }
 
+    /**
+     * TODO?
+     */
     public void ladeUserDaten() {
         historyListe = ladeHistory();
         ausleiheListe = ladeAusleihe();
     }
 
+    /**
+     * TODO
+     * @param accountname
+     * @param passwort
+     * @return 
+     */
     public Account matchingUser(String accountname, String passwort) {
-        Logger.info(this,"matchingUser");
+        Logger.info(this, "matchingUser");
         List<Account> list = accountverwaltung.get();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getPasswort().equals(passwort) && list.get(i).getUsername().equals(accountname)) {
@@ -122,6 +146,10 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Läd die User History Informationen.
+     * @return Liste von der History eines Users
+     */
     private ArrayList<History> ladeHistory() {
         int userid = aktuellerUser.getUserid();
         ArrayList<History> list = new ArrayList<>();
@@ -136,6 +164,10 @@ public class Controller {
         return list;
     }
 
+    /**
+     * Läd die aktuelle Ausleihe eines Nutzers.
+     * @return Liste eines Nutzers mit Ausgeliehen Büchern
+     */
     private ArrayList<Ausleihe> ladeAusleihe() {
         int userid = aktuellerUser.getUserid();
         ArrayList<Ausleihe> list = new ArrayList<>();
@@ -161,9 +193,9 @@ public class Controller {
 
     public void saveMediumChange(Medien m) {
         de.dualibib.Logger.info(this, "saveMediumChange");
-        ArrayList<Medien> list = getAllMedien(); 
-        for(Medien medium : list){
-            if(medium.getId()==m.getId()) {
+        ArrayList<Medien> list = getAllMedien();
+        for (Medien medium : list) {
+            if (medium.getId() == m.getId()) {
                 medienverwaltung.delete(medium);
             }
         }
@@ -230,63 +262,63 @@ public class Controller {
     }
 
     public void setMedienObserver(ElternPanel... panels) {
-       for (ElternPanel panel : panels) {
-           medienverwaltung.addPanelList(panel);
-       }
+        for (ElternPanel panel : panels) {
+            medienverwaltung.addPanelList(panel);
+        }
     }
 
     public void setKategorieObserver(ElternPanel... panels) {
         for (ElternPanel panel : panels) {
-           kategorienverwaltung.addPanelList(panel);
-       }
+            kategorienverwaltung.addPanelList(panel);
+        }
     }
 
     public void setHistoryObserver(ElternPanel... panels) {
         for (ElternPanel panel : panels) {
-           historyverwaltung.addPanelList(panel);
-       }
+            historyverwaltung.addPanelList(panel);
+        }
     }
 
     public void setGenreObserver(ElternPanel... panels) {
         for (ElternPanel panel : panels) {
-           genreverwaltung.addPanelList(panel);
-       }
+            genreverwaltung.addPanelList(panel);
+        }
     }
 
     public void setAusleiheObserver(ElternPanel... panels) {
         for (ElternPanel panel : panels) {
-           ausleiheverwaltung.addPanelList(panel);
-       }
+            ausleiheverwaltung.addPanelList(panel);
+        }
     }
 
     public void setAccountObserver(ElternPanel... panels) {
         for (ElternPanel panel : panels) {
-           accountverwaltung.addPanelList(panel);
-       }
+            accountverwaltung.addPanelList(panel);
+        }
     }
 
     public void setLanguageObserver(ElternPanel... panels) {
         for (ElternPanel panel : panels) {
-           languageverwaltung.addPanelList(panel);
-       }
+            languageverwaltung.addPanelList(panel);
+        }
     }
 
     public void changeLanguage(String string) {
-       try {
-        switch (string) {
-          case "deutsch" :
-              languageverwaltung.getDeutsch();
-              break;
-          case "englisch" :
-              languageverwaltung.getEnglisch();
-              break;
-          case "japanisch" :
-              languageverwaltung.getJapanisch();
-              break;
-          default:languageverwaltung.getDeutsch();
+        try {
+            switch (string) {
+                case "deutsch":
+                    languageverwaltung.getDeutsch();
+                    break;
+                case "englisch":
+                    languageverwaltung.getEnglisch();
+                    break;
+                case "japanisch":
+                    languageverwaltung.getJapanisch();
+                    break;
+                default:
+                    languageverwaltung.getDeutsch();
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             Logger.error(this, string);
         }
     }
