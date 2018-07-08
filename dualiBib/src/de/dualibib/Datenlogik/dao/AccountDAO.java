@@ -26,9 +26,10 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     /**
      * Läd die Datenbank Informationen von den Accounts in eine Liste.
+     *
      * @return Liste von Accounts
      * @throws IOException
-     * @throws ConnectionError 
+     * @throws ConnectionError
      */
     @Override
     public List<Account> laden() throws IOException, ConnectionError {
@@ -63,9 +64,10 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     /**
      * Speichert eine Liste mit neuen Accounts in der Datenbank ab.
+     *
      * @param accountListe Account liste mit neuen Accounts
      * @throws IOException
-     * @throws ConnectionError 
+     * @throws ConnectionError
      */
     @Override
     public void speichern(List<Account> accountListe) throws IOException, ConnectionError {
@@ -91,9 +93,10 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
 
     /**
      * Updatet eine bestimmte Liste an Accounts.
+     *
      * @param accountListe Account Liste
      * @throws IOException
-     * @throws ConnectionError 
+     * @throws ConnectionError
      */
     @Override
     public void update(List<Account> accountListe) throws IOException, ConnectionError {

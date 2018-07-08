@@ -10,7 +10,7 @@ import java.util.List;
  * @author Carina
  */
 public interface IGenreDAO {
-    // TODO - Javadoc?
+
     List<Genre> laden() throws IOException, ConnectionError;
     void speichern(List<Genre> GenreListe)  throws IOException, ConnectionError;
 }
