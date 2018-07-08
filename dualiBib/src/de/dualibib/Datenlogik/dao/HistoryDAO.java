@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
@@ -29,6 +24,13 @@ public class HistoryDAO extends ElternDAO implements IHistoryDAO {
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
 
+    /**
+     * Läd die Datenbank Informationen in eine Liste.
+     *
+     * @return Liste mit History Informationen
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public List<History> laden() throws IOException, ConnectionError {
         ArrayList<History> ret = new ArrayList<>();
@@ -51,6 +53,13 @@ public class HistoryDAO extends ElternDAO implements IHistoryDAO {
         return ret;
     }
 
+    /**
+     * Speichert neue History Informationen in der Datenbank ab.
+     *
+     * @param historyListe History Liste mit neuen Informationen.
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public void speichern(List<History> historyListe) throws IOException, ConnectionError {
         if (con != null) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.History;
@@ -137,11 +132,11 @@ public class HistoryPanel extends ElternPanel {
     }//GEN-LAST:event_sucheFieldActionPerformed
 
     private void auswaehlenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_auswaehlenButtonActionPerformed
-       try {
+        try {
             panelHandler.getSelectPanel().setMedium(getMediumfromHistoryIndices(getListSelections()));
             panelHandler.panelUnsichtbar();
             panelHandler.getUi().add(panelHandler.getSelectPanel());
-            if(panelHandler.getAktuellerUser().isMitarbeiter()){
+            if (panelHandler.getAktuellerUser().isMitarbeiter()) {
                 panelHandler.getSelectPanel().setMitarbeiter();
             }
             panelHandler.getSelectPanel().setVisible(true);
@@ -150,28 +145,30 @@ public class HistoryPanel extends ElternPanel {
     }//GEN-LAST:event_auswaehlenButtonActionPerformed
 
     private void historysuchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historysuchFieldActionPerformed
-        setSearchKategorie(kategorieComboBox.getSelectedItem()+"");
+        setSearchKategorie(kategorieComboBox.getSelectedItem() + "");
     }//GEN-LAST:event_historysuchFieldActionPerformed
 
     private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String text = kategorieComboBox.getItemAt(0);
         int selectedID = -1;
         List<Kategorie> list = panelHandler.getKategorieListe();
-        
+
         for (int i = 0; i < list.size(); i++) {
-            if(list.get(i).getBezeichnung().equals(text))
+            if (list.get(i).getBezeichnung().equals(text)) {
                 selectedID = (int) list.get(i).getId();
+            }
         }
-        
+
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
         for (int i = 0; i < historyListe.size(); i++) {
-            if(historyListe.get(i).getKategorieid()==selectedID)
-             model.addRow(new Object[]{historyListe.get(i).getId()});    
+            if (historyListe.get(i).getKategorieid() == selectedID) {
+                model.addRow(new Object[]{historyListe.get(i).getId()});
+            }
         }
-        
+
     }//GEN-LAST:event_kategorieComboBoxActionPerformed
 
 
@@ -185,7 +182,6 @@ public class HistoryPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    
     private Medien getMediumfromHistoryIndices(int position) {
         History selected = null;
         Medien medium = null;
@@ -193,39 +189,41 @@ public class HistoryPanel extends ElternPanel {
         medium = panelHandler.mapHistoryAndMedium(selected);
         return medium;
     }
-    
+
     private int getListSelections() {
-	int[] selected = jTable1.getSelectedRows();
-	for (int i = 0; i < selected.length; i++) {
-		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
-	}
-	return selected[0];
+        int[] selected = jTable1.getSelectedRows();
+        for (int i = 0; i < selected.length; i++) {
+            selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+        }
+        return selected[0];
     }
-    
-    private void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
+
+    private void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
-        }        
+        }
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
 
     private void setSearchKategorie(String kategorie) {
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
         int kategorieid = -1;
         List<Kategorie> kategorielist = panelHandler.getKategorieListe();
         for (int i = 0; i < kategorielist.size(); i++) {
-         if(kategorielist.get(i).getBezeichnung().equals(kategorie))   
-             kategorieid=(int) kategorielist.get(i).getId();
+            if (kategorielist.get(i).getBezeichnung().equals(kategorie)) {
+                kategorieid = (int) kategorielist.get(i).getId();
+            }
         }
-                        
+
         for (int i = 0; i < historyListe.size(); i++) {
-            if(historyListe.get(i).getKategorieid()==kategorieid)
-             model.addRow(addObject(i));    
+            if (historyListe.get(i).getKategorieid() == kategorieid) {
+                model.addRow(addObject(i));
+            }
         }
     }
 
@@ -233,27 +231,29 @@ public class HistoryPanel extends ElternPanel {
         String medienName = "";
         List<Medien> medienliste = panelHandler.returnMedien();
         for (int j = 0; j < medienliste.size(); j++) {
-            if(historyListe.get(i).getMedienid() == medienliste.get(j).getId())
+            if (historyListe.get(i).getMedienid() == medienliste.get(j).getId()) {
                 medienName = medienliste.get(j).getName();
+            }
         }
-        
+
         String kategorieName = "";
         List<Kategorie> kategorielist = panelHandler.getKategorieListe();
         for (int j = 0; j < kategorielist.size(); j++) {
-            if(historyListe.get(i).getKategorieid() == kategorielist.get(j).getId())
+            if (historyListe.get(i).getKategorieid() == kategorielist.get(j).getId()) {
                 medienName = kategorielist.get(j).getName();
+            }
         }
-        
-        return new Object[]{historyListe.get(i).getId(),panelHandler.getAktuellerUser().getUsername(),medienName,kategorieName};
+
+        return new Object[]{historyListe.get(i).getId(), panelHandler.getAktuellerUser().getUsername(), medienName, kategorieName};
     }
 
     public void fillTable() {
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
         for (int i = 0; i < historyListe.size(); i++) {
-          model.addRow(addObject(i));  
+            model.addRow(addObject(i));
         }
     }
 
@@ -262,7 +262,7 @@ public class HistoryPanel extends ElternPanel {
         Logger.info(this, "update");
         historyListe = panelHandler.getHistory();
         setComboboxKategorie(kategorieComboBox, panelHandler.getKategorieListe());
-        if(historyListe!=null) {
+        if (historyListe != null) {
             fillTable();
         }
     }
@@ -274,5 +274,5 @@ public class HistoryPanel extends ElternPanel {
         kategorieLable.setText((String) props.get(PropertyName.HISTORYPANEL_KATEGORIELABLE));
         auswaehlenButton.setText((String) props.get(PropertyName.HISTORYPANEL_AUSWAEHLENBUTTON));
     }
-    
+
 }

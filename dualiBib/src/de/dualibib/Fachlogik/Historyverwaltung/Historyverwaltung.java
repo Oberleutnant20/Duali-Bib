@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Fachlogik.Historyverwaltung;
 
 import de.dualibib.Datenlogik.dto.History;
@@ -17,12 +12,17 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Historyverwaltung extends ElternVerwaltung{
+public class Historyverwaltung extends ElternVerwaltung {
 
     private ArrayList<History> historyListe;
     private ArrayList<History> historyListeRef;
     private IHistoryDAO historyDAO;
 
+    /**
+     * Konstruktor für die History Verwaltung.
+     *
+     * @param historyDAO History Datenbankobjekt
+     */
     public Historyverwaltung(IHistoryDAO historyDAO) {
         historyListe = new ArrayList<>();
         historyListeRef = new ArrayList<>();
@@ -30,6 +30,12 @@ public class Historyverwaltung extends ElternVerwaltung{
         laden();
     }
 
+    /**
+     * Speichert eine Liste von Historys.
+     *
+     * @throws IOException
+     * @throws ConnectionError
+     */
     public void speichern() throws IOException, ConnectionError {
         List<History> liste = new ArrayList<>();
         if (historyListe.size() > historyListeRef.size()) {
@@ -38,6 +44,9 @@ public class Historyverwaltung extends ElternVerwaltung{
         historyDAO.speichern(liste);
     }
 
+    /**
+     * Läd eine Liste von Historys.
+     */
     public void laden() {
         historyListe.clear();
         de.dualibib.Logger.debug(this, "laden");
@@ -53,6 +62,11 @@ public class Historyverwaltung extends ElternVerwaltung{
         }
     }
 
+    /**
+     * Fügt der History liste eine Element hinzu.
+     *
+     * @param history Neues History Element
+     */
     public void add(History history) {
         if (!historyListe.add(history)) {
             de.dualibib.Logger.error(this, "History gibt es bereits.");
@@ -60,6 +74,11 @@ public class Historyverwaltung extends ElternVerwaltung{
         notifyPanels();
     }
 
+    /**
+     * löscht eine History Element.
+     *
+     * @param history History, welche gelöscht werden soll.
+     */
     public void delete(History history) {
         if (!historyListe.remove(history)) {
             de.dualibib.Logger.error(this, "History gibt es nicht.");

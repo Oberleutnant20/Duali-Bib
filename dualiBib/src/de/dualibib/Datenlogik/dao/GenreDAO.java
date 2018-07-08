@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
@@ -29,6 +24,13 @@ public class GenreDAO extends ElternDAO implements IGenreDAO {
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
 
+    /**
+     * Läd die Datenbank Informationen von den Genres in eine Liste.
+     *
+     * @return Genre Liste
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public List<Genre> laden() throws IOException, ConnectionError {
         ArrayList<Genre> ret = new ArrayList<>();
@@ -50,6 +52,14 @@ public class GenreDAO extends ElternDAO implements IGenreDAO {
         return ret;
     }
 
+    /**
+     * Speichert Liste von Genres in der Datenbank ab.
+     *
+     * @param genreListe Liste mit Genres, welche noch nicht in der Datenbank
+     * sind
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public void speichern(List<Genre> genreListe) throws IOException, ConnectionError {
         if (con != null) {

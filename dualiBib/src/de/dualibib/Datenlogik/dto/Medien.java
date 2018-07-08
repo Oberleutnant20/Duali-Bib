@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dto;
 
 import java.io.Serializable;
@@ -23,6 +18,19 @@ public class Medien implements Serializable {
     private String author;
     private String desc;
 
+    /**
+     * Konstruktor für die Medien.
+     *
+     * @param isbn Angaben der ISBN Nummer
+     * @param barcodenummer Angabe des Barcodes
+     * @param genreId Angabe zum Genre
+     * @param kategorienId Angabe zur Kategorie
+     * @param name Titel
+     * @param id Medien ID
+     * @param anzahl Verfügbare Exemplare
+     * @param author Autor vom Buch
+     * @param desc Beschreibung zum Buch
+     */
     public Medien(String isbn, long barcodenummer, long genreId, long kategorienId, String name, long id, int anzahl, String author, String desc) {
         this.kategorienId = kategorienId;
         this.name = name;
@@ -66,10 +74,11 @@ public class Medien implements Serializable {
     public long getGenreId() {
         return genreId;
     }
-    
-    public int getAnzahl(){
+
+    public int getAnzahl() {
         return anzahl;
     }
+
     public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
@@ -85,7 +94,7 @@ public class Medien implements Serializable {
     public long getBarcodenummer() {
         return barcodenummer;
     }
-    
+
     public String getAuthor() {
         return author;
     }
