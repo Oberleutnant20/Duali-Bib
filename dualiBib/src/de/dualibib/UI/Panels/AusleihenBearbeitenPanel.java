@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Ausleihe;
@@ -117,52 +112,53 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-
-    public void setAusleihenListe(List<Ausleihe> ausleihe){
+    public void setAusleihenListe(List<Ausleihe> ausleihe) {
         ausleiheListe = ausleihe;
     }
-    
+
     private Ausleihe getAusleihefromIndices(int position) {
-		Ausleihe selected = null;
-		selected = ausleiheListe.get(position);
-		return selected;
-	}
-    
-    private int getListSelections() {
-	int[] selected = jTable1.getSelectedRows();
-	for (int i = 0; i < selected.length; i++) {
-		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
-	}
-	return selected[0];
+        Ausleihe selected = null;
+        selected = ausleiheListe.get(position);
+        return selected;
     }
-    
+
+    private int getListSelections() {
+        int[] selected = jTable1.getSelectedRows();
+        for (int i = 0; i < selected.length; i++) {
+            selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+        }
+        return selected[0];
+    }
+
     public void fillTable() {
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
         for (int i = 0; i < ausleiheListe.size(); i++) {
-          model.addRow(addObject(i));  
+            model.addRow(addObject(i));
         }
     }
-    
-     private Object[] addObject(int i) {
+
+    private Object[] addObject(int i) {
         String medienName = "";
         List<Medien> medienlist = panelHandler.returnMedien();
-        
+
         for (int j = 0; j < medienlist.size(); j++) {
-            if(ausleiheListe.get(i).getMedienid() == medienlist.get(j).getId())
+            if (ausleiheListe.get(i).getMedienid() == medienlist.get(j).getId()) {
                 medienName = medienlist.get(j).getName();
+            }
         }
-        
+
         String kategorieName = "";
         List<Kategorie> kategorielist = panelHandler.getKategorieListe();
         for (int j = 0; j < kategorielist.size(); j++) {
-            if(ausleiheListe.get(i).getKategorieid() == kategorielist.get(j).getId())
+            if (ausleiheListe.get(i).getKategorieid() == kategorielist.get(j).getId()) {
                 medienName = kategorielist.get(j).getName();
+            }
         }
-        
-        return new Object[]{ausleiheListe.get(i).getId(),medienName,ausleiheListe.get(i).getDate(),panelHandler.getAktuellerUser().getUsername(),kategorieName};
+
+        return new Object[]{ausleiheListe.get(i).getId(), medienName, ausleiheListe.get(i).getDate(), panelHandler.getAktuellerUser().getUsername(), kategorieName};
     }
 
     @Override

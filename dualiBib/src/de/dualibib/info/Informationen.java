@@ -13,7 +13,7 @@ public class Informationen {
     private final String version = "0.5";
     private final String copyright = "Thomas Jäger, Carina Wagner, Tim Lorse";
     private final String info = "Diese Funktion ist noch in der Entwicklung.";
-    
+
     /**
      * Bei der Entwicklerinformation ist<br>
      * Der Author, die Mailadresse, die Version der Datei und das Copyright
@@ -43,4 +43,3 @@ public class Informationen {
         }
     }
 }
-

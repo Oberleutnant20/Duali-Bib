@@ -111,11 +111,6 @@ public class SelectPanel extends ElternComboboxPanel {
 
         kategorieComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         kategorieComboBox.setEnabled(false);
-        kategorieComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kategorieComboBoxActionPerformed(evt);
-            }
-        });
 
         sucheField.setText("Titelsuche...");
         sucheField.addActionListener(new java.awt.event.ActionListener() {
@@ -232,10 +227,6 @@ public class SelectPanel extends ElternComboboxPanel {
         infoLabel.setText((String) props.get(PropertyName.SELECTPANEL_STATUS_AUSGELIEHEN));
         ausleihenButton.setEnabled(false);
     }//GEN-LAST:event_ausleihenButtonActionPerformed
-
-    private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kategorieComboBoxActionPerformed
 
     public void setMitarbeiter() {
         bearbeitenButton.setEnabled(true);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Fachlogik.Medienverwaltung;
 
 import de.dualibib.Datenlogik.dto.Medien;
@@ -17,7 +12,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Medienverwaltung extends ElternVerwaltung{
+public class Medienverwaltung extends ElternVerwaltung {
 
     private ArrayList<Medien> medienListe;
     private ArrayList<Medien> medienListeRef;
@@ -25,6 +20,11 @@ public class Medienverwaltung extends ElternVerwaltung{
     private ArrayList<Medien> medienListeDelete;
     private IMedienDAO medienDAO;
 
+    /**
+     * Konstruktor für die Medienverwaltung.
+     *
+     * @param medienDAO Medien Datenbankobjekt
+     */
     public Medienverwaltung(IMedienDAO medienDAO) {
         medienListe = new ArrayList<>();
         medienListeRef = new ArrayList<>();
@@ -34,15 +34,23 @@ public class Medienverwaltung extends ElternVerwaltung{
         laden();
     }
 
+    /**
+     * Speichert die Medien Liste ab.
+     * @throws IOException
+     * @throws ConnectionError 
+     */
     public void speichern() throws IOException, ConnectionError {
         List<Medien> liste = new ArrayList<>();
-        if(medienListe.size() > medienListeRef.size()){
+        if (medienListe.size() > medienListeRef.size()) {
             liste = medienListe.subList(medienListeRef.size(), medienListe.size());
         }
         medienDAO.speichern(liste);
         medienDAO.update(medienListeUpdate);
     }
 
+    /**
+     * Läd die Medien.
+     */
     public void laden() {
         medienListe.clear();
         medienListeRef.clear();
@@ -53,12 +61,15 @@ public class Medienverwaltung extends ElternVerwaltung{
                 medienListe.add(medium);
                 medienListeRef.add(medium);
             }
-
         } catch (Exception e) {
             de.dualibib.Logger.error(this, "laden");
         }
     }
 
+    /**
+     * Fügt der Medienliste neue Elemente hinzu.
+     * @param medium Medium, welches hinzugefügt werden soll
+     */
     public void add(Medien medium) {
         if (!medienListe.add(medium)) {
             de.dualibib.Logger.error(this, "Medium gibt es bereits.");
@@ -66,17 +77,25 @@ public class Medienverwaltung extends ElternVerwaltung{
         notifyPanels();
     }
 
+    /**
+     * Löscht ein Medien Element.
+     * @param medien Medium, welches gelöscht werden soll
+     */
     public void delete(Medien medien) {
         if (!medienListe.remove(medien)) {
             de.dualibib.Logger.error(this, "Medium gibt es nicht.");
         }
         notifyPanels();
     }
-    
-    public void update(Medien medien){
+
+    /**
+     * Updatet ein Medien Element.
+     * @param medien Medium, welches upgedatet werden soll
+     */
+    public void update(Medien medien) {
         if (!medienListe.add(medien)) {
             de.dualibib.Logger.error(this, "Medium gibt es bereits.");
-	}
+        }
         medienListeUpdate.add(medien);
         notifyPanels();
     }
@@ -84,10 +103,10 @@ public class Medienverwaltung extends ElternVerwaltung{
     public ArrayList<Medien> get() {
         ArrayList<Medien> liste = new ArrayList<>();
         for (Medien medien : medienListe) {
-                liste.add(medien);
-                de.dualibib.Logger.debug(this, medien.getName());
+            liste.add(medien);
+            de.dualibib.Logger.debug(this, medien.getName());
         }
-	return liste;
+        return liste;
     }
 
 }

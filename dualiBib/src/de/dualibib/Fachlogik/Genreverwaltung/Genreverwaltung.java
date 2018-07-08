@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Fachlogik.Genreverwaltung;
 
 import de.dualibib.Datenlogik.dto.Genre;
@@ -17,12 +12,17 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Genreverwaltung extends ElternVerwaltung{
+public class Genreverwaltung extends ElternVerwaltung {
 
     private ArrayList<Genre> genreListe;
     private ArrayList<Genre> genreListeRef;
     private IGenreDAO genreDAO;
 
+    /**
+     * Konstruktor für die Genreverwaltung.
+     *
+     * @param genreDAO Genre Datenabnkobjekt
+     */
     public Genreverwaltung(IGenreDAO genreDAO) {
         genreListe = new ArrayList<>();
         genreListeRef = new ArrayList<>();
@@ -30,14 +30,23 @@ public class Genreverwaltung extends ElternVerwaltung{
         laden();
     }
 
+    /**
+     * Speichert die Genre Liste ab.
+     *
+     * @throws IOException
+     * @throws ConnectionError
+     */
     public void speichern() throws IOException, ConnectionError {
         List<Genre> liste = new ArrayList<>();
-        if(genreListe.size() > genreListeRef.size()){
+        if (genreListe.size() > genreListeRef.size()) {
             liste = genreListe.subList(genreListeRef.size(), genreListe.size());
-    }
+        }
         genreDAO.speichern(liste);
     }
 
+    /**
+     * Läd die Genre Liste.
+     */
     public void laden() {
         genreListe.clear();
         genreListeRef.clear();
@@ -53,6 +62,11 @@ public class Genreverwaltung extends ElternVerwaltung{
         }
     }
 
+    /**
+     * Fügt ein Genre Element der Liste hinzu.
+     *
+     * @param genre Neues Genre Element
+     */
     public void add(Genre genre) {
         if (!genreListe.add(genre)) {
             de.dualibib.Logger.error(this, "Genre gibt es bereits.");
@@ -60,11 +74,15 @@ public class Genreverwaltung extends ElternVerwaltung{
         notifyPanels();
     }
 
+    /**
+     * Löscht ein Genre Element.
+     *
+     * @param genre Genre, welches gelöscht werden soll
+     */
     public void delete(Genre genre) {
         if (!genreListe.remove(genre)) {
             de.dualibib.Logger.error(this, "Genre gibt es nicht.");
-        }
-        else {
+        } else {
             notifyPanels();
         }
     }

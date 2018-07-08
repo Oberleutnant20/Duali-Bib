@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dto;
 
 import java.io.Serializable;
@@ -18,6 +13,14 @@ public class History implements Serializable {
     long medienid;
     long kategorieid;
 
+    /**
+     * Konstruktor für die History.
+     *
+     * @param id History ID
+     * @param userid Nutzer ID
+     * @param medienid Medien ID
+     * @param kategorieid Kategorie ID
+     */
     public History(long id, int userid, long medienid, long kategorieid) {
         this.id = id;
         this.userid = userid;

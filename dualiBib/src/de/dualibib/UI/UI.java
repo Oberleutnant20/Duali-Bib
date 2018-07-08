@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI;
 
-import de.dualibib.Datenlogik.dto.Genre;
-import de.dualibib.Datenlogik.dto.Kategorie;
 import de.dualibib.Logger;
 import de.dualibib.info.Informationen;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -19,7 +10,7 @@ import javax.swing.JPanel;
  * @author Carina
  */
 public class UI extends javax.swing.JFrame {
-    
+
     PanelHandler panelHandler;
 
     /**
@@ -270,14 +261,9 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JMenuItem optionMenu;
     // End of variables declaration//GEN-END:variables
     // Variablen
-    
 
     private void info() {
         JOptionPane.showMessageDialog(rootPane, new Informationen().printEntwickler(), "Entwicklerinfo", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void entwicklung() {
-        JOptionPane.showMessageDialog(rootPane, new Informationen().printEntwicklung(""), "Entwicklung", JOptionPane.ERROR_MESSAGE);
     }
 
     void setMitarbeiterOnline() {
