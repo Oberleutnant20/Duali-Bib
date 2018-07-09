@@ -1,7 +1,7 @@
 package de.dualibib.Fachlogik.Languageverwaltung;
 
 /**
- *
+ * Zentrale Klasse für die Einträge in den Properties
  * @author Carina
  */
 public class PropertyName {
@@ -24,9 +24,6 @@ public class PropertyName {
     public static final String ACCOUNTBEARBEITENPANEL_PLZ = "ACCOUNTBEARBEITENPANEL_PLZ";
     public static final String ACCOUNTBEARBEITENPANEL_AENDERUNG = "ACCOUNTBEARBEITENPANEL_AENDERUNG";
     public static final String ACCOUNTBEARBEITENPANEL_PASSWORT = "ACCOUNTBEARBEITENPANEL_PASSWORT";
-    /**
-     * verschiedene arten.
-     */
     //AccountsBearbeitenPanel
     public static final String ACCOUNTSBEARBEITENPANEL_SUCHEACCOUNTFIELD = "ACCOUNTSBEARBEITENPANEL_SUCHEACCOUNTFIELD";
     public static final String ACCOUNTSBEARBEITENPANEL_ANLEGENBUTTON = "ACCOUNTSBEARBEITENPANEL_ANLEGENBUTTON";
@@ -40,15 +37,17 @@ public class PropertyName {
     public static final String HISTORYPANEL_KATEGORIELABLE = "HISTORYPANEL_KATEGORIELABLE";
     public static final String HISTORYPANEL_AUSWAEHLENBUTTON = "HISTORYPANEL_AUSWAEHLENBUTTON";
     //LoginPanel
-    public static final String LOGINPANEL_MELDUNGTEXT = "meldungText";
-    /**
-     * verschiedene arten
-     */
+    public static final String LOGINPANEL_MELDUNG = "LOGINPANEL_MELDUNG";
+    public static final String LOGINPANEL_SUCCESSLOGIN = "LOGINPANEL_SUCCESSLOGIN";
+    public static final String LOGINPANEL_SUCCESSLOGOUT = "LOGINPANEL_SUCCESSLOGOUT";
+    public static final String LOGINPANEL_WRONG = "LOGINPANEL_WRONG";
+    public static final String LOGINPANEL_FAILED = "LOGINPANEL_FAILED";
     public static final String LOGINPANEL_ACCOUNTLABEL = "LOGINPANEL_ACCOUNTLABEL";
     public static final String LOGINPANEL_ACCOUNTNAMEFIELD = "LOGINPANEL_ACCOUNTNAMEFIELD";
     public static final String LOGINPANEL_PASSWORDLABEL = "LOGINPANEL_PASSWORDLABEL";
     public static final String LOGINPANEL_PASSWORTFIELD = "LOGINPANEL_PASSWORTFIELD";
     public static final String LOGINPANEL_LOGINBUTTON = "LOGINPANEL_LOGINBUTTON";
+    public static final String LOGINPANEL_LOGOUTBUTTON = "LOGINPANEL_LOGOUTBUTTON";
     //OptionPanel
     public static final String OPTIONPANEL_OPTIONLABEL = "OPTIONPANEL_OPTIONLABEL";
     public static final String OPTIONPANEL_UEBERNEHMENBUTTON = "OPTIONPANEL_UEBERNEHMENBUTTON";

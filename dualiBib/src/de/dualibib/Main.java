@@ -19,6 +19,9 @@ public class Main {
 
     /**
      * Ausführende Main Methode.
+     * 1. Logger einstellen
+     * 2. Verwaltungen anlegen
+     * 3. Controller und PanelHandler starten
      * @param args
      */
     public static void main(String[] args) {

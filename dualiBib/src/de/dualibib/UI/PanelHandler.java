@@ -40,8 +40,6 @@ public class PanelHandler {
     private SuchePanel suchePanel;
     private UI ui;
     private final Controller controller;
-    //private boolean eingeloggt;
-    //private boolean mitarbeiter;
     private Account aktuellerUser;
     private List<Genre> genreListe;
     private List<Kategorie> kategorieListe;
@@ -60,7 +58,7 @@ public class PanelHandler {
     }
 
     /**
-     * TODO
+     * Startet den PanelHandler
      */
     public void start() {
         ui = new UI(this);
@@ -149,7 +147,7 @@ public class PanelHandler {
     }
 
     /**
-     * TODO
+     * nimmt die Parameter an, erstellt einen Account und gibt den zum Speichern an den Controller
      * @param id
      * @param hausnummer
      * @param name
@@ -167,7 +165,8 @@ public class PanelHandler {
     }
 
     /**
-     * TODO
+     * nimmt die Parameter an, erzeugt ein neues Medium und setzt die alten und neuen Werte ein
+     * Medium wird weitergereicht
      * @param isbn
      * @param barcodenummer
      * @param selectedGenre
@@ -208,7 +207,7 @@ public class PanelHandler {
     }
 
     /**
-     * TODO
+     * nimmt Parameter entgegen und erzeugt neuen Account zum weiterreichen
      * @param id
      * @param hausnummer
      * @param name
@@ -244,7 +243,9 @@ public class PanelHandler {
         return controller.getAllAusleihenListe();
     }
 
-    
+    /**
+     * Wählt passendes Medium zum Historyeintrag und gibt es wieder
+     */
     public Medien mapHistoryAndMedium(History selected) {
         Medien medium = null;
         List<Medien> liste = controller.getAllMedien();
@@ -382,6 +383,9 @@ public class PanelHandler {
         return controller.getAllMedien();
     }
 
+    /**
+     * initialisiert das SelectPanel
+     */
     public void setSelectPanel(Medien mediumfromIndices) {
         Logger.info(this, mediumfromIndices.getName() + " wird angezeigt");
         selectPanel.setMedium(mediumfromIndices);
@@ -390,6 +394,9 @@ public class PanelHandler {
         selectPanel.setVisible(true);
     }
 
+    /**
+     * verändert die Sprache
+     */
     public void changeLanguage(String string) {
         controller.changeLanguage(string);
     }

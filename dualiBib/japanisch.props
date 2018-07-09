@@ -38,6 +38,12 @@ LOGINPANEL_ACCOUNTNAMEFIELD = アカウント
 LOGINPANEL_PASSWORDLABEL = パスワード
 LOGINPANEL_PASSWORTFIELD = パスワード
 LOGINPANEL_LOGINBUTTON = ログイン
+LOGINPANEL_LOGOUTBUTTON = Logout
+LOGINPANEL_SUCCESSLOGIN = Erfolgreich eingeloggt.
+LOGINPANEL_SUCCESSLOGOUT = Erfolgreich ausgeloggt.
+LOGINPANEL_WRONG = Accountname oder Passwort falsch.
+LOGINPANEL_FAILED = Speichern der Sitzung nicht möglich
+LOGINPANEL_MELDUNG = Bitte gib deinen Accountnamen und Passwort an.
 
 //OptionPanel
 OPTIONPANEL_OPTIONLABEL = 言語

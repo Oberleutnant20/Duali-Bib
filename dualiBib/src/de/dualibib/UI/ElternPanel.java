@@ -3,7 +3,7 @@ package de.dualibib.UI;
 import java.util.Properties;
 
 /**
- *
+ * Zentrale Klasse für alle Panels wegen den Update-Methoden
  * @author Carina
  */
 public abstract class ElternPanel extends javax.swing.JPanel {
