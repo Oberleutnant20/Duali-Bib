@@ -7,7 +7,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 /**
- *
+ * Zentrale Klasse für die Panels, die Comboboxen für Kategorie und Genre haben
  * @author Carina
  */
 public abstract class ElternComboboxPanel extends ElternPanel {

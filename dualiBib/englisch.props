@@ -38,6 +38,12 @@ LOGINPANEL_ACCOUNTNAMEFIELD = Accountname
 LOGINPANEL_PASSWORDLABEL = Password
 LOGINPANEL_PASSWORTFIELD = Password
 LOGINPANEL_LOGINBUTTON = Login
+LOGINPANEL_LOGOUTBUTTON = Logout
+LOGINPANEL_SUCCESSLOGIN = Erfolgreich eingeloggt.
+LOGINPANEL_SUCCESSLOGOUT = Erfolgreich ausgeloggt.
+LOGINPANEL_WRONG = Accountname oder Passwort falsch.
+LOGINPANEL_FAILED = Speichern der Sitzung nicht möglich
+LOGINPANEL_MELDUNG = Bitte gib deinen Accountnamen und Passwort an.
 
 //OptionPanel
 OPTIONPANEL_OPTIONLABEL = Language

@@ -14,6 +14,7 @@ import java.util.Properties;
 public class LoginPanel extends ElternPanel {
 
     private boolean online = false;
+    private Properties props;
 
     /**
      * Creates new form Login
@@ -140,24 +141,23 @@ public class LoginPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    public void einloggen(boolean einloggen) {
-        if (einloggen) {
-            meldungText.setText("Erfolgreich eingeloggt.");
+    public void einloggen(boolean einloggen){
+        if(einloggen){
+            meldungText.setText((String) props.get(PropertyName.LOGINPANEL_SUCCESSLOGIN));
             accountnameField.setEnabled(false);
             passwortField.setEnabled(false);
-            loginButton.setText("Logout");
+            loginButton.setText((String) props.get(PropertyName.LOGINPANEL_LOGOUTBUTTON));
             online = true;
             panelHandler.panelUnsichtbar();
             panelHandler.getSuchePanel().setVisible(true);
-        } else {
-            meldungText.setText("Accountname oder Passwort falsch.");
+        }else{
+            meldungText.setText((String) props.get(PropertyName.LOGINPANEL_WRONG));
         }
     }
-
-    public void ausloggen() throws IOException, ConnectionError {
-        meldungText.setText("Erfolgreich ausgeloggt.");
-        loginButton.setText("Login");
-        accountnameField.setEnabled(true);
+        
+    public void ausloggen() throws IOException, ConnectionError{
+        meldungText.setText((String) props.get(PropertyName.LOGINPANEL_SUCCESSLOGOUT));
+        loginButton.setText((String) props.get(PropertyName.LOGINPANEL_LOGINBUTTON));accountnameField.setEnabled(true);
         passwortField.setEnabled(true);
         online = false;
     }
@@ -168,6 +168,8 @@ public class LoginPanel extends ElternPanel {
 
     @Override
     public void updateLanguage(Properties props) {
+        this.props = props;
+        meldungText.setText((String) props.get(PropertyName.LOGINPANEL_MELDUNG));
         sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));
         meldungText.setText((String) props.get(PropertyName.LOGINPANEL_ACCOUNTLABEL));
         accountLabel.setText((String) props.get(PropertyName.LOGINPANEL_ACCOUNTLABEL));
