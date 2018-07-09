@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Fachlogik.Kategorieverwaltung;
 
 import de.dualibib.Datenlogik.dto.Kategorie;
@@ -17,12 +12,17 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Kategorienverwaltung extends ElternVerwaltung{
+public class Kategorienverwaltung extends ElternVerwaltung {
 
     private ArrayList<Kategorie> kategorieListe;
     private ArrayList<Kategorie> kategorieListeRef;
     private IKategorieDAO kategorieDAO;
 
+    /**
+     * Konstruktor für die Kategorie Verwaltung.
+     *
+     * @param kategorieDAO Kategorie Datenbankobjekt
+     */
     public Kategorienverwaltung(IKategorieDAO kategorieDAO) {
         kategorieListe = new ArrayList<>();
         kategorieListeRef = new ArrayList<>();
@@ -30,14 +30,23 @@ public class Kategorienverwaltung extends ElternVerwaltung{
         laden();
     }
 
+    /**
+     * Speichert eine Liste von Kategorien ab.
+     *
+     * @throws IOException
+     * @throws ConnectionError
+     */
     public void speichern() throws IOException, ConnectionError {
         List<Kategorie> liste = new ArrayList<>();
-        if(kategorieListe.size() > kategorieListeRef.size()){
+        if (kategorieListe.size() > kategorieListeRef.size()) {
             liste = kategorieListe.subList(kategorieListeRef.size(), kategorieListe.size());
         }
         kategorieDAO.speichern(liste);
     }
 
+    /**
+     * Läd eine Liste von Kategorien.
+     */
     public void laden() {
         kategorieListe.clear();
         kategorieListeRef.clear();
@@ -48,12 +57,16 @@ public class Kategorienverwaltung extends ElternVerwaltung{
                 kategorieListe.add(kategorie);
                 kategorieListeRef.add(kategorie);
             });
-
-        } catch (Exception e) { 
+        } catch (Exception e) {
             de.dualibib.Logger.error(this, "laden");
         }
     }
 
+    /**
+     * Fügt ein neues Kategorie Element in der Liste ein.
+     *
+     * @param kategorie neues Kategorie Element
+     */
     public void add(Kategorie kategorie) {
         if (!kategorieListe.add(kategorie)) {
             de.dualibib.Logger.error(this, "Kategorie gibt es bereits.");
@@ -61,6 +74,11 @@ public class Kategorienverwaltung extends ElternVerwaltung{
         notifyPanels();
     }
 
+    /**
+     * löscht ein Kategorie Element.
+     *
+     * @param kategorie Kategorie, welche gelöscht werden soll
+     */
     public void delete(Kategorie kategorie) {
         if (!kategorieListe.remove(kategorie)) {
             de.dualibib.Logger.error(this, "Kategorie gibt es nicht.");

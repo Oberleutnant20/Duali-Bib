@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Fachlogik.Languageverwaltung.PropertyName;
@@ -113,13 +108,12 @@ public class LoginPanel extends ElternPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        if(!online){
+        if (!online) {
             String accountname = accountnameField.getText();
             String passwort = passwortField.getText();
             panelHandler.login(accountname, passwort);
-            
-        }
-        else{
+
+        } else {
             try {
                 panelHandler.ausloggen();
             } catch (Exception e) {
@@ -127,7 +121,7 @@ public class LoginPanel extends ElternPanel {
                 meldungText.setText("Speichern der Sitzung nicht möglich");
             }
         }
-            
+
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
@@ -160,18 +154,17 @@ public class LoginPanel extends ElternPanel {
             meldungText.setText((String) props.get(PropertyName.LOGINPANEL_WRONG));
         }
     }
-    
+        
     public void ausloggen() throws IOException, ConnectionError{
         meldungText.setText((String) props.get(PropertyName.LOGINPANEL_SUCCESSLOGOUT));
-        loginButton.setText((String) props.get(PropertyName.LOGINPANEL_LOGINBUTTON));
-        accountnameField.setEnabled(true);
+        loginButton.setText((String) props.get(PropertyName.LOGINPANEL_LOGINBUTTON));accountnameField.setEnabled(true);
         passwortField.setEnabled(true);
         online = false;
     }
 
     @Override
     public void update() {
-        }
+    }
 
     @Override
     public void updateLanguage(Properties props) {
@@ -185,5 +178,4 @@ public class LoginPanel extends ElternPanel {
         passwortField.setText((String) props.get(PropertyName.LOGINPANEL_PASSWORTFIELD));
         loginButton.setText((String) props.get(PropertyName.LOGINPANEL_LOGINBUTTON));
     }
-
 }

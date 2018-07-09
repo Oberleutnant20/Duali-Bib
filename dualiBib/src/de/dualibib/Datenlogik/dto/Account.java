@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dto;
 
 import java.io.Serializable;
@@ -11,7 +6,7 @@ import java.io.Serializable;
  *
  * @author Carina
  */
-public class Account implements Serializable{
+public class Account implements Serializable {
 
     private String username;
     private String passwort;
@@ -24,6 +19,20 @@ public class Account implements Serializable{
     private String hausnummer;
     private String ort;
 
+    /**
+     * Konstruktor für die Nutzer.
+     *
+     * @param username Nutzername
+     * @param passwort Passwort
+     * @param mitarbeiter ist Mitarbeiter
+     * @param userid Nutzer ID
+     * @param vorname Vorname
+     * @param nachname Nachname
+     * @param plz Postleitzahl
+     * @param strasse Straße
+     * @param hausnummer Hausnummer
+     * @param ort Ort
+     */
     public Account(String username, String passwort, boolean mitarbeiter, int userid, String vorname, String nachname, int plz, String strasse, String hausnummer, String ort) {
         this.username = username;
         this.passwort = passwort;

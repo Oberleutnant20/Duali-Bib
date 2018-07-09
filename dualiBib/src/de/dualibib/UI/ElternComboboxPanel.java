@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI;
 
 import de.dualibib.Datenlogik.dto.Genre;
@@ -24,8 +19,7 @@ public abstract class ElternComboboxPanel extends ElternPanel {
         super(panelHandler);
     }
 
-    
-    public void setComboboxKategorie(JComboBox combobox,List<Kategorie> list){
+    public void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();
@@ -33,7 +27,7 @@ public abstract class ElternComboboxPanel extends ElternPanel {
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
 
-    public void setComboboxGenre(JComboBox combobox,List<Genre> list){
+    public void setComboboxGenre(JComboBox combobox, List<Genre> list) {
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tmp[i] = list.get(i).getBezeichnung();

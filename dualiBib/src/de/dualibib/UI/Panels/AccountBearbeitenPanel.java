@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Account;
@@ -19,9 +14,8 @@ import java.util.Properties;
 public class AccountBearbeitenPanel extends ElternPanel {
 
     /**
-     * Creates new form AccountBearbeiten
+     * Creates new form AccountBearbeiten.
      */
-
     private Account account;
     private boolean neu;
     private Properties props;
@@ -229,10 +223,9 @@ public class AccountBearbeitenPanel extends ElternPanel {
             String vorname = vornameField.getText();
             String passwort = passwortField.getText();
             boolean mitarbeiter = mitarbeiterCheckBox.isSelected();
-            save(account.getUserid(),hausnummer, name, plz, stadt, strasse, vorname, passwort,mitarbeiter);
+            save(account.getUserid(), hausnummer, name, plz, stadt, strasse, vorname, passwort, mitarbeiter);
             meldungText.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_AENDERUNG));
-        }
-        else {
+        } else {
             meldungText.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_PASSWORT));
         }
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -264,7 +257,7 @@ public class AccountBearbeitenPanel extends ElternPanel {
     public void setAccount(Account a) {
         neu = false;
         account = a;
-        if (account==null) {
+        if (account == null) {
             Logger.error(this, "null");
         }
         setAccountFields();
@@ -279,13 +272,11 @@ public class AccountBearbeitenPanel extends ElternPanel {
         setAccountFields();
     }
 
-    public void setAccountFields(){
+    public void setAccountFields() {
         String plz = "" + account.getPlz();
-        
         while (plz.length() < 5) {
             plz += 0;
         }
-        
         hausnummerField.setText(account.getHausnummer());
         nameField.setText(account.getNachname());
         plzField.setText(plz);
@@ -295,16 +286,15 @@ public class AccountBearbeitenPanel extends ElternPanel {
         mitarbeiterCheckBox.setSelected(account.isMitarbeiter());
     }
 
-    public void save(int id,String hausnummer, String name, int plz, String ort, String strasse, String vorname,String  passwort, boolean mitarbeiter){
+    public void save(int id, String hausnummer, String name, int plz, String ort, String strasse, String vorname, String passwort, boolean mitarbeiter) {
         if (!neu) {
-            panelHandler.saveAccountChange(account.getUserid(),hausnummer, name ,plz ,ort, strasse,vorname,passwort, mitarbeiter,account.getUsername());
-        }
-        else {
-            panelHandler.saveAccount(account.getUserid(),hausnummer, name ,plz , strasse,ort,vorname,passwort, mitarbeiter,account.getUsername());
+            panelHandler.saveAccountChange(account.getUserid(), hausnummer, name, plz, ort, strasse, vorname, passwort, mitarbeiter, account.getUsername());
+        } else {
+            panelHandler.saveAccount(account.getUserid(), hausnummer, name, plz, strasse, ort, vorname, passwort, mitarbeiter, account.getUsername());
         }
     }
 
-    public void bearbeitenMitarbeiter(){
+    public void bearbeitenMitarbeiter() {
         mitarbeiterCheckBox.setEnabled(true);
     }
 
@@ -312,14 +302,14 @@ public class AccountBearbeitenPanel extends ElternPanel {
     public void update() {
         Logger.info(this, "update");
         account = panelHandler.getAktuellerUser();
-        if(account!=null){
-        hausnummerField.setText(account.getHausnummer());
-        nameField.setText(account.getNachname());
-        plzField.setText(""+account.getPlz());
-        stadtField.setText(account.getOrt());
-        strasseField.setText(account.getStrasse());
-        vornameField.setText(account.getVorname());
-        mitarbeiterCheckBox.setSelected(account.isMitarbeiter());
+        if (account != null) {
+            hausnummerField.setText(account.getHausnummer());
+            nameField.setText(account.getNachname());
+            plzField.setText("" + account.getPlz());
+            stadtField.setText(account.getOrt());
+            strasseField.setText(account.getStrasse());
+            vornameField.setText(account.getVorname());
+            mitarbeiterCheckBox.setSelected(account.isMitarbeiter());
         }
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dto;
 
 import java.io.Serializable;
@@ -17,6 +12,13 @@ public class Kategorie implements Serializable {
     private String name;
     private String bezeichnung;
 
+    /**
+     * Konstruktor für die Kategorien.
+     *
+     * @param id Kategorie ID
+     * @param name Name der Kategorie
+     * @param bezeichnung Beschreibung
+     */
     public Kategorie(long id, String name, String bezeichnung) {
         this.id = id;
         this.name = name;

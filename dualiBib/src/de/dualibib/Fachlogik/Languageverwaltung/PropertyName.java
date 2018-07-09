@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Fachlogik.Languageverwaltung;
 
 /**
@@ -13,7 +8,7 @@ public class PropertyName {
 
     //Allgemein
     public static final String SUCHEFIELD = "SUCHEFIELD";
-    
+
     //AccountBearbeitenPanel
     public static final String ACCOUNTBEARBEITENPANEL_VORNAMELABLE = "ACCOUNTBEARBEITENPANEL_VORNAMELABLE";
     public static final String ACCOUNTBEARBEITENPANEL_STRASSELABLE = "ACCOUNTBEARBEITENPANEL_STRASSELABLE";

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Account;
@@ -103,7 +98,7 @@ public class AusleihenPanel extends ElternPanel {
     private void entfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entfernenButtonActionPerformed
         try {
             Ausleihe ausleihe = getAusleihefromIndices(getListSelections());
-            Logger.info(this, ""+ausleihe.getId());
+            Logger.info(this, "" + ausleihe.getId());
             panelHandler.deleteAusleihe(ausleihe);
         } catch (Exception e) {
         }
@@ -124,45 +119,47 @@ public class AusleihenPanel extends ElternPanel {
     // End of variables declaration//GEN-END:variables
 
     private Ausleihe getAusleihefromIndices(int position) {
-		Ausleihe selected = null;
-		selected = ausleiheUserListe.get(position);
-		return selected;
-	}
-    
-    private int getListSelections() {
-	int[] selected = jTable1.getSelectedRows();
-	for (int i = 0; i < selected.length; i++) {
-		selected[i] = jTable1.convertRowIndexToModel(selected[i]);
-	}
-	return selected[0];
+        Ausleihe selected = null;
+        selected = ausleiheUserListe.get(position);
+        return selected;
     }
-    
+
+    private int getListSelections() {
+        int[] selected = jTable1.getSelectedRows();
+        for (int i = 0; i < selected.length; i++) {
+            selected[i] = jTable1.convertRowIndexToModel(selected[i]);
+        }
+        return selected[0];
+    }
+
     public void fillTable() {
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
         for (int i = 0; i < ausleiheUserListe.size(); i++) {
-             model.addRow(addObject(i));  
+            model.addRow(addObject(i));
         }
     }
-    
+
     private Object[] addObject(int i) {
         String medienName = "";
         List<Medien> medienlist = panelHandler.returnMedien();
         for (int j = 0; j < medienlist.size(); j++) {
-            if(ausleiheUserListe.get(i).getMedienid() == medienlist.get(j).getId())
+            if (ausleiheUserListe.get(i).getMedienid() == medienlist.get(j).getId()) {
                 medienName = medienlist.get(j).getName();
+            }
         }
-        
+
         String kategorieName = "";
-        
+
         for (int j = 0; j < panelHandler.getKategorieListe().size(); j++) {
-            if(ausleiheUserListe.get(i).getKategorieid() == panelHandler.getKategorieListe().get(j).getId())
+            if (ausleiheUserListe.get(i).getKategorieid() == panelHandler.getKategorieListe().get(j).getId()) {
                 medienName = panelHandler.getKategorieListe().get(j).getName();
+            }
         }
-        
-        return new Object[]{ausleiheUserListe.get(i).getId(),medienName,ausleiheUserListe.get(i).getDate(),panelHandler.getAktuellerUser().getUsername(),kategorieName};
+
+        return new Object[]{ausleiheUserListe.get(i).getId(), medienName, ausleiheUserListe.get(i).getDate(), panelHandler.getAktuellerUser().getUsername(), kategorieName};
     }
 
     public void setAccount(Account aktuellerUser) {
@@ -177,11 +174,11 @@ public class AusleihenPanel extends ElternPanel {
     public void update() {
         Logger.info(this, "update");
         account = panelHandler.getAktuellerUser();
-        if(account!=null){
-            ausleiheUserListe= new ArrayList<>();
+        if (account != null) {
+            ausleiheUserListe = new ArrayList<>();
             for (int i = 0; i < panelHandler.getAusleihe().size(); i++) {
-                if(panelHandler.getAusleihe().get(i).getUserid()==account.getUserid()){
-                     ausleiheUserListe.add(panelHandler.getAusleihe().get(i));
+                if (panelHandler.getAusleihe().get(i).getUserid() == account.getUserid()) {
+                    ausleiheUserListe.add(panelHandler.getAusleihe().get(i));
                 }
             }
             fillTable();

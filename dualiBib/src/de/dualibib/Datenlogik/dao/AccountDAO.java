@@ -24,6 +24,12 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
 
+    /**
+     * Läd die Datenbank Informationen von den Accounts in eine Liste.
+     * @return Liste von Accounts
+     * @throws IOException
+     * @throws ConnectionError 
+     */
     @Override
     public List<Account> laden() throws IOException, ConnectionError {
         ArrayList<Account> ret = new ArrayList<>();
@@ -42,8 +48,7 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
                     String hausnummer = rs.getString("u_Hausnummer");
                     int plz = rs.getInt("u_PLZ");
                     String ort = rs.getString("u_ort");
-                    String anrede = rs.getString("u_anrede");
-
+                    //String anrede = rs.getString("u_anrede");
                     Account account = new Account(login, passwd, mitarbeiter, id, vorname, nachname, plz, strasse, hausnummer, ort);
                     ret.add(account);
                 }
@@ -56,6 +61,12 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
         return ret;
     }
 
+    /**
+     * Speichert eine Liste mit neuen Accounts in der Datenbank ab.
+     * @param accountListe Account liste mit neuen Accounts
+     * @throws IOException
+     * @throws ConnectionError 
+     */
     @Override
     public void speichern(List<Account> accountListe) throws IOException, ConnectionError {
         if (con != null) {
@@ -78,6 +89,12 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
         }
     }
 
+    /**
+     * Updatet eine bestimmte Liste an Accounts.
+     * @param accountListe Account Liste
+     * @throws IOException
+     * @throws ConnectionError 
+     */
     @Override
     public void update(List<Account> accountListe) throws IOException, ConnectionError {
         if (con != null) {
@@ -108,5 +125,4 @@ public class AccountDAO extends ElternDAO implements IAccountDAO {
             throw new ConnectionError();
         }
     }
-
 }

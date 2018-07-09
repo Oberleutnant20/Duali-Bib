@@ -264,9 +264,10 @@ public class Database {
         }
         return ret;
     }
-    
+
     /**
      * SQL Statement für alles abrufen "Select * From Tabelle;".
+     *
      * @param table angabe der Tabelle
      * @return SQL Statement String
      */

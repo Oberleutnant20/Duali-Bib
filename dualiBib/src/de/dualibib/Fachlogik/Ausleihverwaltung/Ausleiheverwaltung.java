@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Fachlogik.Ausleihverwaltung;
 
 import de.dualibib.Datenlogik.dto.Ausleihe;
@@ -17,7 +12,7 @@ import java.util.List;
  *
  * @author Carina
  */
-public class Ausleiheverwaltung extends ElternVerwaltung{
+public class Ausleiheverwaltung extends ElternVerwaltung {
 
     private ArrayList<Ausleihe> ausleiheListe;
     private ArrayList<Ausleihe> ausleiheListeRef;
@@ -25,6 +20,11 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
     private ArrayList<Ausleihe> ausleiheListeDelete;
     private IAusleiheDAO ausleiheDAO;
 
+    /**
+     * Konstruktor für die Ausleihe Verwaltung.
+     *
+     * @param ausleiheDAO Ausleihe Datenbankobjekt
+     */
     public Ausleiheverwaltung(IAusleiheDAO ausleiheDAO) {
         ausleiheListe = new ArrayList<>();
         ausleiheListeRef = new ArrayList<>();
@@ -34,15 +34,24 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
         laden();
     }
 
+    /**
+     * Speichert die Ausleihe ab.
+     *
+     * @throws IOException
+     * @throws ConnectionError
+     */
     public void speichern() throws IOException, ConnectionError {
         List<Ausleihe> liste = new ArrayList<>();
-        if(ausleiheListe.size() > ausleiheListeRef.size()){
+        if (ausleiheListe.size() > ausleiheListeRef.size()) {
             liste = ausleiheListe.subList(ausleiheListeRef.size(), ausleiheListe.size());
         }
         ausleiheDAO.speichern(liste);
         ausleiheDAO.loeschen(ausleiheListeDelete);
     }
 
+    /**
+     * Läd die Ausleihe.
+     */
     public void laden() {
         ausleiheListe.clear();
         ausleiheListeRef.clear();
@@ -58,6 +67,11 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
         }
     }
 
+    /**
+     * Fügt der Ausleihe ein neues Element hinzu.
+     *
+     * @param ausleihe Ausleihe, was hinzugefügt werden soll.
+     */
     public void add(Ausleihe ausleihe) {
         if (!ausleiheListe.add(ausleihe)) {
             de.dualibib.Logger.error(this, "Ausleihe gibt es bereits.");
@@ -65,17 +79,26 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
         notifyPanels();
     }
 
+    /**
+     * Löscht ein Ausleihe Element.
+     *
+     * @param ausleihe Ausleihe, welches gelöscht werden soll.
+     */
     public void delete(Ausleihe ausleihe) {
         if (!ausleiheListeDelete.add(ausleihe)) {
             de.dualibib.Logger.error(this, "Ausleihe gibt es nicht.");
-        }
-        else {
+        } else {
             ausleiheListe.remove(ausleihe);
             notifyPanels();
         }
     }
 
-    public void update(Ausleihe ausleihe){
+    /**
+     * Updatet ein Ausleihe Element
+     *
+     * @param ausleihe Ausleihe, welche upgedatet werden soll
+     */
+    public void update(Ausleihe ausleihe) {
         if (!ausleiheListeUpdate.add(ausleihe)) {
             de.dualibib.Logger.error(this, "Ausleihe gibt es nicht.");
         }
@@ -88,6 +111,5 @@ public class Ausleiheverwaltung extends ElternVerwaltung{
             liste.add(ausleihe);
         });
         return liste;
-}
-
+    }
 }

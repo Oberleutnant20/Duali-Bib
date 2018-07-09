@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib;
 
 import de.dualibib.Datenlogik.VerwaltungsFactorySingleton;
@@ -23,8 +18,8 @@ import de.dualibib.UI.PanelHandler;
 public class Main {
 
     /**
-     * 
-     * @param args 
+     * Ausführende Main Methode.
+     * @param args
      */
     public static void main(String[] args) {
         Logger.enableDebug(true);
@@ -33,26 +28,26 @@ public class Main {
         VerwaltungsFactorySingleton singleton;
         singleton = VerwaltungsFactorySingleton.getInstance();
         Languageverwaltung languageverwaltung;
-        languageverwaltung = (Languageverwaltung)singleton.getVerwaltung("Language");
+        languageverwaltung = (Languageverwaltung) singleton.getVerwaltung("Language");
         Accountverwaltung accountverwaltung;
-        accountverwaltung = (Accountverwaltung)singleton.getVerwaltung("Account");
+        accountverwaltung = (Accountverwaltung) singleton.getVerwaltung("Account");
         Medienverwaltung medienverwaltung;
-        medienverwaltung = (Medienverwaltung)singleton.getVerwaltung("Medien");
+        medienverwaltung = (Medienverwaltung) singleton.getVerwaltung("Medien");
         Ausleiheverwaltung ausleiheverwaltung;
-        ausleiheverwaltung = (Ausleiheverwaltung)singleton.getVerwaltung("Ausleihe");
+        ausleiheverwaltung = (Ausleiheverwaltung) singleton.getVerwaltung("Ausleihe");
         Kategorienverwaltung kategorienverwaltung;
-        kategorienverwaltung = (Kategorienverwaltung)singleton.getVerwaltung("Kategorien");
+        kategorienverwaltung = (Kategorienverwaltung) singleton.getVerwaltung("Kategorien");
         Genreverwaltung genreverwaltung;
-        genreverwaltung = (Genreverwaltung)singleton.getVerwaltung("Genre");
+        genreverwaltung = (Genreverwaltung) singleton.getVerwaltung("Genre");
         Historyverwaltung historyverwaltung;
-        historyverwaltung = (Historyverwaltung)singleton.getVerwaltung("History");
+        historyverwaltung = (Historyverwaltung) singleton.getVerwaltung("History");
 
         Controller controller;
-        controller = new Controller(languageverwaltung,accountverwaltung, medienverwaltung,ausleiheverwaltung, kategorienverwaltung,genreverwaltung, historyverwaltung);
-        
+        controller = new Controller(languageverwaltung, accountverwaltung, medienverwaltung, ausleiheverwaltung, kategorienverwaltung, genreverwaltung, historyverwaltung);
+
         PanelHandler panelHandler;
         panelHandler = new PanelHandler(controller, genreverwaltung.get(), kategorienverwaltung.get());
-        
+
         controller.start(panelHandler);
         panelHandler.start();
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
@@ -14,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +25,13 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
 
+    /**
+     * Läd die Datenbank Informationen von den Ausleihen in eine Liste.
+     *
+     * @return Liste mit Ausleihen
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public List<Ausleihe> laden() throws IOException, ConnectionError {
         ArrayList<Ausleihe> ret = new ArrayList<>();
@@ -56,6 +57,13 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
         return ret;
     }
 
+    /**
+     * Speichert neue Ausleihen in der Datenbank ab.
+     *
+     * @param ausleiheListe neue Liste mit neuen Ausleihe Informationen
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public void speichern(List<Ausleihe> ausleiheListe) throws IOException, ConnectionError {
         if (con != null) {
@@ -78,12 +86,19 @@ public class AusleiheDAO extends ElternDAO implements IAusleiheDAO {
         }
     }
 
+    /**
+     * Updatet die Ausleihe Liste.
+     *
+     * @param ausleiheListe Liste mit upzudatenden Informationen
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public void loeschen(List<Ausleihe> ausleiheListe) throws IOException, ConnectionError {
         if (con != null) {
             ausleiheListe.forEach((ausleihe) -> {
                 try {
-                    String stmnt = "DELETE FROM Ausleihe WHERE a_ID LIKE "+ausleihe.getId();
+                    String stmnt = "DELETE FROM Ausleihe WHERE a_ID LIKE " + ausleihe.getId();
                     PreparedStatement ptsm = con.prepareStatement(stmnt);
                     ptsm.execute();
                 } catch (SQLException ex) {

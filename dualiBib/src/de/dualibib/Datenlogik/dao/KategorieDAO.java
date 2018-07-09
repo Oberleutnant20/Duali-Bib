@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.Datenlogik.dao;
 
 import de.dualibib.Datenlogik.Database;
@@ -29,6 +24,13 @@ public class KategorieDAO extends ElternDAO implements IKategorieDAO {
     private final Connection con = db.connect_mysql_schema();
     private ResultSet rs = null;
 
+    /**
+     * Läd die Datenbank Informationen von den Kategorien in eine Liste.
+     *
+     * @return Liste mit Kategorien
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public List<Kategorie> laden() throws IOException, ConnectionError {
         ArrayList<Kategorie> ret = new ArrayList<>();
@@ -50,6 +52,13 @@ public class KategorieDAO extends ElternDAO implements IKategorieDAO {
         return ret;
     }
 
+    /**
+     * Speichert neue Kategorien in die Datenbank.
+     *
+     * @param kategorieListe Liste der zu Speichernden Elemente
+     * @throws IOException
+     * @throws ConnectionError
+     */
     @Override
     public void speichern(List<Kategorie> kategorieListe) throws IOException, ConnectionError {
         if (con != null) {
@@ -67,5 +76,4 @@ public class KategorieDAO extends ElternDAO implements IKategorieDAO {
             throw new ConnectionError();
         }
     }
-
 }
