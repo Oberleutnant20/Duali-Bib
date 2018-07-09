@@ -10,7 +10,6 @@ import java.util.List;
  * @author Carina
  */
 public interface IMedienDAO {
-    // TODO - Javadoc?
     List<Medien> laden() throws IOException, ConnectionError;
     void speichern(List<Medien> medienListe)  throws IOException, ConnectionError;
     void update(List<Medien> medienListe) throws IOException, ConnectionError;

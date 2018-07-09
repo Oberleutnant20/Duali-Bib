@@ -61,7 +61,7 @@ public class Controller {
     }
 
     /**
-     * TODO
+     * starten des Controllers
      * @param panelHandler Panelhandler
      */
     public void start(PanelHandler panelHandler) {
@@ -71,7 +71,7 @@ public class Controller {
     }
 
     /**
-     * TODO
+     * Aktualisierung der Panels beim initialen starten der Anwendung
      */
     public void initUpdate() {
         Logger.info(this, "initUpdate");
@@ -103,6 +103,9 @@ public class Controller {
         return null;
     }
 
+    /**
+     * prüft ob der aktuelle User ein Mitarbeiter ist
+     */
     public boolean isMitarbeiter() {
         Logger.info(this, "isMitarbeiter");
         if (aktuellerUser != null) {
@@ -111,18 +114,24 @@ public class Controller {
         return false;
     }
 
+    /**
+     * Fügt einen Historyeintrag der Liste hinzu
+     */
     public void addHistory(History history) {
         Logger.info(this, "addHistory");
         historyverwaltung.add(history);
     }
 
+    /**
+     * Fügt eine Ausleihe der Liste hinzu
+     */
     public void addAusleihe(Ausleihe ausleihe) {
         Logger.info(this, "addAusleihe");
         ausleiheverwaltung.add(ausleihe);
     }
 
     /**
-     * TODO?
+     * Lädt die Listen des jeweiligen Users
      */
     public void ladeUserDaten() {
         historyListe = ladeHistory();
@@ -130,7 +139,7 @@ public class Controller {
     }
 
     /**
-     * TODO
+     * Zieht den passenden User nach accountname und passwort aus der Liste aller User
      * @param accountname
      * @param passwort
      * @return 
@@ -187,10 +196,16 @@ public class Controller {
         return historyverwaltung.get();
     }
 
+    /**
+     * Reicht den geänderten Account zum speichern in die Verwaltung weiter
+     */
     public void saveAccountChange(Account a) {
         accountverwaltung.update(a);
     }
 
+    /**
+     * Speichert verändertes Medium
+     */
     public void saveMediumChange(Medien m) {
         de.dualibib.Logger.info(this, "saveMediumChange");
         ArrayList<Medien> list = getAllMedien();
@@ -202,16 +217,25 @@ public class Controller {
         medienverwaltung.update(m);
     }
 
+    /**
+     * reicht zu löschende Ausleihe an Verwaltung weiter
+     */
     public void deleteAusleihe(Ausleihe a) {
         de.dualibib.Logger.info(this, "deleteAusleihe");
         ausleiheverwaltung.delete(a);
     }
 
+    /**
+     * reicht zu speichernden Account weiter
+     */
     public void saveAccount(Account account) {
         de.dualibib.Logger.info(this, "saveAccount");
         accountverwaltung.add(account);
     }
 
+    /**
+     * reicht zu löschenden Historyeintrag weiter
+     */
     public void deleteHistory(History h) {
         de.dualibib.Logger.info(this, "deleteHistory");
         historyverwaltung.delete(h);
@@ -234,6 +258,9 @@ public class Controller {
         return list;
     }
 
+    /**
+     * Startet die Methoden zum speichern der Einträge in den Verwaltungen
+     */
     public void saveDB() throws IOException, ConnectionError {
         de.dualibib.Logger.info(this, "Speichern");
         accountverwaltung.speichern();
@@ -244,6 +271,9 @@ public class Controller {
         historyverwaltung.speichern();
     }
 
+    /**
+     * Überprüft ob ein Eintrag aus der Ausleihe zur History hinzugefügt werden soll
+     */
     private void ausleihenPruefen() {
         de.dualibib.Logger.debug(this, "Ausleihe prüfen");
         ArrayList<Ausleihe> liste = ausleiheverwaltung.get();

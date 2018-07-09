@@ -1,7 +1,7 @@
 package de.dualibib.Fachlogik.Languageverwaltung;
 
 /**
- *
+ * Zentrale Klasse für die Einträge in den Properties
  * @author Carina
  */
 public class PropertyName {
