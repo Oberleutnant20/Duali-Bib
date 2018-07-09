@@ -10,7 +10,7 @@ import java.util.List;
  * @author Carina
  */
 public interface IKategorieDAO {
-    // TODO - Javadoc?
+
     List<Kategorie> laden() throws IOException, ConnectionError;
     void speichern(List<Kategorie> kategorieListe)  throws IOException, ConnectionError;
     //void update(List<Kategorie> kategorieListe) throws IOException, ConnectionError;

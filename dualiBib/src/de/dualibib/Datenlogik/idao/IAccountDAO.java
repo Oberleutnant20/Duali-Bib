@@ -10,8 +10,8 @@ import java.util.List;
  * @author Carina
  */
 public interface IAccountDAO {
-    // TODO - Javadoc?
+
     List<Account> laden() throws IOException, ConnectionError;
-    void speichern(List<Account> accountListe)  throws IOException, ConnectionError;
+    void speichern(List<Account> accountListe) throws IOException, ConnectionError;
     void update(List<Account> accountListe) throws IOException, ConnectionError;
 }
