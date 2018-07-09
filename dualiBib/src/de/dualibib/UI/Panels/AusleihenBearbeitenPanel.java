@@ -91,6 +91,10 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Entfernt eine Ausleihe.
+     * @param evt 
+     */
     private void entfernenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entfernenButtonActionPerformed
         try {
             panelHandler.deleteAusleihe(getAusleihefromIndices(getListSelections()));
@@ -98,6 +102,10 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
         }
     }//GEN-LAST:event_entfernenButtonActionPerformed
 
+    /**
+     * Führt eine Suche aus.
+     * @param evt 
+     */
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
         panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
@@ -116,12 +124,21 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
         ausleiheListe = ausleihe;
     }
 
+    /**
+     * Fragt die Ausleihe an einer bestimmten Position ab.
+     * @param position Index
+     * @return Ausgewählte Element
+     */
     private Ausleihe getAusleihefromIndices(int position) {
         Ausleihe selected = null;
         selected = ausleiheListe.get(position);
         return selected;
     }
 
+    /**
+     * Prüft welches Element in der Liste gewählt wurde.
+     * @return Index
+     */
     private int getListSelections() {
         int[] selected = jTable1.getSelectedRows();
         for (int i = 0; i < selected.length; i++) {
@@ -130,6 +147,9 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
         return selected[0];
     }
 
+    /**
+     * Füllt die Tabelle mit Daten.
+     */
     public void fillTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -140,16 +160,20 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
         }
     }
 
+    /**
+     * Fügt ein neues Objekt hinzu
+     *
+     * @param i Indices
+     * @return Neues Objekt
+     */
     private Object[] addObject(int i) {
         String medienName = "";
         List<Medien> medienlist = panelHandler.returnMedien();
-
         for (int j = 0; j < medienlist.size(); j++) {
             if (ausleiheListe.get(i).getMedienid() == medienlist.get(j).getId()) {
                 medienName = medienlist.get(j).getName();
             }
         }
-
         String kategorieName = "";
         List<Kategorie> kategorielist = panelHandler.getKategorieListe();
         for (int j = 0; j < kategorielist.size(); j++) {
@@ -157,10 +181,12 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
                 medienName = kategorielist.get(j).getName();
             }
         }
-
         return new Object[]{ausleiheListe.get(i).getId(), medienName, ausleiheListe.get(i).getDate(), panelHandler.getAktuellerUser().getUsername(), kategorieName};
     }
 
+    /**
+     * Updatet die Informationen im aktuellen Panel.
+     */
     @Override
     public void update() {
         Logger.info(this, "update");
@@ -168,6 +194,11 @@ public class AusleihenBearbeitenPanel extends ElternPanel {
         fillTable();
     }
 
+    /**
+     * Setzt die Sprachkonfiguration anhand der Properties um.
+     *
+     * @param props Properties Datei
+     */
     @Override
     public void updateLanguage(Properties props) {
         entfernenButton.setText((String) props.get(PropertyName.AUSLEIHENBEARBEITENPANEL_ENTFERNENBUTTON));

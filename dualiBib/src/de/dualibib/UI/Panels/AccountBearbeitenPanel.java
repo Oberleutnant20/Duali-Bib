@@ -199,20 +199,28 @@ public class AccountBearbeitenPanel extends ElternPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Führt eine suche aus.
+     *
+     * @param evt
+     */
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
         panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
 
+    /**
+     * Führt das speichern aus.
+     *
+     * @param evt
+     */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-
         boolean checkPLZ = !plzField.getText().matches("[0-9]{5}");
         if (checkPLZ) {
             meldungText.setText((String) props.get(PropertyName.ACCOUNTBEARBEITENPANEL_PLZ));
             return;
         }
-
         boolean checkPW = passwortField.getText().equals(checkPasswortField.getText());
         if (checkPW) {
             String hausnummer = hausnummerField.getText();
@@ -254,6 +262,11 @@ public class AccountBearbeitenPanel extends ElternPanel {
     private javax.swing.JLabel vornameLable;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Setzt einen bestehenden Account.
+     *
+     * @param a Accountname
+     */
     public void setAccount(Account a) {
         neu = false;
         account = a;
@@ -263,6 +276,11 @@ public class AccountBearbeitenPanel extends ElternPanel {
         setAccountFields();
     }
 
+    /**
+     * Erstellt einen neuen Account
+     *
+     * @param a Accountname
+     */
     public void setNewAccount(Account a) {
         neu = true;
         account = a;
@@ -272,6 +290,9 @@ public class AccountBearbeitenPanel extends ElternPanel {
         setAccountFields();
     }
 
+    /**
+     * Füllt die Accountdaten mit Informationen.
+     */
     public void setAccountFields() {
         String plz = "" + account.getPlz();
         while (plz.length() < 5) {
@@ -286,6 +307,19 @@ public class AccountBearbeitenPanel extends ElternPanel {
         mitarbeiterCheckBox.setSelected(account.isMitarbeiter());
     }
 
+    /**
+     * Speichert Accountinformationen ab.
+     *
+     * @param id Account ID
+     * @param hausnummer Hausnummer
+     * @param name Nachname
+     * @param plz Postleitzahl
+     * @param ort Ort
+     * @param strasse Straße
+     * @param vorname Vorname
+     * @param passwort Passwort
+     * @param mitarbeiter Ist Mitarbeiter
+     */
     public void save(int id, String hausnummer, String name, int plz, String ort, String strasse, String vorname, String passwort, boolean mitarbeiter) {
         if (!neu) {
             panelHandler.saveAccountChange(account.getUserid(), hausnummer, name, plz, ort, strasse, vorname, passwort, mitarbeiter, account.getUsername());
@@ -294,10 +328,16 @@ public class AccountBearbeitenPanel extends ElternPanel {
         }
     }
 
+    /**
+     * Setzt die CheckBox für die Mitarbeiterbearbeitung.
+     */
     public void bearbeitenMitarbeiter() {
         mitarbeiterCheckBox.setEnabled(true);
     }
 
+    /**
+     * Updatet die Informationen im aktuellen Panel.
+     */
     @Override
     public void update() {
         Logger.info(this, "update");
@@ -313,6 +353,11 @@ public class AccountBearbeitenPanel extends ElternPanel {
         }
     }
 
+    /**
+     * Setzt die Sprachkonfiguration anhand der Properties um.
+     *
+     * @param props Properties Datei
+     */
     @Override
     public void updateLanguage(Properties props) {
         this.props = props;
