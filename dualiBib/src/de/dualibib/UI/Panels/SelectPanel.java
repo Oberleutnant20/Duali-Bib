@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.dualibib.UI.Panels;
 
 import de.dualibib.Datenlogik.dto.Medien;
@@ -30,9 +25,6 @@ public class SelectPanel extends ElternComboboxPanel {
     private Medien medium;
     private Properties props;
 
-//    private final ArrayList<String> genreListe;
-//
-//    private final ArrayList<String> kategorieListe;
     /**
      * Creates new form SelectPanel
      */
@@ -208,12 +200,22 @@ public class SelectPanel extends ElternComboboxPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Führt eine Suche aus.
+     *
+     * @param evt
+     */
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
         panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
 
+    /**
+     * Öffnet das Bearbeiten Panel.
+     *
+     * @param evt
+     */
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
         String name = nameField.getText();
         String desc = beschreibungField.getText();
@@ -221,13 +223,21 @@ public class SelectPanel extends ElternComboboxPanel {
         infoLabel.setText((String) props.get(PropertyName.SELECTPANEL_STATUS_GESPEICHERT));
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
+    /**
+     * Öffnet das Ausleihe Panel.
+     *
+     * @param evt
+     */
     private void ausleihenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ausleihenButtonActionPerformed
-        Date date = new Date(dateComboBox.getSelectedItem().toString()+"");
+        Date date = new Date(dateComboBox.getSelectedItem().toString() + "");
         panelHandler.createNewAusleihe(medium.getId(), date, medium.getKategorienId());
         infoLabel.setText((String) props.get(PropertyName.SELECTPANEL_STATUS_AUSGELIEHEN));
         ausleihenButton.setEnabled(false);
     }//GEN-LAST:event_ausleihenButtonActionPerformed
 
+    /**
+     * Setzt die Mitarbeiterfunktionen auf true.
+     */
     public void setMitarbeiter() {
         bearbeitenButton.setEnabled(true);
         genreComboBox.setEnabled(true);
@@ -237,10 +247,15 @@ public class SelectPanel extends ElternComboboxPanel {
         statusField.setEnabled(true);
     }
 
+    /**
+     * Setzt ein Medium.
+     *
+     * @param m Medium
+     */
     public void setMedium(Medien m) {
         medium = m;
         infoLabel.setText((String) props.get(PropertyName.SELECTPANEL_STATUS));
-        if (panelHandler.getVerfuegbare((int) m.getId())==0) {
+        if (panelHandler.getVerfuegbare((int) m.getId()) == 0) {
             statusField.setText((String) props.get(PropertyName.SELECTPANEL_AUSGELIEHEN));
             ausleihenButton.setEnabled(false);
         } else {
@@ -271,21 +286,31 @@ public class SelectPanel extends ElternComboboxPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-
+    /**
+     * Füllt die ComboBox mit Datum Informationen
+     *
+     * @param combobox ComboBox, welche gefüllt werden soll
+     */
     private void setComboboxDate(JComboBox combobox) {
         ArrayList<Date> datelist = new ArrayList<Date>();
-        for(int i = 15; i<=45;i+=15){
+        for (int i = 15; i <= 45; i += 15) {
             datelist.add(addDays(i));
         }
         String[] tmp = new String[datelist.size()];
         for (int i = 0; i < datelist.size(); i++) {
-            DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);//
+            DateFormat formatter = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.ENGLISH);
             String date = formatter.format(datelist.get(i));
             tmp[i] = date;
         }
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
 
+    /**
+     * Fügt dem Kalender Tage hinzu.
+     *
+     * @param days Angabe der Tage
+     * @return Datum bis wann man es ausleihen kann
+     */
     private static Date addDays(int days) {
         Calendar c = new GregorianCalendar();
         c.add(Calendar.DATE, days);
@@ -293,6 +318,9 @@ public class SelectPanel extends ElternComboboxPanel {
         return date;
     }
 
+    /**
+     * Updatet die Informationen im aktuellen Panel.
+     */
     @Override
     public void update() {
         Logger.info(this, "update");
@@ -300,6 +328,11 @@ public class SelectPanel extends ElternComboboxPanel {
         setComboboxGenre(genreComboBox, panelHandler.getGenreListe());
     }
 
+    /**
+     * Setzt die Sprachkonfiguration anhand der Properties um.
+     *
+     * @param props Properties Datei
+     */
     @Override
     public void updateLanguage(Properties props) {
         this.props = props;

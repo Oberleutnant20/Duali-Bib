@@ -126,12 +126,22 @@ public class AccountsBearbeitenPanel extends ElternPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Führt eine Suche aus.
+     *
+     * @param evt
+     */
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
         panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
 
+    /**
+     * Öffnet das Bearbeitenpanel für Accounts.
+     *
+     * @param evt
+     */
     private void bearbeitenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bearbeitenButtonActionPerformed
         try {
             Account a = getAccountfromIndices(getListSelections());
@@ -144,6 +154,11 @@ public class AccountsBearbeitenPanel extends ElternPanel {
         }
     }//GEN-LAST:event_bearbeitenButtonActionPerformed
 
+    /**
+     * Legt einen neuen Nutzer an.
+     *
+     * @param evt
+     */
     private void anlegenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anlegenButtonActionPerformed
         if (acountNameZulaessig(accountnameField.getText())) {
             Account account = new Account(accountnameField.getText(), "todo", false, 0, "todo", "todo", 0, "todo", "todo", "todo");
@@ -155,13 +170,16 @@ public class AccountsBearbeitenPanel extends ElternPanel {
         }
     }//GEN-LAST:event_anlegenButtonActionPerformed
 
+    /**
+     * sucht einen Account aus der Tabelle.
+     *
+     * @param evt
+     */
     private void sucheAccountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheAccountFieldActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
-
         if (sucheAccountField.getText().equals("Suche Account") || sucheAccountField.getText().equals("")) {
             for (int i = 0; i < accountListe.size(); i++) {
                 model.addRow(new Object[]{accountListe.get(i).getUsername(), accountListe.get(i).getNachname(), accountListe.get(i).getVorname()});
@@ -187,6 +205,9 @@ public class AccountsBearbeitenPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Füllt die Tabelle mit Daten.
+     */
     public void fillTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -197,12 +218,23 @@ public class AccountsBearbeitenPanel extends ElternPanel {
         }
     }
 
+    /**
+     * Fragt einen Account an einer bestimmten Position ab.
+     *
+     * @param position Index
+     * @return Ausgewählter Account
+     */
     private Account getAccountfromIndices(int position) {
         Account selected = null;
         selected = accountListe.get(position);
         return selected;
     }
 
+    /**
+     * Prüft, welches Element in der Liste gewählt.
+     *
+     * @return Index
+     */
     private int getListSelections() {
         int[] selected = jTable1.getSelectedRows();
         for (int i = 0; i < selected.length; i++) {
@@ -211,6 +243,12 @@ public class AccountsBearbeitenPanel extends ElternPanel {
         return selected[0];
     }
 
+    /**
+     * Prüft, ob ein Accountname schon vorhanden ist.
+     *
+     * @param text Nutzername, welcher geprüft werden soll.
+     * @return True, wenn der Name verfügbar ist. False, wenn bereits vergeben.
+     */
     private boolean acountNameZulaessig(String text) {
         if (text.length() <= 8 && text.length() > 0) {
             for (int i = 0; i < accountListe.size(); i++) {
@@ -224,6 +262,9 @@ public class AccountsBearbeitenPanel extends ElternPanel {
         }
     }
 
+    /**
+     * Updatet die Informationen im aktuellen Panel.
+     */
     @Override
     public void update() {
         Logger.info(this, "update");
@@ -231,6 +272,11 @@ public class AccountsBearbeitenPanel extends ElternPanel {
         fillTable();
     }
 
+    /**
+     * Setzt die Sprachkonfiguration anhand der Properties um.
+     *
+     * @param props Properties Datei
+     */
     @Override
     public void updateLanguage(Properties props) {
         sucheAccountField.setText((String) props.get(PropertyName.ACCOUNTSBEARBEITENPANEL_SUCHEACCOUNTFIELD));

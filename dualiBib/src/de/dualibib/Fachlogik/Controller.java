@@ -40,8 +40,9 @@ public class Controller {
     private ArrayList<Ausleihe> ausleiheListe;
 
     /**
-     * Konnstruktor für den Controller.
-     * @param languageverwaltung Verwaltungsklasse für die Sprache 
+     * Konstruktor für den Controller.
+     *
+     * @param languageverwaltung Verwaltungsklasse für die Sprache
      * @param accountverwaltung Verwaltungsklasse für die Accounts
      * @param medienverwaltung Verwaltungsklasse für die Medien
      * @param ausleiheverwaltung Verwaltungsklasse für die Ausleihen
@@ -62,6 +63,7 @@ public class Controller {
 
     /**
      * starten des Controllers
+     *
      * @param panelHandler Panelhandler
      */
     public void start(PanelHandler panelHandler) {
@@ -139,10 +141,12 @@ public class Controller {
     }
 
     /**
-     * Zieht den passenden User nach accountname und passwort aus der Liste aller User
+     * Zieht den passenden User nach accountname und passwort aus der Liste
+     * aller User.
+     *
      * @param accountname
      * @param passwort
-     * @return 
+     * @return
      */
     public Account matchingUser(String accountname, String passwort) {
         Logger.info(this, "matchingUser");
@@ -157,6 +161,7 @@ public class Controller {
 
     /**
      * Läd die User History Informationen.
+     *
      * @return Liste von der History eines Users
      */
     private ArrayList<History> ladeHistory() {
@@ -175,6 +180,7 @@ public class Controller {
 
     /**
      * Läd die aktuelle Ausleihe eines Nutzers.
+     *
      * @return Liste eines Nutzers mit Ausgeliehen Büchern
      */
     private ArrayList<Ausleihe> ladeAusleihe() {
@@ -197,14 +203,14 @@ public class Controller {
     }
 
     /**
-     * Reicht den geänderten Account zum speichern in die Verwaltung weiter
+     * Reicht den geänderten Account zum speichern in die Verwaltung weiter.
      */
     public void saveAccountChange(Account a) {
         accountverwaltung.update(a);
     }
 
     /**
-     * Speichert verändertes Medium
+     * Speichert verändertes Medium.
      */
     public void saveMediumChange(Medien m) {
         de.dualibib.Logger.info(this, "saveMediumChange");
@@ -218,7 +224,7 @@ public class Controller {
     }
 
     /**
-     * reicht zu löschende Ausleihe an Verwaltung weiter
+     * reicht zu löschende Ausleihe an Verwaltung weiter.
      */
     public void deleteAusleihe(Ausleihe a) {
         de.dualibib.Logger.info(this, "deleteAusleihe");
@@ -226,7 +232,7 @@ public class Controller {
     }
 
     /**
-     * reicht zu speichernden Account weiter
+     * reicht zu speichernden Account weiter.
      */
     public void saveAccount(Account account) {
         de.dualibib.Logger.info(this, "saveAccount");
@@ -234,7 +240,7 @@ public class Controller {
     }
 
     /**
-     * reicht zu löschenden Historyeintrag weiter
+     * reicht zu löschenden Historyeintrag weiter.
      */
     public void deleteHistory(History h) {
         de.dualibib.Logger.info(this, "deleteHistory");
@@ -259,7 +265,7 @@ public class Controller {
     }
 
     /**
-     * Startet die Methoden zum speichern der Einträge in den Verwaltungen
+     * Startet die Methoden zum speichern der Einträge in den Verwaltungen.
      */
     public void saveDB() throws IOException, ConnectionError {
         de.dualibib.Logger.info(this, "Speichern");
@@ -272,7 +278,8 @@ public class Controller {
     }
 
     /**
-     * Überprüft ob ein Eintrag aus der Ausleihe zur History hinzugefügt werden soll
+     * Überprüft ob ein Eintrag aus der Ausleihe zur History hinzugefügt werden
+     * soll.
      */
     private void ausleihenPruefen() {
         de.dualibib.Logger.debug(this, "Ausleihe prüfen");
@@ -287,6 +294,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Reicht eine Ausleihe weiter zum Speichern.
+     *
+     * @param a Ausleihe
+     */
     public void saveAusleihe(Ausleihe a) {
         ausleiheverwaltung.add(a);
     }
@@ -333,6 +345,11 @@ public class Controller {
         }
     }
 
+    /**
+     * Führt eine Sprachen Änderung durch.
+     *
+     * @param string Sprache, welche genutzt werden soll
+     */
     public void changeLanguage(String string) {
         try {
             switch (string) {
