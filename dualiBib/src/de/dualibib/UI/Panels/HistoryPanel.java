@@ -125,12 +125,22 @@ public class HistoryPanel extends ElternPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Führt eine Suche aus.
+     *
+     * @param evt
+     */
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
         panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
 
+    /**
+     * Wählt das markierte Element aus.
+     *
+     * @param evt
+     */
     private void auswaehlenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_auswaehlenButtonActionPerformed
         try {
             panelHandler.getSelectPanel().setMedium(getMediumfromHistoryIndices(getListSelections()));
@@ -144,22 +154,30 @@ public class HistoryPanel extends ElternPanel {
         }
     }//GEN-LAST:event_auswaehlenButtonActionPerformed
 
+    /**
+     * Führt die Methode setSearchKategorie aus.
+     *
+     * @param evt
+     */
     private void historysuchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historysuchFieldActionPerformed
         setSearchKategorie(kategorieComboBox.getSelectedItem() + "");
     }//GEN-LAST:event_historysuchFieldActionPerformed
 
+    /**
+     * Wählt die Kategorie in der ComboBox aus.
+     *
+     * @param evt
+     */
     private void kategorieComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kategorieComboBoxActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String text = kategorieComboBox.getItemAt(0);
         int selectedID = -1;
         List<Kategorie> list = panelHandler.getKategorieListe();
-
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getBezeichnung().equals(text)) {
                 selectedID = (int) list.get(i).getId();
             }
         }
-
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
@@ -168,7 +186,6 @@ public class HistoryPanel extends ElternPanel {
                 model.addRow(new Object[]{historyListe.get(i).getId()});
             }
         }
-
     }//GEN-LAST:event_kategorieComboBoxActionPerformed
 
 
@@ -182,6 +199,12 @@ public class HistoryPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Fragt Medien aus der History ab.
+     *
+     * @param position Index
+     * @return Medium, welches gewählt wurde
+     */
     private Medien getMediumfromHistoryIndices(int position) {
         History selected = null;
         Medien medium = null;
@@ -190,6 +213,11 @@ public class HistoryPanel extends ElternPanel {
         return medium;
     }
 
+    /**
+     * Fragt ab welches Element ausgewählt wurde.
+     *
+     * @return Index welcher gewählt wurde.
+     */
     private int getListSelections() {
         int[] selected = jTable1.getSelectedRows();
         for (int i = 0; i < selected.length; i++) {
@@ -198,6 +226,12 @@ public class HistoryPanel extends ElternPanel {
         return selected[0];
     }
 
+    /**
+     * Füllt die Kategorie ComboBox mit Informationen.
+     *
+     * @param combobox Angabe welche ComboBox genutzt werden soll
+     * @param list Liste der Kategorien.
+     */
     private void setComboboxKategorie(JComboBox combobox, List<Kategorie> list) {
         String[] tmp = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
@@ -206,9 +240,13 @@ public class HistoryPanel extends ElternPanel {
         combobox.setModel(new DefaultComboBoxModel(tmp));
     }
 
+    /**
+     * Setzt die Kategorie für die Suche.
+     *
+     * @param kategorie Welche Kategorie gesetzt wurde
+     */
     private void setSearchKategorie(String kategorie) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
         for (int i = model.getRowCount() - 1; i > -1; i--) {
             model.removeRow(i);
         }
@@ -219,7 +257,6 @@ public class HistoryPanel extends ElternPanel {
                 kategorieid = (int) kategorielist.get(i).getId();
             }
         }
-
         for (int i = 0; i < historyListe.size(); i++) {
             if (historyListe.get(i).getKategorieid() == kategorieid) {
                 model.addRow(addObject(i));
@@ -227,6 +264,12 @@ public class HistoryPanel extends ElternPanel {
         }
     }
 
+    /**
+     * Fügt ein Objekt hinzu.
+     *
+     * @param i Indices
+     * @return Neues Objekt mit bestimmten Informationen
+     */
     private Object[] addObject(int i) {
         String medienName = "";
         List<Medien> medienliste = panelHandler.returnMedien();
@@ -235,7 +278,6 @@ public class HistoryPanel extends ElternPanel {
                 medienName = medienliste.get(j).getName();
             }
         }
-
         String kategorieName = "";
         List<Kategorie> kategorielist = panelHandler.getKategorieListe();
         for (int j = 0; j < kategorielist.size(); j++) {
@@ -243,10 +285,12 @@ public class HistoryPanel extends ElternPanel {
                 medienName = kategorielist.get(j).getName();
             }
         }
-
         return new Object[]{historyListe.get(i).getId(), panelHandler.getAktuellerUser().getUsername(), medienName, kategorieName};
     }
 
+    /**
+     * Füllt die Tabelle im Panel mit Informationen
+     */
     public void fillTable() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for (int i = model.getRowCount() - 1; i > -1; i--) {
@@ -257,6 +301,9 @@ public class HistoryPanel extends ElternPanel {
         }
     }
 
+    /**
+     * Updatet die Informationen im aktuellen Panel.
+     */
     @Override
     public void update() {
         Logger.info(this, "update");
@@ -267,6 +314,11 @@ public class HistoryPanel extends ElternPanel {
         }
     }
 
+    /**
+     * Setzt die Sprachkonfiguration anhand der Properties um.
+     *
+     * @param props Properties Datei
+     */
     @Override
     public void updateLanguage(Properties props) {
         sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));

@@ -88,23 +88,25 @@ public class OptionPanel extends ElternPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Führt die Sprachänderung aus.
+     *
+     * @param evt
+     */
     private void uebernehmenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uebernehmenButtonActionPerformed
         panelHandler.changeLanguage(languageComboBox.getSelectedItem().toString() + "");
     }//GEN-LAST:event_uebernehmenButtonActionPerformed
 
+    /**
+     * Führt eine Suche aus.
+     *
+     * @param evt
+     */
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
         panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
-
-    public void setComboboxLanguage(JComboBox combobox, List<String> list) {
-        String[] tmp = new String[list.size()];
-        for (int i = 0; i < list.size(); i++) {
-            tmp[i] = list.get(i);
-        }
-        combobox.setModel(new DefaultComboBoxModel(tmp));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -113,6 +115,24 @@ public class OptionPanel extends ElternPanel {
     private javax.swing.JButton uebernehmenButton;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Füllt eine ComboBox mit Sprachinformationen, welche zur Verfügung stehen.
+     *
+     * @param combobox Angabe der ComboBox, welche befüllt werden soll
+     * @param list Angabe der verfügbaren Sprachliste
+     */
+    public void setComboboxLanguage(JComboBox combobox, List<String> list) {
+        String[] tmp = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            tmp[i] = list.get(i);
+        }
+        combobox.setModel(new DefaultComboBoxModel(tmp));
+    }
+
+    /**
+     *
+     * @return Liste der verfügbaren Sprachen
+     */
     private List<String> getLanguageListe() {
         ArrayList<String> a = new ArrayList<>();
         a.add("deutsch");
@@ -125,6 +145,11 @@ public class OptionPanel extends ElternPanel {
     public void update() {
     }
 
+    /**
+     * Setzt die Sprachkonfiguration anhand der Properties um.
+     *
+     * @param props Properties Datei
+     */
     @Override
     public void updateLanguage(Properties props) {
         sucheField.setText((String) props.get(PropertyName.SUCHEFIELD));

@@ -107,12 +107,16 @@ public class LoginPanel extends ElternPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Führt das Login durch.
+     *
+     * @param evt
+     */
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if (!online) {
             String accountname = accountnameField.getText();
             String passwort = passwortField.getText();
             panelHandler.login(accountname, passwort);
-
         } else {
             try {
                 panelHandler.ausloggen();
@@ -121,15 +125,18 @@ public class LoginPanel extends ElternPanel {
                 meldungText.setText("Speichern der Sitzung nicht möglich");
             }
         }
-
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    /**
+     * Führt eine Suche aus.
+     *
+     * @param evt
+     */
     private void sucheFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sucheFieldActionPerformed
         panelHandler.panelUnsichtbar();
         panelHandler.getSuchePanel().setSearchTitel(sucheField.getText());
         panelHandler.getSuchePanel().setVisible(true);
     }//GEN-LAST:event_sucheFieldActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel accountLabel;
@@ -141,8 +148,13 @@ public class LoginPanel extends ElternPanel {
     private javax.swing.JTextField sucheField;
     // End of variables declaration//GEN-END:variables
 
-    public void einloggen(boolean einloggen){
-        if(einloggen){
+    /**
+     * Meldet einen Nutzer im System an.
+     *
+     * @param einloggen
+     */
+    public void einloggen(boolean einloggen) {
+        if (einloggen) {
             meldungText.setText((String) props.get(PropertyName.LOGINPANEL_SUCCESSLOGIN));
             accountnameField.setEnabled(false);
             passwortField.setEnabled(false);
@@ -150,14 +162,21 @@ public class LoginPanel extends ElternPanel {
             online = true;
             panelHandler.panelUnsichtbar();
             panelHandler.getSuchePanel().setVisible(true);
-        }else{
+        } else {
             meldungText.setText((String) props.get(PropertyName.LOGINPANEL_WRONG));
         }
     }
-        
-    public void ausloggen() throws IOException, ConnectionError{
+
+    /**
+     * Loggt den angemeldeten Nutzer ab.
+     *
+     * @throws IOException
+     * @throws ConnectionError
+     */
+    public void ausloggen() throws IOException, ConnectionError {
         meldungText.setText((String) props.get(PropertyName.LOGINPANEL_SUCCESSLOGOUT));
-        loginButton.setText((String) props.get(PropertyName.LOGINPANEL_LOGINBUTTON));accountnameField.setEnabled(true);
+        loginButton.setText((String) props.get(PropertyName.LOGINPANEL_LOGINBUTTON));
+        accountnameField.setEnabled(true);
         passwortField.setEnabled(true);
         online = false;
     }
@@ -166,6 +185,11 @@ public class LoginPanel extends ElternPanel {
     public void update() {
     }
 
+    /**
+     * Setzt die Sprachkonfiguration anhand der Properties um.
+     *
+     * @param props Properties Datei
+     */
     @Override
     public void updateLanguage(Properties props) {
         this.props = props;
