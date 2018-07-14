@@ -1,10 +1,15 @@
 package de.dualibib.Fachlogik.Languageverwaltung;
 
 import de.dualibib.Fachlogik.ElternVerwaltung;
+import de.dualibib.Logger;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.Properties;
+import java.util.logging.Level;
 
 /**
  *

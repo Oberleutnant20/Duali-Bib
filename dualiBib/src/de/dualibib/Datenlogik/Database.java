@@ -1,6 +1,7 @@
 package de.dualibib.Datenlogik;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,21 +25,29 @@ public class Database {
 
     //Attribute
     private final static String schema = "dualibib";
-    private Properties props;
     String user;
     String pwd;
     String adr;
 
     public Database(){
-        FileReader fileReader;
+        FileReader fileReader = null;
         try {
+            Properties props = new Properties();
             fileReader = new FileReader("db.props");
             props.load(fileReader);
-            user = (String) props.get("user");
-            pwd  = (String) props.get("passwort");
-            adr = (String) props.get("adresse");
+            user = (String) props.get("USER");
+            pwd  = (String) props.get("PW");
+            adr = (String) props.get("ADR");
         } catch (Exception ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            if (fileReader!=null) {
+                try {
+                    fileReader.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }
     
@@ -74,7 +83,7 @@ public class Database {
      * @return Connection if Successful
      */
     public Connection connect_mysql_schema() {
-        return connect_mysql("jdbc:mysql://localhost:3306/" + schema, "root", "");
+        return connect_mysql(adr + schema, user, pwd);
     }
 
     /**
