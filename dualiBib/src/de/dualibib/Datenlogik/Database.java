@@ -11,6 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Database Class with Connect, Disconnect, Resultset and Blobfile.
@@ -21,7 +24,24 @@ public class Database {
 
     //Attribute
     private final static String schema = "dualibib";
+    private Properties props;
+    String user;
+    String pwd;
+    String adr;
 
+    public Database(){
+        FileReader fileReader;
+        try {
+            fileReader = new FileReader("db.props");
+            props.load(fileReader);
+            user = (String) props.get("user");
+            pwd  = (String) props.get("passwort");
+            adr = (String) props.get("adresse");
+        } catch (Exception ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      *
      * @return Datenbankschema
