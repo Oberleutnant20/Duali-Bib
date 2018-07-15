@@ -23,10 +23,10 @@ public class Logger {
 
     /**
      * Konstruktor der Klasse ist privat. Damit nicht weitere Instancen erstellt
-     * werden können.
+     * werden können. Außerdem, wird hier das Log-File erstellt.
      */
-    private Logger() {        
-        
+    private Logger() {
+
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMddHHmmss");
         Date now = new Date();
         String strDate = sdfDate.format(now);
