@@ -29,19 +29,22 @@ public class Database {
     String pwd;
     String adr;
 
-    public Database(){
+    /**
+     * Der Konstruktor der Databaseklasse, liest die Properties Datei ein.
+     */
+    public Database() {
         FileReader fileReader = null;
         try {
             Properties props = new Properties();
             fileReader = new FileReader("db.props");
             props.load(fileReader);
             user = (String) props.get("USER");
-            pwd  = (String) props.get("PW");
+            pwd = (String) props.get("PW");
             adr = (String) props.get("ADR");
         } catch (Exception ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            if (fileReader!=null) {
+        } finally {
+            if (fileReader != null) {
                 try {
                     fileReader.close();
                 } catch (IOException ex) {
@@ -50,7 +53,7 @@ public class Database {
             }
         }
     }
-    
+
     /**
      *
      * @return Datenbankschema
