@@ -1,6 +1,7 @@
 package de.dualibib.Datenlogik;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,6 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Database Class with Connect, Disconnect, Resultset and Blobfile.
@@ -21,7 +25,32 @@ public class Database {
 
     //Attribute
     private final static String schema = "dualibib";
+    String user;
+    String pwd;
+    String adr;
 
+    public Database(){
+        FileReader fileReader = null;
+        try {
+            Properties props = new Properties();
+            fileReader = new FileReader("db.props");
+            props.load(fileReader);
+            user = (String) props.get("USER");
+            pwd  = (String) props.get("PW");
+            adr = (String) props.get("ADR");
+        } catch (Exception ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            if (fileReader!=null) {
+                try {
+                    fileReader.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
     /**
      *
      * @return Datenbankschema
@@ -54,7 +83,7 @@ public class Database {
      * @return Connection if Successful
      */
     public Connection connect_mysql_schema() {
-        return connect_mysql("jdbc:mysql://localhost:3306/" + schema, "root", "");
+        return connect_mysql(adr + schema, user, pwd);
     }
 
     /**
