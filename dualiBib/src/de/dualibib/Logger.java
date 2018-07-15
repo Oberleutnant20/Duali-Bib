@@ -1,5 +1,14 @@
 package de.dualibib;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+
 /**
  *
  * @author Carina
@@ -9,12 +18,30 @@ public class Logger {
     private static final Logger INSTANCE = new Logger();
     private static boolean debug = false;
     private static boolean warnung = false;
+    private static File f;
+    private static Writer writer;
 
     /**
      * Konstruktor der Klasse ist privat. Damit nicht weitere Instancen erstellt
      * werden können.
      */
-    private Logger() {
+    private Logger() {        
+        
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+
+        f = new File(strDate + "_log.txt");
+
+        if (f.exists()) {
+            f.delete();
+        }
+        try {
+            f.createNewFile();
+            writer = new BufferedWriter(new FileWriter(f, true));
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -50,7 +77,14 @@ public class Logger {
      * @param msg Nachricht
      */
     public static void info(Object o, String msg) {
-        System.out.println("info - " + o.getClass().getName() + ": " + msg);
+        String log = "info - " + o.getClass().getName() + ": " + msg;
+        System.out.println(log);
+        try {
+            writer.append(log + "\n");
+            writer.flush();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -61,7 +95,14 @@ public class Logger {
      */
     public static void debug(Object o, String msg) {
         if (debug) {
-            System.out.println("debug - " + o.getClass().getName() + ": " + msg);
+            String log = "debug - " + o.getClass().getName() + ": " + msg;
+            System.out.println(log);
+            try {
+                writer.append(log + "\n");
+                writer.flush();
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -73,7 +114,14 @@ public class Logger {
      */
     public static void warnung(Object o, String msg) {
         if (warnung) {
-            System.out.println("warnung - " + o.getClass().getName() + ": " + msg);
+            String log = "warnung - " + o.getClass().getName() + ": " + msg;
+            System.out.println(log);
+            try {
+                writer.append(log + "\n");
+                writer.flush();
+            } catch (IOException ex) {
+                java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -84,6 +132,13 @@ public class Logger {
      * @param msg Nachricht
      */
     public static void error(Object o, String msg) {
-        System.out.println("error - " + o.getClass().getName() + ": " + msg);
+        String log = "error - " + o.getClass().getName() + ": " + msg;
+        System.out.println(log);
+        try {
+            writer.append(log + "\n");
+            writer.flush();
+        } catch (IOException ex) {
+            java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

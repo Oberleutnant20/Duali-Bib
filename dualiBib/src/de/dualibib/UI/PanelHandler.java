@@ -369,7 +369,7 @@ public class PanelHandler {
                 Logger.info(this, "gefunden");
             }
         }
-        Logger.info(this, verfuegbare + "verfügbare gefunden");
+        Logger.info(this, verfuegbare + " verfügbare gefunden");
         for (Ausleihe ausleihe : controller.getAllAusleihenListe()) {
             if (ausleihe.getMedienid() == medienId) {
                 verfuegbare--;
